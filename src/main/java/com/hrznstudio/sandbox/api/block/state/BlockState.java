@@ -1,4 +1,7 @@
 package com.hrznstudio.sandbox.api.block.state;
 
-public interface BlockState  {
+import com.hrznstudio.sandbox.api.block.Block;
+
+public interface BlockState {
+    Block getBlock();
 }

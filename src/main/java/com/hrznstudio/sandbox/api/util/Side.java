@@ -1,4 +1,4 @@
-package com.hrznstudio.sandbox.api;
+package com.hrznstudio.sandbox.api.util;
 
 public enum Side {
     CLIENT,
