@@ -2,6 +2,9 @@ package com.hrznstudio.sandbox.api.util.math;
 
 import com.hrznstudio.sandbox.api.util.Direction;
 
+import javax.annotation.concurrent.Immutable;
+
+@Immutable
 public interface Position extends Vec3i {
     Mutable toMutable();
 
@@ -12,6 +15,54 @@ public interface Position extends Vec3i {
     }
 
     Position offset(Direction direction, int amount);
+
+    default Position up() {
+        return up(1);
+    }
+
+    default Position up(int amount) {
+        return offset(Direction.UP, amount);
+    }
+
+    default Position down() {
+        return down(1);
+    }
+
+    default Position down(int amount) {
+        return offset(Direction.DOWN, amount);
+    }
+
+    default Position north() {
+        return north(1);
+    }
+
+    default Position north(int amount) {
+        return offset(Direction.NORTH, amount);
+    }
+
+    default Position south() {
+        return south(1);
+    }
+
+    default Position south(int amount) {
+        return offset(Direction.SOUTH, amount);
+    }
+
+    default Position east() {
+        return east(1);
+    }
+
+    default Position east(int amount) {
+        return offset(Direction.EAST, amount);
+    }
+
+    default Position west() {
+        return west(1);
+    }
+
+    default Position west(int amount) {
+        return offset(Direction.WEST, amount);
+    }
 
     interface Mutable extends Position {
 

@@ -1,7 +1,6 @@
 package com.hrznstudio.sandbox.api;
 
 import com.hrznstudio.sandbox.api.event.Event;
-import com.hrznstudio.sandbox.api.event.GenericEvent;
 import com.hrznstudio.sandbox.api.event.Priority;
 import com.hrznstudio.sandbox.api.util.Side;
 
@@ -46,18 +45,4 @@ public interface SandboxAPI {
     }
 
     <T extends Event> void on(Class<T> event, Predicate<T> filter, Priority priority, boolean receiveCancelled, Consumer<T> consumer);
-
-    default <T extends GenericEvent<G>, G> void onGeneric(Class<G> filter, Consumer<T> consumer) {
-        onGeneric(filter, Priority.NORMAL, false, consumer);
-    }
-
-    default <T extends GenericEvent<G>, G> void onGeneric(Class<G> filter, Priority priority, Consumer<T> consumer) {
-        onGeneric(filter, priority, false, consumer);
-    }
-
-    default <T extends GenericEvent<G>, G> void onGeneric(Class<G> filter, boolean receiveCancelled, Consumer<T> consumer) {
-        onGeneric(filter, Priority.NORMAL, receiveCancelled, consumer);
-    }
-
-    <T extends GenericEvent<G>, G> void onGeneric(Class<G> filter, Priority priority, boolean receiveCancelled, Consumer<T> consumer);
 }

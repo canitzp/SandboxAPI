@@ -1,0 +1,47 @@
+package com.hrznstudio.sandbox.api.block;
+
+public class Material {
+    private static final Material EMPTY = new Material();
+    public static final Material AIR = EMPTY;
+    public static final Material STRUCTURE_VOID = EMPTY;
+    public static final Material PORTAL = EMPTY;
+    public static final Material CARPET = EMPTY;
+    public static final Material PLANT = EMPTY;
+    public static final Material UNDERWATER_PLANT = EMPTY;
+    public static final Material REPLACEABLE_PLANT = EMPTY;
+    public static final Material SEAGRASS = EMPTY;
+    public static final Material WATER = EMPTY;
+    public static final Material BUBBLE_COLUMN = EMPTY;
+    public static final Material LAVA = EMPTY;
+    public static final Material SNOW = EMPTY;
+    public static final Material FIRE = EMPTY;
+    public static final Material PART = EMPTY;
+    public static final Material COBWEB = EMPTY;
+    public static final Material REDSTONE_LAMP = EMPTY;
+    public static final Material CLAY = EMPTY;
+    public static final Material EARTH = EMPTY;
+    public static final Material ORGANIC = EMPTY;
+    public static final Material PACKED_ICE = EMPTY;
+    public static final Material SAND = EMPTY;
+    public static final Material SPONGE = EMPTY;
+    public static final Material SHULKER_BOX = EMPTY;
+    public static final Material WOOD = EMPTY;
+    public static final Material BAMBOO_SAPLING = EMPTY;
+    public static final Material BAMBOO = EMPTY;
+    public static final Material WOOL = EMPTY;
+    public static final Material TNT = EMPTY;
+    public static final Material LEAVES = EMPTY;
+    public static final Material GLASS = EMPTY;
+    public static final Material ICE = EMPTY;
+    public static final Material CACTUS = EMPTY;
+    public static final Material STONE = EMPTY;
+    public static final Material METAL = EMPTY;
+    public static final Material SNOW_BLOCK = EMPTY;
+    public static final Material ANVIL = EMPTY;
+    public static final Material BARRIER = EMPTY;
+    public static final Material PISTON = EMPTY;
+    public static final Material UNUSED_PLANT = EMPTY;
+    public static final Material PUMPKIN = EMPTY;
+    public static final Material EGG = EMPTY;
+    public static final Material CAKE = EMPTY;
+}

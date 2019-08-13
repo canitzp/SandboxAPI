@@ -1,10 +1,8 @@
 package com.hrznstudio.sandbox.api.world;
 
-import com.hrznstudio.sandbox.api.block.state.BlockState;
-import com.hrznstudio.sandbox.api.util.math.Position;
+import com.hrznstudio.sandbox.api.util.Side;
 
-public interface World {
-    BlockState getBlockState(Position position);
+public interface World extends WorldReader,WorldWriter {
 
-    boolean isClient();
+    Side getSide();
 }
