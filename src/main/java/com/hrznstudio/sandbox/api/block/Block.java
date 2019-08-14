@@ -1,5 +1,6 @@
 package com.hrznstudio.sandbox.api.block;
 
+import com.hrznstudio.sandbox.api.block.entity.BlockEntity;
 import com.hrznstudio.sandbox.api.block.state.BlockState;
 import com.hrznstudio.sandbox.api.entity.Entity;
 import com.hrznstudio.sandbox.api.entity.player.Hand;
@@ -8,6 +9,7 @@ import com.hrznstudio.sandbox.api.util.Direction;
 import com.hrznstudio.sandbox.api.util.math.Position;
 import com.hrznstudio.sandbox.api.util.math.Vec3f;
 import com.hrznstudio.sandbox.api.world.World;
+import com.hrznstudio.sandbox.api.world.WorldReader;
 
 public interface Block {
 
@@ -28,11 +30,23 @@ public interface Block {
 
     }
 
+    default boolean hasBlockEntity() {
+        return false;
+    }
+
+    default BlockEntity createBlockEntity(WorldReader reader) {
+        return null;
+    }
+
     class Properties {
         private final Material material;
 
         public Properties(Material material) {
             this.material = material;
+        }
+
+        public Material getMaterial() {
+            return material;
         }
     }
 }
