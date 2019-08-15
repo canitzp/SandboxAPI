@@ -4,26 +4,35 @@ import com.hrznstudio.sandbox.api.block.entity.BlockEntity;
 import com.hrznstudio.sandbox.api.block.state.BlockState;
 import com.hrznstudio.sandbox.api.entity.Entity;
 import com.hrznstudio.sandbox.api.entity.player.Hand;
-import com.hrznstudio.sandbox.api.util.Activation;
+import com.hrznstudio.sandbox.api.entity.player.Player;
+import com.hrznstudio.sandbox.api.item.Item;
+import com.hrznstudio.sandbox.api.item.ItemProvider;
+import com.hrznstudio.sandbox.api.item.Stack;
+import com.hrznstudio.sandbox.api.util.InteractionResult;
 import com.hrznstudio.sandbox.api.util.Direction;
 import com.hrznstudio.sandbox.api.util.math.Position;
 import com.hrznstudio.sandbox.api.util.math.Vec3f;
 import com.hrznstudio.sandbox.api.world.World;
 import com.hrznstudio.sandbox.api.world.WorldReader;
 
-public interface Block {
+public interface Block extends ItemProvider {
 
     Properties createProperties();
 
-    default Activation onBlockUsed(World world, Position pos, BlockState state, Entity player, Hand hand, Direction side, Vec3f hit) {
-        return Activation.IGNORE;
+    @Override
+    default Item asItem() {
+        return null;
     }
 
-    default Activation onBlockClicked(World world, Position pos, BlockState state, Entity player, Direction side) {
-        return Activation.IGNORE;
+    default InteractionResult onBlockUsed(World world, Position pos, BlockState state, Player player, Hand hand, Direction side, Vec3f hit) {
+        return InteractionResult.IGNORE;
     }
 
-    default void onBlockPlaced(World world, Position position, BlockState state) {
+    default InteractionResult onBlockClicked(World world, Position pos, BlockState state, Entity player, Direction side) {
+        return InteractionResult.IGNORE;
+    }
+
+    default void onBlockPlaced(World world, Position position, BlockState state, Entity entity, Stack stack) {
     }
 
     default void onBlockDestroyed(World world, Position position, BlockState state) {

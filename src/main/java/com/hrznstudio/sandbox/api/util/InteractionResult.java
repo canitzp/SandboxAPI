@@ -1,6 +1,6 @@
 package com.hrznstudio.sandbox.api.util;
 
-public enum Activation {
+public enum InteractionResult {
     SUCCESS,
     IGNORE,
     FAILURE

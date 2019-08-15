@@ -2,6 +2,7 @@ package com.hrznstudio.sandbox.api;
 
 import com.hrznstudio.sandbox.api.event.Event;
 import com.hrznstudio.sandbox.api.event.Priority;
+import com.hrznstudio.sandbox.api.util.Log;
 import com.hrznstudio.sandbox.api.util.Side;
 
 import java.util.function.Consumer;
@@ -15,6 +16,8 @@ public interface SandboxAPI {
             runnable.run();
         }
     }
+
+    Log getLog();
 
     default <T extends Event> void on(Class<T> event, Predicate<T> filter, Consumer<T> consumer) {
         on(event, filter, Priority.NORMAL, false, consumer);

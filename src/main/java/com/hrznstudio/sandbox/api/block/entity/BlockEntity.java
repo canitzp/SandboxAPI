@@ -10,10 +10,6 @@ import java.util.function.Supplier;
 
 public interface BlockEntity {
 
-    static <T extends BlockEntity> Type<T> createType(Supplier<T> entityCreator, Block... validBlocks) {
-        return (Type<T>) Functions.blockEntityTypeFunction.apply(entityCreator, validBlocks);
-    }
-
     World getWorld();
 
     Position getPosition();
@@ -25,6 +21,11 @@ public interface BlockEntity {
     }
 
     interface Type<T extends BlockEntity> {
+
+        static <T extends BlockEntity> Type<T> of(Supplier<T> entityCreator, Block... validBlocks) {
+            return (Type<T>) Functions.blockEntityTypeFunction.apply(entityCreator, validBlocks);
+        }
+
         Supplier<T> getEntityCreator();
 
         Set<Block> getValidBlocks();
