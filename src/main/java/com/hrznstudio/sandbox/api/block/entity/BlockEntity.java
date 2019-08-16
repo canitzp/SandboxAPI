@@ -4,8 +4,8 @@ import com.hrznstudio.sandbox.api.util.math.Position;
 import com.hrznstudio.sandbox.api.world.World;
 
 public abstract class BlockEntity implements IBlockEntity {
-    private BlockEntityCTX ctx;
     private final Type<?> type;
+    private BlockEntityCTX ctx;
 
     public BlockEntity(Type<?> type) {
         this.type = type;

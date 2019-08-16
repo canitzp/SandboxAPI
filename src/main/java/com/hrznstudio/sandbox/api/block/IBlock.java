@@ -41,6 +41,8 @@ public interface IBlock extends ItemProvider {
 
     IBlockEntity createBlockEntity(WorldReader reader);
 
+    boolean isAir(BlockState state);
+
     class Properties {
         private final Material material;
 

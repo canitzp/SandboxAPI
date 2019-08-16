@@ -17,7 +17,6 @@ import com.hrznstudio.sandbox.api.world.WorldReader;
 import javax.annotation.Nonnull;
 
 public abstract class Block implements IBlock {
-
     Object wrapped;
 
     public Object getWrapped() {
@@ -48,6 +47,11 @@ public abstract class Block implements IBlock {
     @Override
     public BlockState getBaseState() {
         return null;
+    }
+
+    @Override
+    public boolean isAir(BlockState state) {
+        return false;
     }
 
     @Override

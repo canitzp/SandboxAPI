@@ -25,6 +25,8 @@ public interface Stack {
 
     int getCount();
 
+    Stack setCount(int amount);
+
     default Stack shrink() {
         return shrink(1);
     }
@@ -36,6 +38,4 @@ public interface Stack {
     }
 
     Stack grow(int amount);
-
-    Stack setCount(int amount);
 }
