@@ -2,7 +2,7 @@ package com.hrznstudio.sandbox.api.block.state;
 
 import com.hrznstudio.sandbox.api.block.IBlock;
 
-public interface BlockState {
+public interface BlockState extends PropertyContainer<BlockState> {
     IBlock getBlock();
 
     default boolean isAir() {
