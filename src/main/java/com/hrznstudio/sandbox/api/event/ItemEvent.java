@@ -9,6 +9,10 @@ public class ItemEvent extends Event {
         this.stack = stack;
     }
 
+    public ItemStack getStack() {
+        return stack;
+    }
+
     public static class GetArrowType extends ItemEvent {
         private ItemStack arrow;
 
@@ -17,6 +21,9 @@ public class ItemEvent extends Event {
             this.arrow = arrow;
         }
 
+        public ItemStack getWeapon() {
+            return this.getStack();
+        }
         public ItemStack getArrow() {
             return arrow;
         }
