@@ -18,6 +18,9 @@ public class Functions {
     public static final Function<String, IBlock> blockFunction = s -> {
         throw new RuntimeException("No IBlock Function Loaded, Report this as a bug!");
     };
+    public static final Function<String, IItem> itemFunction = s -> {
+        throw new RuntimeException("No IItem Function Loaded, Report this as a bug!");
+    };
     public static final Function<String, Material> materialFunction = s -> {
         throw new RuntimeException("No Material Function Loaded, Report this as a bug!");
     };
