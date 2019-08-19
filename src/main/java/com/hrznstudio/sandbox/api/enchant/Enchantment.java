@@ -1,15 +1,12 @@
 package com.hrznstudio.sandbox.api.enchant;
 
-import com.hrznstudio.sandbox.api.item.ItemStack;
+public abstract class Enchantment implements IEnchantment {
+    private Object wrapped;
+    public Object getWrapped() {
+        return wrapped;
+    }
 
-public interface Enchantment {
-    int getMinimumLevel();
-
-    int getMaximumLevel();
-
-    boolean isAcceptableItem(ItemStack stack);
-
-    boolean isCurse();
-
-    boolean isTreasure();
+    public void setWrapped(Object wrapped) {
+        this.wrapped = wrapped;
+    }
 }

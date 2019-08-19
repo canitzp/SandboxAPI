@@ -3,7 +3,7 @@ package com.hrznstudio.sandbox.api.util;
 import com.hrznstudio.sandbox.api.block.IBlock;
 import com.hrznstudio.sandbox.api.block.Material;
 import com.hrznstudio.sandbox.api.block.entity.IBlockEntity;
-import com.hrznstudio.sandbox.api.enchant.Enchantment;
+import com.hrznstudio.sandbox.api.enchant.IEnchantment;
 import com.hrznstudio.sandbox.api.item.IItem;
 import com.hrznstudio.sandbox.api.item.ItemStack;
 import com.hrznstudio.sandbox.api.registry.Registry;
@@ -22,8 +22,8 @@ public class Functions {
     public static final Function<String, IItem> itemFunction = s -> {
         throw new RuntimeException("No IItem Function Loaded, Report this as a bug!");
     };
-    public static final Function<String, Enchantment> enchantmentFunction = s -> {
-        throw new RuntimeException("No Enchantment Function Loaded, Report this as a bug!");
+    public static final Function<String, IEnchantment> enchantmentFunction = s -> {
+        throw new RuntimeException("No IEnchantment Function Loaded, Report this as a bug!");
     };
     public static final Function<String, Material> materialFunction = s -> {
         throw new RuntimeException("No Material Function Loaded, Report this as a bug!");

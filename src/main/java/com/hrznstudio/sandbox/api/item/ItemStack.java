@@ -1,6 +1,6 @@
 package com.hrznstudio.sandbox.api.item;
 
-import com.hrznstudio.sandbox.api.enchant.Enchantment;
+import com.hrznstudio.sandbox.api.enchant.IEnchantment;
 import com.hrznstudio.sandbox.api.util.Functions;
 
 public interface ItemStack {
@@ -40,5 +40,5 @@ public interface ItemStack {
 
     ItemStack grow(int amount);
 
-    int getLevel(Enchantment enchantment);
+    int getLevel(IEnchantment enchantment);
 }
