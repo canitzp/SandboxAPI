@@ -1,14 +1,15 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-archivesBaseName = project.archives_base_name
-version = project.mod_version
-group = project.maven_group
+archivesBaseName = "SandboxAPI"
+version = System.getenv("BUILD_NUMBER") ?: "0.0.0"
+group = "com.hrznstudio"
 
 repositories {
     mavenCentral()
@@ -20,4 +21,42 @@ dependencies {
     compile 'com.electronwill.night-config:core:3.6.0'
     compile 'com.electronwill.night-config:toml:3.6.0'
     compile 'com.github.zafarkhaja:java-semver:0.9.0'
+}
+
+jar {
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+    repositories {
+        maven {
+            url "s3://cdn.hrzn.studio/maven"
+            authentication {
+                awsIm(AwsImAuthentication)
+            }
+        }
+    }
 }

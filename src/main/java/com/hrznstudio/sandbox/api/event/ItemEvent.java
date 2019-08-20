@@ -24,6 +24,7 @@ public class ItemEvent extends Event {
         public ItemStack getWeapon() {
             return this.getStack();
         }
+
         public ItemStack getArrow() {
             return arrow;
         }

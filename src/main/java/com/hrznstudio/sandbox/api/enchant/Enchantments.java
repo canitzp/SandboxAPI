@@ -43,8 +43,8 @@ public class Enchantments {
 
     public static IEnchantment get(String s) {
         IEnchantment e = Functions.enchantmentFunction.apply(s);
-        if(e ==null)
+        if (e == null)
             throw new RuntimeException("Unknown IEnchantment " + s);
-            return e;
+        return e;
     }
 }

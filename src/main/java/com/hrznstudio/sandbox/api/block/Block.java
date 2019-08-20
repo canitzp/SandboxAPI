@@ -9,13 +9,13 @@ public abstract class Block implements IBlock {
     private Object wrapped;
     private StateFactory<IBlock, BlockState> stateFactory;
 
-    public void setStateFactory(StateFactory<IBlock, BlockState> stateFactory) {
-        this.stateFactory = stateFactory;
-    }
-
     @Override
     public StateFactory<IBlock, BlockState> getStateFactory() {
         return stateFactory;
+    }
+
+    public void setStateFactory(StateFactory<IBlock, BlockState> stateFactory) {
+        this.stateFactory = stateFactory;
     }
 
     public Object getWrapped() {

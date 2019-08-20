@@ -7,6 +7,7 @@ import com.hrznstudio.sandbox.api.enchant.IEnchantment;
 import com.hrznstudio.sandbox.api.item.IItem;
 import com.hrznstudio.sandbox.api.item.ItemStack;
 import com.hrznstudio.sandbox.api.registry.Registry;
+import com.hrznstudio.sandbox.api.util.text.Text;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -21,6 +22,12 @@ public class Functions {
     };
     public static final Function<String, IItem> itemFunction = s -> {
         throw new RuntimeException("No IItem Function Loaded, Report this as a bug!");
+    };
+    public static final Function<String, Text> literalTextFunction = s -> {
+        throw new RuntimeException("No Literal Text Function Loaded, Report this as a bug!");
+    };
+    public static final Function<String, Text> translatedTextFunction = s -> {
+        throw new RuntimeException("No Translated Text Function Loaded, Report this as a bug!");
     };
     public static final Function<String, IEnchantment> enchantmentFunction = s -> {
         throw new RuntimeException("No IEnchantment Function Loaded, Report this as a bug!");

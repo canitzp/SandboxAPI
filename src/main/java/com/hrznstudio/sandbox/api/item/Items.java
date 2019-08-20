@@ -1,7 +1,5 @@
 package com.hrznstudio.sandbox.api.item;
 
-import com.hrznstudio.sandbox.api.block.IBlock;
-import com.hrznstudio.sandbox.api.item.IItem;
 import com.hrznstudio.sandbox.api.util.Functions;
 
 public class Items {
