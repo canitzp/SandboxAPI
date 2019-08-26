@@ -21,7 +21,7 @@ public class AddonSpec {
     private final LoadingSide side;
 
     public AddonSpec(String modid, Version version, @Nullable String title, String description, String mainClass, List<String> authors, String url, LoadingSide side) {
-        if (MODID_PREDICATE.test(modid))
+        if (!MODID_PREDICATE.test(modid))
             throw new IllegalArgumentException(String.format("modid '%s' does not match regex requirement '%s'", modid, MODID_PATTERN.pattern()));
         this.modid = modid;
         this.version = version;
