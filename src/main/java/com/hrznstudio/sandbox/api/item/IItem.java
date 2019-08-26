@@ -13,5 +13,7 @@ public interface IItem {
         return InteractionResult.IGNORE;
     }
 
-    void appendTooltipText(ItemStack cast, @Nullable World world, List<Text> tooltip, boolean advanced);
+    default void appendTooltipText(ItemStack cast, @Nullable World world, List<Text> tooltip, boolean advanced) {
+
+    }
 }
