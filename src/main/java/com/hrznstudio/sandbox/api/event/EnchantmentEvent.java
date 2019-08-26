@@ -4,6 +4,8 @@ import com.hrznstudio.sandbox.api.enchant.IEnchantment;
 import com.hrznstudio.sandbox.api.item.ItemStack;
 import com.hrznstudio.sandbox.api.util.InteractionResult;
 
+import java.util.function.BiPredicate;
+
 public class EnchantmentEvent extends Event {
     private final IEnchantment enchantment;
 
@@ -30,6 +32,37 @@ public class EnchantmentEvent extends Event {
 
         public InteractionResult getResult() {
             return result;
+        }
+
+        public void setResult(InteractionResult result) {
+            checkState();
+            this.result = result;
+        }
+    }
+
+    public static class Compatible extends EnchantmentEvent {
+        private final IEnchantment other;
+        private InteractionResult result = InteractionResult.IGNORE;
+
+        public Compatible(IEnchantment enchantment, IEnchantment other) {
+            super(enchantment);
+            this.other = other;
+        }
+
+        public IEnchantment getOther() {
+            return other;
+        }
+
+        public InteractionResult getResult() {
+            return result;
+        }
+
+        public boolean matches(BiPredicate<IEnchantment, IEnchantment> predicate) {
+            return predicate.test(getEnchantment(), getOther()) || predicate.test(getOther(), getEnchantment());
+        }
+
+        public boolean matches(IEnchantment enchant1, IEnchantment enchant2) {
+            return (getEnchantment() == enchant1 && getOther() == enchant2) || (getEnchantment() == enchant2 && getOther() == enchant1);
         }
 
         public void setResult(InteractionResult result) {
