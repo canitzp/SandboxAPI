@@ -1,6 +1,6 @@
 package com.hrznstudio.sandbox.api.item;
 
-public class Item implements IItem {
+public abstract class Item implements IItem {
     private Object wrapped;
 
     public Object getWrapped() {
