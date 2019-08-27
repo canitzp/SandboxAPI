@@ -3,7 +3,7 @@ package com.hrznstudio.sandbox.api.block;
 import com.hrznstudio.sandbox.api.block.entity.IBlockEntity;
 import com.hrznstudio.sandbox.api.block.state.BlockState;
 import com.hrznstudio.sandbox.api.block.state.StateFactory;
-import com.hrznstudio.sandbox.api.entity.Entity;
+import com.hrznstudio.sandbox.api.entity.IEntity;
 import com.hrznstudio.sandbox.api.entity.player.Hand;
 import com.hrznstudio.sandbox.api.entity.player.Player;
 import com.hrznstudio.sandbox.api.item.IItem;
@@ -31,7 +31,7 @@ public interface IBlock extends ItemProvider {
     }
 
     @Nonnull
-    default InteractionResult onBlockClicked(World world, Position pos, BlockState state, Entity player, Direction side) {
+    default InteractionResult onBlockClicked(World world, Position pos, BlockState state, IEntity player, Direction side) {
         return InteractionResult.IGNORE;
     }
 
@@ -39,7 +39,7 @@ public interface IBlock extends ItemProvider {
 
     StateFactory<IBlock, BlockState> getStateFactory();
 
-    default void onBlockPlaced(World world, Position position, BlockState state, Entity entity, ItemStack itemStack) {
+    default void onBlockPlaced(World world, Position position, BlockState state, IEntity entity, ItemStack itemStack) {
     }
 
     default void onBlockDestroyed(World world, Position position, BlockState state) {
