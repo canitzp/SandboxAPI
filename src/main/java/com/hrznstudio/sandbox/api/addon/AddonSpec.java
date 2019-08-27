@@ -4,6 +4,7 @@ import com.electronwill.nightconfig.core.Config;
 import com.github.zafarkhaja.semver.Version;
 
 import javax.annotation.Nullable;
+import java.net.URL;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
@@ -19,8 +20,10 @@ public class AddonSpec {
     private final List<String> authors;
     private final String url;
     private final LoadingSide side;
+    private final URL path;
 
-    public AddonSpec(String modid, Version version, @Nullable String title, String description, String mainClass, List<String> authors, String url, LoadingSide side) {
+    public AddonSpec(String modid, Version version, @Nullable String title, String description, String mainClass, List<String> authors, String url, LoadingSide side, URL path) {
+        this.path = path;
         if (!MODID_PREDICATE.test(modid))
             throw new IllegalArgumentException(String.format("modid '%s' does not match regex requirement '%s'", modid, MODID_PATTERN.pattern()));
         this.modid = modid;
@@ -37,7 +40,7 @@ public class AddonSpec {
         this.side = side;
     }
 
-    public static AddonSpec from(Config config) {
+    public static AddonSpec from(Config config, URL path) {
         String modid = config.get("modid");
         Version version = Version.valueOf(config.get("version"));
         String title = config.contains("title") ? config.get("title") : modid;
@@ -47,7 +50,7 @@ public class AddonSpec {
         String url = config.contains("url") ? config.get("url") : "";
         String sideS = config.contains("side") ? config.get("side") : "COMMON";
         LoadingSide side = sideS.equalsIgnoreCase("CLIENT") ? LoadingSide.CLIENT : sideS.equalsIgnoreCase("SERVER") ? LoadingSide.SERVER : LoadingSide.COMMON;
-        return new AddonSpec(modid, version, title, description, mainClass, authors, url, side);
+        return new AddonSpec(modid, version, title, description, mainClass, authors, url, side, path);
     }
 
     public String getModid() {
@@ -80,5 +83,9 @@ public class AddonSpec {
 
     public LoadingSide getSide() {
         return side;
+    }
+
+    public URL getPath() {
+        return path;
     }
 }
