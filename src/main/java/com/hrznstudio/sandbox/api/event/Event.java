@@ -11,7 +11,9 @@ public class Event {
 
     private final boolean async = ClassUtil.isAnnotationPresent(getClass(), Async.class);
     private final boolean cancellable = ClassUtil.isAnnotationPresent(getClass(), Cancellable.class);
+    private final boolean hasResult = ClassUtil.isAnnotationPresent(getClass(), HasResult.class);
     private boolean cancelled, complete;
+    private EventResult result;
 
     public boolean isAsync() {
         return async;
@@ -46,6 +48,21 @@ public class Event {
         complete = true;
     }
 
+    public boolean hasResult() {
+        return hasResult;
+    }
+
+    public EventResult getResult() {
+        return result;
+    }
+
+    public void setResult(EventResult result) {
+        if (!hasResult())
+            throw new UnsupportedOperationException("Cannot set result on non-result event");
+        checkState();
+        this.result = result;
+    }
+
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
     public @interface Cancellable {
@@ -55,6 +72,11 @@ public class Event {
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
     public @interface Async {
+
+    }
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.TYPE)
+    public @interface HasResult {
 
     }
 }
