@@ -11,6 +11,8 @@ import com.hrznstudio.sandbox.api.item.ItemProvider;
 import com.hrznstudio.sandbox.api.item.ItemStack;
 import com.hrznstudio.sandbox.api.util.Direction;
 import com.hrznstudio.sandbox.api.util.InteractionResult;
+import com.hrznstudio.sandbox.api.util.Mirror;
+import com.hrznstudio.sandbox.api.util.Rotation;
 import com.hrznstudio.sandbox.api.util.math.Position;
 import com.hrznstudio.sandbox.api.util.math.Vec3f;
 import com.hrznstudio.sandbox.api.world.World;
@@ -20,7 +22,7 @@ import javax.annotation.Nonnull;
 
 public interface IBlock extends ItemProvider {
 
-    Properties createProperties();
+    Properties getProperties();
 
     @Override
     IItem asItem();
@@ -57,7 +59,47 @@ public interface IBlock extends ItemProvider {
         return null;
     }
 
+    default BlockState rotate(BlockState state, Rotation rotation) {
+        return state;
+    }
+
+    default BlockState mirror(BlockState state, Mirror mirror) {
+        return state;
+    }
+
+    default boolean canReplace(BlockState state) {
+        return getMaterial().isReplaceable();
+    }
+
     default boolean isAir(BlockState state) {
+        return false;
+    }
+
+    default void onEntityWalk(World world, Position position, IEntity entity) {
+
+    }
+
+    default boolean canEntitySpawnWithin() {
+        return !getMaterial().isSolid() && !getMaterial().isLiquid();
+    }
+    
+    default Material.PistonInteraction getPistonInteraction(BlockState state) {
+        return getMaterial().getPistonInteraction();
+    }
+    
+    default Material getMaterial() {
+        return getProperties().getMaterial();
+    }
+
+    default ItemStack getPickStack(WorldReader reader, Position position, BlockState state) {
+        return ItemStack.of(this);
+    }
+
+    default boolean isNaturalDirt() {
+        return false;
+    }
+
+    default boolean isNaturalStone() {
         return false;
     }
 

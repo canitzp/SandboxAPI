@@ -3,11 +3,11 @@ package com.hrznstudio.sandbox.api.item;
 public abstract class Item implements IItem {
     private Object wrapped;
 
-    public Object getWrapped() {
+    public final Object getWrapped() {
         return wrapped;
     }
 
-    public void setWrapped(Object wrapped) {
+    public final void setWrapped(Object wrapped) {
         this.wrapped = wrapped;
     }
 }
