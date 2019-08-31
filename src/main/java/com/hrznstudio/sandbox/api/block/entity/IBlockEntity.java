@@ -11,21 +11,45 @@ import com.hrznstudio.sandbox.api.world.World;
 import java.util.function.Supplier;
 
 public interface IBlockEntity {
+    /**
+     * The {@link World} the BlockEntity is currently located in
+     */
     World getWorld();
 
+    /**
+     * The {@link Position} of the BlockEntity
+     */
     Position getPosition();
 
+    /**
+     * The {@link Type} the BlockEntity belongs too
+     */
     Type<?> getType();
 
+    /**
+     * Read the {@link CompoundTag} for data belonging to the BlockEntity
+     */
     default void read(ReadableCompoundTag tag) {
     }
 
+    /**
+     * Write data that needs saving for the BlockEntity to the {@link CompoundTag}
+     */
     default void write(WritableCompoundTag tag) {
     }
 
-    default void save() {}
+    /**
+     * Marks the BlockEntity for saving to world
+     */
+    default void save() {
+    }
 
     interface Tickable extends IBlockEntity {
+        /**
+         * Gets called every game tick and on both sides
+         * <p>
+         * If interacting this world make sure to check {@code getWorld().isServer()}
+         */
         void onTick();
     }
 

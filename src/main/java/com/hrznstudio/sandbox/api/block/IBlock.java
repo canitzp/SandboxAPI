@@ -19,19 +19,37 @@ import com.hrznstudio.sandbox.api.world.World;
 import com.hrznstudio.sandbox.api.world.WorldReader;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public interface IBlock extends ItemProvider {
 
+    /**
+     * The {@link Properties} assigned to the Block
+     */
     Properties getProperties();
 
+    /**
+     * Grabs the Block as an {@link IItem}
+     */
+    @Nullable
     @Override
     IItem asItem();
 
+    /**
+     * Gets called when the block is interacted with by a {@link Player}
+     *
+     * @return The {@link InteractionResult} of the interaction
+     */
     @Nonnull
     default InteractionResult onBlockUsed(World world, Position pos, BlockState state, Player player, Hand hand, Direction side, Vec3f hit) {
         return InteractionResult.IGNORE;
     }
 
+    /**
+     * Gets called when the block is clicked by a {@link Player}
+     *
+     * @return The {@link InteractionResult} of the interaction
+     */
     @Nonnull
     default InteractionResult onBlockClicked(World world, Position pos, BlockState state, Player player) {
         return InteractionResult.IGNORE;
@@ -41,20 +59,39 @@ public interface IBlock extends ItemProvider {
 
     StateFactory<IBlock, BlockState> getStateFactory();
 
+    /**
+     * Gets called when the block is placed
+     */
     default void onBlockPlaced(World world, Position position, BlockState state, IEntity entity, ItemStack itemStack) {
     }
 
+    /**
+     * Gets called when the block is broken
+     */
     default void onBlockDestroyed(World world, Position position, BlockState state) {
     }
 
+    /**
+     * Updates the @{@link BlockState} when a neighbor block updates
+     *
+     * @return The @{@link BlockState} to set in the world
+     */
     default BlockState updateOnNeighborChanged(BlockState state, Direction direction, BlockState otherState, World world, Position position, Position otherPosition) {
         return state;
     }
 
+    /**
+     * Whether the block has a @{@link IBlockEntity} attached to it
+     */
     default boolean hasBlockEntity() {
         return false;
     }
 
+    /**
+     * Creates a new @{@link IBlockEntity} for this block
+     *
+     * Make sure to return true in @{@link this#hasBlockEntity()} to use this
+     */
     default IBlockEntity createBlockEntity(WorldReader reader) {
         return null;
     }
