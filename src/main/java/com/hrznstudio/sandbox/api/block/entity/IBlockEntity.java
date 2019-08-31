@@ -3,6 +3,9 @@ package com.hrznstudio.sandbox.api.block.entity;
 import com.hrznstudio.sandbox.api.block.IBlock;
 import com.hrznstudio.sandbox.api.util.Functions;
 import com.hrznstudio.sandbox.api.util.math.Position;
+import com.hrznstudio.sandbox.api.util.nbt.CompoundTag;
+import com.hrznstudio.sandbox.api.util.nbt.ReadableCompoundTag;
+import com.hrznstudio.sandbox.api.util.nbt.WritableCompoundTag;
 import com.hrznstudio.sandbox.api.world.World;
 
 import java.util.function.Supplier;
@@ -13,6 +16,14 @@ public interface IBlockEntity {
     Position getPosition();
 
     Type<?> getType();
+
+    default void read(ReadableCompoundTag tag) {
+    }
+
+    default void write(WritableCompoundTag tag) {
+    }
+
+    default void save() {}
 
     interface Tickable extends IBlockEntity {
         void onTick();

@@ -7,4 +7,6 @@ public interface BlockEntityCTX {
     World getWorld();
 
     Position getPosition();
+
+    void save();
 }

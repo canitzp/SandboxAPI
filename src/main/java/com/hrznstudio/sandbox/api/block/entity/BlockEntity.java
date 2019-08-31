@@ -29,4 +29,9 @@ public abstract class BlockEntity implements IBlockEntity {
     public final Type<?> getType() {
         return type;
     }
+
+    @Override
+    public final void save() {
+        ctx.save();
+    }
 }
