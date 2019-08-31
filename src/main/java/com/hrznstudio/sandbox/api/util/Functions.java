@@ -7,6 +7,7 @@ import com.hrznstudio.sandbox.api.enchant.IEnchantment;
 import com.hrznstudio.sandbox.api.item.IItem;
 import com.hrznstudio.sandbox.api.item.ItemStack;
 import com.hrznstudio.sandbox.api.registry.Registry;
+import com.hrznstudio.sandbox.api.util.nbt.CompoundTag;
 import com.hrznstudio.sandbox.api.util.text.Text;
 
 import java.util.function.BiFunction;
@@ -43,5 +44,8 @@ public class Functions {
     };
     public static Function<Class<?>, Registry<?>> registryFunction = (c) -> {
         throw new RuntimeException("No Registry Function Loaded, Report this as a bug!");
+    };
+    public static Supplier<CompoundTag> compoundTagCreator = ()-> {
+        throw new RuntimeException("No CompoundTag Creator Loaded, Report this as a bug!");
     };
 }

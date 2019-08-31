@@ -2,11 +2,9 @@ package com.hrznstudio.sandbox.api.item;
 
 import com.hrznstudio.sandbox.api.enchant.IEnchantment;
 import com.hrznstudio.sandbox.api.util.Functions;
+import com.hrznstudio.sandbox.api.util.nbt.CompoundTag;
 
 public interface ItemStack {
-    static ItemStack of(IItem item) {
-        return of(item, 1);
-    }
 
     static ItemStack of(ItemProvider item) {
         return of(item.asItem(), 1);
@@ -14,6 +12,10 @@ public interface ItemStack {
 
     static ItemStack of(ItemProvider item, int amount) {
         return of(item.asItem(), amount);
+    }
+
+    static ItemStack of(IItem item) {
+        return of(item, 1);
     }
 
     static ItemStack of(IItem item, int amount) {
@@ -41,4 +43,16 @@ public interface ItemStack {
     ItemStack grow(int amount);
 
     int getLevel(IEnchantment enchantment);
+
+    boolean hasTag();
+
+    CompoundTag getTag();
+
+    CompoundTag getOrCreateTag();
+
+    void setTag(CompoundTag tag);
+
+    CompoundTag getChildTag(String key);
+
+    CompoundTag getOrCreateChildTag(String key);
 }
