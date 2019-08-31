@@ -3,6 +3,7 @@ package com.hrznstudio.sandbox.api.util;
 import com.hrznstudio.sandbox.api.block.IBlock;
 import com.hrznstudio.sandbox.api.block.Material;
 import com.hrznstudio.sandbox.api.block.entity.IBlockEntity;
+import com.hrznstudio.sandbox.api.block.state.Property;
 import com.hrznstudio.sandbox.api.enchant.IEnchantment;
 import com.hrznstudio.sandbox.api.item.IItem;
 import com.hrznstudio.sandbox.api.item.ItemStack;
@@ -47,5 +48,8 @@ public class Functions {
     };
     public static Supplier<CompoundTag> compoundTagCreator = ()-> {
         throw new RuntimeException("No CompoundTag Creator Loaded, Report this as a bug!");
+    };
+    public static Function<String, Property> propertyFunction = s -> {
+        throw new RuntimeException("No Property Function Loaded, Report this as a bug!");
     };
 }
