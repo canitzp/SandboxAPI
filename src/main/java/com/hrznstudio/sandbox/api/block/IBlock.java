@@ -33,7 +33,7 @@ public interface IBlock extends ItemProvider {
     }
 
     @Nonnull
-    default InteractionResult onBlockClicked(World world, Position pos, BlockState state, IEntity player, Direction side) {
+    default InteractionResult onBlockClicked(World world, Position pos, BlockState state, Player player) {
         return InteractionResult.IGNORE;
     }
 
