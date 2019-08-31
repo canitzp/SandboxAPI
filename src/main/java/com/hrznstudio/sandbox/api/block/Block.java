@@ -6,7 +6,6 @@ import com.hrznstudio.sandbox.api.block.state.StateFactory;
 import com.hrznstudio.sandbox.api.item.IItem;
 
 public abstract class Block implements IBlock {
-    private Object wrapped;
     private IItem itemCache;
     private StateFactory<IBlock, BlockState> stateFactory;
     private final Properties properties;
@@ -27,14 +26,6 @@ public abstract class Block implements IBlock {
 
     public final void setStateFactory(StateFactory<IBlock, BlockState> stateFactory) {
         this.stateFactory = stateFactory;
-    }
-
-    public final Object getWrapped() {
-        return wrapped;
-    }
-
-    public final void setWrapped(Object wrapped) {
-        this.wrapped = wrapped;
     }
 
     @Override

@@ -32,7 +32,7 @@ public class Event {
     }
 
     protected void checkState() {
-        if (complete) {
+        if (isComplete()) {
             throw new UnsupportedOperationException("Cannot modify event in an async context");
         }
     }

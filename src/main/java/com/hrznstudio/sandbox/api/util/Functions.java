@@ -4,6 +4,7 @@ import com.hrznstudio.sandbox.api.block.IBlock;
 import com.hrznstudio.sandbox.api.block.Material;
 import com.hrznstudio.sandbox.api.block.entity.IBlockEntity;
 import com.hrznstudio.sandbox.api.block.state.Property;
+import com.hrznstudio.sandbox.api.client.Client;
 import com.hrznstudio.sandbox.api.enchant.IEnchantment;
 import com.hrznstudio.sandbox.api.item.IItem;
 import com.hrznstudio.sandbox.api.item.ItemStack;
@@ -51,5 +52,8 @@ public class Functions {
     };
     public static Function<String, Property> propertyFunction = s -> {
         throw new RuntimeException("No Property Function Loaded, Report this as a bug!");
+    };
+    public static Supplier<Client> clientInstance = ()->{
+        throw new RuntimeException("No Client Instance Getter Loaded, Report this as a bug!");
     };
 }
