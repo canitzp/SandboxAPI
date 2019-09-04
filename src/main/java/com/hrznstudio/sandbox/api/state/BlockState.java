@@ -1,4 +1,4 @@
-package com.hrznstudio.sandbox.api.block.state;
+package com.hrznstudio.sandbox.api.state;
 
 import com.hrznstudio.sandbox.api.block.IBlock;
 import com.hrznstudio.sandbox.api.block.Material;

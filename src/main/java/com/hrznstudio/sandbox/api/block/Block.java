@@ -1,26 +1,27 @@
 package com.hrznstudio.sandbox.api.block;
 
 import com.hrznstudio.sandbox.api.Registries;
-import com.hrznstudio.sandbox.api.block.state.BlockState;
-import com.hrznstudio.sandbox.api.block.state.StateFactory;
 import com.hrznstudio.sandbox.api.item.IItem;
+import com.hrznstudio.sandbox.api.state.BlockState;
+import com.hrznstudio.sandbox.api.state.Properties;
+import com.hrznstudio.sandbox.api.state.StateFactory;
 
 public abstract class Block implements IBlock {
     private IItem itemCache;
     private StateFactory<IBlock, BlockState> stateFactory;
-    private final Properties properties;
+    private final Settings settings;
 
-    public Block(Properties properties) {
-        this.properties = properties;
+    public Block(Settings settings) {
+        this.settings = settings;
     }
 
     @Override
-    public final Properties getProperties() {
-        return properties;
+    public final Settings getSettings() {
+        return settings;
     }
 
     @Override
-    public StateFactory<IBlock, BlockState> getStateFactory() {
+    public final StateFactory<IBlock, BlockState> getStateFactory() {
         return stateFactory;
     }
 
@@ -34,6 +35,12 @@ public abstract class Block implements IBlock {
             itemCache = Registries.ITEM.get(Registries.BLOCK.getIdentity(this));
         }
         return itemCache;
+    }
+
+    public void appendProperties(StateFactory.Builder<IBlock, BlockState> builder) {
+        if (canContainFluids()) {
+            builder.add(Properties.WATERLOGGED);
+        }
     }
 
     @Override

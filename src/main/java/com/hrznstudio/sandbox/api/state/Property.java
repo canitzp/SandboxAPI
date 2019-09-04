@@ -1,4 +1,4 @@
-package com.hrznstudio.sandbox.api.block.state;
+package com.hrznstudio.sandbox.api.state;
 
 import java.util.Collection;
 import java.util.Optional;

@@ -1,6 +1,7 @@
 package com.hrznstudio.sandbox.api.util.math;
 
 import com.hrznstudio.sandbox.api.util.Direction;
+import com.hrznstudio.sandbox.api.util.Functions;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -9,6 +10,16 @@ public interface Position extends Vec3i {
     Mutable toMutable();
 
     Position toImmutable();
+
+    Position ZERO = create(0,0,0);
+
+    static Position create(int x, int y, int z) {
+        return Functions.positionFunction.apply(new int[]{x, y, z});
+    }
+
+    static Position create(Vec3i vec3i) {
+        return create(vec3i.getX(), vec3i.getY(), vec3i.getZ());
+    }
 
     default Position offset(Direction direction) {
         return offset(direction, 1);
@@ -66,6 +77,18 @@ public interface Position extends Vec3i {
 
     interface Mutable extends Position {
 
+        static Mutable create() {
+            return create(0, 0, 0);
+        }
+
+        static Mutable create(int x, int y, int z) {
+            return Functions.mutablePositionFunction.apply(new int[]{x, y, z});
+        }
+
+        static Mutable create(Vec3i vec3i) {
+            return create(vec3i.getX(), vec3i.getY(), vec3i.getZ());
+        }
+
         default Mutable setX(int x) {
             return set(x, getY(), getZ());
         }
@@ -79,5 +102,9 @@ public interface Position extends Vec3i {
         }
 
         Mutable set(int x, int y, int z);
+
+        default Mutable set(Vec3i vec) {
+            return set(vec.getX(), vec.getY(), vec.getZ());
+        }
     }
 }

@@ -1,8 +1,8 @@
-package com.hrznstudio.sandbox.api.block.state;
+package com.hrznstudio.sandbox.api.state;
 
 import com.hrznstudio.sandbox.api.util.Functions;
 
-public class DefaultProperties {
+public class Properties {
     public static final Property<Boolean> ATTACHED = get("attached");
     public static final Property<Boolean> BOTTOM = get("bottom");
     public static final Property<Boolean> CONDITIONAL = get("conditional");
@@ -32,9 +32,13 @@ public class DefaultProperties {
     public static final Property<Boolean> TRIGGERED = get("triggered");
     public static final Property<Boolean> UNSTABLE = get("unstable");
     public static final Property<Boolean> WATERLOGGED = get("waterlogged");
+    public static final Property<Integer> FLUID_LEVEL = get("fluidlevel");
+    public static final Property<Integer> FLUID_BLOCK_LEVEL = get("level_15");
 
     private static <X extends Comparable<X>> Property<X> get(String s) {
-        return Functions.propertyFunction.apply(s);
+        Property<X> property = Functions.propertyFunction.apply(s);
+        if (property == null)
+            throw new NullPointerException("Property cannot be null");
+        return property;
     }
-    
 }

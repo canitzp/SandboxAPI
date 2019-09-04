@@ -7,6 +7,7 @@ public class BlockItem extends Item implements IBlockItem {
     private final Block block;
 
     public BlockItem(Block block) {
+        super(new Settings());
         this.block = block;
     }
 

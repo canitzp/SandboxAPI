@@ -13,7 +13,50 @@ public interface IItem {
         return InteractionResult.IGNORE;
     }
 
+    Settings getSettings();
+
     default void appendTooltipText(ItemStack cast, @Nullable World world, List<Text> tooltip, boolean advanced) {
 
+    }
+
+    class Settings {
+        private int stackSize = 64;
+        private int maxDamage;
+        private IItem recipeRemainder;
+
+        public Settings() {
+        }
+
+        public int getMaxDamage() {
+            return maxDamage;
+        }
+
+        public Settings setMaxDamage(int maxDamage) {
+            this.maxDamage = maxDamage;
+            this.stackSize = 1;
+            return this;
+        }
+
+        public int getStackSize() {
+            return stackSize;
+        }
+
+        public Settings setStackSize(int stackSize) {
+            if (this.maxDamage > 0) {
+                throw new RuntimeException("Unable to have damage AND stack.");
+            } else {
+                this.stackSize = stackSize;
+                return this;
+            }
+        }
+
+        public IItem getRecipeRemainder() {
+            return recipeRemainder;
+        }
+
+        public Settings setRecipeRemainder(IItem recipeRemainder) {
+            this.recipeRemainder = recipeRemainder;
+            return this;
+        }
     }
 }

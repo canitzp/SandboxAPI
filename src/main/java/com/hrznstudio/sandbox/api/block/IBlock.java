@@ -1,14 +1,18 @@
 package com.hrznstudio.sandbox.api.block;
 
 import com.hrznstudio.sandbox.api.block.entity.IBlockEntity;
-import com.hrznstudio.sandbox.api.block.state.BlockState;
-import com.hrznstudio.sandbox.api.block.state.StateFactory;
 import com.hrznstudio.sandbox.api.entity.IEntity;
 import com.hrznstudio.sandbox.api.entity.player.Hand;
 import com.hrznstudio.sandbox.api.entity.player.Player;
+import com.hrznstudio.sandbox.api.fluid.Fluids;
+import com.hrznstudio.sandbox.api.fluid.IFluid;
 import com.hrznstudio.sandbox.api.item.IItem;
 import com.hrznstudio.sandbox.api.item.ItemProvider;
 import com.hrznstudio.sandbox.api.item.ItemStack;
+import com.hrznstudio.sandbox.api.state.BlockState;
+import com.hrznstudio.sandbox.api.state.FluidState;
+import com.hrznstudio.sandbox.api.state.Properties;
+import com.hrznstudio.sandbox.api.state.StateFactory;
 import com.hrznstudio.sandbox.api.util.Direction;
 import com.hrznstudio.sandbox.api.util.InteractionResult;
 import com.hrznstudio.sandbox.api.util.Mirror;
@@ -24,9 +28,9 @@ import javax.annotation.Nullable;
 public interface IBlock extends ItemProvider {
 
     /**
-     * The {@link Properties} assigned to the Block
+     * The {@link Settings} assigned to the Block
      */
-    Properties getProperties();
+    Settings getSettings();
 
     /**
      * Grabs the Block as an {@link IItem}
@@ -89,7 +93,7 @@ public interface IBlock extends ItemProvider {
 
     /**
      * Creates a new @{@link IBlockEntity} for this block
-     *
+     * <p>
      * Make sure to return true in @{@link this#hasBlockEntity()} to use this
      */
     default IBlockEntity createBlockEntity(WorldReader reader) {
@@ -119,13 +123,13 @@ public interface IBlock extends ItemProvider {
     default boolean canEntitySpawnWithin() {
         return !getMaterial().isSolid() && !getMaterial().isLiquid();
     }
-    
+
     default Material.PistonInteraction getPistonInteraction(BlockState state) {
         return getMaterial().getPistonInteraction();
     }
-    
+
     default Material getMaterial() {
-        return getProperties().getMaterial();
+        return getSettings().getMaterial();
     }
 
     default ItemStack getPickStack(WorldReader reader, Position position, BlockState state) {
@@ -140,10 +144,34 @@ public interface IBlock extends ItemProvider {
         return false;
     }
 
-    class Properties {
+    default boolean canContainFluids() {
+        return false;
+    }
+
+    default boolean canContainFluid(WorldReader world, Position position, BlockState state, IFluid fluid) {
+        return canContainFluids();
+    }
+
+    default boolean fillWith(World world, Position position, BlockState state, FluidState fluid) {
+        if (canContainFluid(world, position, state, fluid.getFluid())) {
+            world.setBlockState(position, state.with(Properties.WATERLOGGED, true));
+            return true;
+        }
+        return false;
+    }
+
+    default IFluid drainFrom(World world, Position position, BlockState state) {
+        if (state.contains(Properties.WATERLOGGED)) {
+            world.setBlockState(position, state.with(Properties.WATERLOGGED, false));
+            return Fluids.WATER;
+        }
+        return Fluids.EMPTY;
+    }
+
+    class Settings {
         private final Material material;
 
-        public Properties(Material material) {
+        public Settings(Material material) {
             this.material = material;
         }
 
