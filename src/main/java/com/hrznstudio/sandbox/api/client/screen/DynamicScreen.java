@@ -4,12 +4,12 @@ import com.hrznstudio.sandbox.api.client.render.RenderUtil;
 import com.hrznstudio.sandbox.api.util.Identity;
 import com.hrznstudio.sandbox.api.util.text.Text;
 
-public class DynamicScreen extends Screen {
+public abstract class DynamicScreen extends Screen {
     public static final Identity BACKGROUND_LOCATION = Identity.of("sandbox", "textures/gui/sheet.png");
     private int containerWidth, containerHeight;
 
-    public DynamicScreen() {
-        super(Text.literal(""));
+    public DynamicScreen(Identity identity) {
+        super(identity);
     }
 
     @Override
