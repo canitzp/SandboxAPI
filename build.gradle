@@ -9,7 +9,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = 'api'
-version = System.getenv("COMMIT") ? "${project.api_version}+${System.getenv("COMMIT")}" : "${project.api_version}"
+version = System.getenv("COMMIT") ? "${project.api_version}-${System.getenv("COMMIT")}" : "${project.api_version}"
 group = project.maven_group
 
 repositories {
