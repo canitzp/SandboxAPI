@@ -54,25 +54,25 @@ public class Functions {
     public static Function<Class<?>, Registry<?>> registryFunction = (c) -> {
         throw new RuntimeException("No Registry Function Loaded, Report this as a bug!");
     };
-    public static Supplier<CompoundTag> compoundTagCreator = ()-> {
+    public static Supplier<CompoundTag> compoundTagCreator = () -> {
         throw new RuntimeException("No CompoundTag Creator Loaded, Report this as a bug!");
     };
     public static Function<String, Property> propertyFunction = s -> {
         throw new RuntimeException("No Property Function Loaded, Report this as a bug!");
     };
-    public static Supplier<Client> clientInstance = ()->{
+    public static Supplier<Client> clientInstance = () -> {
         throw new RuntimeException("No Client Instance Getter Loaded, Report this as a bug!");
     };
-    public static Function<int[], Vec3i> vec3iFunction = (arr)->{
+    public static Function<int[], Vec3i> vec3iFunction = (arr) -> {
         throw new RuntimeException("No Vec3i Function Loaded, Report this as a bug!");
     };
-    public static Function<int[], Position> positionFunction = (arr)->{
+    public static Function<int[], Position> positionFunction = (arr) -> {
         throw new RuntimeException("No Position Function Loaded, Report this as a bug!");
     };
-    public static Function<int[], Position.Mutable> mutablePositionFunction = (arr)->{
+    public static Function<int[], Position.Mutable> mutablePositionFunction = (arr) -> {
         throw new RuntimeException("No Position Function Loaded, Report this as a bug!");
     };
-    public static Supplier<RenderUtil> renderUtil = ()->{
+    public static Supplier<RenderUtil> renderUtil = () -> {
         throw new RuntimeException("No Render Util Loaded, Report this as a bug!");
     };
 }

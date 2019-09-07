@@ -48,9 +48,9 @@ public interface ItemStack {
 
     CompoundTag getTag();
 
-    CompoundTag getOrCreateTag();
-
     void setTag(CompoundTag tag);
+
+    CompoundTag getOrCreateTag();
 
     CompoundTag getChildTag(String key);
 

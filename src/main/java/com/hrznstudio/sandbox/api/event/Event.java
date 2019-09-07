@@ -74,6 +74,7 @@ public class Event {
     public @interface Async {
 
     }
+
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
     public @interface HasResult {

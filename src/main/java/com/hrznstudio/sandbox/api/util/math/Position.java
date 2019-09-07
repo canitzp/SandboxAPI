@@ -7,11 +7,7 @@ import javax.annotation.concurrent.Immutable;
 
 @Immutable
 public interface Position extends Vec3i {
-    Mutable toMutable();
-
-    Position toImmutable();
-
-    Position ZERO = create(0,0,0);
+    Position ZERO = create(0, 0, 0);
 
     static Position create(int x, int y, int z) {
         return Functions.positionFunction.apply(new int[]{x, y, z});
@@ -20,6 +16,10 @@ public interface Position extends Vec3i {
     static Position create(Vec3i vec3i) {
         return create(vec3i.getX(), vec3i.getY(), vec3i.getZ());
     }
+
+    Mutable toMutable();
+
+    Position toImmutable();
 
     default Position offset(Direction direction) {
         return offset(direction, 1);

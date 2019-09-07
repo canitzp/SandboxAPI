@@ -9,6 +9,10 @@ import javax.annotation.Nullable;
 
 public interface Client {
 
+    static Client getInstance() {
+        return Functions.clientInstance.get();
+    }
+
     Player getPlayer();
 
     World getWorld();
@@ -17,8 +21,4 @@ public interface Client {
     IScreen getCurrentScreen();
 
     TextRenderer getTextRenderer();
-
-    static Client getInstance() {
-        return Functions.clientInstance.get();
-    }
 }

@@ -7,9 +7,9 @@ import com.hrznstudio.sandbox.api.state.Properties;
 import com.hrznstudio.sandbox.api.state.StateFactory;
 
 public abstract class Block implements IBlock {
+    private final Settings settings;
     private IItem itemCache;
     private StateFactory<IBlock, BlockState> stateFactory;
-    private final Settings settings;
 
     public Block(Settings settings) {
         this.settings = settings;

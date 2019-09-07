@@ -4,9 +4,9 @@ import com.hrznstudio.sandbox.api.client.Client;
 import com.hrznstudio.sandbox.api.util.text.Text;
 
 public abstract class Screen implements IScreen {
+    private final Text title;
     private Client client;
     private int width, height;
-    private final Text title;
 
     public Screen(Text title) {
         this.title = title;
