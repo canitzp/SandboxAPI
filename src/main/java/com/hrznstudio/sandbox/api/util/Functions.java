@@ -4,6 +4,7 @@ import com.hrznstudio.sandbox.api.block.IBlock;
 import com.hrznstudio.sandbox.api.block.Material;
 import com.hrznstudio.sandbox.api.block.entity.IBlockEntity;
 import com.hrznstudio.sandbox.api.client.Client;
+import com.hrznstudio.sandbox.api.client.render.RenderUtil;
 import com.hrznstudio.sandbox.api.enchant.IEnchantment;
 import com.hrznstudio.sandbox.api.fluid.IFluid;
 import com.hrznstudio.sandbox.api.item.IItem;
@@ -70,5 +71,8 @@ public class Functions {
     };
     public static Function<int[], Position.Mutable> mutablePositionFunction = (arr)->{
         throw new RuntimeException("No Position Function Loaded, Report this as a bug!");
+    };
+    public static Supplier<RenderUtil> renderUtil = ()->{
+        throw new RuntimeException("No Render Util Loaded, Report this as a bug!");
     };
 }

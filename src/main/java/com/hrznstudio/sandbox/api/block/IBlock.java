@@ -22,7 +22,6 @@ import com.hrznstudio.sandbox.api.util.math.Vec3f;
 import com.hrznstudio.sandbox.api.world.World;
 import com.hrznstudio.sandbox.api.world.WorldReader;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public interface IBlock extends ItemProvider {
@@ -44,7 +43,6 @@ public interface IBlock extends ItemProvider {
      *
      * @return The {@link InteractionResult} of the interaction
      */
-    @Nonnull
     default InteractionResult onBlockUsed(World world, Position pos, BlockState state, Player player, Hand hand, Direction side, Vec3f hit) {
         return InteractionResult.IGNORE;
     }
@@ -54,7 +52,6 @@ public interface IBlock extends ItemProvider {
      *
      * @return The {@link InteractionResult} of the interaction
      */
-    @Nonnull
     default InteractionResult onBlockClicked(World world, Position pos, BlockState state, Player player) {
         return InteractionResult.IGNORE;
     }
@@ -72,7 +69,7 @@ public interface IBlock extends ItemProvider {
     /**
      * Gets called when the block is broken
      */
-    default void onBlockDestroyed(World world, Position position, BlockState state) {
+    default void onBlockBroken(World world, Position position, BlockState state) {
     }
 
     /**
@@ -96,6 +93,7 @@ public interface IBlock extends ItemProvider {
      * <p>
      * Make sure to return true in @{@link this#hasBlockEntity()} to use this
      */
+    @Nullable
     default IBlockEntity createBlockEntity(WorldReader reader) {
         return null;
     }
