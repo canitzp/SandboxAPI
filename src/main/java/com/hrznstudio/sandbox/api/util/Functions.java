@@ -5,6 +5,7 @@ import com.hrznstudio.sandbox.api.block.Material;
 import com.hrznstudio.sandbox.api.block.entity.IBlockEntity;
 import com.hrznstudio.sandbox.api.client.Client;
 import com.hrznstudio.sandbox.api.client.render.RenderUtil;
+import com.hrznstudio.sandbox.api.component.Component;
 import com.hrznstudio.sandbox.api.enchant.IEnchantment;
 import com.hrznstudio.sandbox.api.fluid.IFluid;
 import com.hrznstudio.sandbox.api.item.IItem;
@@ -16,6 +17,7 @@ import com.hrznstudio.sandbox.api.util.math.Vec3i;
 import com.hrznstudio.sandbox.api.util.nbt.CompoundTag;
 import com.hrznstudio.sandbox.api.util.text.Text;
 
+import javax.management.AttributeValueExp;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -74,5 +76,8 @@ public class Functions {
     };
     public static Supplier<RenderUtil> renderUtil = () -> {
         throw new RuntimeException("No Render Util Loaded, Report this as a bug!");
+    };
+    public static Function<Class, Component> componentFunction = xClass -> {
+        throw new RuntimeException("No Component Function Loaded, Report this as a bug!");
     };
 }

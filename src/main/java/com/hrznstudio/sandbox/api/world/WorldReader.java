@@ -5,9 +5,12 @@ import com.hrznstudio.sandbox.api.state.BlockState;
 import com.hrznstudio.sandbox.api.state.FluidState;
 import com.hrznstudio.sandbox.api.util.math.Position;
 
+import javax.annotation.Nullable;
+
 public interface WorldReader {
     BlockState getBlockState(Position position);
 
+    @Nullable
     IBlockEntity getBlockEntity(Position position);
 
     FluidState getFluidState(Position position);

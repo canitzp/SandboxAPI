@@ -1,6 +1,8 @@
 package com.hrznstudio.sandbox.api.item;
 
+import com.hrznstudio.sandbox.api.component.Component;
 import com.hrznstudio.sandbox.api.util.InteractionResult;
+import com.hrznstudio.sandbox.api.util.Mono;
 import com.hrznstudio.sandbox.api.util.math.Position;
 import com.hrznstudio.sandbox.api.util.text.Text;
 import com.hrznstudio.sandbox.api.world.World;
@@ -17,6 +19,18 @@ public interface IItem {
 
     default void appendTooltipText(ItemStack cast, @Nullable World world, List<Text> tooltip, boolean advanced) {
 
+    }
+
+    default <X> Mono<X> getComponent(Component<X> component) {
+        return getComponent(component, Mono.empty());
+    }
+
+    default <X> Mono<X> getComponent(Component<X> component, ItemStack stack) {
+        return getComponent(component, Mono.of(stack));
+    }
+
+    default <X> Mono<X> getComponent(Component<X> component, Mono<ItemStack> stack) {
+        return Mono.empty();
     }
 
     class Settings {

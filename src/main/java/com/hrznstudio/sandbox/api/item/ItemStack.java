@@ -1,7 +1,9 @@
 package com.hrznstudio.sandbox.api.item;
 
+import com.hrznstudio.sandbox.api.component.Component;
 import com.hrznstudio.sandbox.api.enchant.IEnchantment;
 import com.hrznstudio.sandbox.api.util.Functions;
+import com.hrznstudio.sandbox.api.util.Mono;
 import com.hrznstudio.sandbox.api.util.nbt.CompoundTag;
 
 public interface ItemStack {
@@ -22,11 +24,17 @@ public interface ItemStack {
         return Functions.itemStackFunction.apply(item, amount);
     }
 
+    static ItemStack empty() {
+        return of(Items.AIR, 0);
+    }
+
     boolean isEmpty();
 
     IItem getItem();
 
     int getCount();
+
+    ItemStack copy();
 
     ItemStack setCount(int amount);
 
@@ -55,4 +63,12 @@ public interface ItemStack {
     CompoundTag getChildTag(String key);
 
     CompoundTag getOrCreateChildTag(String key);
+
+    default <X> Mono<X> getComponent(Component<X> component) {
+        return getItem().getComponent(component, this);
+    }
+
+    int getMaxCount();
+
+    boolean isEqualTo(ItemStack stack);
 }

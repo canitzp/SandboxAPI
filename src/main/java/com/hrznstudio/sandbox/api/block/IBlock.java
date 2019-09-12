@@ -1,6 +1,7 @@
 package com.hrznstudio.sandbox.api.block;
 
 import com.hrznstudio.sandbox.api.block.entity.IBlockEntity;
+import com.hrznstudio.sandbox.api.component.Component;
 import com.hrznstudio.sandbox.api.entity.IEntity;
 import com.hrznstudio.sandbox.api.entity.player.Hand;
 import com.hrznstudio.sandbox.api.entity.player.Player;
@@ -13,10 +14,7 @@ import com.hrznstudio.sandbox.api.state.BlockState;
 import com.hrznstudio.sandbox.api.state.FluidState;
 import com.hrznstudio.sandbox.api.state.Properties;
 import com.hrznstudio.sandbox.api.state.StateFactory;
-import com.hrznstudio.sandbox.api.util.Direction;
-import com.hrznstudio.sandbox.api.util.InteractionResult;
-import com.hrznstudio.sandbox.api.util.Mirror;
-import com.hrznstudio.sandbox.api.util.Rotation;
+import com.hrznstudio.sandbox.api.util.*;
 import com.hrznstudio.sandbox.api.util.math.Position;
 import com.hrznstudio.sandbox.api.util.math.Vec3f;
 import com.hrznstudio.sandbox.api.world.World;
@@ -37,6 +35,18 @@ public interface IBlock extends ItemProvider {
     @Nullable
     @Override
     IItem asItem();
+
+    default <X> Mono<X> getComponent(WorldReader world, Position position, BlockState state, Component<X> component) {
+        return getComponent(world, position, state, component, Mono.empty());
+    }
+
+    default <X> Mono<X> getComponent(WorldReader world, Position position, BlockState state, Component<X> component, Direction side) {
+        return getComponent(world, position, state, component, Mono.of(side));
+    }
+
+    default <X> Mono<X> getComponent(WorldReader world, Position position, BlockState state, Component<X> component, Mono<Direction> side) {
+        return Mono.empty();
+    }
 
     /**
      * Gets called when the block is interacted with by a {@link Player}
