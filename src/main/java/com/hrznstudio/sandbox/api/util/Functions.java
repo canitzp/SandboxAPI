@@ -11,13 +11,13 @@ import com.hrznstudio.sandbox.api.fluid.IFluid;
 import com.hrznstudio.sandbox.api.item.IItem;
 import com.hrznstudio.sandbox.api.item.ItemStack;
 import com.hrznstudio.sandbox.api.registry.Registry;
+import com.hrznstudio.sandbox.api.server.Server;
 import com.hrznstudio.sandbox.api.state.Property;
 import com.hrznstudio.sandbox.api.util.math.Position;
 import com.hrznstudio.sandbox.api.util.math.Vec3i;
 import com.hrznstudio.sandbox.api.util.nbt.CompoundTag;
 import com.hrznstudio.sandbox.api.util.text.Text;
 
-import javax.management.AttributeValueExp;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -64,6 +64,9 @@ public class Functions {
     };
     public static Supplier<Client> clientInstance = () -> {
         throw new RuntimeException("No Client Instance Getter Loaded, Report this as a bug!");
+    };
+    public static Supplier<Server> serverInstance = () -> {
+        throw new RuntimeException("No Server Instance Getter Loaded, Report this as a bug!");
     };
     public static Function<int[], Vec3i> vec3iFunction = (arr) -> {
         throw new RuntimeException("No Vec3i Function Loaded, Report this as a bug!");
