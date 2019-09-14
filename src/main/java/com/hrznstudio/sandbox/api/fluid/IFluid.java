@@ -6,11 +6,10 @@ import com.hrznstudio.sandbox.api.state.BlockState;
 import com.hrznstudio.sandbox.api.state.FluidState;
 import com.hrznstudio.sandbox.api.state.Properties;
 import com.hrznstudio.sandbox.api.state.StateFactory;
+import com.hrznstudio.sandbox.api.util.Mono;
 import com.hrznstudio.sandbox.api.util.math.Position;
 import com.hrznstudio.sandbox.api.util.math.Vec3d;
 import com.hrznstudio.sandbox.api.world.WorldReader;
-
-import java.util.Optional;
 
 public interface IFluid extends ItemProvider {
     FluidState getBaseState();
@@ -49,8 +48,8 @@ public interface IFluid extends ItemProvider {
         return 5;
     }
 
-    default Optional<Vec3d> getVelocity(WorldReader world, Position position, FluidState state) {
-        return Optional.empty();
+    default Mono<Vec3d> getVelocity(WorldReader world, Position position, FluidState state) {
+        return Mono.empty();
     }
 
     /**
