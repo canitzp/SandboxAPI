@@ -1,19 +1,17 @@
 package com.hrznstudio.sandbox.api.client.screen;
 
 import com.hrznstudio.sandbox.api.client.render.RenderUtil;
+import com.hrznstudio.sandbox.api.container.IContainer;
 import com.hrznstudio.sandbox.api.util.Identity;
 
-public abstract class DynamicScreen extends Screen {
+public class DynamicContainerScreen extends ContainerScreen {
     public static final Identity BACKGROUND_LOCATION = Identity.of("sandbox", "textures/gui/sheet.png");
-    private int containerWidth, containerHeight;
+    private final int containerWidth, containerHeight;
 
-    public DynamicScreen(Identity identity) {
-        super(identity);
-    }
-
-    @Override
-    public void init() {
-
+    public DynamicContainerScreen(Identity identity, IContainer container, int containerWidth, int containerHeight) {
+        super(identity, container);
+        this.containerWidth = containerWidth;
+        this.containerHeight = containerHeight;
     }
 
     @Override
@@ -21,19 +19,16 @@ public abstract class DynamicScreen extends Screen {
         RenderUtil render = RenderUtil.instance();
         render.bind(BACKGROUND_LOCATION);
 
-        containerHeight = 136;
-        containerWidth = 195;
-
         int x = (getWidth() / 2) - (containerWidth / 2);
         int y = (getHeight() / 2) - (containerHeight / 2);
 
         drawBackground();
 
-        for (int hX = 0; hX < 9; hX++) {
-            for (int hY = 0; hY < 3; hY++) {
-                drawSlot(x + (hX * 22), y + (hY * 22), 20, 20);
-            }
-        }
+        getContainer().getSlots().forEach(slot -> {
+            drawSlot(x + slot.getXPosition(), y + slot.getYPosition(), 20, 20);
+        });
+
+        super.draw(mouseX, mouseY, partialTicks);
     }
 
     public void drawSlot(int x, int y, int width, int height) {

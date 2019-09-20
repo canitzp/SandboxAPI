@@ -16,6 +16,7 @@ import com.hrznstudio.sandbox.api.state.Property;
 import com.hrznstudio.sandbox.api.util.math.Position;
 import com.hrznstudio.sandbox.api.util.math.Vec3i;
 import com.hrznstudio.sandbox.api.util.nbt.CompoundTag;
+import com.hrznstudio.sandbox.api.util.nbt.ReadableCompoundTag;
 import com.hrznstudio.sandbox.api.util.text.Text;
 
 import java.util.function.BiFunction;
@@ -82,5 +83,8 @@ public class Functions {
     };
     public static Function<Class, Component> componentFunction = xClass -> {
         throw new RuntimeException("No Component Function Loaded, Report this as a bug!");
+    };
+    public static Function<ReadableCompoundTag, ItemStack> itemStackFromTagFunction = tag -> {
+        throw new RuntimeException("No ItemStack Tag Function Loaded, Report this as a bug!");
     };
 }

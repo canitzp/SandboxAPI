@@ -5,6 +5,7 @@ import com.hrznstudio.sandbox.api.enchant.IEnchantment;
 import com.hrznstudio.sandbox.api.util.Functions;
 import com.hrznstudio.sandbox.api.util.Mono;
 import com.hrznstudio.sandbox.api.util.nbt.CompoundTag;
+import com.hrznstudio.sandbox.api.util.nbt.ReadableCompoundTag;
 
 public interface ItemStack {
 
@@ -28,15 +29,19 @@ public interface ItemStack {
         return of(Items.AIR, 0);
     }
 
+    static ItemStack read(ReadableCompoundTag tag) {
+        return Functions.itemStackFromTagFunction.apply(tag);
+    }
+
     boolean isEmpty();
 
     IItem getItem();
 
     int getCount();
 
-    ItemStack copy();
-
     ItemStack setCount(int amount);
+
+    ItemStack copy();
 
     default ItemStack shrink() {
         return shrink(1);
@@ -64,6 +69,8 @@ public interface ItemStack {
 
     CompoundTag getOrCreateChildTag(String key);
 
+    CompoundTag asTag();
+
     default <X> Mono<X> getComponent(Component<X> component) {
         return getItem().getComponent(component, this);
     }
@@ -71,4 +78,8 @@ public interface ItemStack {
     int getMaxCount();
 
     boolean isEqualTo(ItemStack stack);
+
+    boolean isEqualToIgnoreDurability(ItemStack stack);
+
+    boolean areTagsEqual(ItemStack stack);
 }

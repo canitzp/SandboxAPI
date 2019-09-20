@@ -13,6 +13,14 @@ public class Mono<T> {
     private static final Mono<?> EMPTY = new Mono<>();
     private final T value;
 
+    private Mono(T value) {
+        this.value = Objects.requireNonNull(value);
+    }
+
+    private Mono() {
+        this.value = null;
+    }
+
     public static <X> Mono<X> empty() {
         @SuppressWarnings("unchecked")
         Mono<X> mono = (Mono<X>) EMPTY;
@@ -25,14 +33,6 @@ public class Mono<T> {
 
     public static <T> Mono<T> ofNullable(@Nullable T value) {
         return value == null ? empty() : new Mono<>(value);
-    }
-
-    private Mono(T value) {
-        this.value = Objects.requireNonNull(value);
-    }
-
-    private Mono() {
-        this.value = null;
     }
 
     public boolean isPresent() {
@@ -55,9 +55,22 @@ public class Mono<T> {
         return Mono.of(mapper.apply(get()));
     }
 
+    public <X> Mono<X> flatMap(Function<T, Mono<X>> mapper) {
+        if (!isPresent())
+            return empty();
+        return mapper.apply(get());
+    }
+
     public void ifPresent(Consumer<T> consumer) {
         if (isPresent())
             consumer.accept(get());
+    }
+
+    public void ifPresent(Consumer<T> consumer, Runnable runnable) {
+        if (isPresent())
+            consumer.accept(get());
+        else
+            runnable.run();
     }
 
     public <X> Mono<X> cast() {

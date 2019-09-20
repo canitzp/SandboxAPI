@@ -6,12 +6,12 @@ import com.hrznstudio.sandbox.api.util.text.Text;
 
 public abstract class Screen implements IScreen {
     private final Text title;
+    private final Identity identity;
     private Client client;
     private int width, height;
-    private final Identity identity;
 
     public Screen(Identity identity) {
-        this.identity=identity;
+        this.identity = identity;
         this.title = Text.translatable(String.format("screen.%s.%s", identity.getNamespace(), identity.getPath()));
     }
 

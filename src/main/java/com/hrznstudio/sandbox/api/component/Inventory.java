@@ -1,7 +1,9 @@
 package com.hrznstudio.sandbox.api.component;
 
 import com.hrznstudio.sandbox.api.item.ItemStack;
+import com.hrznstudio.sandbox.api.util.IntegerRangeIterator;
 
+import java.util.Iterator;
 import java.util.function.Predicate;
 
 public interface Inventory extends Iterable<Integer> {
@@ -31,7 +33,7 @@ public interface Inventory extends Iterable<Integer> {
                 ItemStack test = extract(slot, itemFilter, amount - extracted.getCount(), true);
                 if (extracted.isEqualTo(test)) {
                     ItemStack ex = extract(slot, itemFilter, amount - extracted.getCount(), simulate);
-                    extracted.grow(ex.getCount());
+                    extracted = extracted.grow(ex.getCount());
                 }
             }
             if (extracted != null && extracted.getCount() >= amount) {
@@ -82,4 +84,10 @@ public interface Inventory extends Iterable<Integer> {
         return insert(stack, false);
     }
 
+    void setStack(int slot, ItemStack stack);
+
+    @Override
+    default Iterator<Integer> iterator() {
+        return new IntegerRangeIterator(0, getSize());
+    }
 }

@@ -2,6 +2,7 @@ package com.hrznstudio.sandbox.api;
 
 import com.hrznstudio.sandbox.api.block.IBlock;
 import com.hrznstudio.sandbox.api.block.entity.IBlockEntity;
+import com.hrznstudio.sandbox.api.container.ContainerFactory;
 import com.hrznstudio.sandbox.api.enchant.IEnchantment;
 import com.hrznstudio.sandbox.api.fluid.IFluid;
 import com.hrznstudio.sandbox.api.item.IItem;
@@ -15,6 +16,7 @@ public interface Registries {
     Registry<IBlockEntity.Type> BLOCK_ENTITY = get(IBlockEntity.Type.class);
     Registry<IFluid> FLUID = get(IFluid.class);
     Registry<IEnchantment> ENCHANTMENT = get(IEnchantment.class);
+    Registry<ContainerFactory> CONTAINER = get(ContainerFactory.class);
 
     static <T> Registry<T> get(Class<T> tClass) {
         return (Registry<T>) Functions.registryFunction.apply(tClass);

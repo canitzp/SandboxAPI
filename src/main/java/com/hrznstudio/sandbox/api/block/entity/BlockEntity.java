@@ -1,12 +1,10 @@
 package com.hrznstudio.sandbox.api.block.entity;
 
 import com.hrznstudio.sandbox.api.component.Component;
-import com.hrznstudio.sandbox.api.state.BlockState;
 import com.hrznstudio.sandbox.api.util.Direction;
 import com.hrznstudio.sandbox.api.util.Mono;
 import com.hrznstudio.sandbox.api.util.math.Position;
 import com.hrznstudio.sandbox.api.world.World;
-import com.hrznstudio.sandbox.api.world.WorldReader;
 
 public abstract class BlockEntity implements IBlockEntity {
     private final Type<?> type;

@@ -1,9 +1,13 @@
 package com.hrznstudio.sandbox.api.util.nbt;
 
+import com.hrznstudio.sandbox.api.util.Identity;
+import com.hrznstudio.sandbox.api.util.math.Position;
+
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
-public interface ReadableCompoundTag {
+public interface ReadableCompoundTag extends Tag {
     int size();
 
     Collection<String> getKeys();
@@ -27,4 +31,14 @@ public interface ReadableCompoundTag {
     UUID getUUID(String key);
 
     boolean remove(String key);
+
+    Tag getTag(String key);
+
+    <T> List<T> getList(String key, Class<T> tagType);
+
+    CompoundTag getCompound(String key);
+
+    Identity getIdentity(String key);
+
+    Position getPosition(String key);
 }
