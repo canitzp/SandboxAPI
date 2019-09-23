@@ -1,23 +1,15 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'com.cinnober.gradle', name: 'semver-git', version: '2.4.0'
-    }
-}
 plugins {
     id 'java'
     id 'maven-publish'
     id 'java-library'
 }
-ext.nextVersion="patch"
-apply plugin: 'com.cinnober.gradle.semver-git'
+
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = 'sandbox-api'
+version = System.getenv("COMMIT") ? "${project.api_version}-${System.getenv("COMMIT")}" : "${project.api_version}"
 group = project.maven_group
 
 repositories {
