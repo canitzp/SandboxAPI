@@ -13,7 +13,7 @@ import com.hrznstudio.sandbox.api.util.Mono;
 import com.hrznstudio.sandbox.api.util.math.Position;
 import com.hrznstudio.sandbox.api.world.WorldReader;
 
-public abstract class Block implements IBlock {
+public class Block implements IBlock {
     private final Settings settings;
     private IItem itemCache;
     private StateFactory<IBlock, BlockState> stateFactory;
