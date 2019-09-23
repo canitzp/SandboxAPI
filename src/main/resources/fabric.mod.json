@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "sandboxapi",
+  "version": "0.0.0",
+  "name": "SandboxAPI",
+  "description": "Minecraft mod engine!",
+  "authors": [
+    "SandboxPowered",
+    "Horizon Studio"
+  ],
+  "contact": {
+    "homepage": "https://sandboxpowered.org",
+    "sources": "https://github.com/SandboxPowered/Sandbox"
+  },
+  "license": "ARR",
+  "icon": "assets/sandbox/icon.png",
+  "environment": "*",
+  "depends": {
+    "fabricloader": ">=0.4.0"
+  },
+  "suggests": {
+  }
+}
