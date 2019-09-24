@@ -1,5 +1,6 @@
 package com.hrznstudio.sandbox.api.util;
 
+import com.google.common.annotations.Beta;
 import com.hrznstudio.sandbox.api.block.IBlock;
 import com.hrznstudio.sandbox.api.block.Material;
 import com.hrznstudio.sandbox.api.block.entity.IBlockEntity;
@@ -23,6 +24,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+@Beta
 public class Functions {
     public static final Function<String, Identity> identityFunction = s -> {
         throw new RuntimeException("No Identity Function Loaded, Report this as a bug!");
@@ -48,43 +50,43 @@ public class Functions {
     public static final Function<String, Material> materialFunction = s -> {
         throw new RuntimeException("No Material Function Loaded, Report this as a bug!");
     };
-    public static BiFunction<Supplier<? extends IBlockEntity>, IBlock[], IBlockEntity.Type<? extends IBlockEntity>> blockEntityTypeFunction = (s, v) -> {
+    public static final BiFunction<Supplier<? extends IBlockEntity>, IBlock[], IBlockEntity.Type<? extends IBlockEntity>> blockEntityTypeFunction = (s, v) -> {
         throw new RuntimeException("No IBlock Entity Type Function Loaded, Report this as a bug!");
     };
-    public static BiFunction<IItem, Integer, ItemStack> itemStackFunction = (s, v) -> {
+    public static final BiFunction<IItem, Integer, ItemStack> itemStackFunction = (s, v) -> {
         throw new RuntimeException("No ItemStack Function Loaded, Report this as a bug!");
     };
-    public static Function<Class<?>, Registry<?>> registryFunction = (c) -> {
+    public static final Function<Class<?>, Registry<?>> registryFunction = (c) -> {
         throw new RuntimeException("No Registry Function Loaded, Report this as a bug!");
     };
-    public static Supplier<CompoundTag> compoundTagCreator = () -> {
+    public static final Supplier<CompoundTag> compoundTagCreator = () -> {
         throw new RuntimeException("No CompoundTag Creator Loaded, Report this as a bug!");
     };
-    public static Function<String, Property> propertyFunction = s -> {
+    public static final Function<String, Property> propertyFunction = s -> {
         throw new RuntimeException("No Property Function Loaded, Report this as a bug!");
     };
-    public static Supplier<Client> clientInstance = () -> {
+    public static final Supplier<Client> clientInstance = () -> {
         throw new RuntimeException("No Client Instance Getter Loaded, Report this as a bug!");
     };
-    public static Supplier<Server> serverInstance = () -> {
+    public static final Supplier<Server> serverInstance = () -> {
         throw new RuntimeException("No Server Instance Getter Loaded, Report this as a bug!");
     };
-    public static Function<int[], Vec3i> vec3iFunction = (arr) -> {
+    public static final Function<int[], Vec3i> vec3iFunction = (arr) -> {
         throw new RuntimeException("No Vec3i Function Loaded, Report this as a bug!");
     };
-    public static Function<int[], Position> positionFunction = (arr) -> {
+    public static final Function<int[], Position> positionFunction = (arr) -> {
         throw new RuntimeException("No Position Function Loaded, Report this as a bug!");
     };
-    public static Function<int[], Position.Mutable> mutablePositionFunction = (arr) -> {
+    public static final Function<int[], Position.Mutable> mutablePositionFunction = (arr) -> {
         throw new RuntimeException("No Position Function Loaded, Report this as a bug!");
     };
-    public static Supplier<RenderUtil> renderUtil = () -> {
+    public static final Supplier<RenderUtil> renderUtil = () -> {
         throw new RuntimeException("No Render Util Loaded, Report this as a bug!");
     };
-    public static Function<Class, Component> componentFunction = xClass -> {
+    public static final Function<Class, Component> componentFunction = xClass -> {
         throw new RuntimeException("No Component Function Loaded, Report this as a bug!");
     };
-    public static Function<ReadableCompoundTag, ItemStack> itemStackFromTagFunction = tag -> {
+    public static final Function<ReadableCompoundTag, ItemStack> itemStackFromTagFunction = tag -> {
         throw new RuntimeException("No ItemStack Tag Function Loaded, Report this as a bug!");
     };
 }

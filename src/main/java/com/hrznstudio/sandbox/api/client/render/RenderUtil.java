@@ -1,8 +1,10 @@
 package com.hrznstudio.sandbox.api.client.render;
 
+import com.google.common.annotations.Beta;
 import com.hrznstudio.sandbox.api.util.Functions;
 import com.hrznstudio.sandbox.api.util.Identity;
 
+@Beta
 public interface RenderUtil {
     static RenderUtil instance() {
         return Functions.renderUtil.get();

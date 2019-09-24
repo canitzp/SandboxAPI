@@ -1,7 +1,9 @@
 package com.hrznstudio.sandbox.api.util.text;
 
+import com.google.common.annotations.Beta;
 import com.hrznstudio.sandbox.api.util.Functions;
 
+@Beta
 public interface Text {
 
     static Text literal(String text) {

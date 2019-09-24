@@ -1,9 +1,11 @@
 package com.hrznstudio.sandbox.api.client.screen;
 
+import com.google.common.annotations.Beta;
 import com.hrznstudio.sandbox.api.client.Client;
 import com.hrznstudio.sandbox.api.util.Identity;
 import com.hrznstudio.sandbox.api.util.text.Text;
 
+@Beta
 public abstract class Screen implements IScreen {
     private final Text title;
     private final Identity identity;

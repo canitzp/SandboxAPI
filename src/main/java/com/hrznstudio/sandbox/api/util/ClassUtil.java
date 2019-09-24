@@ -1,10 +1,12 @@
 package com.hrznstudio.sandbox.api.util;
 
+import com.google.common.annotations.Beta;
 import com.hrznstudio.sandbox.api.event.Event;
 
 import java.lang.annotation.Annotation;
 import java.util.*;
 
+@Beta
 public class ClassUtil {
     private static final Map<Class<?>, Map<Class<? extends Annotation>, Boolean>> annotationCache = new LinkedHashMap<>();
     private static final Map<Class<?>, List<Class<?>>> superCache = new HashMap<>();

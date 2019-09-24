@@ -1,9 +1,9 @@
 package com.hrznstudio.sandbox.api.network;
 
+import com.google.common.annotations.Beta;
 import com.hrznstudio.sandbox.api.SandboxAPI;
-import com.hrznstudio.sandbox.api.util.nbt.ReadableCompoundTag;
-import com.hrznstudio.sandbox.api.util.nbt.WritableCompoundTag;
 
+@Beta
 public interface Packet {
 
     void read(ReadableBuffer buffer);
