@@ -21,4 +21,6 @@ public interface Client {
     Screen getCurrentScreen();
 
     TextRenderer getTextRenderer();
+
+    Session getSession();
 }
