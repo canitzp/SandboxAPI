@@ -1,8 +1,8 @@
 package org.sandboxpowered.sandbox.api.entity;
 
-import com.google.common.annotations.Beta;
+import org.sandboxpowered.sandbox.api.util.annotation.Alpha;
 
-@Beta
+@Alpha
 public interface LivingEntity extends Entity {
     float getHealth();
 

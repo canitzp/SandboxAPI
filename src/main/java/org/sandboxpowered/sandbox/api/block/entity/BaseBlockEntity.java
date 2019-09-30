@@ -1,9 +1,9 @@
 package org.sandboxpowered.sandbox.api.block.entity;
 
-import com.google.common.annotations.Beta;
 import org.sandboxpowered.sandbox.api.component.Component;
 import org.sandboxpowered.sandbox.api.util.Direction;
 import org.sandboxpowered.sandbox.api.util.Mono;
+import org.sandboxpowered.sandbox.api.util.annotation.Internal;
 import org.sandboxpowered.sandbox.api.util.math.Position;
 import org.sandboxpowered.sandbox.api.world.World;
 
@@ -15,7 +15,7 @@ public abstract class BaseBlockEntity implements BlockEntity {
         this.type = type;
     }
 
-    @Beta
+    @Internal
     public final void setContext(BlockEntityContext context) {
         this.context = context;
     }

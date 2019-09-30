@@ -2,7 +2,9 @@ package org.sandboxpowered.sandbox.api.client.screen;
 
 import org.sandboxpowered.sandbox.api.container.Container;
 import org.sandboxpowered.sandbox.api.util.Identity;
+import org.sandboxpowered.sandbox.api.util.annotation.Alpha;
 
+@Alpha
 public abstract class ContainerScreen extends BaseScreen {
     private final Container container;
 

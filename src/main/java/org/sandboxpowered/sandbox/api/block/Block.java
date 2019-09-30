@@ -27,6 +27,7 @@ public interface Block extends ItemProvider {
 
     /**
      * Grabs the Block as an {@link Item}
+     *
      * @return
      */
     @Nullable

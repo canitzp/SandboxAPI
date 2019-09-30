@@ -1,10 +1,10 @@
 package org.sandboxpowered.sandbox.api.container;
 
-import com.google.common.annotations.Beta;
+import org.sandboxpowered.sandbox.api.util.annotation.Alpha;
 
 import java.util.Collection;
 
-@Beta
+@Alpha
 public interface Container {
     Collection<Slot> getSlots();
 }

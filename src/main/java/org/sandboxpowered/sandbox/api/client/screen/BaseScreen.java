@@ -1,11 +1,11 @@
 package org.sandboxpowered.sandbox.api.client.screen;
 
-import com.google.common.annotations.Beta;
 import org.sandboxpowered.sandbox.api.client.Client;
 import org.sandboxpowered.sandbox.api.util.Identity;
+import org.sandboxpowered.sandbox.api.util.annotation.Alpha;
 import org.sandboxpowered.sandbox.api.util.text.Text;
 
-@Beta
+@Alpha
 public abstract class BaseScreen implements Screen {
     private final Text title;
     private final Identity identity;

@@ -1,12 +1,15 @@
 package org.sandboxpowered.sandbox.api.util;
 
-import com.google.common.annotations.Beta;
 import org.sandboxpowered.sandbox.api.event.Event;
+import org.sandboxpowered.sandbox.api.util.annotation.Internal;
 
 import java.lang.annotation.Annotation;
 import java.util.*;
 
-@Beta
+/**
+ * Internal class
+ */
+@Internal
 public class ClassUtil {
     private static final Map<Class<?>, Map<Class<? extends Annotation>, Boolean>> annotationCache = new LinkedHashMap<>();
     private static final Map<Class<?>, List<Class<?>>> superCache = new HashMap<>();

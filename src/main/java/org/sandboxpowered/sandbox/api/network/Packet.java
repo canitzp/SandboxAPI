@@ -1,9 +1,9 @@
 package org.sandboxpowered.sandbox.api.network;
 
-import com.google.common.annotations.Beta;
 import org.sandboxpowered.sandbox.api.SandboxAPI;
+import org.sandboxpowered.sandbox.api.util.annotation.PreAlpha;
 
-@Beta
+@PreAlpha
 public interface Packet {
 
     void read(ReadableBuffer buffer);

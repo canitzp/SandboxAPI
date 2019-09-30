@@ -1,10 +1,10 @@
 package org.sandboxpowered.sandbox.api.game;
 
-import com.google.common.annotations.Beta;
 import org.sandboxpowered.sandbox.api.util.Identity;
 import org.sandboxpowered.sandbox.api.util.Mono;
+import org.sandboxpowered.sandbox.api.util.annotation.PreAlpha;
 
-@Beta
+@PreAlpha
 public interface GameMode {
     Identity getIdentity();
 

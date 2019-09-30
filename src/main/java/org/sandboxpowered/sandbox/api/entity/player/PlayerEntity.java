@@ -1,13 +1,13 @@
 package org.sandboxpowered.sandbox.api.entity.player;
 
-import com.google.common.annotations.Beta;
 import org.sandboxpowered.sandbox.api.entity.LivingEntity;
 import org.sandboxpowered.sandbox.api.util.Identity;
 import org.sandboxpowered.sandbox.api.util.Mono;
+import org.sandboxpowered.sandbox.api.util.annotation.Alpha;
 import org.sandboxpowered.sandbox.api.util.nbt.CompoundTag;
 import org.sandboxpowered.sandbox.api.util.text.Text;
 
-@Beta
+@Alpha
 public interface PlayerEntity extends LivingEntity {
 
     void sendChatMessage(Text text);

@@ -1,10 +1,10 @@
 package org.sandboxpowered.sandbox.api.client.render;
 
-import com.google.common.annotations.Beta;
 import org.sandboxpowered.sandbox.api.util.Functions;
 import org.sandboxpowered.sandbox.api.util.Identity;
+import org.sandboxpowered.sandbox.api.util.annotation.Alpha;
 
-@Beta
+@Alpha
 public interface RenderUtil {
     static RenderUtil instance() {
         return Functions.renderUtil.get();

@@ -1,6 +1,5 @@
 package org.sandboxpowered.sandbox.api.util;
 
-import com.google.common.annotations.Beta;
 import org.sandboxpowered.sandbox.api.block.Block;
 import org.sandboxpowered.sandbox.api.block.Material;
 import org.sandboxpowered.sandbox.api.block.entity.BlockEntity;
@@ -14,6 +13,7 @@ import org.sandboxpowered.sandbox.api.item.ItemStack;
 import org.sandboxpowered.sandbox.api.registry.Registry;
 import org.sandboxpowered.sandbox.api.server.Server;
 import org.sandboxpowered.sandbox.api.state.Property;
+import org.sandboxpowered.sandbox.api.util.annotation.Internal;
 import org.sandboxpowered.sandbox.api.util.math.Position;
 import org.sandboxpowered.sandbox.api.util.math.Vec3i;
 import org.sandboxpowered.sandbox.api.util.nbt.CompoundTag;
@@ -24,7 +24,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-@Beta
+@Internal
 public class Functions {
     public static final Function<String, Identity> identityFunction = s -> {
         throw new RuntimeException("No Identity Function Loaded, Report this as a bug!");

@@ -1,10 +1,10 @@
 package org.sandboxpowered.sandbox.api.client.screen;
 
-import com.google.common.annotations.Beta;
 import org.sandboxpowered.sandbox.api.client.Client;
 import org.sandboxpowered.sandbox.api.util.Identity;
+import org.sandboxpowered.sandbox.api.util.annotation.Alpha;
 
-@Beta
+@Alpha
 public interface Screen {
 
     Identity getId();

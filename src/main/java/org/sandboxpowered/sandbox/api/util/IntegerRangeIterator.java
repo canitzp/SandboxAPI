@@ -1,10 +1,10 @@
 package org.sandboxpowered.sandbox.api.util;
 
-import com.google.common.annotations.Beta;
+import org.sandboxpowered.sandbox.api.util.annotation.Internal;
 
 import java.util.Iterator;
 
-@Beta
+@Internal
 public class IntegerRangeIterator implements Iterator<Integer> {
     private final int start, end;
     private int current;
