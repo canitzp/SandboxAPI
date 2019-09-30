@@ -1,0 +1,103 @@
+[
+  {
+    "name": "Type: Bug :bug:",
+    "color": "e74c3c"
+  },
+  {
+    "name": "Type: Discussion :speech_balloon:",
+    "color": "e74c3c"
+  },
+  {
+    "name": "Type: Event :package:",
+    "color": "e74c3c"
+  },
+  {
+    "name": "Type: Feature :sparkles:",
+    "color": "e74c3c"
+  },
+  {
+    "name": "Type: Improvement :art:",
+    "color": "e74c3c"
+  },
+  {
+    "name": "Type: Documentation :pencil:",
+    "color": "e74c3c"
+  },
+  {
+    "name": "Type: Performance :zap:",
+    "color": "e74c3c",
+    "description": "Potential Improvement In Measured Performance"
+  },
+  {
+    "name": "Breaking Changes :boom:",
+    "color": "fbca04"
+  },
+  {
+    "name": "Resolution: Answered",
+    "color": "CCCCCC"
+  },
+  {
+    "name": "Resolution: Fixed",
+    "color": "CCCCCC"
+  },
+  {
+    "name": "Resolution: Intended Design",
+    "color": "CCCCCC"
+  },
+  {
+    "name": "Resolution: Not Applicable",
+    "color": "CCCCCC"
+  },
+  {
+    "name": "Resolution: Not Reproducible",
+    "color": "CCCCCC"
+  },
+  {
+    "name": "Resolution: Duplicate",
+    "color": "CCCCCC"
+  },
+  {
+    "name": "Resolution: External",
+    "color": "CCCCCC"
+  },
+  {
+    "name": "Resolution: Wont Fix",
+    "color": "CCCCCC"
+  },
+  {
+    "name": "Bug: Compatibility :ambulance:",
+    "color": "EB6420",
+    "description": "Violation Of Forwards/backwards Compatibility"
+  },
+  {
+    "name": "Bug: Accessibility :children_crossing:",
+    "color": "EB6420",
+    "description": "Accessibility-related Functionality Is Broken"
+  },
+  {
+    "name": "Bug: Localization :globe_with_meridians:",
+    "color": "EB6420",
+    "description": "Also Called “World Ready.” Some Piece Of UI Isn’t Localized (or Able To Be Localized), Often Due To Hard-coding Of Strings Or Other Visible Elements."
+  },
+  {
+    "name": "Bug: Compliance :lock:",
+    "color": "EB6420",
+    "description": "Violation Of Compliance With Things Like Signing, Security, Legality, Etc."
+  },
+  {
+    "name": "Urgency: Low :green_book:",
+    "color": "207DE5"
+  },
+  {
+    "name": "Urgency: Medium :ledger:",
+    "color": "207DE5"
+  },
+  {
+    "name": "Urgency: High :orange_book:",
+    "color": "207DE5"
+  },
+  {
+    "name": "Urgency: Urgent :closed_book:",
+    "color": "207DE5"
+  }
+]

@@ -1,0 +1,15 @@
+name: Label Management
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@1.0.0
+    - name: "Check & Modify Labels"
+      uses: lannonbr/issue-label-manager-action@2.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
