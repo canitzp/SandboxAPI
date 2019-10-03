@@ -30,7 +30,6 @@ public interface Block extends ItemProvider {
      *
      * @return
      */
-    @Nullable
     @Override
     Mono<Item> asItem();
 
