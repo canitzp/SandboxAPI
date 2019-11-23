@@ -59,4 +59,34 @@ public class BlockEvent extends Event {
             return state;
         }
     }
+
+    public static class Fall extends BlockEvent {
+        private final World world;
+        private final Position position;
+        private final BlockState state;
+        private final float distance;
+
+        public Fall(World world, Position position, BlockState state, float distance) {
+            this.world = world;
+            this.position = position;
+            this.state = state;
+            this.distance = distance;
+        }
+
+        public World getWorld() {
+            return world;
+        }
+
+        public Position getPosition() {
+            return position;
+        }
+
+        public BlockState getState() {
+            return state;
+        }
+
+        public float getDistance() {
+            return distance;
+        }
+    }
 }
