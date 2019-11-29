@@ -6,8 +6,8 @@ import org.sandboxpowered.sandbox.api.block.Block;
 public class BaseBlockItem extends BaseItem implements BlockItem {
     private final BaseBlock block;
 
-    public BaseBlockItem(BaseBlock block) {
-        super(new Settings());
+    public BaseBlockItem(BaseBlock block, Settings settings) {
+        super(settings);
         this.block = block;
     }
 

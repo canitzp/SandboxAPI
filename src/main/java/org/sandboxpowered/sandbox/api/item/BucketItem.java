@@ -5,7 +5,7 @@ import org.sandboxpowered.sandbox.api.fluid.BaseFluid;
 public class BucketItem extends BaseItem {
     private BaseFluid fluid;
 
-    public BucketItem(Settings settings, BaseFluid fluid) {
+    public BucketItem(BaseFluid fluid, Settings settings) {
         super(settings);
         this.fluid = fluid;
     }
