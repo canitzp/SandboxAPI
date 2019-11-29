@@ -141,14 +141,6 @@ public interface Block extends ItemProvider {
         return ItemStack.of(this);
     }
 
-    default boolean isNaturalDirt() {
-        return false;
-    }
-
-    default boolean isNaturalStone() {
-        return false;
-    }
-
     class Settings {
         private final Material material;
 
