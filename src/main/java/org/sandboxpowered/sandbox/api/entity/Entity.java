@@ -9,4 +9,10 @@ public interface Entity {
     default <X> Mono<X> getComponent(Component<X> component) {
         return Mono.empty();
     }
+
+    Type getType();
+
+    interface Type {
+
+    }
 }

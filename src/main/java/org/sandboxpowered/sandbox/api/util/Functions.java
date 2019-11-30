@@ -1,5 +1,6 @@
 package org.sandboxpowered.sandbox.api.util;
 
+import com.google.common.graph.AbstractNetwork;
 import org.sandboxpowered.sandbox.api.block.Block;
 import org.sandboxpowered.sandbox.api.block.Material;
 import org.sandboxpowered.sandbox.api.block.entity.BlockEntity;
@@ -7,6 +8,7 @@ import org.sandboxpowered.sandbox.api.client.Client;
 import org.sandboxpowered.sandbox.api.client.render.RenderUtil;
 import org.sandboxpowered.sandbox.api.component.Component;
 import org.sandboxpowered.sandbox.api.enchant.Enchantment;
+import org.sandboxpowered.sandbox.api.entity.Entity;
 import org.sandboxpowered.sandbox.api.fluid.Fluid;
 import org.sandboxpowered.sandbox.api.item.Item;
 import org.sandboxpowered.sandbox.api.item.ItemStack;
@@ -88,5 +90,11 @@ public class Functions {
     };
     public static final Function<ReadableCompoundTag, ItemStack> itemStackFromTagFunction = tag -> {
         throw new RuntimeException("No ItemStack Tag Function Loaded, Report this as a bug!");
+    };
+    public static final Function<String, Entity.Type> entityTypeFunction = id -> {
+        throw new RuntimeException("No Entity Type Function Loaded, Report this as a bug!");
+    };
+    public static final Function<Entity, Entity.Type> entityTypeEntityFunction = id -> {
+        throw new RuntimeException("No Entity Type from Entity Function Loaded, Report this as a bug!");
     };
 }

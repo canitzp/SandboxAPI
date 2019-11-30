@@ -14,4 +14,10 @@ public class EntityEvent extends Event {
         return entity;
     }
 
+    @Cancellable
+    public static class Spawn extends EntityEvent {
+        public Spawn(Entity entity) {
+            super(entity);
+        }
+    }
 }
