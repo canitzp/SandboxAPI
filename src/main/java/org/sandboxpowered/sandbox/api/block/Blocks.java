@@ -679,11 +679,12 @@ public class Blocks {
     public static final Block STRUCTURE_BLOCK = get("structure_block");
     public static final Block JIGSAW = get("jigsaw");
     public static final Block COMPOSTER = get("composter");
+    public static final Block BEE_NEST = get("bee_nest");
+    public static final Block BEEHIVE = get("beehive");
+    public static final Block HONEY_BLOCK = get("honey_block");
+    public static final Block HONEYCOMB_BLOCK = get("honeycomb_block");
 
     private static Block get(String name) {
-        Block block = Functions.blockFunction.apply(name);
-        if (block == null)
-            throw new RuntimeException("Unknown Block " + name);
-        return block;
+        return Functions.blockFunction.apply(name);
     }
 }

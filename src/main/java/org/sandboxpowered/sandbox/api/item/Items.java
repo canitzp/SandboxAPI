@@ -880,11 +880,12 @@ public class Items {
     public static final Item LANTERN = get("lantern");
     public static final Item SWEET_BERRIES = get("sweet_berries");
     public static final Item CAMPFIRE = get("campfire");
+    public static final Item HONEYCOMB = get("honeycomb");
+    public static final Item BEE_NEST = get("bee_nest");
+    public static final Item BEE_HIVE = get("bee_hive");
+    public static final Item HONEY_BOTTLE = get("honey_bottle");
 
     private static Item get(String name) {
-        Item item = Functions.itemFunction.apply(name);
-        if (item == null)
-            throw new RuntimeException("Unknown Item " + name);
-        return item;
+        return Functions.itemFunction.apply(name);
     }
 }
