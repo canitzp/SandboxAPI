@@ -1,6 +1,7 @@
 package org.sandboxpowered.sandbox.api.item;
 
 import org.sandboxpowered.sandbox.api.component.Component;
+import org.sandboxpowered.sandbox.api.content.Content;
 import org.sandboxpowered.sandbox.api.util.InteractionResult;
 import org.sandboxpowered.sandbox.api.util.Mono;
 import org.sandboxpowered.sandbox.api.util.math.Position;
@@ -10,9 +11,14 @@ import org.sandboxpowered.sandbox.api.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public interface Item {
+public interface Item extends Content<Item> {
     default InteractionResult onItemUsed(World world, Position position, ItemStack itemStack) {
         return InteractionResult.IGNORE;
+    }
+
+    @Override
+    default Class<Item> getContentType() {
+        return Item.class;
     }
 
     Settings getSettings();

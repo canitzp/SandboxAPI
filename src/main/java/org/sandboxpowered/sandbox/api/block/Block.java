@@ -2,6 +2,7 @@ package org.sandboxpowered.sandbox.api.block;
 
 import org.sandboxpowered.sandbox.api.block.entity.BlockEntity;
 import org.sandboxpowered.sandbox.api.component.Component;
+import org.sandboxpowered.sandbox.api.content.Content;
 import org.sandboxpowered.sandbox.api.entity.Entity;
 import org.sandboxpowered.sandbox.api.entity.player.Hand;
 import org.sandboxpowered.sandbox.api.entity.player.PlayerEntity;
@@ -18,7 +19,11 @@ import org.sandboxpowered.sandbox.api.world.WorldReader;
 
 import javax.annotation.Nullable;
 
-public interface Block extends ItemProvider {
+public interface Block extends ItemProvider, Content<Block> {
+    @Override
+    default Class<Block> getContentType() {
+        return Block.class;
+    }
 
     /**
      * The {@link Settings} assigned to the Block

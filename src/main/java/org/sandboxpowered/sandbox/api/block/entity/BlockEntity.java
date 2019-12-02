@@ -1,6 +1,7 @@
 package org.sandboxpowered.sandbox.api.block.entity;
 
 import org.sandboxpowered.sandbox.api.block.Block;
+import org.sandboxpowered.sandbox.api.content.Content;
 import org.sandboxpowered.sandbox.api.util.Functions;
 import org.sandboxpowered.sandbox.api.util.math.Position;
 import org.sandboxpowered.sandbox.api.util.nbt.CompoundTag;
@@ -53,9 +54,15 @@ public interface BlockEntity {
         void onTick();
     }
 
-    interface Type<T extends BlockEntity> {
+    interface Type<T extends BlockEntity> extends Content<Type<T>> {
         static <T extends BlockEntity> Type<T> of(Supplier<T> entityCreator, Block... validBlocks) {
             return (Type<T>) Functions.blockEntityTypeFunction.apply(entityCreator, validBlocks);
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        default Class getContentType() {
+            return Type.class;
         }
     }
 }

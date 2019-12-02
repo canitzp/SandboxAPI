@@ -61,6 +61,9 @@ public class Functions {
     public static final Function<Class<?>, Registry<?>> registryFunction = (c) -> {
         throw new RuntimeException("No Registry Function Loaded, Report this as a bug!");
     };
+    public static final Function<Class<?>, Registry<?>> registryTypeFunction = (c) -> {
+        throw new RuntimeException("No Registry Type Function Loaded, Report this as a bug!");
+    };
     public static final Supplier<CompoundTag> compoundTagCreator = () -> {
         throw new RuntimeException("No CompoundTag Creator Loaded, Report this as a bug!");
     };
