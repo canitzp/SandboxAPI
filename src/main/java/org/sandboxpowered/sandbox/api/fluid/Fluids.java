@@ -1,6 +1,8 @@
 package org.sandboxpowered.sandbox.api.fluid;
 
-import org.sandboxpowered.sandbox.api.util.Functions;
+import org.sandboxpowered.sandbox.api.Registries;
+import org.sandboxpowered.sandbox.api.util.Identity;
+import org.sandboxpowered.sandbox.api.util.Mono;
 
 public class Fluids {
     public static final Fluid EMPTY = get("empty");
@@ -10,9 +12,7 @@ public class Fluids {
     public static final Fluid LAVA_FLOWING = get("flowing_lava");
 
     private static Fluid get(String name) {
-        Fluid fluid = Functions.fluidFunction.apply(name);
-        if (fluid == null)
-            throw new RuntimeException("Unknown Fluid " + name);
-        return fluid;
+        Mono<Fluid> fluid = Registries.FLUID.get(Identity.of("minecraft", name));
+        return "empty".equals(name) ? fluid.get() : fluid.orElse(EMPTY);
     }
 }

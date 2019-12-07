@@ -36,7 +36,7 @@ public class Properties {
     public static final Property<Integer> FLUID_BLOCK_LEVEL = get("level_15");
 
     private static <X extends Comparable<X>> Property<X> get(String s) {
-        Property<X> property = Functions.propertyFunction.apply(s);
+        Property<X> property = Functions.getInstance().getProperty(s);
         if (property == null)
             throw new NullPointerException("Property cannot be null");
         return property;

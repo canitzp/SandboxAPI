@@ -7,11 +7,11 @@ import org.sandboxpowered.sandbox.api.util.annotation.Alpha;
 public interface Text {
 
     static Text literal(String text) {
-        return Functions.literalTextFunction.apply(text);
+        return Functions.getInstance().createLiteralText(text);
     }
 
     static Text translatable(String text) {
-        return Functions.translatedTextFunction.apply(text);
+        return Functions.getInstance().createTranslatedText(text);
     }
 
     default void append(String string) {

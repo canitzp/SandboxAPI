@@ -7,7 +7,7 @@ import javax.annotation.concurrent.Immutable;
 @Immutable
 public interface Vec3i {
     static Vec3i create(int x, int y, int z) {
-        return Functions.vec3iFunction.apply(new int[]{x, y, z});
+        return Functions.getInstance().createVec3i(x, y, z);
     }
 
     int getX();

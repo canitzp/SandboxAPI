@@ -4,6 +4,6 @@ import org.sandboxpowered.sandbox.api.util.Functions;
 
 public interface CompoundTag extends Tag, ReadableCompoundTag, WritableCompoundTag {
     static CompoundTag create() {
-        return Functions.compoundTagCreator.get();
+        return Functions.getInstance().createCompoundTag();
     }
 }

@@ -56,7 +56,7 @@ public interface BlockEntity {
 
     interface Type<T extends BlockEntity> extends Content<Type<T>> {
         static <T extends BlockEntity> Type<T> of(Supplier<T> entityCreator, Block... validBlocks) {
-            return (Type<T>) Functions.blockEntityTypeFunction.apply(entityCreator, validBlocks);
+            return Functions.getInstance().blockEntityTypeFunction(entityCreator, validBlocks);
         }
 
         @Override

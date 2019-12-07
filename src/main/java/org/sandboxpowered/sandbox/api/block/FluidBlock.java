@@ -1,7 +1,6 @@
 package org.sandboxpowered.sandbox.api.block;
 
 import org.sandboxpowered.sandbox.api.fluid.BaseFluid;
-import org.sandboxpowered.sandbox.api.util.Identity;
 
 public class FluidBlock extends BaseBlock {
     private BaseFluid fluid;

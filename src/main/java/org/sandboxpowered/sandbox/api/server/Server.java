@@ -8,7 +8,7 @@ import org.sandboxpowered.sandbox.api.world.World;
 
 public interface Server {
     static Server getInstance() {
-        return Functions.serverInstance.get();
+        return Functions.getInstance().serverInstance();
     }
 
     World getWorld(Identity identity);

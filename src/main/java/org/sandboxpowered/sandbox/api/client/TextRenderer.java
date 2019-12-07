@@ -1,7 +1,5 @@
 package org.sandboxpowered.sandbox.api.client;
 
-import org.sandboxpowered.sandbox.api.util.annotation.Beta;
-
 public interface TextRenderer {
 
     int getTextWidth(String text);

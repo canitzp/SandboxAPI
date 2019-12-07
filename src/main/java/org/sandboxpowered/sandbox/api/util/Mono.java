@@ -74,6 +74,7 @@ public class Mono<T> {
     }
 
     public <X> Mono<X> cast() {
+        //noinspection unchecked
         return (Mono<X>) this;
     }
 

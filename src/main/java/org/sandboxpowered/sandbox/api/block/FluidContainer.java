@@ -11,7 +11,7 @@ import org.sandboxpowered.sandbox.api.world.WorldReader;
 
 public interface FluidContainer {
     default boolean canContainFluid(WorldReader world, Position position, BlockState state, Fluid fluid) {
-        return fluid == Fluids.WATER;
+        return Fluids.WATER.matches(fluid);
     }
 
     default boolean fillWith(World world, Position position, BlockState state, FluidState fluid) {

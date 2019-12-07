@@ -3,7 +3,7 @@ package org.sandboxpowered.sandbox.api.util;
 public interface Identity {
 
     static Identity of(String namespace, String path) {
-        return Functions.identityFunction.apply(namespace + ":" + path);
+        return Functions.getInstance().createIdentityFromString(namespace, path);
     }
 
     String getNamespace();

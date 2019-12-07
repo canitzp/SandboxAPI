@@ -1,6 +1,9 @@
 package org.sandboxpowered.sandbox.api.block;
 
+import org.sandboxpowered.sandbox.api.Registries;
+import org.sandboxpowered.sandbox.api.registry.Registry;
 import org.sandboxpowered.sandbox.api.util.Functions;
+import org.sandboxpowered.sandbox.api.util.Identity;
 
 public class Blocks {
     public static final Block AIR = get("air");
@@ -685,6 +688,6 @@ public class Blocks {
     public static final Block HONEYCOMB_BLOCK = get("honeycomb_block");
 
     private static Block get(String name) {
-        return Functions.blockFunction.apply(name);
+        return Registries.BLOCK.get(Identity.of("minecraft", name)).orElse(null);
     }
 }

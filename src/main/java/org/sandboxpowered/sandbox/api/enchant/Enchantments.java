@@ -1,6 +1,7 @@
 package org.sandboxpowered.sandbox.api.enchant;
 
-import org.sandboxpowered.sandbox.api.util.Functions;
+import org.sandboxpowered.sandbox.api.Registries;
+import org.sandboxpowered.sandbox.api.util.Identity;
 
 public class Enchantments {
     public static final Enchantment PROTECTION = get("protection");
@@ -42,9 +43,6 @@ public class Enchantments {
     public static final Enchantment VANISHING_CURSE = get("vanishing_curse");
 
     private static Enchantment get(String s) {
-        Enchantment e = Functions.enchantmentFunction.apply(s);
-        if (e == null)
-            throw new RuntimeException("Unknown Enchantment " + s);
-        return e;
+        return Registries.ENCHANTMENT.get(Identity.of("minecraft", s)).orElse(null);
     }
 }

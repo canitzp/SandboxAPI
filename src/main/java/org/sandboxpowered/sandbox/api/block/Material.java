@@ -47,7 +47,7 @@ public interface Material {
     Material CAKE = getMaterial("CAKE");
 
     static Material getMaterial(String mat) {
-        return Functions.materialFunction.apply(mat);
+        return Functions.getInstance().getMaterial(mat);
     }
 
     PistonInteraction getPistonInteraction();

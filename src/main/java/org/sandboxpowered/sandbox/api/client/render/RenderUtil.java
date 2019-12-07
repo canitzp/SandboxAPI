@@ -7,7 +7,7 @@ import org.sandboxpowered.sandbox.api.util.annotation.Alpha;
 @Alpha
 public interface RenderUtil {
     static RenderUtil instance() {
-        return Functions.renderUtil.get();
+        return Functions.getInstance().renderUtilInstance();
     }
 
     default void draw(int x, int y, float u, float v, int width, int height) {

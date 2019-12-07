@@ -1,15 +1,13 @@
 package org.sandboxpowered.sandbox.api.util;
 
-import com.google.common.graph.AbstractNetwork;
 import org.sandboxpowered.sandbox.api.block.Block;
 import org.sandboxpowered.sandbox.api.block.Material;
 import org.sandboxpowered.sandbox.api.block.entity.BlockEntity;
 import org.sandboxpowered.sandbox.api.client.Client;
 import org.sandboxpowered.sandbox.api.client.render.RenderUtil;
 import org.sandboxpowered.sandbox.api.component.Component;
-import org.sandboxpowered.sandbox.api.enchant.Enchantment;
+import org.sandboxpowered.sandbox.api.content.Content;
 import org.sandboxpowered.sandbox.api.entity.Entity;
-import org.sandboxpowered.sandbox.api.fluid.Fluid;
 import org.sandboxpowered.sandbox.api.item.Item;
 import org.sandboxpowered.sandbox.api.item.ItemStack;
 import org.sandboxpowered.sandbox.api.registry.Registry;
@@ -22,82 +20,52 @@ import org.sandboxpowered.sandbox.api.util.nbt.CompoundTag;
 import org.sandboxpowered.sandbox.api.util.nbt.ReadableCompoundTag;
 import org.sandboxpowered.sandbox.api.util.text.Text;
 
-import java.util.function.BiFunction;
-import java.util.function.Function;
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 @Internal
-public class Functions {
-    public static final Function<String, Identity> identityFunction = s -> {
-        throw new RuntimeException("No Identity Function Loaded, Report this as a bug!");
-    };
-    public static final Function<String, Block> blockFunction = s -> {
-        throw new RuntimeException("No IBlock Function Loaded, Report this as a bug!");
-    };
-    public static final Function<String, Fluid> fluidFunction = s -> {
-        throw new RuntimeException("No IFluid Function Loaded, Report this as a bug!");
-    };
-    public static final Function<String, Item> itemFunction = s -> {
-        throw new RuntimeException("No IItem Function Loaded, Report this as a bug!");
-    };
-    public static final Function<String, Text> literalTextFunction = s -> {
-        throw new RuntimeException("No Literal Text Function Loaded, Report this as a bug!");
-    };
-    public static final Function<String, Text> translatedTextFunction = s -> {
-        throw new RuntimeException("No Translated Text Function Loaded, Report this as a bug!");
-    };
-    public static final Function<String, Enchantment> enchantmentFunction = s -> {
-        throw new RuntimeException("No IEnchantment Function Loaded, Report this as a bug!");
-    };
-    public static final Function<String, Material> materialFunction = s -> {
-        throw new RuntimeException("No Material Function Loaded, Report this as a bug!");
-    };
-    public static final BiFunction<Supplier<? extends BlockEntity>, Block[], BlockEntity.Type<? extends BlockEntity>> blockEntityTypeFunction = (s, v) -> {
-        throw new RuntimeException("No IBlock Entity Type Function Loaded, Report this as a bug!");
-    };
-    public static final BiFunction<Item, Integer, ItemStack> itemStackFunction = (s, v) -> {
-        throw new RuntimeException("No ItemStack Function Loaded, Report this as a bug!");
-    };
-    public static final Function<Class<?>, Registry<?>> registryFunction = (c) -> {
-        throw new RuntimeException("No Registry Function Loaded, Report this as a bug!");
-    };
-    public static final Function<Class<?>, Registry<?>> registryTypeFunction = (c) -> {
-        throw new RuntimeException("No Registry Type Function Loaded, Report this as a bug!");
-    };
-    public static final Supplier<CompoundTag> compoundTagCreator = () -> {
-        throw new RuntimeException("No CompoundTag Creator Loaded, Report this as a bug!");
-    };
-    public static final Function<String, Property> propertyFunction = s -> {
-        throw new RuntimeException("No Property Function Loaded, Report this as a bug!");
-    };
-    public static final Supplier<Client> clientInstance = () -> {
-        throw new RuntimeException("No Client Instance Getter Loaded, Report this as a bug!");
-    };
-    public static final Supplier<Server> serverInstance = () -> {
-        throw new RuntimeException("No Server Instance Getter Loaded, Report this as a bug!");
-    };
-    public static final Function<int[], Vec3i> vec3iFunction = (arr) -> {
-        throw new RuntimeException("No Vec3i Function Loaded, Report this as a bug!");
-    };
-    public static final Function<int[], Position> positionFunction = (arr) -> {
-        throw new RuntimeException("No Position Function Loaded, Report this as a bug!");
-    };
-    public static final Function<int[], Position.Mutable> mutablePositionFunction = (arr) -> {
-        throw new RuntimeException("No Position Function Loaded, Report this as a bug!");
-    };
-    public static final Supplier<RenderUtil> renderUtil = () -> {
-        throw new RuntimeException("No Render Util Loaded, Report this as a bug!");
-    };
-    public static final Function<Class, Component> componentFunction = xClass -> {
-        throw new RuntimeException("No Component Function Loaded, Report this as a bug!");
-    };
-    public static final Function<ReadableCompoundTag, ItemStack> itemStackFromTagFunction = tag -> {
-        throw new RuntimeException("No ItemStack Tag Function Loaded, Report this as a bug!");
-    };
-    public static final Function<String, Entity.Type> entityTypeFunction = id -> {
-        throw new RuntimeException("No Entity Type Function Loaded, Report this as a bug!");
-    };
-    public static final Function<Entity, Entity.Type> entityTypeEntityFunction = id -> {
-        throw new RuntimeException("No Entity Type from Entity Function Loaded, Report this as a bug!");
-    };
+public interface Functions {
+
+    @Nonnull
+    static Functions getInstance() {
+        return null;
+    }
+
+    Identity createIdentityFromString(String name, String path);
+
+    Text createLiteralText(String text);
+
+    Text createTranslatedText(String translation);
+
+    Material getMaterial(String material);
+
+    <T extends BlockEntity> BlockEntity.Type<T> blockEntityTypeFunction(Supplier<T> supplier, Block[] blocks);
+
+    ItemStack createItemStack(Item item, int amount);
+
+    ItemStack createItemStackFromTag(ReadableCompoundTag tag);
+
+    <T extends Content> Registry<T> registryFunction(Class<T> c);
+
+    <T extends Content> Registry<T> registryTypeFunction(Class<T> c);
+
+    CompoundTag createCompoundTag();
+
+    Property getProperty(String property);
+
+    Client clientInstance();
+
+    Server serverInstance();
+
+    Vec3i createVec3i(int x, int y, int z);
+
+    Position createPosition(int x, int y, int z);
+
+    Position.Mutable createMutablePosition(int x, int y, int z);
+
+    RenderUtil renderUtilInstance();
+
+    <T> Component<T> componentFunction(Class<T> c);
+
+    Entity.Type entityTypeEntityFunction(Entity e);
 }

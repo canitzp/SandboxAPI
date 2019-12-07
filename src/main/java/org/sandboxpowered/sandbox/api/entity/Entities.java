@@ -1,6 +1,8 @@
 package org.sandboxpowered.sandbox.api.entity;
 
-import org.sandboxpowered.sandbox.api.util.Functions;
+import org.sandboxpowered.sandbox.api.Registries;
+import org.sandboxpowered.sandbox.api.registry.Registry;
+import org.sandboxpowered.sandbox.api.util.Identity;
 
 public class Entities {
     public static final Entity.Type AREA_EFFECT_CLOUD = get("area_effect_cloud");
@@ -108,6 +110,6 @@ public class Entities {
     public static final Entity.Type FISHING_BOBBER = get("fishing_bobber");
 
     private static Entity.Type get(String type) {
-        return Functions.entityTypeFunction.apply(type);
+        return Registries.ENTITY.get(Identity.of("minecraft", type)).orElse(null);
     }
 }
