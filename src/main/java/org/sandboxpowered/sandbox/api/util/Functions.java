@@ -8,6 +8,9 @@ import org.sandboxpowered.sandbox.api.client.render.RenderUtil;
 import org.sandboxpowered.sandbox.api.component.Component;
 import org.sandboxpowered.sandbox.api.content.Content;
 import org.sandboxpowered.sandbox.api.entity.Entity;
+import org.sandboxpowered.sandbox.api.fluid.Fluid;
+import org.sandboxpowered.sandbox.api.fluid.FluidStack;
+import org.sandboxpowered.sandbox.api.fluid.Fluid;
 import org.sandboxpowered.sandbox.api.item.Item;
 import org.sandboxpowered.sandbox.api.item.ItemStack;
 import org.sandboxpowered.sandbox.api.registry.Registry;
@@ -68,4 +71,8 @@ public interface Functions {
     <T> Component<T> componentFunction(Class<T> c);
 
     Entity.Type entityTypeEntityFunction(Entity e);
+
+    FluidStack fluidStackFunction(Fluid fluid, int amount);
+
+    FluidStack fluidStackFromTagFunction(ReadableCompoundTag tag);
 }

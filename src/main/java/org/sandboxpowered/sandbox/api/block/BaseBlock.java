@@ -4,6 +4,8 @@ import org.sandboxpowered.sandbox.api.Registries;
 import org.sandboxpowered.sandbox.api.block.entity.BaseBlockEntity;
 import org.sandboxpowered.sandbox.api.block.entity.BlockEntity;
 import org.sandboxpowered.sandbox.api.component.Component;
+import org.sandboxpowered.sandbox.api.component.Components;
+import org.sandboxpowered.sandbox.api.component.fluid.FluidLoggingContainer;
 import org.sandboxpowered.sandbox.api.item.Item;
 import org.sandboxpowered.sandbox.api.state.BlockState;
 import org.sandboxpowered.sandbox.api.state.Properties;
@@ -12,6 +14,7 @@ import org.sandboxpowered.sandbox.api.util.Direction;
 import org.sandboxpowered.sandbox.api.util.Mono;
 import org.sandboxpowered.sandbox.api.util.annotation.Internal;
 import org.sandboxpowered.sandbox.api.util.math.Position;
+import org.sandboxpowered.sandbox.api.world.World;
 import org.sandboxpowered.sandbox.api.world.WorldReader;
 
 public class BaseBlock implements Block {
@@ -58,7 +61,9 @@ public class BaseBlock implements Block {
 
     @Override
     public <X> Mono<X> getComponent(WorldReader world, Position position, BlockState state, Component<X> component, Mono<Direction> side) {
-        if (hasBlockEntity()) {
+        if (this instanceof FluidLoggable && component == Components.FLUID_COMPONENT) {
+            return Mono.of(new FluidLoggingContainer((FluidLoggable) this, world, position, state, side)).cast();
+        } else if (hasBlockEntity()) {
             BlockEntity entity = world.getBlockEntity(position);
             if (entity instanceof BaseBlockEntity)
                 return ((BaseBlockEntity) entity).getComponent(component, side);
@@ -67,7 +72,7 @@ public class BaseBlock implements Block {
     }
 
     public void appendProperties(StateFactory.Builder<Block, BlockState> builder) {
-        if (this instanceof FluidContainer) {
+        if (this instanceof FluidLoggable && ((FluidLoggable)this).needsWaterloggedProperty()) {
             builder.add(Properties.WATERLOGGED);
         }
     }
