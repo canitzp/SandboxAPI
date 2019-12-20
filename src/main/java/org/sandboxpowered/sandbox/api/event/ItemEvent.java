@@ -1,6 +1,9 @@
 package org.sandboxpowered.sandbox.api.event;
 
 import org.sandboxpowered.sandbox.api.item.ItemStack;
+import org.sandboxpowered.sandbox.api.util.text.Text;
+
+import java.util.List;
 
 public class ItemEvent extends Event {
     private final ItemStack stack;
@@ -32,6 +35,13 @@ public class ItemEvent extends Event {
         public void setArrow(ItemStack arrow) {
             checkState();
             this.arrow = arrow;
+        }
+    }
+
+    @Cancellable
+    public static class DamageItem extends ItemEvent {
+        public DamageItem(ItemStack stack) {
+            super(stack);
         }
     }
 }

@@ -8,6 +8,8 @@ import org.sandboxpowered.sandbox.api.util.Mono;
 import org.sandboxpowered.sandbox.api.util.nbt.CompoundTag;
 import org.sandboxpowered.sandbox.api.util.nbt.ReadableCompoundTag;
 
+import javax.annotation.Nullable;
+
 public interface ItemStack {
 
     static ItemStack of(ItemProvider item) {
@@ -68,12 +70,14 @@ public interface ItemStack {
 
     boolean hasTag();
 
+    @Nullable
     CompoundTag getTag();
 
     void setTag(CompoundTag tag);
 
     CompoundTag getOrCreateTag();
 
+    @Nullable
     CompoundTag getChildTag(String key);
 
     CompoundTag getOrCreateChildTag(String key);
@@ -91,4 +95,12 @@ public interface ItemStack {
     boolean isEqualToIgnoreDurability(ItemStack stack);
 
     boolean areTagsEqual(ItemStack stack);
+
+    boolean isDamaged();
+
+    boolean isDamageable();
+
+    int getMaxDamage();
+
+    int getDamage();
 }
