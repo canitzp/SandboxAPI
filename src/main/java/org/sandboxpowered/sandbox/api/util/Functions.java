@@ -31,7 +31,7 @@ public interface Functions {
 
     @Nonnull
     static Functions getInstance() {
-        return null;
+        throw new RuntimeException("No functions defined, this is a bug.");
     }
 
     Identity createIdentityFromString(String name, String path);
