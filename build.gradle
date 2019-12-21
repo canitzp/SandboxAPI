@@ -8,7 +8,7 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-archivesBaseName = 'sandbox-api'
+archivesBaseName = 'sandboxapi'
 version = "${project.api_version}-SNAPSHOT"
 group = project.maven_group
 
