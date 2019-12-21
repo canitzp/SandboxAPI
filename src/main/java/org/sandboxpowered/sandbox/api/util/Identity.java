@@ -6,6 +6,10 @@ public interface Identity {
         return Functions.getInstance().createIdentityFromString(namespace, path);
     }
 
+    static Identity of(String identity) {
+        return Functions.getInstance().createIdentityFromString(identity);
+    }
+
     String getNamespace();
 
     String getPath();

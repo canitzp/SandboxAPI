@@ -34,6 +34,8 @@ public interface Functions {
         throw new RuntimeException("No functions defined, this is a bug.");
     }
 
+    Identity createIdentityFromString(String identity);
+
     Identity createIdentityFromString(String name, String path);
 
     Text createLiteralText(String text);
