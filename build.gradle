@@ -57,7 +57,7 @@ publishing {
         if (System.getenv("mvn_username")) {
             maven {
                 name = "Maven"
-                url = uri("sftp://maven.sandboxpowered.org:22/")
+                url = uri("sftp://maven.sandboxpowered.org:22/sbxmvn/")
                 credentials {
                     username = System.getenv("mvn_username")
                     password = System.getenv("mvn_password")
