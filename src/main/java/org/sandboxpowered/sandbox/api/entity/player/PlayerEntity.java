@@ -4,6 +4,7 @@ import org.sandboxpowered.sandbox.api.entity.LivingEntity;
 import org.sandboxpowered.sandbox.api.util.Identity;
 import org.sandboxpowered.sandbox.api.util.Mono;
 import org.sandboxpowered.sandbox.api.util.annotation.Alpha;
+import org.sandboxpowered.sandbox.api.util.math.Position;
 import org.sandboxpowered.sandbox.api.util.nbt.CompoundTag;
 import org.sandboxpowered.sandbox.api.util.text.Text;
 
@@ -23,4 +24,10 @@ public interface PlayerEntity extends LivingEntity {
     }
 
     void openContainer(Identity id, Mono<CompoundTag> data);
+
+    Mono<Position> getSleepingPosition();
+
+    default boolean isSleeping() {
+        return getSleepingPosition().isPresent();
+    }
 }

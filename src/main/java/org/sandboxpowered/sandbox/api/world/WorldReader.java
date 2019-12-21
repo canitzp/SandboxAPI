@@ -1,8 +1,10 @@
 package org.sandboxpowered.sandbox.api.world;
 
 import org.sandboxpowered.sandbox.api.block.entity.BlockEntity;
+import org.sandboxpowered.sandbox.api.component.Component;
 import org.sandboxpowered.sandbox.api.state.BlockState;
 import org.sandboxpowered.sandbox.api.state.FluidState;
+import org.sandboxpowered.sandbox.api.util.Mono;
 import org.sandboxpowered.sandbox.api.util.math.Position;
 
 import javax.annotation.Nullable;
@@ -26,4 +28,6 @@ public interface WorldReader {
     default boolean isHeightValid(int height) {
         return height > 0 && height < 256;
     }
+
+    <X> Mono<X> getComponentFromPosition(Component<X> component, Position position);
 }

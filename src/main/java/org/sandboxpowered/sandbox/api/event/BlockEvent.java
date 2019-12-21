@@ -1,5 +1,6 @@
 package org.sandboxpowered.sandbox.api.event;
 
+import org.sandboxpowered.sandbox.api.entity.Entity;
 import org.sandboxpowered.sandbox.api.state.BlockState;
 import org.sandboxpowered.sandbox.api.util.math.Position;
 import org.sandboxpowered.sandbox.api.world.World;
@@ -40,11 +41,13 @@ public class BlockEvent extends Event {
         private final World world;
         private final Position position;
         private final BlockState state;
+        private final Entity entity;
 
-        public Break(World world, Position position, BlockState state) {
+        public Break(World world, Position position, BlockState state, Entity entity) {
             this.world = world;
             this.position = position;
             this.state = state;
+            this.entity = entity;
         }
 
         public World getWorld() {
@@ -57,6 +60,10 @@ public class BlockEvent extends Event {
 
         public BlockState getState() {
             return state;
+        }
+
+        public Entity getEntity() {
+            return entity;
         }
     }
 
