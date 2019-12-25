@@ -28,6 +28,4 @@ public interface WorldReader {
     default boolean isHeightValid(int height) {
         return height > 0 && height < 256;
     }
-
-    <X> Mono<X> getComponentFromPosition(Component<X> component, Position position);
 }

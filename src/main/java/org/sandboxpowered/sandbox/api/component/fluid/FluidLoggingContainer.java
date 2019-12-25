@@ -65,7 +65,7 @@ public class FluidLoggingContainer implements FluidContainer {
     @Override
     public void setStack(int slot, FluidStack stack) {
         if (loggable.canContainFluid(world, pos, state, stack.getFluid(), direction)) {
-            loggable.fillWith(world, pos, state, stack, direction, true);
+            loggable.fillWith(world, pos, state, stack, direction, false);
         }
     }
 }

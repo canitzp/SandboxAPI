@@ -24,7 +24,7 @@ public interface FluidLoggable {
     }
 
     default FluidStack fillWith(WorldReader world, Position position, BlockState state, FluidStack fluid, Mono<Direction> direction, boolean simulate) {
-        if (!(world instanceof WorldWriter)) return fluid;
+        if (!(world instanceof WorldWriter) && !simulate) return fluid;
         if (canContainFluid(world, position, state, fluid.getFluid(), direction)) {
             if (!simulate) ((WorldWriter)world).setBlockState(position, state.with(Properties.WATERLOGGED, true));
             return fluid.shrink(1000);
@@ -33,7 +33,7 @@ public interface FluidLoggable {
     }
 
     default FluidStack drainFrom(WorldReader world, Position position, BlockState state, int amount, Mono<Direction> direction, boolean simulate) {
-        if (!(world instanceof WorldWriter)) return FluidStack.empty();
+        if (!(world instanceof WorldWriter) && !simulate) return FluidStack.empty();
         if (state.get(Properties.WATERLOGGED) && amount <= 1000) {
             if (!simulate) ((WorldWriter)world).setBlockState(position, state.with(Properties.WATERLOGGED, false));
             return FluidStack.of(Fluids.WATER, amount);
