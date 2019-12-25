@@ -30,4 +30,6 @@ public interface PlayerEntity extends LivingEntity {
     default boolean isSleeping() {
         return getSleepingPosition().isPresent();
     }
+
+    boolean isSneaking();
 }
