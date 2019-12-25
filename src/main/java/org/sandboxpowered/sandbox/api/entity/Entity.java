@@ -13,6 +13,8 @@ public interface Entity {
 
     Type getType();
 
+    boolean isSneaking();
+
     interface Type extends Content<Type> {
         @Override
         default Class<Type> getContentType() {
