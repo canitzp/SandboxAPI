@@ -1,6 +1,6 @@
 package org.sandboxpowered.sandbox.api.event;
 
-import org.sandboxpowered.sandbox.api.enchant.Enchantment;
+import org.sandboxpowered.sandbox.api.enchantment.Enchantment;
 import org.sandboxpowered.sandbox.api.item.ItemStack;
 
 import java.util.function.BiPredicate;

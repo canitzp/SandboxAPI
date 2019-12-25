@@ -4,7 +4,7 @@ import org.sandboxpowered.sandbox.api.block.Block;
 import org.sandboxpowered.sandbox.api.block.entity.BlockEntity;
 import org.sandboxpowered.sandbox.api.container.ContainerFactory;
 import org.sandboxpowered.sandbox.api.content.Content;
-import org.sandboxpowered.sandbox.api.enchant.Enchantment;
+import org.sandboxpowered.sandbox.api.enchantment.Enchantment;
 import org.sandboxpowered.sandbox.api.entity.Entity;
 import org.sandboxpowered.sandbox.api.fluid.Fluid;
 import org.sandboxpowered.sandbox.api.item.Item;

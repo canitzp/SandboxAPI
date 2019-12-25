@@ -148,6 +148,8 @@ public interface Block extends ItemProvider, Content<Block> {
 
     class Settings {
         private final Material material;
+        private float hardness, resistance, slipperiness, velocity, jumpVelocity;
+        private int luminance, opacity;
 
         public Settings(Material material) {
             this.material = material;
@@ -156,5 +158,60 @@ public interface Block extends ItemProvider, Content<Block> {
         public Material getMaterial() {
             return material;
         }
+
+        public Settings withHardness(float hardness) {
+            this.hardness = hardness;
+            return this;
+        }
+
+        public Settings unbreakable() {
+            return withHardness(-1);
+        }
+
+        public Settings withResistance(float resistance) {
+            this.resistance = resistance;
+            return this;
+        }
+
+        public Settings withLuminance(int luminance) {
+            this.luminance = luminance;
+            return this;
+        }
+
+        public Settings withStrength(float hardness, float resistance) {
+            this.hardness = hardness;
+            this.resistance = Math.max(0.0F, resistance);
+            return this;
+        }
+
+        protected Block.Settings withStrength(float strength) {
+            this.withStrength(strength, strength);
+            return this;
+        }
+
+        public Block.Settings withVelocity(float velocity) {
+            this.velocity = velocity;
+            return this;
+        }
+
+        public Block.Settings withJumpVelocity(float jumpVelocity) {
+            this.jumpVelocity = jumpVelocity;
+            return this;
+        }
+
+        protected Settings breakInstantly() {
+            return this.withStrength(0.0F);
+        }
+
+        public Settings setOpacity(int opacity) {
+            this.opacity = opacity;
+            return this;
+        }
+
+        public Settings setSlipperiness(float slipperiness) {
+            this.slipperiness = slipperiness;
+            return this;
+        }
+
     }
 }

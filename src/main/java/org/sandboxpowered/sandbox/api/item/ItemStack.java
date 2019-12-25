@@ -1,8 +1,7 @@
 package org.sandboxpowered.sandbox.api.item;
 
 import org.sandboxpowered.sandbox.api.component.Component;
-import org.sandboxpowered.sandbox.api.enchant.Enchantment;
-import org.sandboxpowered.sandbox.api.registry.Registry;
+import org.sandboxpowered.sandbox.api.enchantment.Enchantment;
 import org.sandboxpowered.sandbox.api.util.Functions;
 import org.sandboxpowered.sandbox.api.util.Mono;
 import org.sandboxpowered.sandbox.api.util.nbt.CompoundTag;

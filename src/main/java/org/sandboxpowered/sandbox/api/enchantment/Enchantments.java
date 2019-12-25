@@ -1,4 +1,4 @@
-package org.sandboxpowered.sandbox.api.enchant;
+package org.sandboxpowered.sandbox.api.enchantment;
 
 import org.sandboxpowered.sandbox.api.Registries;
 import org.sandboxpowered.sandbox.api.util.Identity;
