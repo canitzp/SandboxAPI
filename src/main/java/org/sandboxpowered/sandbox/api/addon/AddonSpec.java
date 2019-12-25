@@ -2,6 +2,7 @@ package org.sandboxpowered.sandbox.api.addon;
 
 import com.electronwill.nightconfig.core.Config;
 import com.github.zafarkhaja.semver.Version;
+import org.sandboxpowered.sandbox.api.util.annotation.Internal;
 
 import javax.annotation.Nullable;
 import java.net.URL;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
+@Internal
 public class AddonSpec {
     private static final Pattern MODID_PATTERN = Pattern.compile("[a-z0-9-_]{4,15}");
     private static final Predicate<String> MODID_PREDICATE = MODID_PATTERN.asPredicate();
