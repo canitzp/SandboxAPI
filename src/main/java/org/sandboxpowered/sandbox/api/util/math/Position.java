@@ -2,8 +2,15 @@ package org.sandboxpowered.sandbox.api.util.math;
 
 import org.sandboxpowered.sandbox.api.util.Direction;
 import org.sandboxpowered.sandbox.api.util.Functions;
+import org.sandboxpowered.sandbox.api.util.PositionIterator;
 
 import javax.annotation.concurrent.Immutable;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 @Immutable
 public interface Position extends Vec3i {
@@ -23,6 +30,26 @@ public interface Position extends Vec3i {
 
     default Position offset(Direction direction) {
         return offset(direction, 1);
+    }
+
+    default Stream<Position> getAllWithin(Position start, Position end) {
+        return getAllWithin(start.getX(), start.getY(), start.getZ(), end.getX(), end.getY(), end.getZ());
+    }
+
+    default Stream<Position> getAllWithin(int x1, int y1, int z1, int x2, int y2, int z2) {
+        return StreamSupport.stream(new Spliterators.AbstractSpliterator<Position>((x2 - x1 + 1) * (y2 - y1 + 1) * (z2 - z1 + 1), Spliterator.SIZED | Spliterator.NONNULL) {
+            final PositionIterator iterator = new PositionIterator(x1, y1, z1, x2, y2, z2);
+            final Mutable mutable = Mutable.create();
+
+            @Override
+            public boolean tryAdvance(Consumer<? super Position> action) {
+                if (iterator.step()) {
+                    action.accept(mutable.set(iterator.getX(), iterator.getY(), iterator.getZ()));
+                    return true;
+                }
+                return false;
+            }
+        }, false);
     }
 
     Position offset(Direction direction, int amount);
