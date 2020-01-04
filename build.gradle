@@ -9,7 +9,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = 'sandboxapi'
-version = "${project.api_version}-SNAPSHOT"
+version = project.api_version + "+" + (System.getenv("TRAVIS_BUILD_NUMBER") ? ("build." + System.getenv("TRAVIS_BUILD_NUMBER")) : "invalid")
 group = project.maven_group
 
 repositories {
