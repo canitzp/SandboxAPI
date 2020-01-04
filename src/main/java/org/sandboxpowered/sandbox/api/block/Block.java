@@ -148,70 +148,93 @@ public interface Block extends ItemProvider, Content<Block> {
 
     class Settings {
         private final Material material;
-        private float hardness, resistance, slipperiness, velocity, jumpVelocity;
-        private int luminance, opacity;
+        private final float hardness, resistance, slipperiness, velocity, jumpVelocity;
+        private final int luminance;
 
-        public Settings(Material material) {
+        private Settings(Material material, float hardness, float resistance, float slipperiness, float velocity, float jumpVelocity, int luminance) {
             this.material = material;
+            this.hardness = hardness;
+            this.resistance = resistance;
+            this.slipperiness = slipperiness;
+            this.velocity = velocity;
+            this.jumpVelocity = jumpVelocity;
+            this.luminance = luminance;
         }
 
         public Material getMaterial() {
             return material;
         }
 
-        public Settings withHardness(float hardness) {
-            this.hardness = hardness;
-            return this;
+        public float getHardness() {
+            return hardness;
         }
 
-        public Settings unbreakable() {
-            return withHardness(-1);
+        public float getResistance() {
+            return resistance;
         }
 
-        public Settings withResistance(float resistance) {
-            this.resistance = resistance;
-            return this;
+        public float getSlipperiness() {
+            return slipperiness;
         }
 
-        public Settings withLuminance(int luminance) {
-            this.luminance = luminance;
-            return this;
+        public float getVelocity() {
+            return velocity;
         }
 
-        public Settings withStrength(float hardness, float resistance) {
-            this.hardness = hardness;
-            this.resistance = Math.max(0.0F, resistance);
-            return this;
+        public float getJumpVelocity() {
+            return jumpVelocity;
         }
 
-        protected Block.Settings withStrength(float strength) {
-            this.withStrength(strength, strength);
-            return this;
+        public int getLuminance() {
+            return luminance;
         }
 
-        public Block.Settings withVelocity(float velocity) {
-            this.velocity = velocity;
-            return this;
+        public static Builder builder(Material material) {
+            return new Builder(material);
         }
 
-        public Block.Settings withJumpVelocity(float jumpVelocity) {
-            this.jumpVelocity = jumpVelocity;
-            return this;
-        }
+        public static class Builder {
+            private final Material material;
+            private float hardness, resistance, slipperiness, velocity, jumpVelocity;
+            private int luminance, opacity;
 
-        protected Settings breakInstantly() {
-            return this.withStrength(0.0F);
-        }
+            private Builder(Material material) {
+                this.material = material;
+            }
 
-        public Settings setOpacity(int opacity) {
-            this.opacity = opacity;
-            return this;
-        }
+            public Builder setHardness(float hardness) {
+                this.hardness = hardness;
+                return this;
+            }
 
-        public Settings setSlipperiness(float slipperiness) {
-            this.slipperiness = slipperiness;
-            return this;
-        }
+            public Builder setResistance(float resistance) {
+                this.resistance = resistance;
+                return this;
+            }
 
+            public Builder setSlipperiness(float slipperiness) {
+                this.slipperiness = slipperiness;
+                return this;
+            }
+
+            public Builder setVelocity(float velocity) {
+                this.velocity = velocity;
+                return this;
+            }
+
+            public Builder setJumpVelocity(float jumpVelocity) {
+                this.jumpVelocity = jumpVelocity;
+                return this;
+            }
+
+            public Builder setLuminance(int luminance) {
+                this.luminance = luminance;
+                return this;
+            }
+
+            public Settings build() {
+                return new Settings(material, hardness, resistance, slipperiness, velocity, jumpVelocity, luminance);
+            }
+        }
     }
 }
