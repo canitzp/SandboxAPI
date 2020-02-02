@@ -5,10 +5,10 @@ import org.sandboxpowered.sandbox.api.component.FluidContainer;
 import org.sandboxpowered.sandbox.api.fluid.FluidStack;
 import org.sandboxpowered.sandbox.api.state.BlockState;
 import org.sandboxpowered.sandbox.api.util.Direction;
-import org.sandboxpowered.sandbox.api.util.Mono;
 import org.sandboxpowered.sandbox.api.util.math.Position;
 import org.sandboxpowered.sandbox.api.world.WorldReader;
 
+import javax.annotation.Nullable;
 import java.util.function.Predicate;
 
 public class FluidLoggingContainer implements FluidContainer {
@@ -16,9 +16,9 @@ public class FluidLoggingContainer implements FluidContainer {
     private WorldReader world;
     private Position pos;
     private BlockState state;
-    private Mono<Direction> direction;
+    private Direction direction;
 
-    public FluidLoggingContainer(FluidLoggable loggable, WorldReader world, Position pos, BlockState state, Mono<Direction> direction) {
+    public FluidLoggingContainer(FluidLoggable loggable, WorldReader world, Position pos, BlockState state, @Nullable Direction direction) {
         this.loggable = loggable;
         this.world = world;
         this.pos = pos;

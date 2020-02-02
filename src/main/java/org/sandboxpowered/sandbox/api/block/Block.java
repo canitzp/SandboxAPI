@@ -18,6 +18,7 @@ import org.sandboxpowered.sandbox.api.world.World;
 import org.sandboxpowered.sandbox.api.world.WorldReader;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public interface Block extends ItemProvider, Content<Block> {
     @Override
@@ -32,21 +33,15 @@ public interface Block extends ItemProvider, Content<Block> {
 
     /**
      * Grabs the Block as an {@link Item}
-     *
-     * @return
      */
     @Override
-    Mono<Item> asItem();
+    Optional<Item> asItem();
 
     default <X> Mono<X> getComponent(WorldReader world, Position position, BlockState state, Component<X> component) {
-        return getComponent(world, position, state, component, Mono.empty());
+        return getComponent(world, position, state, component, null);
     }
 
-    default <X> Mono<X> getComponent(WorldReader world, Position position, BlockState state, Component<X> component, Direction side) {
-        return getComponent(world, position, state, component, Mono.of(side));
-    }
-
-    default <X> Mono<X> getComponent(WorldReader world, Position position, BlockState state, Component<X> component, Mono<Direction> side) {
+    default <X> Mono<X> getComponent(WorldReader world, Position position, BlockState state, Component<X> component, @Nullable Direction side) {
         return Mono.empty();
     }
 

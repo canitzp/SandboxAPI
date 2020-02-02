@@ -10,6 +10,7 @@ import org.sandboxpowered.sandbox.api.world.World;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 public interface Item extends Content<Item> {
     default InteractionResult onItemUsed(World world, Position position, ItemStack itemStack) {
@@ -28,14 +29,10 @@ public interface Item extends Content<Item> {
     }
 
     default <X> Mono<X> getComponent(Component<X> component) {
-        return getComponent(component, Mono.empty());
+        return getComponent(component, ItemStack.empty());
     }
 
     default <X> Mono<X> getComponent(Component<X> component, ItemStack stack) {
-        return getComponent(component, Mono.of(stack));
-    }
-
-    default <X> Mono<X> getComponent(Component<X> component, Mono<ItemStack> stack) {
         return Mono.empty();
     }
 

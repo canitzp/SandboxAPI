@@ -1,14 +1,18 @@
 package org.sandboxpowered.sandbox.api.block.entity;
 
 import org.sandboxpowered.sandbox.api.block.Block;
+import org.sandboxpowered.sandbox.api.component.Component;
 import org.sandboxpowered.sandbox.api.content.Content;
+import org.sandboxpowered.sandbox.api.util.Direction;
 import org.sandboxpowered.sandbox.api.util.Functions;
+import org.sandboxpowered.sandbox.api.util.Mono;
 import org.sandboxpowered.sandbox.api.util.math.Position;
 import org.sandboxpowered.sandbox.api.util.nbt.CompoundTag;
 import org.sandboxpowered.sandbox.api.util.nbt.ReadableCompoundTag;
 import org.sandboxpowered.sandbox.api.util.nbt.WritableCompoundTag;
 import org.sandboxpowered.sandbox.api.world.World;
 
+import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public interface BlockEntity {
@@ -44,6 +48,12 @@ public interface BlockEntity {
      */
     default void save() {
     }
+
+    default <X> Mono<X> getComponent(Component<X> component) {
+        return getComponent(component, null);
+    }
+
+    <X> Mono<X> getComponent(Component<X> component, @Nullable Direction side);
 
     interface Tickable extends BlockEntity {
         /**

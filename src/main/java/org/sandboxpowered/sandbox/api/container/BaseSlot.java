@@ -3,8 +3,9 @@ package org.sandboxpowered.sandbox.api.container;
 import org.sandboxpowered.sandbox.api.component.Inventory;
 import org.sandboxpowered.sandbox.api.entity.player.PlayerEntity;
 import org.sandboxpowered.sandbox.api.item.ItemStack;
-import org.sandboxpowered.sandbox.api.util.Mono;
 import org.sandboxpowered.sandbox.api.util.annotation.Alpha;
+
+import java.util.Optional;
 
 @Alpha
 public class BaseSlot implements Slot {
@@ -74,7 +75,7 @@ public class BaseSlot implements Slot {
     }
 
     @Override
-    public Mono<String> getBackgroundSprite() {
-        return Mono.empty();
+    public Optional<String> getBackgroundSprite() {
+        return Optional.empty();
     }
 }

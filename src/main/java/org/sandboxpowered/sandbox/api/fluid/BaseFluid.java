@@ -5,7 +5,8 @@ import org.sandboxpowered.sandbox.api.state.FluidState;
 import org.sandboxpowered.sandbox.api.state.Properties;
 import org.sandboxpowered.sandbox.api.state.StateFactory;
 import org.sandboxpowered.sandbox.api.util.Identity;
-import org.sandboxpowered.sandbox.api.util.Mono;
+
+import java.util.Optional;
 
 public abstract class BaseFluid implements Fluid {
     private StateFactory<Fluid, FluidState> stateFactory;
@@ -33,8 +34,8 @@ public abstract class BaseFluid implements Fluid {
     }
 
     @Override
-    public final Mono<Item> asItem() {
-        return Mono.of(asBucket());
+    public final Optional<Item> asItem() {
+        return Optional.of(asBucket());
     }
 
     public abstract Identity getTexturePath(boolean flowing);

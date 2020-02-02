@@ -110,6 +110,6 @@ public class Entities {
     public static final Entity.Type FISHING_BOBBER = get("fishing_bobber");
 
     private static Entity.Type get(String type) {
-        return Registries.ENTITY.get(Identity.of("minecraft", type)).orElse(null);
+        return Registries.ENTITY.get(Identity.of("minecraft", type)).asOptional().orElse(null);
     }
 }

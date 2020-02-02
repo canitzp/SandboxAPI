@@ -14,6 +14,8 @@ import org.sandboxpowered.sandbox.api.util.math.Position;
 import org.sandboxpowered.sandbox.api.util.math.Vec3d;
 import org.sandboxpowered.sandbox.api.world.WorldReader;
 
+import java.util.Optional;
+
 public interface Fluid extends ItemProvider, Content<Fluid> {
     FluidState getBaseState();
 
@@ -51,8 +53,8 @@ public interface Fluid extends ItemProvider, Content<Fluid> {
         return 5;
     }
 
-    default Mono<Vec3d> getVelocity(WorldReader world, Position position, FluidState state) {
-        return Mono.empty();
+    default Optional<Vec3d> getVelocity(WorldReader world, Position position, FluidState state) {
+        return Optional.empty();
     }
 
     /**
@@ -61,17 +63,12 @@ public interface Fluid extends ItemProvider, Content<Fluid> {
     Item asBucket();
 
     default <X> Mono<X> getComponent(Component<X> component) {
-        return getComponent(component, Mono.empty());
+        return getComponent(component, null);
     }
 
     default <X> Mono<X> getComponent(Component<X> component, FluidStack stack) {
-        return getComponent(component, Mono.of(stack));
-    }
-
-    default <X> Mono<X> getComponent(Component<X> component, Mono<FluidStack> stack) {
         return Mono.empty();
     }
-
     @Override
     default Class<Fluid> getContentType() {
         return Fluid.class;

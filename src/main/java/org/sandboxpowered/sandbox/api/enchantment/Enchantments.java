@@ -43,6 +43,6 @@ public class Enchantments {
     public static final Enchantment VANISHING_CURSE = get("vanishing_curse");
 
     private static Enchantment get(String s) {
-        return Registries.ENCHANTMENT.get(Identity.of("minecraft", s)).orElse(null);
+        return Registries.ENCHANTMENT.get(Identity.of("minecraft", s)).asOptional().orElse(null);
     }
 }

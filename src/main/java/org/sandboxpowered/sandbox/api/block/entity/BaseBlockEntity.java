@@ -7,6 +7,9 @@ import org.sandboxpowered.sandbox.api.util.annotation.Internal;
 import org.sandboxpowered.sandbox.api.util.math.Position;
 import org.sandboxpowered.sandbox.api.world.World;
 
+import javax.annotation.Nullable;
+import java.util.Optional;
+
 public abstract class BaseBlockEntity implements BlockEntity {
     private final Type<?> type;
     private BlockEntityContext context;
@@ -40,7 +43,7 @@ public abstract class BaseBlockEntity implements BlockEntity {
         context.save();
     }
 
-    public <X> Mono<X> getComponent(Component<X> component, Mono<Direction> side) {
+    public <X> Mono<X> getComponent(Component<X> component, @Nullable Direction side) {
         return Mono.empty();
     }
 }

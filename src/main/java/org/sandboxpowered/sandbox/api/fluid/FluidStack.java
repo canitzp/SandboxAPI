@@ -7,15 +7,6 @@ import org.sandboxpowered.sandbox.api.util.nbt.CompoundTag;
 import org.sandboxpowered.sandbox.api.util.nbt.ReadableCompoundTag;
 
 public interface FluidStack {
-
-    static FluidStack of(Mono<Fluid> mono) {
-        return of(mono, 1);
-    }
-
-    static FluidStack of(Mono<Fluid> mono, int amount) {
-        return mono.isPresent() ? of(mono.get(), amount) : empty();
-    }
-
     static FluidStack of(Fluid fluid) {
         return of(fluid, 1000);
     }

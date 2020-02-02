@@ -7,6 +7,7 @@ import org.sandboxpowered.sandbox.api.component.Component;
 import org.sandboxpowered.sandbox.api.component.Components;
 import org.sandboxpowered.sandbox.api.component.fluid.FluidLoggingContainer;
 import org.sandboxpowered.sandbox.api.item.Item;
+import org.sandboxpowered.sandbox.api.registry.Registry;
 import org.sandboxpowered.sandbox.api.state.BlockState;
 import org.sandboxpowered.sandbox.api.state.Properties;
 import org.sandboxpowered.sandbox.api.state.StateFactory;
@@ -14,12 +15,14 @@ import org.sandboxpowered.sandbox.api.util.Direction;
 import org.sandboxpowered.sandbox.api.util.Mono;
 import org.sandboxpowered.sandbox.api.util.annotation.Internal;
 import org.sandboxpowered.sandbox.api.util.math.Position;
-import org.sandboxpowered.sandbox.api.world.World;
 import org.sandboxpowered.sandbox.api.world.WorldReader;
+
+import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class BaseBlock implements Block {
     private final Settings settings;
-    private Mono<Item> itemCache;
+    private Registry.Entry<Item> itemCache;
     private StateFactory<Block, BlockState> stateFactory;
 
     public BaseBlock(Settings settings) {
@@ -42,31 +45,26 @@ public class BaseBlock implements Block {
     }
 
     @Override
-    public Mono<Item> asItem() {
+    public Optional<Item> asItem() {
         if (itemCache == null) {
             itemCache = Registries.ITEM.get(Registries.BLOCK.getIdentity(this));
         }
-        return itemCache;
+        return itemCache.asOptional();
     }
 
     @Override
     public final <X> Mono<X> getComponent(WorldReader world, Position position, BlockState state, Component<X> component) {
-        return getComponent(world, position, state, component, Mono.empty());
+        return getComponent(world, position, state, component, null);
     }
 
     @Override
-    public final <X> Mono<X> getComponent(WorldReader world, Position position, BlockState state, Component<X> component, Direction side) {
-        return getComponent(world, position, state, component, Mono.of(side));
-    }
-
-    @Override
-    public <X> Mono<X> getComponent(WorldReader world, Position position, BlockState state, Component<X> component, Mono<Direction> side) {
+    public <X> Mono<X> getComponent(WorldReader world, Position position, BlockState state, Component<X> component, @Nullable Direction side) {
         if (this instanceof FluidLoggable && component == Components.FLUID_COMPONENT) {
             return Mono.of(new FluidLoggingContainer((FluidLoggable) this, world, position, state, side)).cast();
         } else if (hasBlockEntity()) {
             BlockEntity entity = world.getBlockEntity(position);
             if (entity instanceof BaseBlockEntity)
-                return ((BaseBlockEntity) entity).getComponent(component, side);
+                return entity.getComponent(component, side);
         }
         return Mono.empty();
     }

@@ -688,6 +688,6 @@ public class Blocks {
     public static final Block HONEYCOMB_BLOCK = get("honeycomb_block");
 
     private static Block get(String name) {
-        return Registries.BLOCK.get(Identity.of("minecraft", name)).orElse(null);
+        return Registries.BLOCK.get(Identity.of("minecraft", name)).asOptional().orElse(null);
     }
 }

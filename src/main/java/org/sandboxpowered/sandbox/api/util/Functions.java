@@ -10,7 +10,6 @@ import org.sandboxpowered.sandbox.api.content.Content;
 import org.sandboxpowered.sandbox.api.entity.Entity;
 import org.sandboxpowered.sandbox.api.fluid.Fluid;
 import org.sandboxpowered.sandbox.api.fluid.FluidStack;
-import org.sandboxpowered.sandbox.api.fluid.Fluid;
 import org.sandboxpowered.sandbox.api.item.Item;
 import org.sandboxpowered.sandbox.api.item.ItemStack;
 import org.sandboxpowered.sandbox.api.registry.Registry;
@@ -51,8 +50,6 @@ public interface Functions {
     ItemStack createItemStackFromTag(ReadableCompoundTag tag);
 
     <T extends Content> Registry<T> registryFunction(Class<T> c);
-
-    <T extends Content> Registry<T> registryTypeFunction(Class<T> c);
 
     CompoundTag createCompoundTag();
 

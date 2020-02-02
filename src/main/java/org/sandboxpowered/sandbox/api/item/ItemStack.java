@@ -16,15 +16,7 @@ public interface ItemStack {
     }
 
     static ItemStack of(ItemProvider item, int amount) {
-        return of(item.asItem(), amount);
-    }
-
-    static ItemStack of(Mono<Item> mono) {
-        return of(mono, 1);
-    }
-
-    static ItemStack of(Mono<Item> mono, int amount) {
-        return mono.isPresent() ? of(mono.get(), amount) : empty();
+        return item.asItem().map(i -> of(i,amount)).orElse(empty());
     }
 
     static ItemStack of(Item item) {

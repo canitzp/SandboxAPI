@@ -2,7 +2,8 @@ package org.sandboxpowered.sandbox.api.item;
 
 import org.sandboxpowered.sandbox.api.Registries;
 import org.sandboxpowered.sandbox.api.util.Identity;
-import org.sandboxpowered.sandbox.api.util.Mono;
+
+import java.util.Optional;
 
 public class Items {
     public static final Item AIR = get("air");
@@ -888,7 +889,7 @@ public class Items {
     public static final Item HONEY_BOTTLE = get("honey_bottle");
 
     private static Item get(String name) {
-        Mono<Item> item = Registries.ITEM.get(Identity.of("minecraft", name));
-        return "air".equals(name) ? item.get() : item.orElse(AIR);
+        Optional<Item> item = Registries.ITEM.get(Identity.of("minecraft", name)).asOptional();
+        return "air".equals(name) ? item.orElseThrow(NullPointerException::new) : item.orElse(AIR);
     }
 }

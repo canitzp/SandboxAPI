@@ -12,19 +12,15 @@ import org.sandboxpowered.sandbox.api.registry.Registry;
 import org.sandboxpowered.sandbox.api.util.Functions;
 
 public class Registries {
-    public static final Registry<Block> BLOCK = get(Block.class);
-    public static final Registry<Item> ITEM = get(Item.class);
-    public static final Registry<Entity.Type> ENTITY = get(Entity.Type.class);
-    public static final Registry<BlockEntity.Type> BLOCK_ENTITY = get(BlockEntity.Type.class);
-    public static final Registry<Fluid> FLUID = get(Fluid.class);
-    public static final Registry<Enchantment> ENCHANTMENT = get(Enchantment.class);
-    public static final Registry<ContainerFactory> CONTAINER = get(ContainerFactory.class);
-
-    private static <T extends Content<T>> Registry<T> get(Class<T> tClass) {
-        return Functions.getInstance().registryFunction(tClass);
-    }
+    public static final Registry<Block> BLOCK = getRegistry(Block.class);
+    public static final Registry<Item> ITEM = getRegistry(Item.class);
+    public static final Registry<Entity.Type> ENTITY = getRegistry(Entity.Type.class);
+    public static final Registry<BlockEntity.Type> BLOCK_ENTITY = getRegistry(BlockEntity.Type.class);
+    public static final Registry<Fluid> FLUID = getRegistry(Fluid.class);
+    public static final Registry<Enchantment> ENCHANTMENT = getRegistry(Enchantment.class);
+    public static final Registry<ContainerFactory> CONTAINER = getRegistry(ContainerFactory.class);
 
     public static <T extends Content<T>> Registry<T> getRegistry(Class<T> tClass) {
-        return Functions.getInstance().registryTypeFunction(tClass);
+        return Functions.getInstance().registryFunction(tClass);
     }
 }
