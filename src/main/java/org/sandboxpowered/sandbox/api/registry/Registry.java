@@ -33,8 +33,16 @@ public interface Registry<T extends Content> {
     Class<T> getType();
 
     interface Entry<T extends Content> {
+        boolean exists();
+
         T get();
 
         Optional<T> asOptional();
+
+        T orElse(T other);
+
+        void ifPresent(Consumer<T> tConsumer);
+
+        void ifPresent(Consumer<T> tConsumer, Runnable notPresent);
     }
 }
