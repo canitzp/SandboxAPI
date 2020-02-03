@@ -10,7 +10,6 @@ import org.sandboxpowered.sandbox.api.world.World;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 
 public interface Item extends Content<Item> {
     default InteractionResult onItemUsed(World world, Position position, ItemStack itemStack) {

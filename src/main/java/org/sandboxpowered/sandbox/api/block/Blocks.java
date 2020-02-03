@@ -2,7 +2,6 @@ package org.sandboxpowered.sandbox.api.block;
 
 import org.sandboxpowered.sandbox.api.Registries;
 import org.sandboxpowered.sandbox.api.registry.Registry;
-import org.sandboxpowered.sandbox.api.util.Functions;
 import org.sandboxpowered.sandbox.api.util.Identity;
 
 public class Blocks {

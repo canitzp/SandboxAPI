@@ -4,8 +4,6 @@ import org.sandboxpowered.sandbox.api.Registries;
 import org.sandboxpowered.sandbox.api.registry.Registry;
 import org.sandboxpowered.sandbox.api.util.Identity;
 
-import java.util.Optional;
-
 public class Fluids {
     public static final Registry.Entry<Fluid> EMPTY = get("empty");
     public static final Registry.Entry<Fluid> WATER = get("water");

@@ -4,7 +4,6 @@ import org.sandboxpowered.sandbox.api.content.Content;
 import org.sandboxpowered.sandbox.api.entity.Entity;
 import org.sandboxpowered.sandbox.api.entity.LivingEntity;
 import org.sandboxpowered.sandbox.api.item.ItemStack;
-import org.sandboxpowered.sandbox.api.util.annotation.Alpha;
 import org.sandboxpowered.sandbox.api.util.annotation.Beta;
 
 @Beta

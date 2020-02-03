@@ -69,6 +69,7 @@ public interface Fluid extends ItemProvider, Content<Fluid> {
     default <X> Mono<X> getComponent(Component<X> component, FluidStack stack) {
         return Mono.empty();
     }
+
     @Override
     default Class<Fluid> getContentType() {
         return Fluid.class;

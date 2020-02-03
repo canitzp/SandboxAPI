@@ -2,7 +2,6 @@ package org.sandboxpowered.sandbox.api.registry;
 
 import org.sandboxpowered.sandbox.api.content.Content;
 import org.sandboxpowered.sandbox.api.util.Identity;
-import org.sandboxpowered.sandbox.api.util.Mono;
 
 import java.util.Collection;
 import java.util.NoSuchElementException;

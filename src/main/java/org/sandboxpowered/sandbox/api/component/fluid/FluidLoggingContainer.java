@@ -49,7 +49,7 @@ public class FluidLoggingContainer implements FluidContainer {
     @Override
     public FluidStack extract(int slot, Predicate<FluidStack> fluidFilter, int amount, boolean simulate) {
         if (fluidFilter.test(get(0))) {
-            return loggable.drainFrom(world, pos, state, amount, direction,  simulate);
+            return loggable.drainFrom(world, pos, state, amount, direction, simulate);
         }
         return FluidStack.empty();
     }

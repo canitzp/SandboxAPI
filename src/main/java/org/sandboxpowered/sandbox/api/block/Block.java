@@ -156,6 +156,10 @@ public interface Block extends ItemProvider, Content<Block> {
             this.luminance = luminance;
         }
 
+        public static Builder builder(Material material) {
+            return new Builder(material);
+        }
+
         public Material getMaterial() {
             return material;
         }
@@ -182,10 +186,6 @@ public interface Block extends ItemProvider, Content<Block> {
 
         public int getLuminance() {
             return luminance;
-        }
-
-        public static Builder builder(Material material) {
-            return new Builder(material);
         }
 
         public static class Builder {

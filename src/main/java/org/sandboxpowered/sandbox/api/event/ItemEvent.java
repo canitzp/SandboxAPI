@@ -1,9 +1,6 @@
 package org.sandboxpowered.sandbox.api.event;
 
 import org.sandboxpowered.sandbox.api.item.ItemStack;
-import org.sandboxpowered.sandbox.api.util.text.Text;
-
-import java.util.List;
 
 public class ItemEvent extends Event {
     private final ItemStack stack;

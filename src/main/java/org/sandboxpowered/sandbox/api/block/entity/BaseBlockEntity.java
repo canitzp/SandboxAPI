@@ -8,7 +8,6 @@ import org.sandboxpowered.sandbox.api.util.math.Position;
 import org.sandboxpowered.sandbox.api.world.World;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 public abstract class BaseBlockEntity implements BlockEntity {
     private final Type<?> type;

@@ -25,7 +25,7 @@ public interface ItemStack {
     }
 
     static ItemStack of(ItemProvider item, int amount) {
-        return item.asItem().map(i -> of(i,amount)).orElse(empty());
+        return item.asItem().map(i -> of(i, amount)).orElse(empty());
     }
 
     static ItemStack of(Item item) {

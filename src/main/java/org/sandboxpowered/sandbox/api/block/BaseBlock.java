@@ -70,7 +70,7 @@ public class BaseBlock implements Block {
     }
 
     public void appendProperties(StateFactory.Builder<Block, BlockState> builder) {
-        if (this instanceof FluidLoggable && ((FluidLoggable)this).needsWaterloggedProperty()) {
+        if (this instanceof FluidLoggable && ((FluidLoggable) this).needsWaterloggedProperty()) {
             builder.add(Properties.WATERLOGGED);
         }
     }

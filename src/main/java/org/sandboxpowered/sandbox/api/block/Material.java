@@ -71,6 +71,6 @@ public interface Material {
         DESTROY,
         BLOCK,
         IGNORE,
-        PUSH_ONLY;
+        PUSH_ONLY
     }
 }
