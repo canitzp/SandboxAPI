@@ -19,7 +19,7 @@ public interface FluidLoggable {
 
     default FluidStack getFluid(WorldReader world, Position position, BlockState state, @Nullable Direction direction) {
         if (state.contains(Properties.WATERLOGGED)) {
-            if (state.get(Properties.WATERLOGGED)) return FluidStack.of(Fluids.WATER);
+            if (state.get(Properties.WATERLOGGED)) return FluidStack.of(Fluids.WATER.get());
         }
         return FluidStack.empty();
     }
@@ -37,7 +37,7 @@ public interface FluidLoggable {
         if (!(world instanceof WorldWriter) && !simulate) return FluidStack.empty();
         if (state.get(Properties.WATERLOGGED) && amount <= 1000) {
             if (!simulate) ((WorldWriter)world).setBlockState(position, state.with(Properties.WATERLOGGED, false));
-            return FluidStack.of(Fluids.WATER, amount);
+            return FluidStack.of(Fluids.WATER.get(), amount);
         }
         return FluidStack.empty();
     }

@@ -2,11 +2,14 @@ package org.sandboxpowered.sandbox.api.registry;
 
 import org.sandboxpowered.sandbox.api.content.Content;
 import org.sandboxpowered.sandbox.api.util.Identity;
+import org.sandboxpowered.sandbox.api.util.Mono;
 
 import java.util.Collection;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public interface Registry<T extends Content> {
@@ -33,13 +36,18 @@ public interface Registry<T extends Content> {
     Class<T> getType();
 
     interface Entry<T extends Content> {
-        boolean exists();
 
-        T get();
+        T get() throws NoSuchElementException;
 
-        Optional<T> asOptional();
+        Optional<T> getAsOptional();
 
         T orElse(T other);
+
+        T orElseGet(Supplier<T> other);
+
+        boolean isPresent();
+
+        boolean matches(T other);
 
         void ifPresent(Consumer<T> tConsumer);
 

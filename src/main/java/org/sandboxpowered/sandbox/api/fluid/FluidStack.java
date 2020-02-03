@@ -16,7 +16,7 @@ public interface FluidStack {
     }
 
     static FluidStack empty() {
-        return of(Fluids.EMPTY, 0);
+        return of(Fluids.EMPTY.get(), 0);
     }
 
     static FluidStack read(ReadableCompoundTag tag) {

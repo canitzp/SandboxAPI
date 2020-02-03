@@ -49,7 +49,7 @@ public class BaseBlock implements Block {
         if (itemCache == null) {
             itemCache = Registries.ITEM.get(Registries.BLOCK.getIdentity(this));
         }
-        return itemCache.asOptional();
+        return itemCache.getAsOptional();
     }
 
     @Override
