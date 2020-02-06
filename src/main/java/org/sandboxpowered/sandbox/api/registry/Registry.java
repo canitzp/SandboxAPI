@@ -16,7 +16,7 @@ public interface Registry<T extends Content> {
 
     Entry<T> get(Identity identity);
 
-    void register(Identity identity, T val);
+    Entry<T> register(Identity identity, T val);
 
     Collection<T> values();
 

@@ -3,6 +3,7 @@ package org.sandboxpowered.sandbox.api;
 import org.sandboxpowered.sandbox.api.content.Content;
 import org.sandboxpowered.sandbox.api.event.Event;
 import org.sandboxpowered.sandbox.api.event.Priority;
+import org.sandboxpowered.sandbox.api.registry.Registry;
 import org.sandboxpowered.sandbox.api.util.Identity;
 import org.sandboxpowered.sandbox.api.util.Log;
 import org.sandboxpowered.sandbox.api.util.Side;
@@ -19,8 +20,8 @@ public interface SandboxAPI {
         }
     }
 
-    default <T extends Content<T>> void register(Identity identity, T content) {
-        Registries.getRegistry(content.getContentType()).register(identity, content);
+    default <T extends Content<T>> Registry.Entry<T> register(Identity identity, T content) {
+        return Registries.getRegistry(content.getContentType()).register(identity, content);
     }
 
     Log getLog();

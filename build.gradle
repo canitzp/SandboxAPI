@@ -54,7 +54,7 @@ publishing {
         }
     }
     repositories {
-        if (System.getenv("mvn_username")) {
+        if (project == rootProject && System.getenv("mvn_username")) {
             maven {
                 name = "Maven"
                 url = uri("sftp://maven.sandboxpowered.org:22/sbxmvn/")

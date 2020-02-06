@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
 
 public interface FluidLoggable {
     default boolean canContainFluid(WorldReader world, Position position, BlockState state, Fluid fluid, @Nullable Direction direction) {
-        return fluid == Fluids.WATER;
+        return Fluids.WATER.matches(fluid);
     }
 
     default FluidStack getFluid(WorldReader world, Position position, BlockState state, @Nullable Direction direction) {
