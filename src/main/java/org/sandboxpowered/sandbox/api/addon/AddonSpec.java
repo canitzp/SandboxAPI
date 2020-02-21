@@ -2,11 +2,14 @@ package org.sandboxpowered.sandbox.api.addon;
 
 import com.electronwill.nightconfig.core.Config;
 import com.github.zafarkhaja.semver.Version;
+import org.sandboxpowered.sandbox.api.util.Identity;
 import org.sandboxpowered.sandbox.api.util.annotation.Internal;
 
 import javax.annotation.Nullable;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -23,9 +26,11 @@ public class AddonSpec {
     private final String url;
     private final LoadingSide side;
     private final URL path;
+    private final Map<String, Boolean> platforms;
 
-    public AddonSpec(String modid, Version version, @Nullable String title, String description, String mainClass, List<String> authors, String url, LoadingSide side, URL path) {
+    private AddonSpec(String modid, Version version, @Nullable String title, String description, String mainClass, List<String> authors, String url, LoadingSide side, URL path, Map<String, Boolean> platforms) {
         this.path = path;
+        this.platforms = platforms;
         if (!MODID_PREDICATE.test(modid))
             throw new IllegalArgumentException(String.format("modid '%s' does not match regex requirement '%s'", modid, MODID_PATTERN.pattern()));
         this.modid = modid;
@@ -52,7 +57,8 @@ public class AddonSpec {
         String url = config.contains("url") ? config.get("url") : "";
         String sideS = config.contains("side") ? config.get("side") : "COMMON";
         LoadingSide side = sideS.equalsIgnoreCase("CLIENT") ? LoadingSide.CLIENT : sideS.equalsIgnoreCase("SERVER") ? LoadingSide.SERVER : LoadingSide.COMMON;
-        return new AddonSpec(modid, version, title, description, mainClass, authors, url, side, path);
+        Map<String, Boolean> platforms = config.contains("platforms") ? config.get("platforms") : Collections.emptyMap();
+        return new AddonSpec(modid, version, title, description, mainClass, authors, url, side, path, platforms);
     }
 
     public String getModid() {
@@ -89,5 +95,19 @@ public class AddonSpec {
 
     public URL getPath() {
         return path;
+    }
+
+    public Map<String, Boolean> getPlatforms() {
+        return platforms;
+    }
+
+    public PlatformSupport getPlatformSupport(Identity platform) {
+        return platforms.containsKey(platform.toString()) ? platforms.get(platform.toString()) ? PlatformSupport.YES : PlatformSupport.NO : PlatformSupport.MAYBE;
+    }
+
+    public enum PlatformSupport {
+        YES,
+        MAYBE,
+        NO
     }
 }
