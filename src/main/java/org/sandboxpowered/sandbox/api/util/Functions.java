@@ -3,8 +3,6 @@ package org.sandboxpowered.sandbox.api.util;
 import org.sandboxpowered.sandbox.api.block.Block;
 import org.sandboxpowered.sandbox.api.block.Material;
 import org.sandboxpowered.sandbox.api.block.entity.BlockEntity;
-import org.sandboxpowered.sandbox.api.client.Client;
-import org.sandboxpowered.sandbox.api.client.render.RenderUtil;
 import org.sandboxpowered.sandbox.api.component.Component;
 import org.sandboxpowered.sandbox.api.content.Content;
 import org.sandboxpowered.sandbox.api.entity.Entity;
@@ -55,8 +53,6 @@ public interface Functions {
 
     Property getProperty(String property);
 
-    Client clientInstance();
-
     Server serverInstance();
 
     Vec3i createVec3i(int x, int y, int z);
@@ -64,8 +60,6 @@ public interface Functions {
     Position createPosition(int x, int y, int z);
 
     Position.Mutable createMutablePosition(int x, int y, int z);
-
-    RenderUtil renderUtilInstance();
 
     <T> Component<T> componentFunction(Class<T> c);
 

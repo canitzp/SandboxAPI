@@ -46,7 +46,7 @@ public class BaseBlock implements Block {
     @Override
     public Optional<Item> asItem() {
         if (itemCache == null) {
-            itemCache = Registries.ITEM.get(Registries.BLOCK.getIdentity(this));
+            itemCache = Item.REGISTRY.get(getIdentity());
         }
         return itemCache.getAsOptional();
     }
