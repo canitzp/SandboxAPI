@@ -1,6 +1,5 @@
 package org.sandboxpowered.sandbox.api.block;
 
-import org.sandboxpowered.sandbox.api.Registries;
 import org.sandboxpowered.sandbox.api.block.entity.BaseBlockEntity;
 import org.sandboxpowered.sandbox.api.block.entity.BlockEntity;
 import org.sandboxpowered.sandbox.api.component.Component;

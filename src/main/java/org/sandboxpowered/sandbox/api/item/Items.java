@@ -1,6 +1,5 @@
 package org.sandboxpowered.sandbox.api.item;
 
-import org.sandboxpowered.sandbox.api.Registries;
 import org.sandboxpowered.sandbox.api.registry.Registry;
 import org.sandboxpowered.sandbox.api.util.Identity;
 
@@ -888,6 +887,6 @@ public class Items {
     public static final Registry.Entry<Item> HONEY_BOTTLE = get("honey_bottle");
 
     private static Registry.Entry<Item> get(String name) {
-        return Registries.ITEM.get(Identity.of("minecraft", name));
+        return Item.REGISTRY.get(Identity.of("minecraft", name));
     }
 }

@@ -1,6 +1,5 @@
 package org.sandboxpowered.sandbox.api.enchantment;
 
-import org.sandboxpowered.sandbox.api.Registries;
 import org.sandboxpowered.sandbox.api.registry.Registry;
 import org.sandboxpowered.sandbox.api.util.Identity;
 
@@ -44,6 +43,6 @@ public class Enchantments {
     public static final Registry.Entry<Enchantment> VANISHING_CURSE = get("vanishing_curse");
 
     private static Registry.Entry<Enchantment> get(String s) {
-        return Registries.ENCHANTMENT.get(Identity.of("minecraft", s));
+        return Enchantment.REGISTRY.get(Identity.of("minecraft", s));
     }
 }

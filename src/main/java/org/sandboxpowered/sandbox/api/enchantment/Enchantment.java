@@ -4,10 +4,13 @@ import org.sandboxpowered.sandbox.api.content.Content;
 import org.sandboxpowered.sandbox.api.entity.Entity;
 import org.sandboxpowered.sandbox.api.entity.LivingEntity;
 import org.sandboxpowered.sandbox.api.item.ItemStack;
+import org.sandboxpowered.sandbox.api.registry.Registry;
 import org.sandboxpowered.sandbox.api.util.annotation.Beta;
 
 @Beta
 public interface Enchantment extends Content<Enchantment> {
+    Registry<Enchantment> REGISTRY = Registry.getRegistryFromType(Enchantment.class);
+
     int getMinimumLevel();
 
     int getMaximumLevel();

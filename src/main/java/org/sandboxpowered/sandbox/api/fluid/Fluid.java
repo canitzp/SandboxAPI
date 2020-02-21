@@ -5,6 +5,7 @@ import org.sandboxpowered.sandbox.api.component.Component;
 import org.sandboxpowered.sandbox.api.content.Content;
 import org.sandboxpowered.sandbox.api.item.Item;
 import org.sandboxpowered.sandbox.api.item.ItemProvider;
+import org.sandboxpowered.sandbox.api.registry.Registry;
 import org.sandboxpowered.sandbox.api.state.BlockState;
 import org.sandboxpowered.sandbox.api.state.FluidState;
 import org.sandboxpowered.sandbox.api.state.Properties;
@@ -17,6 +18,8 @@ import org.sandboxpowered.sandbox.api.world.WorldReader;
 import java.util.Optional;
 
 public interface Fluid extends ItemProvider, Content<Fluid> {
+    Registry<Fluid> REGISTRY = Registry.getRegistryFromType(Fluid.class);
+
     FluidState getBaseState();
 
     StateFactory<Fluid, FluidState> getStateFactory();

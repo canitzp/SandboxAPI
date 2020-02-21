@@ -1,6 +1,5 @@
 package org.sandboxpowered.sandbox.api.block;
 
-import org.sandboxpowered.sandbox.api.Registries;
 import org.sandboxpowered.sandbox.api.registry.Registry;
 import org.sandboxpowered.sandbox.api.util.Identity;
 
@@ -687,6 +686,6 @@ public class Blocks {
     public static final Registry.Entry<Block> HONEYCOMB_BLOCK = get("honeycomb_block");
 
     private static Registry.Entry<Block> get(String name) {
-        return Registries.BLOCK.get(Identity.of("minecraft", name));
+        return Block.REGISTRY.get(Identity.of("minecraft", name));
     }
 }

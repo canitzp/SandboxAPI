@@ -1,6 +1,5 @@
 package org.sandboxpowered.sandbox.api.entity;
 
-import org.sandboxpowered.sandbox.api.Registries;
 import org.sandboxpowered.sandbox.api.registry.Registry;
 import org.sandboxpowered.sandbox.api.util.Identity;
 
@@ -110,6 +109,6 @@ public class Entities {
     public static final Registry.Entry<Entity.Type> FISHING_BOBBER = get("fishing_bobber");
 
     private static Registry.Entry<Entity.Type> get(String type) {
-        return Registries.ENTITY.get(Identity.of("minecraft", type));
+        return Entity.Type.REGISTRY.get(Identity.of("minecraft", type));
     }
 }

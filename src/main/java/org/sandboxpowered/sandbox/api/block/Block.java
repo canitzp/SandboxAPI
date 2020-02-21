@@ -9,6 +9,7 @@ import org.sandboxpowered.sandbox.api.entity.player.PlayerEntity;
 import org.sandboxpowered.sandbox.api.item.Item;
 import org.sandboxpowered.sandbox.api.item.ItemProvider;
 import org.sandboxpowered.sandbox.api.item.ItemStack;
+import org.sandboxpowered.sandbox.api.registry.Registry;
 import org.sandboxpowered.sandbox.api.state.BlockState;
 import org.sandboxpowered.sandbox.api.state.StateFactory;
 import org.sandboxpowered.sandbox.api.util.*;
@@ -21,6 +22,8 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public interface Block extends ItemProvider, Content<Block> {
+    Registry<Block> REGISTRY = Registry.getRegistryFromType(Block.class);
+
     @Override
     default Class<Block> getContentType() {
         return Block.class;
