@@ -15,9 +15,5 @@ public interface SandboxAPI {
         }
     }
 
-    default <T extends Content<T>> Registry.Entry<T> register(Identity identity, T content) {
-        return Registry.getRegistryFromType(content.getContentType()).register(identity, content);
-    }
-
     Log getLog();
 }
