@@ -39,9 +39,9 @@ public interface Registry<T extends Content> {
 
     Class<T> getType();
 
-    interface Entry<T extends Content> {
-
-        T get() throws NoSuchElementException;
+    interface Entry<T extends Content> extends Supplier<T>, Predicate<T> {
+        @Override
+        T get();
 
         Optional<T> getAsOptional();
 
@@ -50,6 +50,11 @@ public interface Registry<T extends Content> {
         T orElseGet(Supplier<T> other);
 
         boolean isPresent();
+
+        @Override
+        default boolean test(T t) {
+            return matches(t);
+        }
 
         boolean matches(T other);
 
