@@ -5,19 +5,12 @@
   "name": "SandboxAPI",
   "description": "Minecraft mod engine!",
   "authors": [
-    "SandboxPowered",
-    "Horizon Studio"
+    "SandboxPowered"
   ],
   "contact": {
     "homepage": "https://sandboxpowered.org",
     "sources": "https://github.com/SandboxPowered/Sandbox"
   },
-  "license": "ARR",
   "icon": "assets/sandbox/icon.png",
-  "environment": "*",
-  "depends": {
-    "fabricloader": ">=0.4.0"
-  },
-  "suggests": {
-  }
+  "environment": "*"
 }

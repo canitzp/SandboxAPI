@@ -1,6 +1,5 @@
 package org.sandboxpowered.sandbox.api.block;
 
-import org.sandboxpowered.sandbox.api.block.entity.BaseBlockEntity;
 import org.sandboxpowered.sandbox.api.block.entity.BlockEntity;
 import org.sandboxpowered.sandbox.api.component.Component;
 import org.sandboxpowered.sandbox.api.component.Components;
@@ -62,7 +61,7 @@ public class BaseBlock implements Block {
             return Mono.of(new FluidLoggingContainer((FluidLoggable) this, world, position, state, side)).cast();
         } else if (hasBlockEntity()) {
             BlockEntity entity = world.getBlockEntity(position);
-            if (entity instanceof BaseBlockEntity)
+            if (entity != null)
                 return entity.getComponent(component, side);
         }
         return Mono.empty();
