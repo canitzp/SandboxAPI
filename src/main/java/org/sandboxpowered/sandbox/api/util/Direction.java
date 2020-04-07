@@ -6,6 +6,7 @@ import org.sandboxpowered.sandbox.api.util.math.Vec3i;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -18,8 +19,8 @@ public enum Direction {
     EAST(5, 4, 3, "east", Direction.AxisDirection.POSITIVE, Direction.Axis.X, Vec3i.create(1, 0, 0));
     private static final Direction[] ALL = values();
     private static final Map<String, Direction> NAME_MAP = Arrays.stream(ALL).collect(Collectors.toMap(Direction::getName, (dir) -> dir));
-    private static final Direction[] ID_TO_DIRECTION = Arrays.stream(ALL).sorted(Comparator.comparingInt((direction_1) -> direction_1.id)).toArray(Direction[]::new);
-    private static final Direction[] HORIZONTAL = Arrays.stream(ALL).filter((direction_1) -> direction_1.getAxis().isHorizontal()).sorted(Comparator.comparingInt((direction_1) -> direction_1.horizontalId)).toArray(Direction[]::new);
+    private static final Direction[] ID_TO_DIRECTION = Arrays.stream(ALL).sorted(Comparator.comparingInt((dir) -> dir.id)).toArray(Direction[]::new);
+    private static final Direction[] HORIZONTAL = Arrays.stream(ALL).filter((dir) -> dir.getAxis().isHorizontal()).sorted(Comparator.comparingInt((dir) -> dir.horizontalId)).toArray(Direction[]::new);
     private final int id;
     private final int invertedId;
     private final int horizontalId;
@@ -39,20 +40,20 @@ public enum Direction {
     }
 
     @Nullable
-    public static Direction byName(@Nullable String string_1) {
-        return string_1 == null ? null : NAME_MAP.get(string_1.toLowerCase(Locale.ROOT));
+    public static Direction byName(@Nullable String name) {
+        return name == null ? null : NAME_MAP.get(name.toLowerCase(Locale.ROOT));
     }
 
-    public static Direction byId(int int_1) {
-        return ID_TO_DIRECTION[Math.abs(int_1 % ID_TO_DIRECTION.length)];
+    public static Direction byId(int index) {
+        return ID_TO_DIRECTION[Math.abs(index % ID_TO_DIRECTION.length)];
     }
 
-    public static Direction fromHorizontal(int int_1) {
-        return HORIZONTAL[Math.abs(int_1 % HORIZONTAL.length)];
+    public static Direction fromHorizontal(int horizontalIndex) {
+        return HORIZONTAL[Math.abs(horizontalIndex % HORIZONTAL.length)];
     }
 
-    public static Direction fromRotation(double double_1) {
-        return fromHorizontal((int) Math.floor(double_1 / 90.0D + 0.5D) & 3);
+    public static Direction fromRotation(double rotation) {
+        return fromHorizontal((int) Math.floor(rotation / 90.0D + 0.5D) & 3);
     }
 
     public static Direction from(Direction.Axis axis, Direction.AxisDirection direction) {
@@ -76,9 +77,9 @@ public enum Direction {
         float val = Float.MIN_VALUE;
 
         for (Direction dir : ALL) {
-            float float_5 = x * (float) dir.vector.getX() + y * (float) dir.vector.getY() + z * (float) dir.vector.getZ();
-            if (float_5 > val) {
-                val = float_5;
+            float dist = x * (float) dir.vector.getX() + y * (float) dir.vector.getY() + z * (float) dir.vector.getZ();
+            if (dist > val) {
+                val = dist;
                 outDir = dir;
             }
         }
@@ -87,13 +88,13 @@ public enum Direction {
     }
 
     public static Direction get(Direction.AxisDirection direction, Direction.Axis axis) {
-        for (Direction direction_1 : values()) {
-            if (direction_1.getDirection() == direction && direction_1.getAxis() == axis) {
-                return direction_1;
+        for (Direction dir : values()) {
+            if (dir.getDirection() == direction && dir.getAxis() == axis) {
+                return dir;
             }
         }
 
-        throw new IllegalArgumentException("No such direction: " + direction + " " + axis);
+        throw new IllegalArgumentException(String.format("No such direction: %s %s", direction, axis));
     }
 
     public int getId() {
@@ -153,8 +154,6 @@ public enum Direction {
         switch (this) {
             case NORTH:
                 return DOWN;
-            case EAST:
-            case WEST:
             default:
                 throw new IllegalStateException("Unable to get X-rotated facing of " + this);
             case SOUTH:
@@ -170,7 +169,6 @@ public enum Direction {
         switch (this) {
             case EAST:
                 return DOWN;
-            case SOUTH:
             default:
                 throw new IllegalStateException("Unable to get Z-rotated facing of " + this);
             case WEST:
@@ -225,10 +223,6 @@ public enum Direction {
         return this.name;
     }
 
-    public String asString() {
-        return this.name;
-    }
-
     public Vec3i getVector() {
         return this.vector;
     }
@@ -244,7 +238,6 @@ public enum Direction {
             this.facingArray = directions;
             this.axisArray = axes;
         }
-
 
         @Override
         public boolean test(@Nullable Direction direction) {
@@ -280,44 +273,14 @@ public enum Direction {
     }
 
     public enum Axis implements Predicate<Direction> {
-        X("x") {
-            public int choose(int x, int y, int z) {
-                return z;
-            }
+        X("x"),
+        Y("y"),
+        Z("z");
 
-            public double choose(double x, double y, double z) {
-                return x;
-            }
-        },
-        Y("y") {
-            public int choose(int x, int y, int z) {
-                return y;
-            }
-
-            public double choose(double x, double y, double z) {
-                return y;
-            }
-        },
-        Z("z") {
-            public int choose(int x, int y, int z) {
-                return z;
-            }
-
-            public double choose(double x, double y, double z) {
-                return z;
-            }
-        };
-
-        private static final Map<String, Direction.Axis> BY_NAME = Arrays.stream(values()).collect(Collectors.toMap(Axis::getName, (axis) -> axis));
         private final String name;
 
-        Axis(String string_1) {
-            this.name = string_1;
-        }
-
-        @Nullable
-        public static Direction.Axis fromName(String string_1) {
-            return BY_NAME.get(string_1.toLowerCase(Locale.ROOT));
+        Axis(String name) {
+            this.name = name;
         }
 
         public String getName() {
@@ -349,17 +312,9 @@ public enum Direction {
                 case Y:
                     return Direction.Type.VERTICAL;
                 default:
-                    throw new Error("Someone's been tampering with the universe!");
+                    throw new Error(String.format("Unknown Axis %s!", this.getName()));
             }
         }
-
-        public String asString() {
-            return this.name;
-        }
-
-        public abstract int choose(int x, int y, int z);
-
-        public abstract double choose(double x, double y, double z);
     }
 
 }
