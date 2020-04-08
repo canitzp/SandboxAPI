@@ -2,12 +2,8 @@ package org.sandboxpowered.sandbox.api.content.resource;
 
 
 import org.sandboxpowered.sandbox.api.block.Block;
-import org.sandboxpowered.sandbox.api.content.Content;
 import org.sandboxpowered.sandbox.api.item.Item;
-import org.sandboxpowered.sandbox.api.registry.Registry;
-import org.sandboxpowered.sandbox.api.util.Identity;
 
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -15,7 +11,8 @@ public class ResourceType {
 	private String baseName;
 	private Map<String, Item> items = new HashMap<>();
 	private Map<String, Block> blocks = new HashMap<>();
-	private Map<String, Set<Content<?>>> requestInfo = new HashMap<>(); //for debug purposes
+	private Map<String, Set<String>> addedItems = new HashMap<>();
+	private Map<String, Set<String>> addedBlocks = new HashMap<>();
 
 	public ResourceType(String baseName) {
 		this.baseName = baseName;
@@ -59,7 +56,6 @@ public class ResourceType {
 	 * For example, if you want to get sandbox:copper_ingot, and baseResource is copper,
 	 * you pass "ingot" in, since that is the affix.
 	 */
-	@Nullable
 	public Optional<Item> getItem(String itemName) {
 		return Optional.ofNullable(items.get(itemName));
 	}
@@ -132,7 +128,6 @@ public class ResourceType {
 	 * For example, if you want to get cotton:copper_ore, and baseResource is copper,
 	 * * you pass "ore" in, since that is the affix.
 	 */
-	@Nullable
 	Optional<Block> getBlock(String blockName) {
 		return Optional.ofNullable(blocks.get(blockName));
 	}
@@ -181,25 +176,40 @@ public class ResourceType {
 	/**
 	 * Processes a request for new resource types, registering any that don't yet exist.
 	 * @param request The requested resources to add.
+	 * TODO: preference config to select a specific mod register
 	 */
 	public void append(String source, ResourceRequest request) {
 		Map<String, Supplier<Item>> requestedItems = request.getItems();
 		Map<String, Supplier<Block>> requestedBlocks = request.getBlocks();
-		Set<Content<?>> registered = new HashSet<>();
+		Set<String> registeredItems = new HashSet<>();
+		Set<String> registeredBlocks = new HashSet<>();
 		for (String key : request.getItems().keySet()) {
 			if (!containsItem(key)) {
-				Item item = requestedItems.get(key).get();
-				items.put(key, Registry.getRegistryFromType(Item.class).register(Identity.of("sandbox", key), item).get());
-				registered.add(item);
+				items.put(key, requestedItems.get(key).get());
+				registeredItems.add(key);
 			}
 		}
 		for (String key : request.getBlocks().keySet()) {
 			if (!containsBlock(key)) {
-				Block block = requestedBlocks.get(key).get();
-				blocks.put(key, Registry.getRegistryFromType(Block.class).register(Identity.of("sandbox", key), block).get());
-				registered.add(block);
+				blocks.put(key, requestedBlocks.get(key).get());
+				registeredBlocks.add(key);
 			}
 		}
-		requestInfo.put(source, registered);
+		addedItems.put(source, registeredItems);
+		addedBlocks.put(source, registeredBlocks);
+	}
+
+	public String getItemSource(String affix) {
+		for (String id : addedItems.keySet()) {
+			if (addedItems.get(id).contains(affix)) return id;
+		}
+		return "";
+	}
+
+	public String getBlockSource(String affix) {
+		for (String id : addedBlocks.keySet()) {
+			if (addedBlocks.get(id).contains(affix)) return id;
+		}
+		return "";
 	}
 }
