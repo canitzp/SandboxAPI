@@ -26,12 +26,17 @@ public class ResourceManager {
 	}
 
 	//TODO: put somewhere else? this gets called after all addons get initialized so we can do preferences properly
-	public static void registerAll() {
+	public static void register() {
 		TYPES.forEach((name, type) -> {
 			type.getItemNames().forEach(id -> Registry.getRegistryFromType(Item.class).register(Identity.of("sandbox", id), type.getItem(id).orElseThrow(() ->
 					new IllegalStateException("Item named " + id + " was in " + type.getBaseName() + " resource type list but doesn't exist!"))));
 			type.getBlockNames().forEach(id -> Registry.getRegistryFromType(Block.class).register(Identity.of("sandbox", id), type.getBlock(id).orElseThrow(() ->
 					new IllegalStateException("Block named " + id + " was in " + type.getBaseName() + " resource type list but doesn't exist!"))));
 		});
+	}
+
+	//TODO: put somewhere else? this is called to wipe existing resource types when you leave
+	public static void deregister() {
+		TYPES.clear();
 	}
 }

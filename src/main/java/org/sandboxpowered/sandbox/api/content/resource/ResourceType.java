@@ -63,27 +63,27 @@ public class ResourceType {
 	//TODO: should we do this better somehow? The mergability is the main reason we have to put everything here
 
 	public Optional<Item> getBase() {
-		 return getItem("Base");
+		 return getItem("base");
 	}
 
 	public Optional<Item> getIngot() {
-		 return getItem("Ingot");
+		 return getItem("ingot");
 	}
 
 	public Optional<Item> getGear() {
-		 return getItem("Gear");
+		 return getItem("gear");
 	}
 
 	public Optional<Item> getDust() {
-		 return getItem("Dust");
+		 return getItem("dust");
 	}
 
 	public Optional<Item> getNugget() {
-		 return getItem("Nugget");
+		 return getItem("nugget");
 	}
 
 	public Optional<Item> getPlate() {
-		 return getItem("Plate");
+		 return getItem("plate");
 	}
 
 	public Optional<Item> getPickaxe() {
