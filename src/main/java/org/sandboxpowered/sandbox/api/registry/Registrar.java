@@ -18,7 +18,6 @@ public interface Registrar {
         return ResourceManager.requestResource("sandbox", request); //TODO: fix when we have per-addon instances
     }
 
-    //TODO: better impl once we have per-addon instances
     default ResourceType getResource(String resourceName) {
         return ResourceManager.getExistingResource("sandbox", resourceName); //TODO: fix when we have per-addon instances
     }
