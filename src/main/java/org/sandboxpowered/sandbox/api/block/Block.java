@@ -117,7 +117,7 @@ public interface Block extends ItemProvider, Content<Block> {
     }
 
     default boolean canReplace(BlockState state) {
-        return getMaterial().isReplaceable();
+        return getMaterial(state).isReplaceable();
     }
 
     default boolean isAir(BlockState state) {
@@ -128,22 +128,47 @@ public interface Block extends ItemProvider, Content<Block> {
 
     }
 
-    default boolean canEntitySpawnWithin() {
-        return !getMaterial().isSolid() && !getMaterial().isLiquid();
+    default boolean canEntitySpawnWithin(BlockState state) {
+        return !getMaterial(state).isSolid() && !getMaterial(state).isLiquid();
     }
 
     default Material.PistonInteraction getPistonInteraction(BlockState state) {
-        return getMaterial().getPistonInteraction();
+        return getMaterial(state).getPistonInteraction();
     }
 
-    default Material getMaterial() {
+    default Material getMaterial(BlockState state) {
         return getSettings().getMaterial();
+    }
+
+    default float getHardness(BlockState state) {
+        return getSettings().getHardness();
+    }
+
+    default float getResistance(BlockState state) {
+        return getSettings().getResistance();
+    }
+
+    default float getSlipperiness(BlockState state) {
+        return getSettings().getSlipperiness();
+    }
+
+    default float getVelocity(BlockState state) {
+        return getSettings().getVelocity();
+    }
+
+    default float getJumpVelocity(BlockState state) {
+        return getSettings().getJumpVelocity();
+    }
+
+    default int getLumincance(BlockState state) {
+        return getSettings().getLuminance();
     }
 
     default ItemStack getPickStack(WorldReader reader, Position position, BlockState state) {
         return ItemStack.of(this);
     }
 
+    //TODO: mining tool/level, map color, collision, opacity, sound group, random tick, drops, dynamic bounds
     class Settings {
         private final Material material;
         private final float hardness, resistance, slipperiness, velocity, jumpVelocity;
@@ -161,6 +186,24 @@ public interface Block extends ItemProvider, Content<Block> {
 
         public static Builder builder(Material material) {
             return new Builder(material);
+        }
+
+        public static Builder builder(Registry.Entry<Block> block) {
+            return builder(block.get());
+        }
+
+        public static Builder builder(Block block) {
+            return builder(block.getSettings());
+        }
+
+        public static Builder builder(Settings settings) {
+            return new Builder(settings.material)
+                    .setHardness(settings.hardness)
+                    .setResistance(settings.resistance)
+                    .setSlipperiness(settings.slipperiness)
+                    .setVelocity(settings.velocity)
+                    .setJumpVelocity(settings.jumpVelocity)
+                    .setLuminance(settings.luminance);
         }
 
         public Material getMaterial() {
