@@ -13,7 +13,7 @@ public interface AddonInfo {
     /**
      * @return The ID of this addon.
      */
-    String getAddonId();
+    String getId();
 
     /**
      * @return The version of this addon as SemVer.

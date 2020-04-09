@@ -14,6 +14,6 @@ public interface Registrar {
     <T extends Content<T>> Registry.Entry<T> register(Identity identity, T content);
 
     default <T extends Content<T>> Registry.Entry<T> register(String name, T content) {
-        return register(Identity.of(getSourceAddon().getAddonId(), name), content);
+        return register(Identity.of(getSourceAddon().getId(), name), content);
     }
 }

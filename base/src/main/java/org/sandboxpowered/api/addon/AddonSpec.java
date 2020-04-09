@@ -21,7 +21,7 @@ public class AddonSpec implements AddonInfo {
     private static final Predicate<String> MODID_PREDICATE = MODID_PATTERN.asPredicate();
 
     //metadata
-    private final String addonId;
+    private final String id;
     private final Version version;
     private final String title;
     private final String description;
@@ -36,17 +36,17 @@ public class AddonSpec implements AddonInfo {
     private final String mainClass;
     private final URL path;
 
-    private AddonSpec(String addonId, Version version, @Nullable String title, String description, List<String> authors, String url, Map<String, String> dependencies, Config customProperties, LoadingSide side, Map<String, Boolean> platforms, String mainClass, URL path) {
-        if (!MODID_PREDICATE.test(addonId))
-            throw new IllegalArgumentException(String.format("addon ID '%s' does not match regex requirement '%s'", addonId, MODID_PATTERN.pattern()));
-        this.addonId = addonId;
+    private AddonSpec(String id, Version version, @Nullable String title, String description, List<String> authors, String url, Map<String, String> dependencies, Config customProperties, LoadingSide side, Map<String, Boolean> platforms, String mainClass, URL path) {
+        if (!MODID_PREDICATE.test(id))
+            throw new IllegalArgumentException(String.format("Addon ID '%s' does not match regex requirement '%s'", id, MODID_PATTERN.pattern()));
+        this.id = id;
         this.version = version;
         if (title == null || title.isEmpty())
-            title = addonId;
+            title = id;
         this.title = title;
         this.description = description;
         if (authors.isEmpty())
-            throw new IllegalArgumentException("authors does not meet minimum list requirement of 1");
+            throw new IllegalArgumentException(String.format("Addon %s does not define any authors!", id));
         this.authors = authors;
         this.url = url;
         this.dependencies = dependencies;
@@ -60,11 +60,14 @@ public class AddonSpec implements AddonInfo {
     public static AddonSpec from(Config config, URL path) {
         CONFIG_SPEC.correct(config);
         String id = config.get("id");
-        if (id.equals("")) throw new IllegalArgumentException(String.format("Addon ID for addon at path %s is not defined!", path.toString()));
-        Version version = Version.valueOf(config.get("version"));
+        if (id.equals("")) throw new IllegalArgumentException(String.format("Addon at path %s does not define an ID!", path.toString()));
+        String verString = config.get("version");
+        if (verString.equals("")) throw new IllegalArgumentException(String.format("Addon %s does not define a version!", id));
+        Version version = Version.valueOf(verString);
         String title = config.get("title");
         String description = config.get("description");
         String mainClass = config.get("entrypoint");
+        if (mainClass.equals("")) throw new IllegalArgumentException(String.format("Addon %s does not define an entrypoint!", id));
         List<String> authors = config.get("authors");
         String url = config.get("url");
         Map<String, String> dependencies = config.get("dependencies");
@@ -75,8 +78,8 @@ public class AddonSpec implements AddonInfo {
     }
 
     @Override
-    public String getAddonId() {
-        return addonId;
+    public String getId() {
+        return id;
     }
 
     @Override
@@ -141,7 +144,7 @@ public class AddonSpec implements AddonInfo {
 
     static {
         CONFIG_SPEC.define("id", "");
-        CONFIG_SPEC.define("version", "1.0.0");
+        CONFIG_SPEC.define("version", "");
         CONFIG_SPEC.define("title", "");
         CONFIG_SPEC.define("description", "");
         CONFIG_SPEC.define("entrypoint", "");
