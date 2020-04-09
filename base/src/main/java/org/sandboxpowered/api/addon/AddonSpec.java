@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class AddonSpec {
     private static final Pattern MODID_PATTERN = Pattern.compile("[a-z0-9-_]{4,15}");
     private static final Predicate<String> MODID_PREDICATE = MODID_PATTERN.asPredicate();
-    private final String modid;
+    private final String addonId;
     private final Version version;
     private final String title;
     private final String description;
@@ -28,15 +28,15 @@ public class AddonSpec {
     private final URL path;
     private final Map<String, Boolean> platforms;
 
-    private AddonSpec(String modid, Version version, @Nullable String title, String description, String mainClass, List<String> authors, String url, LoadingSide side, URL path, Map<String, Boolean> platforms) {
+    private AddonSpec(String addonId, Version version, @Nullable String title, String description, String mainClass, List<String> authors, String url, LoadingSide side, URL path, Map<String, Boolean> platforms) {
         this.path = path;
         this.platforms = platforms;
-        if (!MODID_PREDICATE.test(modid))
-            throw new IllegalArgumentException(String.format("modid '%s' does not match regex requirement '%s'", modid, MODID_PATTERN.pattern()));
-        this.modid = modid;
+        if (!MODID_PREDICATE.test(addonId))
+            throw new IllegalArgumentException(String.format("addon ID '%s' does not match regex requirement '%s'", addonId, MODID_PATTERN.pattern()));
+        this.addonId = addonId;
         this.version = version;
         if (title == null || title.isEmpty())
-            title = modid;
+            title = addonId;
         this.title = title;
         this.description = description;
         this.mainClass = mainClass;
@@ -48,7 +48,7 @@ public class AddonSpec {
     }
 
     public static AddonSpec from(Config config, URL path) {
-        String modid = config.get("modid");
+        String modid = config.get("id");
         Version version = Version.valueOf(config.get("version"));
         String title = config.contains("title") ? config.get("title") : modid;
         String description = config.contains("description") ? config.get("description") : "";
@@ -61,8 +61,8 @@ public class AddonSpec {
         return new AddonSpec(modid, version, title, description, mainClass, authors, url, side, path, platforms);
     }
 
-    public String getModid() {
-        return modid;
+    public String getAddonId() {
+        return addonId;
     }
 
     public Version getVersion() {
