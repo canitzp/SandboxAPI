@@ -28,7 +28,7 @@ public interface Functions {
 
     @Nonnull
     static Functions getInstance() {
-        throw new RuntimeException("No functions defined, this is a bug.");
+        throw new IllegalStateException("No functions defined, this is a bug.");
     }
 
     Identity createIdentityFromString(String identity);
