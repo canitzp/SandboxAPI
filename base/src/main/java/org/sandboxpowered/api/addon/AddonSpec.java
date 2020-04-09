@@ -14,7 +14,7 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 @Internal
-public class AddonSpec {
+public class AddonSpec implements AddonInfo {
     private static final Pattern MODID_PATTERN = Pattern.compile("[a-z0-9-_]{4,15}");
     private static final Predicate<String> MODID_PREDICATE = MODID_PATTERN.asPredicate();
     private final String addonId;
@@ -48,9 +48,9 @@ public class AddonSpec {
     }
 
     public static AddonSpec from(Config config, URL path) {
-        String modid = config.get("id");
+        String id = config.get("id");
         Version version = Version.valueOf(config.get("version"));
-        String title = config.contains("title") ? config.get("title") : modid;
+        String title = config.contains("title") ? config.get("title") : id;
         String description = config.contains("description") ? config.get("description") : "";
         String mainClass = config.get("entrypoint");
         List<String> authors = config.get("authors");
@@ -58,41 +58,50 @@ public class AddonSpec {
         String sideS = config.contains("side") ? config.get("side") : "COMMON";
         LoadingSide side = sideS.equalsIgnoreCase("CLIENT") ? LoadingSide.CLIENT : sideS.equalsIgnoreCase("SERVER") ? LoadingSide.SERVER : LoadingSide.COMMON;
         Map<String, Boolean> platforms = config.contains("platforms") ? config.get("platforms") : Collections.emptyMap();
-        return new AddonSpec(modid, version, title, description, mainClass, authors, url, side, path, platforms);
+        return new AddonSpec(id, version, title, description, mainClass, authors, url, side, path, platforms);
     }
 
-    public String getAddonId() {
+    @Override
+    public String getId() {
         return addonId;
     }
 
+    @Override
     public Version getVersion() {
         return version;
     }
 
+    @Override
     public String getTitle() {
         return title;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public String getMainClass() {
         return mainClass;
     }
 
+    @Override
     public List<String> getAuthors() {
         return authors;
     }
 
+    @Override
     public String getUrl() {
         return url;
     }
 
+    @Override
     public LoadingSide getSide() {
         return side;
     }
 
+    @Override
     public URL getPath() {
         return path;
     }
@@ -101,13 +110,8 @@ public class AddonSpec {
         return platforms;
     }
 
+    @Override
     public PlatformSupport getPlatformSupport(Identity platform) {
         return platforms.containsKey(platform.toString()) ? platforms.get(platform.toString()) ? PlatformSupport.YES : PlatformSupport.NO : PlatformSupport.MAYBE;
-    }
-
-    public enum PlatformSupport {
-        YES,
-        MAYBE,
-        NO
     }
 }

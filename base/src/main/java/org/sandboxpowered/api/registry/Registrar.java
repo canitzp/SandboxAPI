@@ -1,11 +1,11 @@
 package org.sandboxpowered.api.registry;
 
-import org.sandboxpowered.api.addon.AddonSpec;
+import org.sandboxpowered.api.addon.AddonInfo;
 import org.sandboxpowered.api.content.Content;
 import org.sandboxpowered.api.util.Identity;
 
 public interface Registrar {
-    AddonSpec getSourceAddon();
+    AddonInfo getSourceAddon();
 
     <T extends Content<T>> Registry.Entry<T> getEntry(Identity identity, Class<T> tClass);
 
@@ -14,6 +14,6 @@ public interface Registrar {
     <T extends Content<T>> Registry.Entry<T> register(Identity identity, T content);
 
     default <T extends Content<T>> Registry.Entry<T> register(String name, T content) {
-        return register(Identity.of(getSourceAddon().getAddonId(), name), content);
+        return register(Identity.of(getSourceAddon().getId(), name), content);
     }
 }

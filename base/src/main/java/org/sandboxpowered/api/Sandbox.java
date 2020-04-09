@@ -1,17 +1,17 @@
 package org.sandboxpowered.api;
 
-import java.util.Map;
-
 import org.sandboxpowered.api.addon.Addon;
-import org.sandboxpowered.api.addon.AddonSpec;
+import org.sandboxpowered.api.addon.AddonInfo;
 import org.sandboxpowered.api.registry.Registrar;
 
+import java.util.Map;
+
 public interface Sandbox {
-	Map<AddonSpec, Addon> getAllAddons();
+	Map<AddonInfo, Addon> getAllAddons();
 
-	SandboxAPI getAPIFor(AddonSpec spec);
+	SandboxAPI getAPIFor(AddonInfo spec);
 
-	Registrar getRegistrarFor(AddonSpec spec);
+	Registrar getRegistrarFor(AddonInfo spec);
 
 	default void initializeAll() {
 		getAllAddons().forEach((spec, addon) -> {
@@ -19,7 +19,7 @@ public interface Sandbox {
 			try {
 				addon.init(api);
 			} catch (Exception e) {
-				throw new RuntimeException("Initialization for addon " + spec.getAddonId() + " failed: " + e);
+				throw new RuntimeException("Initialization for addon " + spec.getId() + " failed: " + e);
 			}
 		});
 	}
@@ -30,7 +30,7 @@ public interface Sandbox {
 			try {
 				addon.register(registrar);
 			} catch (Exception e) {
-				throw new RuntimeException("Registration for addon " + spec.getAddonId() + " failed: " + e);
+				throw new RuntimeException("Registration for addon " + spec.getId() + " failed: " + e);
 			}
 		});
 	}
