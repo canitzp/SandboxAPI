@@ -1,71 +1,87 @@
 plugins {
-    id 'java'
+    id 'java-platform'
     id 'maven-publish'
-    id 'java-library'
+}
+def ENV = System.getenv()
+
+allprojects {
+    def buildNumber = ENV.TRAVIS_BUILD_NUMBER
+    version = "${project.api_version}.${buildNumber ?: "0"}"
+    group = project.maven_group
 }
 
+archivesBaseName='platform'
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
-archivesBaseName = 'sandboxapi'
-version = "$project.api_version.${System.getenv("TRAVIS_BUILD_NUMBER") ? (System.getenv("TRAVIS_BUILD_NUMBER")) : "0"}"
-group = project.maven_group
-
-repositories {
-    mavenCentral()
-    maven { url 'https://jitpack.io' }
-    maven { url 'https://maven.sandboxpowered.org' }
-}
-
-configurations {
-    shade
-    compile.extendsFrom shade
-}
-
-dependencies {
-    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
-    shade 'com.electronwill.night-config:core:3.6.0'
-    shade 'com.electronwill.night-config:toml:3.6.0'
-    shade 'com.github.zafarkhaja:java-semver:0.9.0'
-    implementation group: 'com.google.guava', name: 'guava', version: '21.0'
-    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
-}
-
-jar {
-    from {
-        configurations.shade.collect { it.isDirectory() ? it : zipTree(it) }
+void addRepo(RepositoryHandler repositories) {
+    def ENV = System.getenv()
+    if (ENV.mvn_username) {
+        repositories.maven {
+            name = "Maven"
+            url = uri("sftp://maven.sandboxpowered.org:22/sbxmvn/")
+            credentials {
+                username = ENV.mvn_username
+                password = ENV.mvn_password
+            }
+        }
     }
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.sandboxpowered.org' }
+    }
+
+    if (project.name != "base") {
+        dependencies {
+            api project(':base')
+        }
+    }
+
+    // Add fabric.mod.json to api modules for fabric support (for some reason we have to do this)
+    ext.genOutputDir = file("$buildDir/generated/resources")
+    task generateFabricModJson {
+        ext.outputFile = file("$genOutputDir/fabric.mod.json")
+        outputs.file(outputFile)
+        doLast {
+            outputFile.text = /{"id": "sandbox-$project.name", "version": "$project.version"}/
+        }
+    }
+    sourceSets.main.output.dir genOutputDir, builtBy: generateFabricModJson
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                afterEvaluate {
+                    artifact jar
+                }
+            }
+        }
+        addRepo(repositories)
+    }
 }
 
-artifacts {
-    archives sourcesJar
+dependencies {
+    constraints {
+        api project(":base")
+        api project(":rendering")
+        api project(":rendering-opengl")
+        api project(":rendering-vulkan")
+    }
 }
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-            artifact sourcesJar
+        platform(MavenPublication) {
+            groupId = project.maven_group
+            artifactId = 'api'
+
+            from components.javaPlatform
         }
     }
-    repositories {
-        if (project == rootProject && System.getenv("mvn_username")) {
-            maven {
-                name = "Maven"
-                url = uri("sftp://maven.sandboxpowered.org:22/sbxmvn/")
-                credentials {
-                    username = System.getenv("mvn_username")
-                    password = System.getenv("mvn_password")
-                }
-            }
-        } else {
-            mavenLocal()
-        }
-    }
+    addRepo(repositories)
 }

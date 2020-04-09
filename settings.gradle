@@ -1,1 +1,7 @@
-rootProject.name="sandbox-api"
+rootProject.name = 'api'
+
+include 'base'
+
+include 'rendering'
+include 'rendering-opengl'
+include 'rendering-vulkan'
