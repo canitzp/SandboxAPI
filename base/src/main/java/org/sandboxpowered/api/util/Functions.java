@@ -9,6 +9,10 @@ import org.sandboxpowered.api.item.ItemStack;
 import org.sandboxpowered.api.registry.Registry;
 import org.sandboxpowered.api.server.Server;
 import org.sandboxpowered.api.state.Property;
+import org.sandboxpowered.api.status.StatusEffect;
+import org.sandboxpowered.api.status.StatusEffectInstance;
+import org.sandboxpowered.api.status.StatusEffectType;
+import org.sandboxpowered.api.status.potion.Potion;
 import org.sandboxpowered.api.util.annotation.Internal;
 import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.util.math.Vec3i;
@@ -68,4 +72,8 @@ public interface Functions {
     FluidStack fluidStackFunction(Fluid fluid, int amount);
 
     FluidStack fluidStackFromTagFunction(ReadableCompoundTag tag);
+
+    StatusEffectInstance createStatusEffectInstance(StatusEffect effect, int duration, int amplifier);
+
+    StatusEffectType createStatusEffectType(String name);
 }
