@@ -1,4 +1,4 @@
-package org.sandboxpowered.sandbox.api.content.resource;
+package org.sandboxpowered.sandbox.api.content.resource.supplier;
 
 import org.sandboxpowered.sandbox.api.block.BaseBlock;
 import org.sandboxpowered.sandbox.api.block.Block;
@@ -8,7 +8,7 @@ import org.sandboxpowered.sandbox.api.block.Material;
 import java.util.function.Supplier;
 
 //TODO: mining levels/tools, sounds, etc.
-public class BlockSuppliers {
+public final class BlockSuppliers {
 	/**
 	 * A generic metal ore supplier, similar to the properties of coal or iron ore.
 	 */
@@ -67,4 +67,6 @@ public class BlockSuppliers {
 			.setHardness(5.0f)
 			.setResistance(6.0f)
 			.build());
+
+	private BlockSuppliers() { }
 }

@@ -1,215 +1,82 @@
 package org.sandboxpowered.sandbox.api.content.resource;
 
+import java.util.Objects;
 
-import org.sandboxpowered.sandbox.api.block.Block;
-import org.sandboxpowered.sandbox.api.item.Item;
-
-import java.util.*;
-import java.util.function.Supplier;
-
-public class ResourceType {
-	private String baseName;
-	private Map<String, Item> items = new HashMap<>();
-	private Map<String, Block> blocks = new HashMap<>();
-	private Map<String, Set<String>> addedItems = new HashMap<>();
-	private Map<String, Set<String>> addedBlocks = new HashMap<>();
-
-	public ResourceType(String baseName) {
-		this.baseName = baseName;
-	}
-
-	/**
-	 * Gets the base resource name. For example, "copper".
-	 */
-	String getBaseName() {
-		return baseName;
-	}
-
-	/**
-	 * Finds out whether this object takes responsibility for creating and registering the given block or item name.
-	 * For instance, a resource with the domain "copper" will contain "copper_ingot" and "copper_block"; and a
-	 * resource with the domain "mercury" will govern an item named "mercury".
-	 */
-	public boolean containsAny(String affix) {
-		return items.containsKey(affix) || blocks.containsKey(affix);
-	}
-
-	public boolean containsItem(String affix) {
-		return items.containsKey(affix);
-	}
-
-	public boolean containsBlock(String affix) {
-		return blocks.containsKey(affix);
-	}
-
-	/**
-	 * Returns the full name of the block/item for the given affix. For example, given "ore", returns "copper_ore",
-	 * if this is a copper resource. If the affix is empty, only the base resource name is returned.
-	 */
-	public String getFullNameForAffix(String affix) {
-		return affix.equals("") ? getBaseName() : getBaseName() + "_" + affix;
-	}
-
-	/**
-	 * Gets the item (or BlockItem!) corresponding to this item name. If it's already defined, returns the
-	 * already-defined one. If one is not registered, it returns Optional.empty();
-	 * For example, if you want to get sandbox:copper_ingot, and baseResource is copper,
-	 * you pass "ingot" in, since that is the affix.
-	 */
-	public Optional<Item> getItem(String itemName) {
-		return Optional.ofNullable(items.get(itemName));
-	}
-
-	//TODO: should we do this better somehow? The mergability is the main reason we have to put everything here
-
-	public Optional<Item> getBase() {
-		 return getItem("base");
-	}
-
-	public Optional<Item> getIngot() {
-		 return getItem("ingot");
-	}
-
-	public Optional<Item> getGear() {
-		 return getItem("gear");
-	}
-
-	public Optional<Item> getDust() {
-		 return getItem("dust");
-	}
-
-	public Optional<Item> getNugget() {
-		 return getItem("nugget");
-	}
-
-	public Optional<Item> getPlate() {
-		 return getItem("plate");
-	}
-
-	public Optional<Item> getPickaxe() {
-		 return getItem("pickaxe");
-	}
-
-	public Optional<Item> getAxe() {
-		 return getItem("axe");
-	}
-
-	public Optional<Item> getShovel() {
-		 return getItem("shovel");
-	}
-
-	public Optional<Item> getHoe() {
-		 return getItem("hoe");
-	}
-
-	public Optional<Item> getSword() {
-		 return getItem("sword");
-	}
-
-	public Optional<Item> getHelmet() {
-		 return getItem("helmet");
-	}
-
-	public Optional<Item> getChestplate() {
-		 return getItem("chestplate");
-	}
-
-	public Optional<Item> getLeggings() {
-		 return getItem("leggings");
-	}
-
-	public Optional<Item> getBoots() {
-		 return getItem("boots");
-	}
-
-	/**
-	 * Gets the block corresponding to this block name. If it's already defined, returns the already-defined one. If
-	 * it's a builtin, registers and returns the builtin. Only if it's neither registered nor builtin is null returned.
-	 * For example, if you want to get cotton:copper_ore, and baseResource is copper,
-	 * * you pass "ore" in, since that is the affix.
-	 */
-	Optional<Block> getBlock(String blockName) {
-		return Optional.ofNullable(blocks.get(blockName));
-	}
-
-	public Optional<Block> getBlock() {
-		return getBlock("block");
-	}
-
-	public Optional<Block> getOre() {
-		return getBlock("ore");
-	}
-
-	public Optional<Block> getNetherOre() {
-		return getBlock("nether_ore");
-	}
-
-	public Optional<Block> getEndOre() {
-		return getBlock("end_ore");
+public final class ResourceType {
+	public static final ResourceType BASE = new ResourceType("");
+	//item affixes
+	public static final ResourceType INGOT = new ResourceType("ingot");
+	public static final ResourceType NUGGET = new ResourceType("nugget");
+	public static final ResourceType DUST = new ResourceType("dust");
+	public static final ResourceType GEAR = new ResourceType("gear");
+	public static final ResourceType PLATE = new ResourceType("plate");
+	public static final ResourceType PICKAXE = new ResourceType("pickaxe");
+	public static final ResourceType AXE = new ResourceType("axe");
+	public static final ResourceType SHOVEL = new ResourceType("shovel");
+	public static final ResourceType HOE = new ResourceType("hoe");
+	public static final ResourceType SWORD = new ResourceType("sword");
+	public static final ResourceType HELMET = new ResourceType("helmet");
+	public static final ResourceType CHESTPLATE = new ResourceType("chestplate");
+	public static final ResourceType LEGGINGS = new ResourceType("leggings");
+	public static final ResourceType BOOTS = new ResourceType("boots");
+	public static final ResourceType HORSE_ARMOR = new ResourceType("horse_armor");
+	//block affixes
+	public static final ResourceType BLOCK = new ResourceType("block");
+	public static final ResourceType ORE = new ResourceType("ore");
+	public static final ResourceType NETHER_ORE = new ResourceType("nether", "ore");
+	public static final ResourceType END_ORE = new ResourceType("end", "ore");
+	//fluid affixes
+	public static final ResourceType MOLTEN = new ResourceType("molten", "");
+	public static final ResourceType MOLTEN_FLOWING = new ResourceType("molten_flowing", "");
+	
+	private String prefix;
+	private String suffix;
+	
+	public ResourceType(String prefix, String suffix) {
+		this.prefix = prefix;
+		this.suffix = suffix;
 	}
 	
-	public Collection<String> getAllNames() {
-		Set<String> ret = new HashSet<>();
-		ret.addAll(items.keySet());
-		ret.addAll(blocks.keySet());
-		return ret;
+	public ResourceType(String suffix) {
+		this.prefix = "";
+		this.suffix = suffix;
 	}
 
-	/**
-	 * Gets the affixes of all currently registered items for this resource.
-	 *
-	 * @return a collection of item name affixes which are guaranteed to be known for the purposes of contains and getItem
-	 */
-	public Collection<String> getItemNames() {
-		return items.keySet();
+	public String getPrefix() {
+		return prefix;
+	}
+	
+	public String getSuffix() {
+		return suffix;
+	}
+	
+	public String getFullName(String baseName) {
+		StringBuilder builder = new StringBuilder();
+		if (!getPrefix().equals("")) builder.append(getPrefix()).append("_");
+		builder.append(baseName);
+		if (!getSuffix().equals("")) builder.append("_").append(getSuffix());
+		return builder.toString();
 	}
 
-	/**
-	 * Gets the affixes of all currently registered items for this resource.
-	 *
-	 * @return a collection of block name affixes which are guaranteed to be known for the purposes of contains and getBlock
-	 */
-	public Collection<String> getBlockNames() {
-		return blocks.keySet();
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ResourceType that = (ResourceType) o;
+		return Objects.equals(prefix, that.prefix) &&
+				Objects.equals(suffix, that.suffix);
 	}
 
-	/**
-	 * Processes a request for new resource types, registering any that don't yet exist.
-	 * @param request The requested resources to add.
-	 * TODO: preference config to select a specific mod register
-	 */
-	public void append(String source, ResourceRequest request) {
-		Map<String, Supplier<Item>> requestedItems = request.getItems();
-		Map<String, Supplier<Block>> requestedBlocks = request.getBlocks();
-		Set<String> registeredItems = new HashSet<>();
-		Set<String> registeredBlocks = new HashSet<>();
-		for (String key : request.getItems().keySet()) {
-			if (!containsItem(key)) {
-				items.put(key, requestedItems.get(key).get());
-				registeredItems.add(key);
-			}
-		}
-		for (String key : request.getBlocks().keySet()) {
-			if (!containsBlock(key)) {
-				blocks.put(key, requestedBlocks.get(key).get());
-				registeredBlocks.add(key);
-			}
-		}
-		addedItems.put(source, registeredItems);
-		addedBlocks.put(source, registeredBlocks);
+	@Override
+	public int hashCode() {
+		return Objects.hash(prefix, suffix);
 	}
 
-	public String getItemSource(String affix) {
-		for (String id : addedItems.keySet()) {
-			if (addedItems.get(id).contains(affix)) return id;
-		}
-		return "";
-	}
-
-	public String getBlockSource(String affix) {
-		for (String id : addedBlocks.keySet()) {
-			if (addedBlocks.get(id).contains(affix)) return id;
-		}
-		return "";
+	@Override
+	public String toString() {
+		return "ResourceType{" +
+				"prefix='" + prefix + '\'' +
+				", suffix='" + suffix + '\'' +
+				'}';
 	}
 }

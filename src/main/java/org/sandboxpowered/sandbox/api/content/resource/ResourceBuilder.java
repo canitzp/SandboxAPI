@@ -1,48 +1,71 @@
 package org.sandboxpowered.sandbox.api.content.resource;
 
 import org.sandboxpowered.sandbox.api.block.Block;
+import org.sandboxpowered.sandbox.api.content.resource.supplier.BlockSuppliers;
+import org.sandboxpowered.sandbox.api.content.resource.supplier.FluidSuppliers;
+import org.sandboxpowered.sandbox.api.fluid.Fluid;
 import org.sandboxpowered.sandbox.api.item.BaseItem;
 import org.sandboxpowered.sandbox.api.item.Item;
 
 import java.util.*;
 import java.util.function.Supplier;
 
-public class ResourceBuilder {
-	private final String resourceName;
-	private Set<String> items = new HashSet<>();
-	private Set<String> blocks = new HashSet<>();
-	private Set<String> ores = new HashSet<>();
-	private List<String> tools = new ArrayList<>(); //TODO: name to type
-	private List<String> armor = new ArrayList<>(); //TODO: name to type
-	private Map<String, Supplier<Item>> customItems = new HashMap<>();
-	private Map<String, Supplier<Block>> customBlocks = new HashMap<>();
+public final class ResourceBuilder {
+	private String resourceName;
+	private Set<ResourceType> items = new HashSet<>();
+	private Set<ResourceType> blocks = new HashSet<>();
+	private Set<ResourceType> ores = new HashSet<>();
+	private Set<ResourceType> fluids = new HashSet<>();
+	private List<ResourceType> tools = new ArrayList<>(); //TODO: name to type
+	private List<ResourceType> armor = new ArrayList<>(); //TODO: name to type
+	private Map<ResourceType, Supplier<Item>> customItems = new HashMap<>();
+	private Map<ResourceType, Supplier<Block>> customBlocks = new HashMap<>();
+	private Map<ResourceType, Supplier<Fluid>> customFluids = new HashMap<>();
 	// By default, assume this is a stone tier ore.
-	private Supplier<Block> oreSupplier = BlockSuppliers.STONE_TIER_ORE;
 	private Supplier<Block> blockSupplier = BlockSuppliers.METAL_BLOCK;
+	private Supplier<Block> oreSupplier = BlockSuppliers.STONE_TIER_ORE;
+	private Supplier<Fluid> fluidSupplier = FluidSuppliers.VIRTUAL_FLUID;
 
-	public ResourceBuilder(String resourceName) {
+	private ResourceBuilder(String resourceName) {
 		this.resourceName = resourceName;
 	}
 
-	public ResourceBuilder ofMetal() {
-		return this.withIngot().withIngredients().withBlock();
+	public static ResourceBuilder of(String resourceName) {
+		return new ResourceBuilder(resourceName);
 	}
 
-	public ResourceBuilder ofMachiningMetal() {
-		return this.ofMetal().withMachineParts();
+	public static ResourceBuilder ofMetal(String resourceName) {
+		return new ResourceBuilder(resourceName).withIngot().withIngredients().withBlock();
 	}
 
-	public ResourceBuilder ofGem() {
-		return this.withBase().withBlock();
+	public static ResourceBuilder ofMachiningMetal(String resourceName) {
+		return ofMetal(resourceName).withMachineParts();
 	}
 
-	public ResourceBuilder blockSupplier(Supplier<Block> supplier) {
+	public static ResourceBuilder ofGem(String resourceName) {
+		return new ResourceBuilder(resourceName).withBaseItem().withBlock();
+	}
+
+	public static ResourceBuilder ofBlock(String resourceName, Supplier<Block> supplier) {
+		return new ResourceBuilder(resourceName).withBlockSupplier(supplier).withBlock();
+	}
+
+	public static ResourceBuilder ofFluid(String resourceName, Supplier<Fluid> supplier) {
+		return new ResourceBuilder(resourceName).withFluidSupplier(supplier).withBaseFluid();
+	}
+
+	public ResourceBuilder withBlockSupplier(Supplier<Block> supplier) {
 		blockSupplier = supplier;
 		return this;
 	}
 
-	public ResourceBuilder oreSupplier(Supplier<Block> supplier) {
+	public ResourceBuilder withOreSupplier(Supplier<Block> supplier) {
 		oreSupplier = supplier;
+		return this;
+	}
+
+	public ResourceBuilder withFluidSupplier(Supplier<Fluid> supplier) {
+		fluidSupplier = supplier;
 		return this;
 	}
 
@@ -53,97 +76,118 @@ public class ResourceBuilder {
 	public ResourceBuilder withIngredients() {
 		return this.withDust().withNugget();
 	}
+
 	public ResourceBuilder withAllOres() {
 		return this.withOverworldOre().withNetherOre().withEndOre();
 	}
 
-	public ResourceBuilder withBase() {
-		items.add("");
+	public ResourceBuilder withBaseItem() {
+		items.add(ResourceType.BASE);
 		return this;
 	}
 
 	public ResourceBuilder withIngot() {
-		items.add("ingot");
+		items.add(ResourceType.INGOT);
 		return this;
 	}
 
 	public ResourceBuilder withDust() {
-		items.add("dust");
+		items.add(ResourceType.DUST);
 		return this;
 	}
 
 	public ResourceBuilder withNugget() {
-		items.add("nugget");
+		items.add(ResourceType.NUGGET);
 		return this;
 	}
 
 	public ResourceBuilder withGear() {
-		items.add("gear");
+		items.add(ResourceType.GEAR);
 		return this;
 	}
 
 	public ResourceBuilder withPlate() {
-		items.add("plate");
+		items.add(ResourceType.PLATE);
 		return this;
 	}
 
 	//TODO: tools, armor
 
-	public ResourceBuilder withCustomItem(String affix, Supplier<Item> supplier) {
-		customItems.put(affix, supplier);
+	public ResourceBuilder withCustomItem(ResourceType type, Supplier<Item> supplier) {
+		customItems.put(type, supplier);
+		return this;
+	}
+
+	public ResourceBuilder withBaseBlock() {
+		blocks.add(ResourceType.BASE);
 		return this;
 	}
 
 	public ResourceBuilder withBlock() {
-		blocks.add("block");
+		blocks.add(ResourceType.BLOCK);
 		return this;
 	}
 
 	public ResourceBuilder withOverworldOre() {
-		ores.add("_ore");
+		ores.add(ResourceType.ORE);
 		return this;
 	}
 
 	public ResourceBuilder withNetherOre() {
-		ores.add("_nether_ore");
+		ores.add(ResourceType.NETHER_ORE);
 		return this;
 	}
 
 	public ResourceBuilder withEndOre() {
-		ores.add("_end_ore");
+		ores.add(ResourceType.END_ORE);
 		return this;
 	}
 
-	public ResourceBuilder withCustomBlock(String affix, Supplier<Block> supplier) {
-		customBlocks.put(affix, supplier);
+	public ResourceBuilder withCustomBlock(ResourceType type, Supplier<Block> supplier) {
+		customBlocks.put(type, supplier);
 		return this;
 	}
 
-	public ResourceBuilder withCustomBlock(String affix) {
-		blocks.add(affix);
+	public ResourceBuilder withCustomBlock(ResourceType type) {
+		blocks.add(type);
 		return this;
 	}
 
-	public ResourceBuilder withCustomOre(String affix) {
-		ores.add(affix);
+	public ResourceBuilder withCustomOre(ResourceType type) {
+		ores.add(type);
+		return this;
+	}
+
+	public ResourceBuilder withBaseFluid() {
+		fluids.add(ResourceType.BASE);
+		return this;
+	}
+
+	public ResourceBuilder withCustomFluid(ResourceType type, Supplier<Fluid> supplier) {
+		customFluids.put(type, supplier);
 		return this;
 	}
 
 	public ResourceRequest build() {
-		Map<String, Supplier<Item>> itemSuppliers = new HashMap<>();
-		Map<String, Supplier<Block>> blockSuppliers = new HashMap<>();
-		for (String item : items) {
+		Map<ResourceType, Supplier<Item>> itemSuppliers = new HashMap<>();
+		Map<ResourceType, Supplier<Block>> blockSuppliers = new HashMap<>();
+		Map<ResourceType, Supplier<Fluid>> fluidSuppliers = new HashMap<>();
+		for (ResourceType item : items) {
 			itemSuppliers.put(item, () -> new BaseItem(new Item.Settings())); //TODO: item group
 		}
-		for (String block : blocks) {
+		for (ResourceType block : blocks) {
 			blockSuppliers.put(block, blockSupplier);
 		}
-		for (String ore : ores) {
+		for (ResourceType ore : ores) {
 			blockSuppliers.put(ore, oreSupplier);
+		}
+		for (ResourceType fluid : fluids) {
+			fluidSuppliers.put(fluid, fluidSupplier);
 		}
 		itemSuppliers.putAll(customItems);
 		blockSuppliers.putAll(customBlocks);
-		return new ResourceRequest(resourceName, itemSuppliers, blockSuppliers);
+		fluidSuppliers.putAll(customFluids);
+		return new ResourceRequest(resourceName, itemSuppliers, blockSuppliers, fluidSuppliers);
 	}
 
 }
