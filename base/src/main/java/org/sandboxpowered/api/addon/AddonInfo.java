@@ -3,6 +3,7 @@ package org.sandboxpowered.api.addon;
 import com.electronwill.nightconfig.core.Config;
 import com.github.zafarkhaja.semver.Version;
 import org.sandboxpowered.api.util.Identity;
+import org.sandboxpowered.api.util.annotation.Internal;
 
 import java.net.URL;
 import java.util.List;
@@ -68,11 +69,13 @@ public interface AddonInfo {
     /**
      * @return The full qualified name of the entrypoint class for this addon.
      */
+    @Internal
     String getMainClass();
 
     /**
      * @return The path this addon is at relative to the game instance.
      */
+    @Internal
     URL getPath();
 
     enum PlatformSupport {
