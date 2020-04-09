@@ -10,11 +10,14 @@ import java.util.Set;
 import com.github.zafarkhaja.semver.Parser;
 import com.github.zafarkhaja.semver.expr.Expression;
 import com.github.zafarkhaja.semver.expr.ExpressionParser;
+
 import org.sandboxpowered.api.addon.Addon;
-import org.sandboxpowered.api.addon.AddonSpec;
+import org.sandboxpowered.api.addon.AddonInfo;
 import org.sandboxpowered.api.registry.Registrar;
 import org.sandboxpowered.api.util.Identity;
 import org.sandboxpowered.api.util.annotation.Internal;
+
+import java.util.Map;
 
 @Internal
 public interface Sandbox {
@@ -30,9 +33,9 @@ public interface Sandbox {
 
 	Map<AddonSpec, Addon> getAllAddons();
 
-	SandboxAPI getAPIFor(AddonSpec spec);
+	SandboxAPI getAPIFor(AddonInfo spec);
 
-	Registrar getRegistrarFor(AddonSpec spec);
+	Registrar getRegistrarFor(AddonInfo spec);
 
 	default List<AddonSpec> getLoadOrder() {
 		Set<AddonSpec> visited = new HashSet<>();
