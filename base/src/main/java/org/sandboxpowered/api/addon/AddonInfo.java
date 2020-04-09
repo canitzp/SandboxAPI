@@ -1,35 +1,96 @@
 package org.sandboxpowered.api.addon;
 
+import com.electronwill.nightconfig.core.Config;
 import com.github.zafarkhaja.semver.Version;
 import org.sandboxpowered.api.util.Identity;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 public interface AddonInfo {
-    String getId();
+    /**
+     * @return The ID of this addon.
+     */
+    String getAddonId();
 
+    /**
+     * @return The version of this addon as SemVer.
+     */
     Version getVersion();
 
+    /**
+     * @return The display name of this addon.
+     */
     String getTitle();
 
+    /**
+     * @return The description of this addon.
+     */
     String getDescription();
 
-    String getMainClass();
-
+    /**
+     * @return A list of the authors of this addon.
+     */
     List<String> getAuthors();
 
+    /**
+     * @return The URL for the home page of this addon.
+     */
     String getUrl();
 
+    /**
+     * @return The loading side of this addon.
+     */
     LoadingSide getSide();
 
-    URL getPath();
+    /**
+     * @return A map of the names and versions of all addons this addon has a dependency on.
+     */
+    Map<String, String> getDependencies();
 
+    /**
+     * @return Any custom properties this addon defines.
+     */
+    Config getCustomProperties();
+
+    /**
+     * @return A map of platform identities to definite support states.
+     */
+    Map<String, Boolean> getPlatforms();
+
+    /**
+     * @param platform The platform to test for.
+     * @return The level of support this addon has for the given platform.
+     */
     PlatformSupport getPlatformSupport(Identity platform);
 
+    /**
+     * @return The full qualified name of the entrypoint class for this addon.
+     */
+    String getMainClass();
+
+    /**
+     * @return The path this addon is at relative to the game instance.
+     */
+    URL getPath();
+
     enum PlatformSupport {
+        /**
+         * This platform is definitely supported.
+         */
         YES,
+        /**
+         * It is not known whether this platform is supported.
+         */
         MAYBE,
-        NO
+        /**
+         * This platform is definitely not supported.
+         */
+        NO;
+
+        public boolean canRun() {
+            return this != NO;
+        }
     }
 }
