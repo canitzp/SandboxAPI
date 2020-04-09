@@ -1,9 +1,9 @@
-package org.sandboxpowered.sandbox.api.content.resource;
+package org.sandboxpowered.api.content.resource;
 
 
-import org.sandboxpowered.sandbox.api.block.Block;
-import org.sandboxpowered.sandbox.api.fluid.Fluid;
-import org.sandboxpowered.sandbox.api.item.Item;
+import org.sandboxpowered.api.block.Block;
+import org.sandboxpowered.api.fluid.Fluid;
+import org.sandboxpowered.api.item.Item;
 
 import java.util.*;
 import java.util.function.Consumer;

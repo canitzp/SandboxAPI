@@ -1,12 +1,11 @@
-package org.sandboxpowered.sandbox.api.content.resource;
+package org.sandboxpowered.api.content.resource;
 
-import org.sandboxpowered.sandbox.api.block.Block;
-import org.sandboxpowered.sandbox.api.block.Blocks;
-import org.sandboxpowered.sandbox.api.content.resource.vanilla.VanillaResource;
-import org.sandboxpowered.sandbox.api.fluid.Fluid;
-import org.sandboxpowered.sandbox.api.item.Item;
-import org.sandboxpowered.sandbox.api.item.Items;
-import org.sandboxpowered.sandbox.api.util.Identity;
+import org.sandboxpowered.api.block.Block;
+import org.sandboxpowered.api.block.Blocks;
+import org.sandboxpowered.api.fluid.Fluid;
+import org.sandboxpowered.api.item.Item;
+import org.sandboxpowered.api.item.Items;
+import org.sandboxpowered.api.util.Identity;
 
 import java.util.HashMap;
 import java.util.Map;

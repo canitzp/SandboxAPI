@@ -1,18 +1,18 @@
-package org.sandboxpowered.sandbox.api.content.resource.supplier;
+package org.sandboxpowered.api.content.resource.supplier;
 
-import org.sandboxpowered.sandbox.api.block.Blocks;
-import org.sandboxpowered.sandbox.api.fluid.BaseFluid;
-import org.sandboxpowered.sandbox.api.fluid.Fluid;
-import org.sandboxpowered.sandbox.api.fluid.Fluids;
-import org.sandboxpowered.sandbox.api.item.Item;
-import org.sandboxpowered.sandbox.api.item.Items;
-import org.sandboxpowered.sandbox.api.state.BlockState;
-import org.sandboxpowered.sandbox.api.state.FluidState;
-import org.sandboxpowered.sandbox.api.util.Identity;
+import org.sandboxpowered.api.block.Blocks;
+import org.sandboxpowered.api.fluid.BaseFluid;
+import org.sandboxpowered.api.fluid.Fluid;
+import org.sandboxpowered.api.fluid.Fluids;
+import org.sandboxpowered.api.item.Item;
+import org.sandboxpowered.api.item.Items;
+import org.sandboxpowered.api.state.BlockState;
+import org.sandboxpowered.api.state.FluidState;
+import org.sandboxpowered.api.util.Identity;
 
 import java.util.function.Supplier;
 
-public class FluidSuppliers {
+public final class FluidSuppliers {
 	public static Supplier<Fluid> VIRTUAL_FLUID = VirtualFluid::new;
 
 	//TODO: move elsewhere? helpful/necessary?
