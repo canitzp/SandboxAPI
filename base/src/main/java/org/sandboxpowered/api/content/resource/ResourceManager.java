@@ -10,7 +10,7 @@ import org.sandboxpowered.api.util.Identity;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResourceManager {
+public final class ResourceManager {
 	private static final Map<String, Resource> TYPES = new HashMap<>();
 
 	public static Resource requestResource(String source, ResourceRequest request) {
@@ -46,6 +46,8 @@ public class ResourceManager {
 		appendGold();
 		appendDiamond();
 	}
+
+	private ResourceManager() { }
 
 	static {
 		appendIron();

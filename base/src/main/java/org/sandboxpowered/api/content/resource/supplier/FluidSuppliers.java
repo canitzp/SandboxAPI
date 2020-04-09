@@ -13,7 +13,12 @@ import org.sandboxpowered.api.util.Identity;
 import java.util.function.Supplier;
 
 public final class FluidSuppliers {
+	/**
+	 * A fluid that only exists in tanks and buckets, without in-world logic.
+	 */
 	public static Supplier<Fluid> VIRTUAL_FLUID = VirtualFluid::new;
+
+	private FluidSuppliers() { }
 
 	//TODO: move elsewhere? helpful/necessary?
 	private static class VirtualFluid extends BaseFluid {
