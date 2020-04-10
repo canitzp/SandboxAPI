@@ -35,23 +35,35 @@ public final class ResourceBuilder {
 	}
 
 	public static ResourceBuilder ofMetal(String resourceName) {
-		return new ResourceBuilder(resourceName).withIngot().withIngredients().withBlock();
+		return new ResourceBuilder(resourceName).withItem(ResourceType.INGOT).withIngredients().withBlock(ResourceType.BLOCK);
+	}
+
+	public static ResourceBuilder ofMetal(String resourceName, Supplier<Block> blockSupplier, Supplier<Block> oreSupplier) {
+		return ofMetal(resourceName).withBlockSupplier(blockSupplier).withOreSupplier(oreSupplier);
 	}
 
 	public static ResourceBuilder ofMachiningMetal(String resourceName) {
 		return ofMetal(resourceName).withMachineParts();
 	}
 
+	public static ResourceBuilder ofMachiningMetal(String resourceName, Supplier<Block> blockSupplier, Supplier<Block> oreSupplier) {
+		return ofMachiningMetal(resourceName).withBlockSupplier(blockSupplier).withOreSupplier(oreSupplier);
+	}
+
 	public static ResourceBuilder ofGem(String resourceName) {
-		return new ResourceBuilder(resourceName).withBaseItem().withBlock();
+		return new ResourceBuilder(resourceName).withItem(ResourceType.BASE).withBlock(ResourceType.BLOCK);
+	}
+
+	public static ResourceBuilder ofGem(String resourceName, Supplier<Block> blockSupplier, Supplier<Block> oreSupplier) {
+		return ofGem(resourceName).withBlock(ResourceType.BLOCK).withBlockSupplier(blockSupplier).withOreSupplier(oreSupplier);
 	}
 
 	public static ResourceBuilder ofBlock(String resourceName, Supplier<Block> supplier) {
-		return new ResourceBuilder(resourceName).withBlockSupplier(supplier).withBlock();
+		return new ResourceBuilder(resourceName).withBlockSupplier(supplier).withBlock(ResourceType.BLOCK);
 	}
 
 	public static ResourceBuilder ofFluid(String resourceName, Supplier<Fluid> supplier) {
-		return new ResourceBuilder(resourceName).withFluidSupplier(supplier).withBaseFluid();
+		return new ResourceBuilder(resourceName).withFluidSupplier(supplier).withFluid(ResourceType.BASE);
 	}
 
 	public ResourceBuilder withBlockSupplier(Supplier<Block> supplier) {
@@ -70,100 +82,51 @@ public final class ResourceBuilder {
 	}
 
 	public ResourceBuilder withMachineParts() {
-		return this.withGear().withPlate();
+		return this.withItem(ResourceType.GEAR).withItem(ResourceType.PLATE);
 	}
 
 	public ResourceBuilder withIngredients() {
-		return this.withDust().withNugget();
+		return this.withItem(ResourceType.DUST).withItem(ResourceType.NUGGET);
 	}
 
 	public ResourceBuilder withAllOres() {
-		return this.withOverworldOre().withNetherOre().withEndOre();
-	}
-
-	public ResourceBuilder withBaseItem() {
-		items.add(ResourceType.BASE);
-		return this;
-	}
-
-	public ResourceBuilder withIngot() {
-		items.add(ResourceType.INGOT);
-		return this;
-	}
-
-	public ResourceBuilder withDust() {
-		items.add(ResourceType.DUST);
-		return this;
-	}
-
-	public ResourceBuilder withNugget() {
-		items.add(ResourceType.NUGGET);
-		return this;
-	}
-
-	public ResourceBuilder withGear() {
-		items.add(ResourceType.GEAR);
-		return this;
-	}
-
-	public ResourceBuilder withPlate() {
-		items.add(ResourceType.PLATE);
-		return this;
+		return this.withOre(ResourceType.ORE).withOre(ResourceType.NETHER_ORE).withOre(ResourceType.END_ORE);
 	}
 
 	//TODO: tools, armor
 
-	public ResourceBuilder withCustomItem(ResourceType type, Supplier<Item> supplier) {
+	public ResourceBuilder withItem(ResourceType type) {
+		items.add(type);
+		return this;
+	}
+
+	public ResourceBuilder withItem(ResourceType type, Supplier<Item> supplier) {
 		customItems.put(type, supplier);
 		return this;
 	}
 
-	public ResourceBuilder withBaseBlock() {
-		blocks.add(ResourceType.BASE);
-		return this;
-	}
 
-	public ResourceBuilder withBlock() {
-		blocks.add(ResourceType.BLOCK);
-		return this;
-	}
-
-	public ResourceBuilder withOverworldOre() {
-		ores.add(ResourceType.ORE);
-		return this;
-	}
-
-	public ResourceBuilder withNetherOre() {
-		ores.add(ResourceType.NETHER_ORE);
-		return this;
-	}
-
-	public ResourceBuilder withEndOre() {
-		ores.add(ResourceType.END_ORE);
-		return this;
-	}
-
-	public ResourceBuilder withCustomBlock(ResourceType type, Supplier<Block> supplier) {
-		customBlocks.put(type, supplier);
-		return this;
-	}
-
-	public ResourceBuilder withCustomBlock(ResourceType type) {
+	public ResourceBuilder withBlock(ResourceType type) {
 		blocks.add(type);
 		return this;
 	}
 
-	public ResourceBuilder withCustomOre(ResourceType type) {
+	public ResourceBuilder withOre(ResourceType type) {
 		ores.add(type);
 		return this;
 	}
 
-	public ResourceBuilder withBaseFluid() {
-		fluids.add(ResourceType.BASE);
+	public ResourceBuilder withBlock(ResourceType type, Supplier<Block> supplier) {
+		customBlocks.put(type, supplier);
 		return this;
 	}
 
-	public ResourceBuilder withCustomFluid(ResourceType type, Supplier<Fluid> supplier) {
+	public ResourceBuilder withFluid(ResourceType type) {
+		fluids.add(type);
+		return this;
+	}
+
+	public ResourceBuilder withFluid(ResourceType type, Supplier<Fluid> supplier) {
 		customFluids.put(type, supplier);
 		return this;
 	}
@@ -173,13 +136,13 @@ public final class ResourceBuilder {
 		Map<ResourceType, Supplier<Block>> blockSuppliers = new HashMap<>();
 		Map<ResourceType, Supplier<Fluid>> fluidSuppliers = new HashMap<>();
 		for (ResourceType item : items) {
-			itemSuppliers.put(item, () -> new BaseItem(new Item.Settings())); //TODO: item group
+			itemSuppliers.put(item, () -> new BaseItem(new Item.Settings())); //TODO: item group?
 		}
 		for (ResourceType block : blocks) {
-			blockSuppliers.put(block, blockSupplier);
+			blockSuppliers.put(block, blockSupplier); //TODO: block items?
 		}
 		for (ResourceType ore : ores) {
-			blockSuppliers.put(ore, oreSupplier);
+			blockSuppliers.put(ore, oreSupplier); //TODO: block items?
 		}
 		for (ResourceType fluid : fluids) {
 			fluidSuppliers.put(fluid, fluidSupplier);
