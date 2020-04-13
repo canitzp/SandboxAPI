@@ -13,6 +13,7 @@ import com.github.zafarkhaja.semver.expr.ExpressionParser;
 
 import org.sandboxpowered.api.addon.Addon;
 import org.sandboxpowered.api.addon.AddonInfo;
+import org.sandboxpowered.api.content.resource.ResourceManager;
 import org.sandboxpowered.api.registry.Registrar;
 import org.sandboxpowered.api.util.Identity;
 import org.sandboxpowered.api.util.annotation.Internal;
@@ -69,9 +70,11 @@ public interface Sandbox {
 			try {
 				addon.register(registrar);
 			} catch (Exception e) {
-				throw new RuntimeException(String.format("Initialization for addon %s failed: %s", info.getId(), e.getMessage()), e);
+				throw new RuntimeException(String.format("Registration for addon %s failed: %s", info.getId(), e.getMessage()), e);
 			}
 		});
+		//now that all addons have done registration, we can safely register the requested resources!
+		ResourceManager.register();
 	}
 
 	//TODO: does this properly prevent circular dependencies while satisfying everything?
