@@ -14,6 +14,8 @@ public interface ReadableCompoundTag extends Tag {
 
     boolean contains(String key);
 
+    boolean contains(String key, NbtType type);
+
     int getInt(String key);
 
     int[] getIntArray(String key);

@@ -1,13 +1,16 @@
 package org.sandboxpowered.api.item;
 
+import org.sandboxpowered.api.entity.Arm;
 import org.sandboxpowered.api.entity.Entity;
 import org.sandboxpowered.api.entity.LivingEntity;
 import org.sandboxpowered.api.entity.player.Hand;
 import org.sandboxpowered.api.entity.player.PlayerEntity;
 import org.sandboxpowered.api.state.BlockState;
 import org.sandboxpowered.api.util.Color;
+import org.sandboxpowered.api.util.Identity;
 import org.sandboxpowered.api.util.ItemUse;
 import org.sandboxpowered.api.util.ObjectInteractionResult;
+import org.sandboxpowered.api.util.nbt.NbtType;
 import org.sandboxpowered.api.world.World;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.content.Content;
@@ -18,7 +21,10 @@ import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.util.text.Text;
 
 import javax.annotation.Nullable;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 public interface Item extends Content<Item> {
@@ -81,10 +87,11 @@ public interface Item extends Content<Item> {
 
     class Settings {
         private int stackSize = 64;
-        private int maxDamage;
+        private int maxDamage = 0;
         //TODO: make recipe-aware once we implement recipes, probably make a separate interface
-        private Function<ItemStack, ItemStack> recipeRemainder;
-        private ItemProperty displayedProperty;
+        private Function<ItemStack, ItemStack> recipeRemainder = stack -> ItemStack.empty();
+        private Map<Identity, ItemProperty> properties = new HashMap<>();
+        private MeteredItemProperty meterProperty;
         //TODO, rarity, food component(should that be a Component<X>?)
 
         public Settings() {
@@ -97,15 +104,25 @@ public interface Item extends Content<Item> {
         public Settings setMaxDamage(int maxDamage) {
             this.maxDamage = maxDamage;
             this.stackSize = 1;
+            return this.setMeterProperty(Identity.of("damage"), DAMAGE);
+        }
+
+        public Map<Identity, ItemProperty> getProperties() {
+            return properties;
+        }
+
+        public Settings addProperty(Identity id, ItemProperty property) {
+            properties.put(id, property);
             return this;
         }
 
-        public ItemProperty getDisplayedProperty() {
-            return displayedProperty;
+        public ItemProperty getMeterProperty() {
+            return meterProperty;
         }
 
-        public void setDisplayedProperty(ItemProperty displayedProperty) {
-            this.displayedProperty = displayedProperty;
+        public Settings setMeterProperty(Identity id, MeteredItemProperty property) {
+            this.meterProperty = property;
+            return this.addProperty(id, property);
         }
 
         public int getStackSize() {
@@ -136,34 +153,30 @@ public interface Item extends Content<Item> {
         }
     }
 
-    //TODO: better name? better location?
     interface ItemProperty {
-        int getCurrentValue(ItemStack stack);
-        int getMaxValue(ItemStack stack);
-        boolean displayBar(ItemStack stack);
-        Color getBarColor(ItemStack stack, int currentValue, int maxValue);
+        float getCurrentValue(ItemStack stack, World world, @Nullable LivingEntity holder);
     }
 
-    class DamageItemProperty implements ItemProperty{
-        @Override
-        public int getCurrentValue(ItemStack stack) {
-            return stack.getDamage();
+    interface MeteredItemProperty extends ItemProperty {
+        default boolean displayMeter(ItemStack stack, World world, @Nullable LivingEntity holder) {
+            return getCurrentValue(stack, world, holder) != 1f;
         }
-
-        @Override
-        public int getMaxValue(ItemStack stack) {
-            return stack.getMaxDamage();
-        }
-
-        @Override
-        public boolean displayBar(ItemStack stack) {
-            return stack.getDamage() != stack.getMaxDamage();
-        }
-
-        @Override
-        public Color getBarColor(ItemStack stack, int currentValue, int maxValue) {
-            float percent = Math.max(0.0F, ((float) maxValue - (float) currentValue) / (float) maxValue);
-            return Color.fromHsv(percent / 3.0F, 1.0F, 1.0F);
+        default Color getMeterColor(ItemStack stack, World world, @Nullable LivingEntity holder) {
+            return Color.fromHsv(getCurrentValue(stack, world, holder) / 3F, 1F, 1.0F);
         }
     }
+
+    MeteredItemProperty DAMAGE = (stack, world, holder) -> (stack.getMaxDamage() - stack.getDamage()) / (float) stack.getMaxDamage();
+    ItemProperty DAMAGED = (stack, world, holder) -> stack.getDamage() > 0? 1F : 0F;
+    ItemProperty LEFT_HANDED = (stack, world, holder) -> {
+        if (holder == null) return 0F;
+        return holder.getDominantArm() == Arm.LEFT? 1F: 0F;
+    };
+    ItemProperty CUSTOM_MODEL_DATA = (stack, world, holder) -> {
+        if (!stack.hasTag()) return 0F;
+        if (!stack.getTag().contains("CustomModelData", NbtType.INT)) return 0F;
+        return (float) stack.getTag().getInt("CustomModelData");
+    };
+    //TODO: cooldown
+
 }

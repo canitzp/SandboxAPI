@@ -7,4 +7,6 @@ public interface LivingEntity extends Entity {
     float getHealth();
 
     void setHealth(float health);
+
+    Arm getDominantArm();
 }
