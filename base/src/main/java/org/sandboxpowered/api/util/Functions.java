@@ -10,7 +10,6 @@ import org.sandboxpowered.api.registry.Registry;
 import org.sandboxpowered.api.server.Server;
 import org.sandboxpowered.api.state.Property;
 import org.sandboxpowered.api.util.annotation.Internal;
-import org.sandboxpowered.api.util.math.ChunkPlacement;
 import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.util.math.Vec3i;
 import org.sandboxpowered.api.util.nbt.CompoundTag;

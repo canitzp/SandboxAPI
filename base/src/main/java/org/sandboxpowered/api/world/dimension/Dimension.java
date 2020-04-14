@@ -2,9 +2,9 @@ package org.sandboxpowered.api.world.dimension;
 
 import org.sandboxpowered.api.content.Content;
 import org.sandboxpowered.api.registry.Registry;
-import org.sandboxpowered.api.util.math.ChunkPlacement;
 import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.util.math.Vec3d;
+import org.sandboxpowered.api.util.math.Vec3i;
 import org.sandboxpowered.api.world.World;
 import org.sandboxpowered.api.world.border.WorldBorder;
 import org.sandboxpowered.api.world.gen.chunk.ChunkGenerator;
@@ -72,7 +72,7 @@ public interface Dimension {
     ChunkGenerator<?> createChunkGenerator();
 
     @Nullable
-    Position getSpawningBlockInChunk(ChunkPlacement chunk, boolean checkMobSpawnValidity);
+    Position getSpawningBlockInChunk(/*Replace with Chunk once possible*/ Vec3i chunk, boolean checkMobSpawnValidity);
 
     @Nullable
     Position getTopSpawningBlockPosition(int x, int z, boolean checkMobSpawnValidity);
