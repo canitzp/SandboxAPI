@@ -5,7 +5,6 @@ import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.world.biome.Biome;
 
 public interface BiomeAccess {
-
     default BiomeAccess create(Storage storage, long seed, Type type) {
         return Functions.getInstance().createBiomeAccess(storage, seed, type);
     }

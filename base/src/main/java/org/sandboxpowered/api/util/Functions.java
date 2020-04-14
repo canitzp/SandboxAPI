@@ -63,8 +63,6 @@ public interface Functions {
 
     Position.Mutable createMutablePosition(int x, int y, int z);
 
-    ChunkPlacement createChunkPos(int x, int z);
-
     BiomeAccess createBiomeAccess(BiomeAccess.Storage storage, long seed, BiomeAccess.Type type);
 
     <T> Component<T> componentFunction(Class<T> c);
