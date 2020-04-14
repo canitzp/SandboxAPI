@@ -10,6 +10,7 @@ import org.sandboxpowered.api.registry.Registry;
 import org.sandboxpowered.api.server.Server;
 import org.sandboxpowered.api.state.Property;
 import org.sandboxpowered.api.util.annotation.Internal;
+import org.sandboxpowered.api.util.math.ChunkPlacement;
 import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.util.math.Vec3i;
 import org.sandboxpowered.api.util.nbt.CompoundTag;
@@ -60,6 +61,8 @@ public interface Functions {
     Position createPosition(int x, int y, int z);
 
     Position.Mutable createMutablePosition(int x, int y, int z);
+
+    ChunkPlacement createChunkPos(int x, int z);
 
     <T> Component<T> componentFunction(Class<T> c);
 
