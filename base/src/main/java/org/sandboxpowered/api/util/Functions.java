@@ -20,6 +20,7 @@ import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.content.Content;
 import org.sandboxpowered.api.fluid.Fluid;
 import org.sandboxpowered.api.fluid.FluidStack;
+import org.sandboxpowered.api.world.biome.source.BiomeAccess;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
@@ -63,6 +64,8 @@ public interface Functions {
     Position.Mutable createMutablePosition(int x, int y, int z);
 
     ChunkPlacement createChunkPos(int x, int z);
+
+    BiomeAccess createBiomeAccess(BiomeAccess.Storage storage, long seed, BiomeAccess.Type type);
 
     <T> Component<T> componentFunction(Class<T> c);
 

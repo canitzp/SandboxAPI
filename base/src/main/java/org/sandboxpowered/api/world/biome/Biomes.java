@@ -1,0 +1,87 @@
+package org.sandboxpowered.api.world.biome;
+
+import org.sandboxpowered.api.registry.Registry;
+import org.sandboxpowered.api.util.Identity;
+
+public class Biomes {
+    public static final Registry.Entry<Biome> OCEAN = get("ocean");
+    //public static final Registry.Entry<Biome> DEFAULT = OCEAN;
+    public static final Registry.Entry<Biome> PLAINS = get("plains");
+    public static final Registry.Entry<Biome> DESERT = get("desert");
+    public static final Registry.Entry<Biome> MOUNTAINS = get("mountains");
+    public static final Registry.Entry<Biome> FOREST = get("forest");
+    public static final Registry.Entry<Biome> TAIGA = get("taiga");
+    public static final Registry.Entry<Biome> SWAMP = get("swamp");
+    public static final Registry.Entry<Biome> RIVER = get("river");
+    public static final Registry.Entry<Biome> NETHER = get("nether");
+    public static final Registry.Entry<Biome> THE_END = get("the_end");
+    public static final Registry.Entry<Biome> FROZEN_OCEAN = get("frozen_ocean");
+    public static final Registry.Entry<Biome> FROZEN_RIVER = get("frozen_river");
+    public static final Registry.Entry<Biome> SNOWY_TUNDRA = get("snowy_tundra");
+    public static final Registry.Entry<Biome> SNOWY_MOUNTAINS = get("snowy_mountains");
+    public static final Registry.Entry<Biome> MUSHROOM_FIELDS = get("mushroom_fields");
+    public static final Registry.Entry<Biome> MUSHROOM_FIELD_SHORE = get("mushroom_field_shore");
+    public static final Registry.Entry<Biome> BEACH = get("beach");
+    public static final Registry.Entry<Biome> DESERT_HILLS = get("desert_hills");
+    public static final Registry.Entry<Biome> WOODED_HILLS = get("wooded_hills");
+    public static final Registry.Entry<Biome> TAIGA_HILLS = get("taiga_hills");
+    public static final Registry.Entry<Biome> MOUNTAIN_EDGE = get("mountain_edge");
+    public static final Registry.Entry<Biome> JUNGLE = get("jungle");
+    public static final Registry.Entry<Biome> JUNGLE_HILLS = get("jungle_hills");
+    public static final Registry.Entry<Biome> JUNGLE_EDGE = get("jungle_edge");
+    public static final Registry.Entry<Biome> DEEP_OCEAN = get("deep_ocean");
+    public static final Registry.Entry<Biome> STONE_SHORE = get("stone_shore");
+    public static final Registry.Entry<Biome> SNOWY_BEACH = get("snowy_beach");
+    public static final Registry.Entry<Biome> BIRCH_FOREST = get("birch_forest");
+    public static final Registry.Entry<Biome> BIRCH_FOREST_HILLS = get("birch_forest_hills");
+    public static final Registry.Entry<Biome> DARK_FOREST = get("dark_forest");
+    public static final Registry.Entry<Biome> SNOWY_TAIGA = get("snowy_taiga");
+    public static final Registry.Entry<Biome> SNOWY_TAIGA_HILLS = get("snowy_taiga_hills");
+    public static final Registry.Entry<Biome> GIANT_TREE_TAIGA = get("giant_tree_taiga");
+    public static final Registry.Entry<Biome> GIANT_TREE_TAIGA_HILLS = get("giant_tree_taiga_hills");
+    public static final Registry.Entry<Biome> WOODED_MOUNTAINS = get("wooded_mountains");
+    public static final Registry.Entry<Biome> SAVANNA = get("savanna");
+    public static final Registry.Entry<Biome> SAVANNA_PLATEAU = get("savanna_plateau");
+    public static final Registry.Entry<Biome> BADLANDS = get("badlands");
+    public static final Registry.Entry<Biome> WOODED_BADLANDS_PLATEAU = get("wooded_badlands_plateau");
+    public static final Registry.Entry<Biome> BADLANDS_PLATEAU = get("badlands_plateau");
+    public static final Registry.Entry<Biome> SMALL_END_ISLANDS = get("small_end_islands");
+    public static final Registry.Entry<Biome> END_MIDLANDS = get("end_midlands");
+    public static final Registry.Entry<Biome> END_HIGHLANDS = get("end_highlands");
+    public static final Registry.Entry<Biome> END_BARRENS = get("end_barrens");
+    public static final Registry.Entry<Biome> WARM_OCEAN = get("warm_ocean");
+    public static final Registry.Entry<Biome> LUKEWARM_OCEAN = get("lukewarm_ocean");
+    public static final Registry.Entry<Biome> COLD_OCEAN = get("cold_ocean");
+    public static final Registry.Entry<Biome> DEEP_WARM_OCEAN = get("deep_warm_ocean");
+    public static final Registry.Entry<Biome> DEEP_LUKEWARM_OCEAN = get("deep_lukewarm_ocean");
+    public static final Registry.Entry<Biome> DEEP_COLD_OCEAN = get("deep_cold_ocean");
+    public static final Registry.Entry<Biome> DEEP_FROZEN_OCEAN = get("deep_frozen_ocean");
+    public static final Registry.Entry<Biome> THE_VOID = get("the_void");
+    public static final Registry.Entry<Biome> SUNFLOWER_PLAINS = get("sunflower_plains");
+    public static final Registry.Entry<Biome> DESERT_LAKES = get("desert_lakes");
+    public static final Registry.Entry<Biome> GRAVELLY_MOUNTAINS = get("gravelly_mountains");
+    public static final Registry.Entry<Biome> FLOWER_FOREST = get("flower_forest");
+    public static final Registry.Entry<Biome> TAIGA_MOUNTAINS = get("taiga_mountains");
+    public static final Registry.Entry<Biome> SWAMP_HILLS = get("swamp_hills");
+    public static final Registry.Entry<Biome> ICE_SPIKES = get("ice_spikes");
+    public static final Registry.Entry<Biome> MODIFIED_JUNGLE = get("modified_jungle");
+    public static final Registry.Entry<Biome> MODIFIED_JUNGLE_EDGE = get("modified_jungle_edge");
+    public static final Registry.Entry<Biome> TALL_BIRCH_FOREST = get("tall_birch_forest");
+    public static final Registry.Entry<Biome> TALL_BIRCH_HILLS = get("tall_birch_hills");
+    public static final Registry.Entry<Biome> DARK_FOREST_HILLS = get("dark_forest_hills");
+    public static final Registry.Entry<Biome> SNOWY_TAIGA_MOUNTAINS = get("snowy_taiga_mountains");
+    public static final Registry.Entry<Biome> GIANT_SPRUCE_TAIGA = get("giant_spruce_taiga");
+    public static final Registry.Entry<Biome> GIANT_SPRUCE_TAIGA_HILLS = get("giant_spruce_taiga_hills");
+    public static final Registry.Entry<Biome> MODIFIED_GRAVELLY_MOUNTAINS = get("modified_gravelly_mountains");
+    public static final Registry.Entry<Biome> SHATTERED_SAVANNA = get("shattered_savanna");
+    public static final Registry.Entry<Biome> SHATTERED_SAVANNA_PLATEAU = get("shattered_savanna_plateau");
+    public static final Registry.Entry<Biome> ERODED_BADLANDS = get("eroded_badlands");
+    public static final Registry.Entry<Biome> MODIFIED_WOODED_BADLANDS_PLATEAU = get("modified_wooded_badlands_plateau");
+    public static final Registry.Entry<Biome> MODIFIED_BADLANDS_PLATEAU = get("modified_badlands_plateau");
+    public static final Registry.Entry<Biome> BAMBOO_JUNGLE = get("bamboo_jungle");
+    public static final Registry.Entry<Biome> BAMBOO_JUNGLE_HILLS = get("bamboo_jungle_hills");
+
+    private static Registry.Entry<Biome> get(String name) {
+        return Biome.REGISTRY.get(Identity.of("minecraft", name));
+    }
+}
