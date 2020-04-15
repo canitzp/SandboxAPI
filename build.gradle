@@ -5,7 +5,7 @@ plugins {
 def ENV = System.getenv()
 
 allprojects {
-    def buildNumber = ENV.TRAVIS_BUILD_NUMBER
+    def buildNumber = ENV.BUILD_NUMBER
     version = "${project.api_version}.${buildNumber ?: "0"}"
     group = project.maven_group
 }
