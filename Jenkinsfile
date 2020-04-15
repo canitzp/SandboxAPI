@@ -9,7 +9,7 @@ pipeline {
 
     stage('Archive') {
       steps {
-        archiveArtifacts(onlyIfSuccessful: true, fingerprint: true, artifacts: 'build/libs/*')
+        archiveArtifacts(onlyIfSuccessful: true, fingerprint: true, artifacts: '**/build/libs/*')
       }
     }
 
