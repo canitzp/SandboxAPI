@@ -2,6 +2,7 @@ package org.sandboxpowered.api.world.dimension;
 
 import org.sandboxpowered.api.content.Content;
 import org.sandboxpowered.api.registry.Registry;
+import org.sandboxpowered.api.util.Color;
 import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.util.math.Vec3d;
 import org.sandboxpowered.api.util.math.Vec3i;
@@ -19,20 +20,14 @@ public interface Dimension {
         return (int) (time / 24000L % 8L + 8L) % 8;
     }
 
-    default float[] getBackgroundColor(float skyAngle, float tickDelta) {
+    default Color getBackgroundColor(float skyAngle, float tickDelta) {
         float f = 0.4F;
-        float g = (float) Math.cos(skyAngle * 6.2831855F) - 0.0F;
-        float h = -0.0F;
-        if (g >= -0.4F && g <= 0.4F) {
-            float i = (g - -0.0F) / 0.4F * 0.5F + 0.5F;
-            float j = 1.0F - (1.0F - (float) Math.sin(i * 3.1415927F)) * 0.99F;
+        float g = (float) Math.cos(skyAngle * Math.PI * 2);
+        if (g >= -f && g <= f) {
+            float i = g / f * 0.5F + 0.5F;
+            float j = 1.0F - (1.0F - (float) Math.sin(i * Math.PI)) * 0.99F;
             j *= j;
-            float[] backgroundColor = new float[4];
-            backgroundColor[0] = i * 0.3F + 0.7F;
-            backgroundColor[1] = i * i * 0.7F + 0.2F;
-            backgroundColor[2] = i * i * 0.0F + 0.2F;
-            backgroundColor[3] = j;
-            return backgroundColor;
+            return new Color(i * 0.3F + 0.7F, i * i * 0.7F + 0.2F, i * i * 0.0F + 0.2F, j);
         } else {
             return null;
         }
@@ -81,7 +76,11 @@ public interface Dimension {
 
     boolean hasVisibleSky();
 
-    Vec3d getFogColor(float skyAngle, float tickDelta);
+    Color getGrassColor(Position position);
+
+    Color getFoliageColor(Position position);
+
+    Color getFogColor(float skyAngle, float tickDelta);
 
     boolean canPlayersSleep();
 
