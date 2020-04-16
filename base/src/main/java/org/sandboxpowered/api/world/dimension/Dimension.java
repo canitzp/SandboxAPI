@@ -8,6 +8,7 @@ import org.sandboxpowered.api.util.math.Vec3d;
 import org.sandboxpowered.api.util.math.Vec3i;
 import org.sandboxpowered.api.world.World;
 import org.sandboxpowered.api.world.border.WorldBorder;
+import org.sandboxpowered.api.world.gen.chunk.Chunk;
 import org.sandboxpowered.api.world.gen.chunk.ChunkGenerator;
 
 import javax.annotation.Nullable;
@@ -67,7 +68,7 @@ public interface Dimension {
     ChunkGenerator<?> createChunkGenerator();
 
     @Nullable
-    Position getSpawningBlockInChunk(/*Replace with Chunk once possible*/ Vec3i chunk, boolean checkMobSpawnValidity);
+    Position getSpawningBlockInChunk(Chunk chunk, boolean checkMobSpawnValidity);
 
     @Nullable
     Position getTopSpawningBlockPosition(int x, int z, boolean checkMobSpawnValidity);
