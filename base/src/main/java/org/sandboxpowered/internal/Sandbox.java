@@ -17,10 +17,6 @@ import java.util.*;
 public interface Sandbox {
     Parser<Expression> PARSER = ExpressionParser.newInstance();
 
-    static Sandbox getSandbox() {
-        throw new IllegalStateException("No Sandbox instance is defined! Please report this!");
-    }
-
     Identity getPlatform();
 
     Optional<AddonInfo> getAddon(String addonId);

@@ -32,6 +32,7 @@ module sandbox.base {
     exports org.sandboxpowered.api.util.math;
     exports org.sandboxpowered.api.util.nbt;
     exports org.sandboxpowered.api.util.text;
+    exports org.sandboxpowered.api.world;
 
     exports org.sandboxpowered.internal to
             sandbox.rendering,
