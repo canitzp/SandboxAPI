@@ -29,7 +29,7 @@ public interface Functions {
 
     @NotNull
     static Functions getInstance() {
-        throw new IllegalStateException("No functions defined, this is a bug.");
+        return org.sandboxpowered.internal.Internal.loadFunctions();
     }
 
     Identity createIdentityFromString(String identity);

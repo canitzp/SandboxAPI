@@ -6,6 +6,8 @@ module sandbox.base {
     requires java.semver;
     requires guava;
 
+    uses org.sandboxpowered.internal.Functions;
+
     exports org.sandboxpowered.api;
     exports org.sandboxpowered.api.addon;
     exports org.sandboxpowered.api.block;
