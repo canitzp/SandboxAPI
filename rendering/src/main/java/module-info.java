@@ -1,4 +1,4 @@
-module sandbox.rendering.universal {
+module sandbox.rendering {
     requires transitive sandbox.base;
 
     uses org.sandboxpowered.api.client.render.RenderPipeline;
