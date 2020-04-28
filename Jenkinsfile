@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'openjdk:14.0.1-slim'
+    }
+
+  }
   stages {
     stage('Build') {
       steps {
