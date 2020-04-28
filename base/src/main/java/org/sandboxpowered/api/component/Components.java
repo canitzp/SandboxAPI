@@ -1,6 +1,6 @@
 package org.sandboxpowered.api.component;
 
-import org.sandboxpowered.api.util.Functions;
+import org.sandboxpowered.internal.Functions;
 
 public class Components {
     public static final Component<Inventory> INVENTORY_COMPONENT = get(Inventory.class);

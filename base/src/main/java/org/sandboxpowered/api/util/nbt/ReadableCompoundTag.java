@@ -1,7 +1,7 @@
 package org.sandboxpowered.api.util.nbt;
 
-import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.util.Identity;
+import org.sandboxpowered.api.util.math.Position;
 
 import java.util.Collection;
 import java.util.List;

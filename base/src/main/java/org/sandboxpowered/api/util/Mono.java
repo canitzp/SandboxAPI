@@ -1,7 +1,8 @@
 package org.sandboxpowered.api.util;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -27,7 +28,7 @@ public class Mono<T> {
         return mono;
     }
 
-    public static <T> Mono<T> of(@Nonnull T value) {
+    public static <T> Mono<T> of(@NotNull T value) {
         return new Mono<>(value);
     }
 

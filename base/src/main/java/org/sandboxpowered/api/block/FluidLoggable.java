@@ -1,16 +1,15 @@
 package org.sandboxpowered.api.block;
 
-import org.sandboxpowered.api.state.BlockState;
-import org.sandboxpowered.api.state.Properties;
-import org.sandboxpowered.api.world.WorldReader;
-import org.sandboxpowered.api.world.WorldWriter;
+import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.fluid.Fluid;
 import org.sandboxpowered.api.fluid.FluidStack;
 import org.sandboxpowered.api.fluid.Fluids;
+import org.sandboxpowered.api.state.BlockState;
+import org.sandboxpowered.api.state.Properties;
 import org.sandboxpowered.api.util.Direction;
 import org.sandboxpowered.api.util.math.Position;
-
-import javax.annotation.Nullable;
+import org.sandboxpowered.api.world.WorldReader;
+import org.sandboxpowered.api.world.WorldWriter;
 
 public interface FluidLoggable {
     default boolean canContainFluid(WorldReader world, Position position, BlockState state, Fluid fluid, @Nullable Direction direction) {

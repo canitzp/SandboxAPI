@@ -1,17 +1,15 @@
 package org.sandboxpowered.api.util.math;
 
 import org.sandboxpowered.api.util.Direction;
-import org.sandboxpowered.api.util.Functions;
-import org.sandboxpowered.api.util.PositionIterator;
+import org.sandboxpowered.internal.PositionIterator;
+import org.sandboxpowered.internal.Functions;
 
-import javax.annotation.concurrent.Immutable;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-@Immutable
 public interface Position extends Vec3i {
     Position ZERO = create(0, 0, 0);
 

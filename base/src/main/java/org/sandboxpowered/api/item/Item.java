@@ -1,6 +1,6 @@
 package org.sandboxpowered.api.item;
 
-import org.sandboxpowered.api.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.content.Content;
 import org.sandboxpowered.api.registry.Registry;
@@ -8,8 +8,8 @@ import org.sandboxpowered.api.util.InteractionResult;
 import org.sandboxpowered.api.util.Mono;
 import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.util.text.Text;
+import org.sandboxpowered.api.world.World;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public interface Item extends Content<Item> {

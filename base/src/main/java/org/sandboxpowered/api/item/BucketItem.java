@@ -3,7 +3,7 @@ package org.sandboxpowered.api.item;
 import org.sandboxpowered.api.fluid.BaseFluid;
 
 public class BucketItem extends BaseItem {
-    private BaseFluid fluid;
+    private final BaseFluid fluid;
 
     public BucketItem(BaseFluid fluid, Settings settings) {
         super(settings);

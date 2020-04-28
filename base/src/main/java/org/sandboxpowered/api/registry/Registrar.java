@@ -2,9 +2,9 @@ package org.sandboxpowered.api.registry;
 
 import org.sandboxpowered.api.addon.AddonInfo;
 import org.sandboxpowered.api.content.Content;
+import org.sandboxpowered.api.content.resource.Resource;
 import org.sandboxpowered.api.content.resource.ResourceManager;
 import org.sandboxpowered.api.content.resource.ResourceRequest;
-import org.sandboxpowered.api.content.resource.Resource;
 import org.sandboxpowered.api.util.Identity;
 
 public interface Registrar {

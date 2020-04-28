@@ -1,7 +1,7 @@
 package org.sandboxpowered.api.util.text;
 
 import org.sandboxpowered.api.util.annotation.Alpha;
-import org.sandboxpowered.api.util.Functions;
+import org.sandboxpowered.internal.Functions;
 
 @Alpha
 public interface Text {

@@ -1,12 +1,14 @@
-package org.sandboxpowered.api.addon;
+package org.sandboxpowered.internal;
 
 import com.electronwill.nightconfig.core.Config;
 import com.electronwill.nightconfig.core.ConfigSpec;
 import com.github.zafarkhaja.semver.Version;
+import org.jetbrains.annotations.Nullable;
+import org.sandboxpowered.api.addon.AddonInfo;
+import org.sandboxpowered.api.addon.LoadingSide;
 import org.sandboxpowered.api.util.Identity;
 import org.sandboxpowered.api.util.annotation.Internal;
 
-import javax.annotation.Nullable;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +22,20 @@ public class AddonSpec implements AddonInfo {
     private static final Pattern MODID_PATTERN = Pattern.compile("[a-z0-9-_]{4,15}");
     private static final Predicate<String> MODID_PREDICATE = MODID_PATTERN.asPredicate();
 
+    static {
+        CONFIG_SPEC.define("id", "");
+        CONFIG_SPEC.define("version", "");
+        CONFIG_SPEC.define("title", "");
+        CONFIG_SPEC.define("description", "");
+        CONFIG_SPEC.define("entrypoint", "");
+        CONFIG_SPEC.define("authors", Collections.emptyList());
+        CONFIG_SPEC.define("url", "");
+        CONFIG_SPEC.define("dependencies", Collections.emptyMap());
+        CONFIG_SPEC.define("custom", Config.inMemoryUniversal());
+        CONFIG_SPEC.defineOfClass("side", LoadingSide.COMMON, LoadingSide.class);
+        CONFIG_SPEC.define("platforms", Collections.emptyMap());
+    }
+
     //metadata
     private final String id;
     private final Version version;
@@ -31,7 +47,6 @@ public class AddonSpec implements AddonInfo {
     private final Config customProperties;
     private final LoadingSide side;
     private final Map<String, Boolean> platforms;
-
     //internal info
     private final String mainClass;
     private final URL path;
@@ -60,14 +75,17 @@ public class AddonSpec implements AddonInfo {
     public static AddonSpec from(Config config, URL path) {
         CONFIG_SPEC.correct(config);
         String id = config.get("id");
-        if (id.equals("")) throw new IllegalArgumentException(String.format("Addon at path %s does not define an ID!", path.toString()));
+        if (id.equals(""))
+            throw new IllegalArgumentException(String.format("Addon at path %s does not define an ID!", path.toString()));
         String verString = config.get("version");
-        if (verString.equals("")) throw new IllegalArgumentException(String.format("Addon %s does not define a version!", id));
+        if (verString.equals(""))
+            throw new IllegalArgumentException(String.format("Addon %s does not define a version!", id));
         Version version = Version.valueOf(verString);
         String title = config.get("title");
         String description = config.get("description");
         String mainClass = config.get("entrypoint");
-        if (mainClass.equals("")) throw new IllegalArgumentException(String.format("Addon %s does not define an entrypoint!", id));
+        if (mainClass.equals(""))
+            throw new IllegalArgumentException(String.format("Addon %s does not define an entrypoint!", id));
         List<String> authors = config.get("authors");
         String url = config.get("url");
         Map<String, String> dependencies = config.get("dependencies");
@@ -140,19 +158,5 @@ public class AddonSpec implements AddonInfo {
     @Override
     public URL getPath() {
         return path;
-    }
-
-    static {
-        CONFIG_SPEC.define("id", "");
-        CONFIG_SPEC.define("version", "");
-        CONFIG_SPEC.define("title", "");
-        CONFIG_SPEC.define("description", "");
-        CONFIG_SPEC.define("entrypoint", "");
-        CONFIG_SPEC.define("authors", Collections.emptyList());
-        CONFIG_SPEC.define("url", "");
-        CONFIG_SPEC.define("dependencies", Collections.emptyMap());
-        CONFIG_SPEC.define("custom", Config.inMemoryUniversal());
-        CONFIG_SPEC.defineOfClass("side", LoadingSide.COMMON, LoadingSide.class);
-        CONFIG_SPEC.define("platforms", Collections.emptyMap());
     }
 }

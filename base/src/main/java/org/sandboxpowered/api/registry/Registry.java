@@ -1,8 +1,8 @@
 package org.sandboxpowered.api.registry;
 
 import org.sandboxpowered.api.content.Content;
-import org.sandboxpowered.api.util.Functions;
 import org.sandboxpowered.api.util.Identity;
+import org.sandboxpowered.internal.Functions;
 
 import java.util.Collection;
 import java.util.Optional;

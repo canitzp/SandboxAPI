@@ -1,6 +1,6 @@
 package org.sandboxpowered.api.state;
 
-import org.sandboxpowered.api.world.WorldReader;
+import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.block.Block;
 import org.sandboxpowered.api.block.Material;
 import org.sandboxpowered.api.component.Component;
@@ -9,8 +9,7 @@ import org.sandboxpowered.api.util.Mirror;
 import org.sandboxpowered.api.util.Mono;
 import org.sandboxpowered.api.util.Rotation;
 import org.sandboxpowered.api.util.math.Position;
-
-import javax.annotation.Nullable;
+import org.sandboxpowered.api.world.WorldReader;
 
 public interface BlockState extends PropertyContainer<BlockState> {
     Block getBlock();

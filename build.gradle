@@ -30,6 +30,8 @@ subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
 
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_14
+
     repositories {
         mavenCentral()
         maven { url 'https://jitpack.io' }

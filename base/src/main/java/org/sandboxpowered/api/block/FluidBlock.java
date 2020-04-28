@@ -3,7 +3,7 @@ package org.sandboxpowered.api.block;
 import org.sandboxpowered.api.fluid.BaseFluid;
 
 public class FluidBlock extends BaseBlock {
-    private BaseFluid fluid;
+    private final BaseFluid fluid;
 
     public FluidBlock(Settings settings, BaseFluid fluid) {
         super(settings);

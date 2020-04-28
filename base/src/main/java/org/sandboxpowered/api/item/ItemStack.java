@@ -1,14 +1,13 @@
 package org.sandboxpowered.api.item;
 
+import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.enchantment.Enchantment;
 import org.sandboxpowered.api.registry.Registry;
-import org.sandboxpowered.api.util.Functions;
 import org.sandboxpowered.api.util.Mono;
 import org.sandboxpowered.api.util.nbt.CompoundTag;
 import org.sandboxpowered.api.util.nbt.ReadableCompoundTag;
-
-import javax.annotation.Nullable;
+import org.sandboxpowered.internal.Functions;
 
 public interface ItemStack {
 

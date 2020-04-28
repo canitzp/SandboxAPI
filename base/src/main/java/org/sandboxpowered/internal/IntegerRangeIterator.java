@@ -1,4 +1,4 @@
-package org.sandboxpowered.api.util;
+package org.sandboxpowered.internal;
 
 import org.sandboxpowered.api.util.annotation.Internal;
 

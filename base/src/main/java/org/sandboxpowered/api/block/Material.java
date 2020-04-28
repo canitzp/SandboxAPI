@@ -1,6 +1,6 @@
 package org.sandboxpowered.api.block;
 
-import org.sandboxpowered.api.util.Functions;
+import org.sandboxpowered.internal.Functions;
 
 public interface Material {
     Material AIR = getMaterial("AIR");

@@ -1,13 +1,13 @@
 package org.sandboxpowered.api.block.entity;
 
-import org.sandboxpowered.api.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.util.Direction;
 import org.sandboxpowered.api.util.Mono;
 import org.sandboxpowered.api.util.annotation.Internal;
 import org.sandboxpowered.api.util.math.Position;
-
-import javax.annotation.Nullable;
+import org.sandboxpowered.api.world.World;
+import org.sandboxpowered.internal.BlockEntityContext;
 
 public abstract class BaseBlockEntity implements BlockEntity {
     private final Type<?> type;
