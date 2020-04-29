@@ -56,17 +56,6 @@ subprojects {
         }
     }
 
-    // Add fabric.mod.json to api modules for fabric support (for some reason we have to do this)
-    ext.genOutputDir = file("$buildDir/generated/resources")
-    task generateFabricModJson {
-        ext.outputFile = file("$genOutputDir/fabric.mod.json")
-        outputs.file(outputFile)
-        doLast {
-            outputFile.text = /{"id": "sandbox-$project.name", "version": "$project.version"}/
-        }
-    }
-    sourceSets.main.output.dir genOutputDir, builtBy: generateFabricModJson
-
     publishing {
         publications {
             mavenJava(MavenPublication) {
