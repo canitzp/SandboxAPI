@@ -42,7 +42,7 @@ subprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'org.javamodularity.moduleplugin'
 
-    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_14
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_11
 
     repositories {
         mavenCentral()
