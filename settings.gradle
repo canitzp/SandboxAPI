@@ -5,3 +5,5 @@ include 'base'
 include 'rendering'
 include 'rendering-opengl'
 include 'rendering-vulkan'
+
+include 'recipes'
