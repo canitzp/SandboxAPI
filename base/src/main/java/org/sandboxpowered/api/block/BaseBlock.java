@@ -22,6 +22,7 @@ public class BaseBlock implements Block {
     private final Settings settings;
     private Registry.Entry<Item> itemCache;
     private StateFactory<Block, BlockState> stateFactory;
+    private BlockState baseState;
 
     public BaseBlock(Settings settings) {
         this.settings = settings;
@@ -40,6 +41,11 @@ public class BaseBlock implements Block {
     @Internal
     public final void setStateFactory(StateFactory<Block, BlockState> stateFactory) {
         this.stateFactory = stateFactory;
+        this.baseState= createBaseState(stateFactory.getBaseState());
+    }
+
+    protected BlockState createBaseState(BlockState baseState) {
+        return baseState;
     }
 
     @Override
@@ -75,6 +81,6 @@ public class BaseBlock implements Block {
 
     @Override
     public final BlockState getBaseState() {
-        return stateFactory.getBaseState();
+        return baseState;
     }
 }

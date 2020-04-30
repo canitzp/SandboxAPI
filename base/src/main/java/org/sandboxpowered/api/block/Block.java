@@ -20,6 +20,7 @@ import org.sandboxpowered.api.world.WorldReader;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
+import java.util.Random;
 
 public interface Block extends ItemProvider, Content<Block> {
     Registry<Block> REGISTRY = Registry.getRegistryFromType(Block.class);
@@ -89,6 +90,9 @@ public interface Block extends ItemProvider, Content<Block> {
      */
     default BlockState updateOnNeighborChanged(BlockState state, Direction direction, BlockState otherState, World world, Position position, Position otherPosition) {
         return state;
+    }
+
+    default void randomTick(BlockState blockState, World serverWorld, Position position, Random random) {
     }
 
     /**
@@ -173,8 +177,9 @@ public interface Block extends ItemProvider, Content<Block> {
         private final Material material;
         private final float hardness, resistance, slipperiness, velocity, jumpVelocity;
         private final int luminance;
+        private final boolean randomTicks;
 
-        private Settings(Material material, float hardness, float resistance, float slipperiness, float velocity, float jumpVelocity, int luminance) {
+        private Settings(Material material, float hardness, float resistance, float slipperiness, float velocity, float jumpVelocity, int luminance, boolean randomTicks) {
             this.material = material;
             this.hardness = hardness;
             this.resistance = resistance;
@@ -182,6 +187,11 @@ public interface Block extends ItemProvider, Content<Block> {
             this.velocity = velocity;
             this.jumpVelocity = jumpVelocity;
             this.luminance = luminance;
+            this.randomTicks = randomTicks;
+        }
+
+        public boolean isRandomTicks() {
+            return randomTicks;
         }
 
         public static Builder builder(Material material) {
@@ -238,6 +248,7 @@ public interface Block extends ItemProvider, Content<Block> {
             private final Material material;
             private float hardness, resistance, slipperiness, velocity, jumpVelocity;
             private int luminance, opacity;
+            private boolean randomTicks;
 
             private Builder(Material material) {
                 this.material = material;
@@ -272,9 +283,13 @@ public interface Block extends ItemProvider, Content<Block> {
                 this.luminance = luminance;
                 return this;
             }
+            public Builder ticksRandomly() {
+                this.randomTicks=true;
+                return this;
+            }
 
             public Settings build() {
-                return new Settings(material, hardness, resistance, slipperiness, velocity, jumpVelocity, luminance);
+                return new Settings(material, hardness, resistance, slipperiness, velocity, jumpVelocity, luminance, randomTicks);
             }
         }
     }
