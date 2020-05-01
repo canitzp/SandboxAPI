@@ -1,7 +1,6 @@
 package org.sandboxpowered.api.recipes;
 
 import com.google.gson.JsonObject;
-import org.sandboxpowered.api.component.Inventory;
 import org.sandboxpowered.api.content.Content;
 import org.sandboxpowered.api.item.ItemStack;
 import org.sandboxpowered.api.registry.Registry;
@@ -12,7 +11,7 @@ import org.sandboxpowered.api.world.WorldReader;
 
 import java.util.Collection;
 
-public interface Recipe<I extends Inventory> {
+public interface Recipe<I> {
     Identity getIdentity();
 
     boolean matches(I inventory, WorldReader reader);
