@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'openjdk:14.0.1-slim'
+      image 'openjdk:11'
     }
 
   }
