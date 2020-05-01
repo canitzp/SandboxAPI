@@ -1,5 +1,8 @@
-package org.sandboxpowered.api.util;
+package org.sandboxpowered.internal;
 
+import org.sandboxpowered.api.util.annotation.Internal;
+
+@Internal
 public class PositionIterator {
     private final int startX;
     private final int startY;

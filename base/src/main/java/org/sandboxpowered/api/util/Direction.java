@@ -1,10 +1,10 @@
 package org.sandboxpowered.api.util;
 
 import com.google.common.collect.Iterators;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.util.math.Vec3i;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -244,7 +244,7 @@ public enum Direction {
         }
 
         @Override
-        @Nonnull
+        @NotNull
         public Iterator<Direction> iterator() {
             return Iterators.forArray(facingArray);
         }

@@ -1,4 +1,4 @@
-package org.sandboxpowered.api.block.entity;
+package org.sandboxpowered.internal;
 
 import org.sandboxpowered.api.util.annotation.Internal;
 import org.sandboxpowered.api.util.math.Position;

@@ -1,11 +1,10 @@
 package org.sandboxpowered.api.world;
 
 import org.sandboxpowered.api.block.Block;
+import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.entity.Entity;
 import org.sandboxpowered.api.state.BlockState;
 import org.sandboxpowered.api.util.math.Position;
-
-import javax.annotation.Nullable;
 
 public interface WorldWriter {
     boolean setBlockState(Position position, BlockState state, BlockFlag... flags);

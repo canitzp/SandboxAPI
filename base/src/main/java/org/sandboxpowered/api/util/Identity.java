@@ -1,5 +1,7 @@
 package org.sandboxpowered.api.util;
 
+import org.sandboxpowered.internal.Functions;
+
 public interface Identity {
     static Identity of(String namespace, String path) {
         return Functions.getInstance().createIdentityFromString(namespace, path);

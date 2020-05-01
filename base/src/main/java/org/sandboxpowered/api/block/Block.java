@@ -1,5 +1,6 @@
 package org.sandboxpowered.api.block;
 
+import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.block.entity.BlockEntity;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.content.Content;
@@ -18,7 +19,6 @@ import org.sandboxpowered.api.util.math.Vec3f;
 import org.sandboxpowered.api.world.World;
 import org.sandboxpowered.api.world.WorldReader;
 
-import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.Random;
 

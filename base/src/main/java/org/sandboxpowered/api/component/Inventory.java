@@ -1,7 +1,7 @@
 package org.sandboxpowered.api.component;
 
 import org.sandboxpowered.api.item.ItemStack;
-import org.sandboxpowered.api.util.IntegerRangeIterator;
+import org.sandboxpowered.internal.IntegerRangeIterator;
 
 import java.util.Iterator;
 import java.util.function.Predicate;

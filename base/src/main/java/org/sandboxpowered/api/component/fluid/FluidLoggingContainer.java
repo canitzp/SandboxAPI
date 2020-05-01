@@ -1,22 +1,22 @@
 package org.sandboxpowered.api.component.fluid;
 
-import org.sandboxpowered.api.state.BlockState;
-import org.sandboxpowered.api.world.WorldReader;
+import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.block.FluidLoggable;
 import org.sandboxpowered.api.component.FluidContainer;
 import org.sandboxpowered.api.fluid.FluidStack;
+import org.sandboxpowered.api.state.BlockState;
 import org.sandboxpowered.api.util.Direction;
 import org.sandboxpowered.api.util.math.Position;
+import org.sandboxpowered.api.world.WorldReader;
 
-import javax.annotation.Nullable;
 import java.util.function.Predicate;
 
 public class FluidLoggingContainer implements FluidContainer {
-    private FluidLoggable loggable;
-    private WorldReader world;
-    private Position pos;
-    private BlockState state;
-    private Direction direction;
+    private final FluidLoggable loggable;
+    private final WorldReader world;
+    private final Position pos;
+    private final BlockState state;
+    private final Direction direction;
 
     public FluidLoggingContainer(FluidLoggable loggable, WorldReader world, Position pos, BlockState state, @Nullable Direction direction) {
         this.loggable = loggable;

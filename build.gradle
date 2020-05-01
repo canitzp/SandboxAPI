@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.javamodularity:moduleplugin:1.6.0"
+    }
+}
+
 plugins {
     id 'java-platform'
     id 'maven-publish'
@@ -29,6 +40,9 @@ void addRepo(RepositoryHandler repositories) {
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
+    apply plugin: 'org.javamodularity.moduleplugin'
+
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_11
 
     repositories {
         mavenCentral()
@@ -41,17 +55,6 @@ subprojects {
             api project(':base')
         }
     }
-
-    // Add fabric.mod.json to api modules for fabric support (for some reason we have to do this)
-    ext.genOutputDir = file("$buildDir/generated/resources")
-    task generateFabricModJson {
-        ext.outputFile = file("$genOutputDir/fabric.mod.json")
-        outputs.file(outputFile)
-        doLast {
-            outputFile.text = /{"id": "sandbox-$project.name", "version": "$project.version"}/
-        }
-    }
-    sourceSets.main.output.dir genOutputDir, builtBy: generateFabricModJson
 
     publishing {
         publications {
@@ -71,6 +74,8 @@ dependencies {
         api project(":rendering")
         api project(":rendering-opengl")
         api project(":rendering-vulkan")
+
+        api project(":resources")
     }
 }
 

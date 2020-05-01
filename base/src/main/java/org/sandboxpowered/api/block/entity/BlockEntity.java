@@ -1,18 +1,18 @@
 package org.sandboxpowered.api.block.entity;
 
+import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.block.Block;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.content.Content;
 import org.sandboxpowered.api.util.Direction;
-import org.sandboxpowered.api.util.Functions;
 import org.sandboxpowered.api.util.Mono;
 import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.util.nbt.CompoundTag;
 import org.sandboxpowered.api.util.nbt.ReadableCompoundTag;
 import org.sandboxpowered.api.util.nbt.WritableCompoundTag;
 import org.sandboxpowered.api.world.World;
+import org.sandboxpowered.internal.Functions;
 
-import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public interface BlockEntity {

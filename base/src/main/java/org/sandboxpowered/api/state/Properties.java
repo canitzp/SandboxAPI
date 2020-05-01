@@ -1,7 +1,7 @@
 package org.sandboxpowered.api.state;
 
 import org.sandboxpowered.api.util.Direction;
-import org.sandboxpowered.api.util.Functions;
+import org.sandboxpowered.internal.Functions;
 
 public class Properties {
     public static final Property<Boolean> ATTACHED = getProperty("attached");
