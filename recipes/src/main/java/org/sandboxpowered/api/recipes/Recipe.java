@@ -6,6 +6,7 @@ import org.sandboxpowered.api.util.Identity;
 import org.sandboxpowered.api.util.nbt.ReadableCompoundTag;
 import org.sandboxpowered.api.util.nbt.WritableCompoundTag;
 import org.sandboxpowered.api.world.World;
+import com.google.gson.JsonObject;
 
 public interface Recipe<I extends Inventory> {
 
@@ -19,6 +20,8 @@ public interface Recipe<I extends Inventory> {
         void write(R recipe, WritableCompoundTag tag);
 
         R read(ReadableCompoundTag tag);
+
+        R fromJson(JsonObject object);
     }
 
     interface Type<R extends Recipe<?>> extends Content<Type<R>> {
