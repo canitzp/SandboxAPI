@@ -2,29 +2,21 @@ package org.sandboxpowered.api.recipes;
 
 import com.google.gson.JsonObject;
 import org.sandboxpowered.api.content.Content;
-import org.sandboxpowered.api.item.ItemStack;
 import org.sandboxpowered.api.registry.Registry;
 import org.sandboxpowered.api.util.Identity;
 import org.sandboxpowered.api.util.nbt.ReadableCompoundTag;
 import org.sandboxpowered.api.util.nbt.WritableCompoundTag;
-import org.sandboxpowered.api.world.WorldReader;
 
-import java.util.Collection;
-
-public interface Recipe<I> {
+public interface Recipe {
     Identity getIdentity();
 
-    boolean matches(I inventory, WorldReader reader);
-
-    ItemStack getPreviewResult();
-
-    ItemStack getCraftingResult(I inventory, WorldReader reader);
+    boolean matches(RecipeContext context);
 
     Type<?> getType();
 
-    Collection<ItemStack> getRemainingStacks(I inventory, WorldReader reader);
+    void result(RecipeContext context);
 
-    interface Serializer<R extends Recipe<?>> {
+    interface Serializer<R extends Recipe> {
         void write(R recipe, WritableCompoundTag tag);
 
         R read(ReadableCompoundTag tag);
@@ -32,8 +24,20 @@ public interface Recipe<I> {
         R fromJson(JsonObject object);
     }
 
-    @SuppressWarnings("rawtypes")
-    interface Type<R extends Recipe<?>> extends Content<Type<R>> {
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    interface Type<R extends Recipe> extends Content<Type<R>> {
         Registry<Type> REGISTRY = Registry.getRegistryFromType(Type.class);
+
+        static Builder builder(Identity identity) {
+            return null;
+        }
+
+        interface Builder {
+            <T> Builder withInput(Ingredient<T> ingredient);
+
+            <T> Builder withOutput(Ingredient<T> ingredient);
+
+            <R extends Recipe> Type<R> build(Class<R> rClass);
+        }
     }
 }

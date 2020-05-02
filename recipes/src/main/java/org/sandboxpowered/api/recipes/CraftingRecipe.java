@@ -1,7 +1,7 @@
 package org.sandboxpowered.api.recipes;
 
-import org.sandboxpowered.api.component.Inventory;
+import org.sandboxpowered.api.item.ItemStack;
 
-public interface CraftingRecipe<I extends Inventory> extends InventoryRecipe<I> {
+public interface CraftingRecipe extends Recipe<ItemStack> {
     boolean fits(int width, int height);
 }
