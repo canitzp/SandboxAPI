@@ -1,4 +1,4 @@
-package org.sandboxpowered.api.content.resource.supplier;
+package org.sandboxpowered.api.resources.supplier;
 
 import org.sandboxpowered.api.block.BaseBlock;
 import org.sandboxpowered.api.block.Block;

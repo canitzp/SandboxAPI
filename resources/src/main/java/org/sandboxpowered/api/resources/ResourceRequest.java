@@ -1,4 +1,4 @@
-package org.sandboxpowered.api.content.resource;
+package org.sandboxpowered.api.resources;
 
 import org.sandboxpowered.api.block.Block;
 import org.sandboxpowered.api.fluid.Fluid;

@@ -69,6 +69,8 @@ public class Properties {
     public static final Property<Direction> FACING = getProperty("facing");
     public static final Property<Direction> HORIZONTAL_FACING = getProperty("horizontal_facing");
     public static final Property<Direction> HOPPER_FACING = getProperty("hopper_facing");
+    public static final Property<Direction.Axis> HORIZONTAL_AXIS = getProperty("horizontal_axis");
+    public static final Property<Direction.Axis> AXIS = getProperty("axis");
 
     private static <X extends Comparable<X>> Property<X> getProperty(String s) {
         Property<X> property = Functions.getInstance().getProperty(s);

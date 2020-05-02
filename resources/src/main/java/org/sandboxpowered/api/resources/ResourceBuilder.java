@@ -1,11 +1,11 @@
-package org.sandboxpowered.api.content.resource;
+package org.sandboxpowered.api.resources;
 
 import org.sandboxpowered.api.block.Block;
-import org.sandboxpowered.api.content.resource.supplier.BlockSuppliers;
-import org.sandboxpowered.api.content.resource.supplier.FluidSuppliers;
 import org.sandboxpowered.api.fluid.Fluid;
 import org.sandboxpowered.api.item.BaseItem;
 import org.sandboxpowered.api.item.Item;
+import org.sandboxpowered.api.resources.supplier.BlockSuppliers;
+import org.sandboxpowered.api.resources.supplier.FluidSuppliers;
 
 import java.util.*;
 import java.util.function.Supplier;

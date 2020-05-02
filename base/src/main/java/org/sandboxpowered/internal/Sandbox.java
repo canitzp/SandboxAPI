@@ -6,7 +6,6 @@ import com.github.zafarkhaja.semver.expr.ExpressionParser;
 import org.sandboxpowered.api.SandboxAPI;
 import org.sandboxpowered.api.addon.Addon;
 import org.sandboxpowered.api.addon.AddonInfo;
-import org.sandboxpowered.api.content.resource.ResourceManager;
 import org.sandboxpowered.api.registry.Registrar;
 import org.sandboxpowered.api.util.Identity;
 import org.sandboxpowered.api.util.annotation.Internal;
@@ -65,7 +64,7 @@ public interface Sandbox {
             }
         });
         //now that all addons have done registration, we can safely register the requested resources!
-        ResourceManager.register();
+//        ResourceManager.register();
     }
 
     //TODO: does this properly prevent circular dependencies while satisfying everything?

@@ -2,10 +2,9 @@ package org.sandboxpowered.api.registry;
 
 import org.sandboxpowered.api.addon.AddonInfo;
 import org.sandboxpowered.api.content.Content;
-import org.sandboxpowered.api.content.resource.Resource;
-import org.sandboxpowered.api.content.resource.ResourceManager;
-import org.sandboxpowered.api.content.resource.ResourceRequest;
 import org.sandboxpowered.api.util.Identity;
+
+import java.util.Optional;
 
 public interface Registrar {
     AddonInfo getSourceAddon();
@@ -20,11 +19,8 @@ public interface Registrar {
         return register(Identity.of(getSourceAddon().getId(), name), content);
     }
 
-    default Resource requestResource(ResourceRequest request) {
-        return ResourceManager.requestResource(getSourceAddon().getId(), request);
-    }
+    <T extends Service> Optional<T> getRegistrarService(Class<T> tClass);
 
-    default Resource getResource(String resourceName) {
-        return ResourceManager.getExistingResource(getSourceAddon().getId(), resourceName);
+    interface Service {
     }
 }

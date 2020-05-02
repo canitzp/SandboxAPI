@@ -1,4 +1,4 @@
-package org.sandboxpowered.api.content.resource;
+package org.sandboxpowered.api.resources;
 
 import java.util.Objects;
 

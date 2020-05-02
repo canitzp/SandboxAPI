@@ -12,4 +12,8 @@ public interface Vec3i {
     int getY();
 
     int getZ();
+
+    Vec3i add(int x, int y, int z);
+
+    Vec3i sub(int x, int y, int z);
 }

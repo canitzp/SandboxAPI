@@ -99,6 +99,12 @@ public interface Position extends Vec3i {
         return offset(Direction.WEST, amount);
     }
 
+    @Override
+    Position add(int x, int y, int z);
+
+    @Override
+    Position sub(int x, int y, int z);
+
     interface Mutable extends Position {
 
         static Mutable create() {

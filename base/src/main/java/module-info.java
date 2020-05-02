@@ -17,8 +17,6 @@ module sandbox.base {
     exports org.sandboxpowered.api.component.fluid;
     exports org.sandboxpowered.api.component.inventory;
     exports org.sandboxpowered.api.content;
-    exports org.sandboxpowered.api.content.resource;
-    exports org.sandboxpowered.api.content.resource.supplier;
     exports org.sandboxpowered.api.enchantment;
     exports org.sandboxpowered.api.entity;
     exports org.sandboxpowered.api.entity.player;

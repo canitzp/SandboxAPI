@@ -74,6 +74,8 @@ dependencies {
         api project(":rendering")
         api project(":rendering-opengl")
         api project(":rendering-vulkan")
+
+        api project(":resources")
     }
 }
 

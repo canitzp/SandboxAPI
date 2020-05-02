@@ -6,4 +6,6 @@ include 'rendering'
 include 'rendering-opengl'
 include 'rendering-vulkan'
 
+include 'resources'
+
 include 'recipes'
