@@ -13,7 +13,7 @@ public class ClassUtil {
     private static final Map<Class<?>, Map<Class<? extends Annotation>, Boolean>> annotationCache = new LinkedHashMap<>();
     private static final Map<Class<?>, List<Class<?>>> superCache = new HashMap<>();
 
-    public static boolean isAnnotationPresent(Class aClass, Class<? extends Annotation> annotation) {
+    public static boolean isAnnotationPresent(Class<?> aClass, Class<? extends Annotation> annotation) {
         return annotationCache.computeIfAbsent(aClass, a -> new LinkedHashMap<>()).computeIfAbsent(annotation, annotationClass -> {
             List<Class<?>> classes = lookupAllSuper(aClass);
             for (Class<?> c : classes)

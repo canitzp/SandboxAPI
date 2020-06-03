@@ -164,7 +164,7 @@ public interface Block extends ItemProvider, Content<Block> {
         return getSettings().getJumpVelocity();
     }
 
-    default int getLumincance(BlockState state) {
+    default int getLuminance(BlockState state) {
         return getSettings().getLuminance();
     }
 

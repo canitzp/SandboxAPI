@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public interface Registry<T extends Content> {
+public interface Registry<T extends Content<T>> {
     static <T extends Content<T>> Registry<T> getRegistryFromType(Class<T> tClass) {
         return Functions.getInstance().registryFunction(tClass);
     }
@@ -38,7 +38,7 @@ public interface Registry<T extends Content> {
 
     Class<T> getType();
 
-    interface Entry<T extends Content> extends Supplier<T>, Predicate<T> {
+    interface Entry<T extends Content<T>> extends Supplier<T>, Predicate<T> {
         @Override
         T get();
 
