@@ -11,7 +11,7 @@ import java.util.Optional;
 public abstract class BaseFluid implements Fluid {
     private StateFactory<Fluid, FluidState> stateFactory;
 
-    protected static int getBlockstateLevel(FluidState state) {
+    protected static int getBlockStateLevel(FluidState state) {
         return state.isStill() ? 0 : 8 - Math.min(state.get(Properties.FLUID_LEVEL), 8) + (state.get(Properties.FALLING) ? 8 : 0);
     }
 

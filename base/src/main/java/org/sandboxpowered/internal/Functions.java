@@ -48,11 +48,11 @@ public interface Functions {
 
     ItemStack createItemStackFromTag(ReadableCompoundTag tag);
 
-    <T extends Content> Registry<T> registryFunction(Class<T> c);
+    <T extends Content<T>> Registry<T> registryFunction(Class<T> c);
 
     CompoundTag createCompoundTag();
 
-    Property getProperty(String property);
+    <T extends Comparable<T>> Property<T> getProperty(String property);
 
     Server serverInstance();
 
