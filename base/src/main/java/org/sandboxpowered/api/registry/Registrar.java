@@ -5,6 +5,7 @@ import org.sandboxpowered.api.content.Content;
 import org.sandboxpowered.api.util.Identity;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public interface Registrar {
     AddonInfo getSourceAddon();
@@ -20,6 +21,19 @@ public interface Registrar {
     }
 
     <T extends Service> Optional<T> getRegistrarService(Class<T> tClass);
+
+    default <T extends Service> void useRegistrarService(Class<T> tClass, Consumer<T> tConsumer) {
+        getRegistrarService(tClass).ifPresent(tConsumer);
+    }
+
+    default <T extends Service> void useRegistrarService(Class<T> tClass, Consumer<T> tConsumer, Runnable runnable) {
+        Optional<T> serviceOptional = getRegistrarService(tClass);
+        if (serviceOptional.isPresent()) {
+            tConsumer.accept(serviceOptional.get());
+        } else {
+            runnable.run();
+        }
+    }
 
     interface Service {
     }
