@@ -7,3 +7,4 @@ include 'rendering-opengl'
 include 'rendering-vulkan'
 
 include 'resources'
+include 'resources-v2'
