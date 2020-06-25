@@ -38,6 +38,8 @@ public interface Registry<T extends Content<T>> {
 
     Class<T> getType();
 
+    Identity getIdentity();
+
     interface Entry<T extends Content<T>> extends Supplier<T>, Predicate<T> {
         @Override
         T get();
