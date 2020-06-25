@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.sandboxpowered.api.block.Block;
 import org.sandboxpowered.api.block.Material;
 import org.sandboxpowered.api.block.entity.BlockEntity;
+import org.sandboxpowered.api.client.Client;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.content.Content;
 import org.sandboxpowered.api.entity.Entity;
@@ -17,6 +18,7 @@ import org.sandboxpowered.api.state.Property;
 import org.sandboxpowered.api.util.Identity;
 import org.sandboxpowered.api.util.annotation.Internal;
 import org.sandboxpowered.api.util.math.Position;
+import org.sandboxpowered.api.util.math.Vec2i;
 import org.sandboxpowered.api.util.math.Vec3i;
 import org.sandboxpowered.api.util.nbt.CompoundTag;
 import org.sandboxpowered.api.util.nbt.ReadableCompoundTag;
@@ -25,11 +27,11 @@ import org.sandboxpowered.api.util.text.Text;
 import java.util.function.Supplier;
 
 @Internal
-public interface Functions {
+public interface InternalService {
 
     @NotNull
-    static Functions getInstance() {
-        return org.sandboxpowered.internal.Internal.loadFunctions();
+    static InternalService getInstance() {
+        return SandboxServiceLoader.loadService(InternalService.class);
     }
 
     Identity createIdentityFromString(String identity);
@@ -69,4 +71,10 @@ public interface Functions {
     FluidStack fluidStackFunction(Fluid fluid, int amount);
 
     FluidStack fluidStackFromTagFunction(ReadableCompoundTag tag);
+
+    Identity.Variant createVariantIdentity(Identity identity, String variant);
+
+    Client clientInstance();
+
+    Vec2i createVec2i(int x, int y);
 }

@@ -2,7 +2,7 @@ package org.sandboxpowered.api.registry;
 
 import org.sandboxpowered.api.content.Content;
 import org.sandboxpowered.api.util.Identity;
-import org.sandboxpowered.internal.Functions;
+import org.sandboxpowered.internal.InternalService;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 public interface Registry<T extends Content<T>> {
     static <T extends Content<T>> Registry<T> getRegistryFromType(Class<T> tClass) {
-        return Functions.getInstance().registryFunction(tClass);
+        return InternalService.getInstance().registryFunction(tClass);
     }
 
     Identity getIdentity(T val);

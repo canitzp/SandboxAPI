@@ -71,8 +71,6 @@ dependencies {
     constraints {
         api project(":base")
         api project(":rendering")
-        api project(":rendering-opengl")
-        api project(":rendering-vulkan")
 
         api project(":resources")
     }

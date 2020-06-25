@@ -11,7 +11,7 @@ import org.sandboxpowered.api.util.nbt.CompoundTag;
 import org.sandboxpowered.api.util.nbt.ReadableCompoundTag;
 import org.sandboxpowered.api.util.nbt.WritableCompoundTag;
 import org.sandboxpowered.api.world.World;
-import org.sandboxpowered.internal.Functions;
+import org.sandboxpowered.internal.InternalService;
 
 import java.util.function.Supplier;
 
@@ -66,7 +66,7 @@ public interface BlockEntity {
 
     interface Type<T extends BlockEntity> extends Content<Type<T>> {
         static <T extends BlockEntity> Type<T> of(Supplier<T> entityCreator, Block... validBlocks) {
-            return Functions.getInstance().blockEntityTypeFunction(entityCreator, validBlocks);
+            return InternalService.getInstance().blockEntityTypeFunction(entityCreator, validBlocks);
         }
 
         @Override

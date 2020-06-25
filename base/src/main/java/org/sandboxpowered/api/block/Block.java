@@ -172,6 +172,16 @@ public interface Block extends ItemProvider, Content<Block> {
         return ItemStack.of(this);
     }
 
+    default RenderType getRenderType() {
+        return RenderType.MODEL;
+    }
+
+    enum RenderType {
+        MODEL,
+        DYNAMIC,
+        INVISIBLE
+    }
+
     //TODO: mining tool/level, map color, collision, opacity, sound group, random tick, drops, dynamic bounds
     class Settings {
         private final Material material;
