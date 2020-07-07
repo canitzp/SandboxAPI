@@ -1,6 +1,6 @@
 package org.sandboxpowered.api.block;
 
-import org.sandboxpowered.internal.Functions;
+import org.sandboxpowered.internal.InternalService;
 
 public interface Material {
     Material AIR = getMaterial("AIR");
@@ -47,7 +47,7 @@ public interface Material {
     Material CAKE = getMaterial("CAKE");
 
     static Material getMaterial(String mat) {
-        return Functions.getInstance().getMaterial(mat);
+        return InternalService.getInstance().getMaterial(mat);
     }
 
     PistonInteraction getPistonInteraction();

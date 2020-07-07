@@ -10,12 +10,12 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public enum Direction {
-    DOWN(0, 1, -1, "down", Direction.AxisDirection.NEGATIVE, Direction.Axis.Y, Vec3i.create(0, -1, 0)),
-    UP(1, 0, -1, "up", Direction.AxisDirection.POSITIVE, Direction.Axis.Y, Vec3i.create(0, 1, 0)),
-    NORTH(2, 3, 2, "north", Direction.AxisDirection.NEGATIVE, Direction.Axis.Z, Vec3i.create(0, 0, -1)),
-    SOUTH(3, 2, 0, "south", Direction.AxisDirection.POSITIVE, Direction.Axis.Z, Vec3i.create(0, 0, 1)),
-    WEST(4, 5, 1, "west", Direction.AxisDirection.NEGATIVE, Direction.Axis.X, Vec3i.create(-1, 0, 0)),
-    EAST(5, 4, 3, "east", Direction.AxisDirection.POSITIVE, Direction.Axis.X, Vec3i.create(1, 0, 0));
+    DOWN(0, 1, -1, "down", AxisDirection.NEGATIVE, Axis.Y, Vec3i.create(0, -1, 0)),
+    UP(1, 0, -1, "up", AxisDirection.POSITIVE, Axis.Y, Vec3i.create(0, 1, 0)),
+    NORTH(2, 3, 2, "north", AxisDirection.NEGATIVE, Axis.Z, Vec3i.create(0, 0, -1)),
+    SOUTH(3, 2, 0, "south", AxisDirection.POSITIVE, Axis.Z, Vec3i.create(0, 0, 1)),
+    WEST(4, 5, 1, "west", AxisDirection.NEGATIVE, Axis.X, Vec3i.create(-1, 0, 0)),
+    EAST(5, 4, 3, "east", AxisDirection.POSITIVE, Axis.X, Vec3i.create(1, 0, 0));
     private static final Direction[] ALL = values();
     private static final Map<String, Direction> NAME_MAP = Arrays.stream(ALL).collect(Collectors.toMap(Direction::getName, (dir) -> dir));
     private static final Direction[] ID_TO_DIRECTION = Arrays.stream(ALL).sorted(Comparator.comparingInt((dir) -> dir.id)).toArray(Direction[]::new);
@@ -24,11 +24,11 @@ public enum Direction {
     private final int invertedId;
     private final int horizontalId;
     private final String name;
-    private final Direction.Axis axis;
-    private final Direction.AxisDirection direction;
+    private final Axis axis;
+    private final AxisDirection direction;
     private final Vec3i vector;
 
-    Direction(int id, int horizontalId, int invertedId, String name, Direction.AxisDirection direction, Direction.Axis axis, Vec3i vector) {
+    Direction(int id, int horizontalId, int invertedId, String name, AxisDirection direction, Axis axis, Vec3i vector) {
         this.id = id;
         this.horizontalId = horizontalId;
         this.invertedId = invertedId;
@@ -55,15 +55,15 @@ public enum Direction {
         return fromHorizontal((int) Math.floor(rotation / 90.0D + 0.5D) & 3);
     }
 
-    public static Direction from(Direction.Axis axis, Direction.AxisDirection direction) {
+    public static Direction from(Axis axis, AxisDirection direction) {
         switch (axis) {
             case X:
-                return direction == Direction.AxisDirection.POSITIVE ? EAST : WEST;
+                return direction == AxisDirection.POSITIVE ? EAST : WEST;
             case Y:
-                return direction == Direction.AxisDirection.POSITIVE ? UP : DOWN;
+                return direction == AxisDirection.POSITIVE ? UP : DOWN;
             case Z:
             default:
-                return direction == Direction.AxisDirection.POSITIVE ? SOUTH : NORTH;
+                return direction == AxisDirection.POSITIVE ? SOUTH : NORTH;
         }
     }
 
@@ -86,7 +86,7 @@ public enum Direction {
         return outDir;
     }
 
-    public static Direction get(Direction.AxisDirection direction, Direction.Axis axis) {
+    public static Direction get(AxisDirection direction, Axis axis) {
         for (Direction dir : values()) {
             if (dir.getDirection() == direction && dir.getAxis() == axis) {
                 return dir;
@@ -104,7 +104,7 @@ public enum Direction {
         return this.horizontalId;
     }
 
-    public Direction.AxisDirection getDirection() {
+    public AxisDirection getDirection() {
         return this.direction;
     }
 
@@ -112,7 +112,7 @@ public enum Direction {
         return byId(this.invertedId);
     }
 
-    public Direction rotateClockwise(Direction.Axis axis) {
+    public Direction rotateClockwise(Axis axis) {
         switch (axis) {
             case X:
                 if (this != WEST && this != EAST) {
@@ -195,22 +195,22 @@ public enum Direction {
     }
 
     public int getOffsetX() {
-        return this.axis == Direction.Axis.X ? this.direction.offset() : 0;
+        return this.axis == Axis.X ? this.direction.offset() : 0;
     }
 
     public int getOffsetY() {
-        return this.axis == Direction.Axis.Y ? this.direction.offset() : 0;
+        return this.axis == Axis.Y ? this.direction.offset() : 0;
     }
 
     public int getOffsetZ() {
-        return this.axis == Direction.Axis.Z ? this.direction.offset() : 0;
+        return this.axis == Axis.Z ? this.direction.offset() : 0;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public Direction.Axis getAxis() {
+    public Axis getAxis() {
         return this.axis;
     }
 
@@ -227,13 +227,13 @@ public enum Direction {
     }
 
     public enum Type implements Predicate<Direction>, Iterable<Direction> {
-        HORIZONTAL(new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST}, new Direction.Axis[]{Direction.Axis.X, Direction.Axis.Z}),
-        VERTICAL(new Direction[]{Direction.UP, Direction.DOWN}, new Direction.Axis[]{Direction.Axis.Y});
+        HORIZONTAL(new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST}, new Axis[]{Axis.X, Axis.Z}),
+        VERTICAL(new Direction[]{Direction.UP, Direction.DOWN}, new Axis[]{Axis.Y});
 
         private final Direction[] facingArray;
-        private final Direction.Axis[] axisArray;
+        private final Axis[] axisArray;
 
-        Type(Direction[] directions, Direction.Axis[] axes) {
+        Type(Direction[] directions, Axis[] axes) {
             this.facingArray = directions;
             this.axisArray = axes;
         }
@@ -303,13 +303,13 @@ public enum Direction {
             return direction != null && direction.getAxis() == this;
         }
 
-        public Direction.Type getType() {
+        public Type getType() {
             switch (this) {
                 case X:
                 case Z:
-                    return Direction.Type.HORIZONTAL;
+                    return Type.HORIZONTAL;
                 case Y:
-                    return Direction.Type.VERTICAL;
+                    return Type.VERTICAL;
                 default:
                     throw new Error(String.format("Unknown Axis %s!", this.getName()));
             }

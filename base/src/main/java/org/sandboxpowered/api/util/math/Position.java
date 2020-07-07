@@ -2,7 +2,7 @@ package org.sandboxpowered.api.util.math;
 
 import org.sandboxpowered.api.util.Direction;
 import org.sandboxpowered.internal.PositionIterator;
-import org.sandboxpowered.internal.Functions;
+import org.sandboxpowered.internal.InternalService;
 
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -14,7 +14,7 @@ public interface Position extends Vec3i {
     Position ZERO = create(0, 0, 0);
 
     static Position create(int x, int y, int z) {
-        return Functions.getInstance().createPosition(x, y, z);
+        return InternalService.getInstance().createPosition(x, y, z);
     }
 
     static Position create(Vec3i vec3i) {
@@ -99,10 +99,8 @@ public interface Position extends Vec3i {
         return offset(Direction.WEST, amount);
     }
 
-    @Override
     Position add(int x, int y, int z);
 
-    @Override
     Position sub(int x, int y, int z);
 
     interface Mutable extends Position {
@@ -112,7 +110,7 @@ public interface Position extends Vec3i {
         }
 
         static Mutable create(int x, int y, int z) {
-            return Functions.getInstance().createMutablePosition(x, y, z);
+            return InternalService.getInstance().createMutablePosition(x, y, z);
         }
 
         static Mutable create(Vec3i vec3i) {

@@ -10,6 +10,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+@SuppressWarnings("unchecked")
 public class Mono<T> {
     private static final Mono<?> EMPTY = new Mono<>();
     private final T value;
@@ -23,9 +24,7 @@ public class Mono<T> {
     }
 
     public static <X> Mono<X> empty() {
-        @SuppressWarnings("unchecked")
-        Mono<X> mono = (Mono<X>) EMPTY;
-        return mono;
+        return (Mono<X>) EMPTY;
     }
 
     public static <T> Mono<T> of(@NotNull T value) {
@@ -75,7 +74,6 @@ public class Mono<T> {
     }
 
     public <X> Mono<X> cast() {
-        //noinspection unchecked
         return (Mono<X>) this;
     }
 

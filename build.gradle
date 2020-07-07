@@ -40,9 +40,8 @@ void addRepo(RepositoryHandler repositories) {
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
-    apply plugin: 'org.javamodularity.moduleplugin'
 
-    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
     repositories {
         mavenCentral()
@@ -72,8 +71,6 @@ dependencies {
     constraints {
         api project(":base")
         api project(":rendering")
-        api project(":rendering-opengl")
-        api project(":rendering-vulkan")
 
         api project(":resources")
     }

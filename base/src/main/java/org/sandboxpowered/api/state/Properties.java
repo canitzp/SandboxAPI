@@ -1,7 +1,7 @@
 package org.sandboxpowered.api.state;
 
 import org.sandboxpowered.api.util.Direction;
-import org.sandboxpowered.internal.Functions;
+import org.sandboxpowered.internal.InternalService;
 
 public class Properties {
     public static final Property<Boolean> ATTACHED = getProperty("attached");
@@ -73,7 +73,7 @@ public class Properties {
     public static final Property<Direction.Axis> AXIS = getProperty("axis");
 
     private static <X extends Comparable<X>> Property<X> getProperty(String s) {
-        Property<X> property = Functions.getInstance().getProperty(s);
+        Property<X> property = InternalService.getInstance().getProperty(s);
         if (property == null)
             throw new NullPointerException("Property cannot be null");
         return property;

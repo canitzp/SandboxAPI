@@ -4,7 +4,7 @@ import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.util.Mono;
 import org.sandboxpowered.api.util.nbt.CompoundTag;
 import org.sandboxpowered.api.util.nbt.ReadableCompoundTag;
-import org.sandboxpowered.internal.Functions;
+import org.sandboxpowered.internal.InternalService;
 
 public interface FluidStack {
     static FluidStack of(Fluid fluid) {
@@ -12,7 +12,7 @@ public interface FluidStack {
     }
 
     static FluidStack of(Fluid fluid, int amount) {
-        return Functions.getInstance().fluidStackFunction(fluid, amount);
+        return InternalService.getInstance().fluidStackFunction(fluid, amount);
     }
 
     static FluidStack empty() {
@@ -20,7 +20,7 @@ public interface FluidStack {
     }
 
     static FluidStack read(ReadableCompoundTag tag) {
-        return Functions.getInstance().fluidStackFromTagFunction(tag);
+        return InternalService.getInstance().fluidStackFromTagFunction(tag);
     }
 
     boolean isEmpty();

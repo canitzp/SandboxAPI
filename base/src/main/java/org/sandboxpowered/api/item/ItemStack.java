@@ -7,7 +7,7 @@ import org.sandboxpowered.api.registry.Registry;
 import org.sandboxpowered.api.util.Mono;
 import org.sandboxpowered.api.util.nbt.CompoundTag;
 import org.sandboxpowered.api.util.nbt.ReadableCompoundTag;
-import org.sandboxpowered.internal.Functions;
+import org.sandboxpowered.internal.InternalService;
 
 public interface ItemStack {
 
@@ -32,7 +32,7 @@ public interface ItemStack {
     }
 
     static ItemStack of(Item item, int amount) {
-        return Functions.getInstance().createItemStack(item, amount);
+        return InternalService.getInstance().createItemStack(item, amount);
     }
 
     static ItemStack empty() {
@@ -40,7 +40,7 @@ public interface ItemStack {
     }
 
     static ItemStack read(ReadableCompoundTag tag) {
-        return Functions.getInstance().createItemStackFromTag(tag);
+        return InternalService.getInstance().createItemStackFromTag(tag);
     }
 
     boolean isEmpty();
