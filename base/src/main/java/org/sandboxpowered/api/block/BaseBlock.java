@@ -41,7 +41,7 @@ public class BaseBlock implements Block {
     @Internal
     public final void setStateFactory(StateFactory<Block, BlockState> stateFactory) {
         this.stateFactory = stateFactory;
-        this.baseState= createBaseState(stateFactory.getBaseState());
+        this.baseState = createBaseState(stateFactory.getBaseState());
     }
 
     protected BlockState createBaseState(BlockState baseState) {

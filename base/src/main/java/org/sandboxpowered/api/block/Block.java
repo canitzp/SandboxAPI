@@ -200,10 +200,6 @@ public interface Block extends ItemProvider, Content<Block> {
             this.randomTicks = randomTicks;
         }
 
-        public boolean isRandomTicks() {
-            return randomTicks;
-        }
-
         public static Builder builder(Material material) {
             return new Builder(material);
         }
@@ -224,6 +220,10 @@ public interface Block extends ItemProvider, Content<Block> {
                     .setVelocity(settings.velocity)
                     .setJumpVelocity(settings.jumpVelocity)
                     .setLuminance(settings.luminance);
+        }
+
+        public boolean isRandomTicks() {
+            return randomTicks;
         }
 
         public Material getMaterial() {
@@ -293,8 +293,9 @@ public interface Block extends ItemProvider, Content<Block> {
                 this.luminance = luminance;
                 return this;
             }
+
             public Builder ticksRandomly() {
-                this.randomTicks=true;
+                this.randomTicks = true;
                 return this;
             }
 

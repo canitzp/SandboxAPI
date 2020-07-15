@@ -1,8 +1,8 @@
 package org.sandboxpowered.api.util.math;
 
 import org.sandboxpowered.api.util.Direction;
-import org.sandboxpowered.internal.PositionIterator;
 import org.sandboxpowered.internal.InternalService;
+import org.sandboxpowered.internal.PositionIterator;
 
 import java.util.Spliterator;
 import java.util.Spliterators;
