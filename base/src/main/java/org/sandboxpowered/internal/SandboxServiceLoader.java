@@ -20,7 +20,7 @@ public class SandboxServiceLoader {
             if (services.length == 0)
                 throw new IllegalStateException("No services defined, require 1");
             if (services.length > 1)
-                throw new IllegalStateException(String.format("Cannot have more than 2 services defined, all services [%s]", Arrays.toString(services)));
+                throw new IllegalStateException(String.format("Cannot have more than 1 service defined, all services [%s]", Arrays.toString(services)));
             SERVICE_MAP.put(tClass, services[0]);
         }
         return tClass.cast(SERVICE_MAP.get(tClass));
