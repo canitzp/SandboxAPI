@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @Alpha
 public interface PlayerEntity extends LivingEntity {
-
     void sendChatMessage(Text text);
 
     void sendOverlayMessage(Text text);
