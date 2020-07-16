@@ -21,7 +21,7 @@ allprojects {
     group = project.maven_group
 }
 
-archivesBaseName='platform'
+archivesBaseName = 'platform'
 
 void addRepo(RepositoryHandler repositories) {
     def ENV = System.getenv()

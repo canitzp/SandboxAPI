@@ -3,7 +3,7 @@ package org.sandboxpowered.api.entity;
 import org.sandboxpowered.api.registry.Registry;
 import org.sandboxpowered.api.util.Identity;
 
-public class Entities {
+public class EntityTypes {
     public static final Registry.Entry<Entity.Type> AREA_EFFECT_CLOUD = get("area_effect_cloud");
     public static final Registry.Entry<Entity.Type> ARMOR_STAND = get("armor_stand");
     public static final Registry.Entry<Entity.Type> ARROW = get("arrow");
