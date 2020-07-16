@@ -21,7 +21,7 @@ public interface Enchantment extends Content<Enchantment> {
 
     boolean isTreasure();
 
-    Weight getWeight();
+    Rarity getRarity();
 
     default void onTargetDamage(LivingEntity self, Entity victim, int level) {
     }
@@ -37,7 +37,7 @@ public interface Enchantment extends Content<Enchantment> {
     enum Target {
     }
 
-    enum Weight {
+    enum Rarity {
         COMMON(10),
         UNCOMMON(5),
         RARE(2),
@@ -45,7 +45,7 @@ public interface Enchantment extends Content<Enchantment> {
 
         private final int weight;
 
-        Weight(int weight) {
+        Rarity(int weight) {
             this.weight = weight;
         }
 

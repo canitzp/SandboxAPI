@@ -7,14 +7,14 @@ import org.sandboxpowered.api.util.annotation.Alpha;
 public abstract class BaseEnchantment implements Enchantment {
     private final int minLevel, maxLevel;
     private final boolean curse, treasure;
-    private final Weight weight;
+    private final Rarity rarity;
 
-    public BaseEnchantment(int minLevel, int maxLevel, boolean curse, boolean treasure, Weight weight) {
+    public BaseEnchantment(int minLevel, int maxLevel, boolean curse, boolean treasure, Rarity rarity) {
         this.minLevel = minLevel;
         this.maxLevel = maxLevel;
         this.curse = curse;
         this.treasure = treasure;
-        this.weight = weight;
+        this.rarity = rarity;
     }
 
     @Override
@@ -43,7 +43,7 @@ public abstract class BaseEnchantment implements Enchantment {
     }
 
     @Override
-    public Weight getWeight() {
-        return weight;
+    public Rarity getRarity() {
+        return rarity;
     }
 }
