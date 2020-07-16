@@ -8,15 +8,15 @@ import org.sandboxpowered.internal.SandboxServiceLoader;
 
 public interface RenderPipeline {
 
+    static RenderPipeline getPipeline(Identity identity) throws UnsupportedRenderPipelineException {
+        return SandboxServiceLoader.loadService(PipelineService.class).getPipeline(identity);
+    }
+
     RenderManager getRenderManager();
 
     ModelManager getModelManager();
 
     ShaderManager getShaderManager();
-
-    static RenderPipeline getPipeline(Identity identity) throws UnsupportedRenderPipelineException {
-        return SandboxServiceLoader.loadService(PipelineService.class).getPipeline(identity);
-    }
 
     class UnsupportedRenderPipelineException extends RuntimeException {
 

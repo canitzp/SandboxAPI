@@ -22,20 +22,6 @@ public final class ResourceManager {
     private ResourceManager() {
     }
 
-    public static Resource requestResource(String source, ResourceRequest request) {
-        Resource type = TYPES.computeIfAbsent(request.getName(), Resource::new);
-        type.append(source, request);
-        return type;
-    }
-
-    public static Resource getExistingResource(String source, String resourceName) {
-        Resource ret = TYPES.get(resourceName);
-        if (ret == null) {
-            throw new RuntimeException("Addon " + source + " tried to get resource type " + resourceName + " that hasn't been requested!");
-        }
-        return ret;
-    }
-
     //TODO: put somewhere else? this gets called after all addons get initialized so we can do preferences properly
     public static void register() {
         TYPES.forEach((name, resource) -> {

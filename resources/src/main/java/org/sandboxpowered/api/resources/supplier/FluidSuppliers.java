@@ -9,9 +9,11 @@ import org.sandboxpowered.api.item.Items;
 import org.sandboxpowered.api.state.BlockState;
 import org.sandboxpowered.api.state.FluidState;
 import org.sandboxpowered.api.util.Identity;
+import org.sandboxpowered.api.util.annotation.Alpha;
 
 import java.util.function.Supplier;
 
+@Alpha
 public final class FluidSuppliers {
     /**
      * A fluid that only exists in tanks and buckets, without in-world logic.

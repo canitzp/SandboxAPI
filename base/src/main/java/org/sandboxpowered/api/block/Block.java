@@ -219,10 +219,11 @@ public interface Block extends ItemProvider, Content<Block> {
                     .setSlipperiness(settings.slipperiness)
                     .setVelocity(settings.velocity)
                     .setJumpVelocity(settings.jumpVelocity)
-                    .setLuminance(settings.luminance);
+                    .setLuminance(settings.luminance)
+                    .setRandomTicks(settings.randomTicks);
         }
 
-        public boolean isRandomTicks() {
+        public boolean doesRandomTick() {
             return randomTicks;
         }
 
@@ -301,6 +302,11 @@ public interface Block extends ItemProvider, Content<Block> {
 
             public Settings build() {
                 return new Settings(material, hardness, resistance, slipperiness, velocity, jumpVelocity, luminance, randomTicks);
+            }
+
+            private Builder setRandomTicks(boolean randomTicks) {
+                this.randomTicks = randomTicks;
+                return this;
             }
         }
     }
