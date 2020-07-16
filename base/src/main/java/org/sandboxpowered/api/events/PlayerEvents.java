@@ -4,6 +4,7 @@ import org.sandboxpowered.api.entity.LivingEntity;
 import org.sandboxpowered.api.entity.player.PlayerEntity;
 import org.sandboxpowered.api.events.args.BlockArgs;
 import org.sandboxpowered.api.events.args.ChatArgs;
+import org.sandboxpowered.api.events.args.CopyDataArgs;
 import org.sandboxpowered.api.events.args.EntityArgs;
 import org.sandboxpowered.eventhandler.EventHandler;
 import org.sandboxpowered.eventhandler.PriorityEventHandler;
@@ -16,5 +17,5 @@ public class PlayerEvents {
     public static final PriorityHandler<PlayerEntity, BlockArgs> SLEEP = new PriorityEventHandler<>();
     public static final PriorityHandler<PlayerEntity, BlockArgs> WAKE_UP = new PriorityEventHandler<>();
     public static final EventHandlerBase<PlayerEntity, ChatArgs> CHAT_MESSAGE = new EventHandler<>();
-    public static final EventHandlerBase<PlayerEntity, EntityArgs<PlayerEntity>> CLONE = new EventHandler<>();
+    public static final EventHandlerBase<PlayerEntity, CopyDataArgs> COPY_DATA = new EventHandler<>();
 }
