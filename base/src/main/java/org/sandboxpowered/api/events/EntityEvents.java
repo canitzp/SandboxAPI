@@ -13,7 +13,6 @@ import org.sandboxpowered.eventhandler.priority.Cancellable;
 import org.sandboxpowered.eventhandler.priority.PriorityHandler;
 
 public class EntityEvents {
-    public static final PriorityHandler<PlayerEntity, EntityArgs<ItemEntity>> ITEM_THROW = new PriorityEventHandler<>();
     public static final PriorityHandler<Entity, Cancellable> SPAWN = new PriorityEventHandler<>();
     public static final PriorityHandler<Entity, Cancellable> TICK = new PriorityEventHandler<>();
     public static final PriorityHandler<Entity, Cancellable> DEATH = new PriorityEventHandler<>();
@@ -25,8 +24,8 @@ public class EntityEvents {
     public static final PriorityHandler<LivingEntity, DistanceArgs> FALL = new PriorityEventHandler<>();
     public static final PriorityHandler<LivingEntity, Cancellable> JUMP = new PriorityEventHandler<>();
     public static final PriorityHandler<LivingEntity, EntityArgs<LivingEntity>> KNOCKBACK = new PriorityEventHandler<>();
-    public static final EventHandlerBase<Entity, EventArgs> CONSTRUCT_ENTITY = new EventHandler<>();
+    public static final EventHandlerBase<Entity, EventArgs> CONSTRUCT = new EventHandler<>();
 
     //TODO may need args that include the renderer
-    public static final PriorityHandler<Entity, Cancellable> ENTITY_RENDER = new PriorityEventHandler<>();
+    public static final PriorityHandler<Entity, Cancellable> RENDER = new PriorityEventHandler<>();
 }
