@@ -61,6 +61,6 @@ public interface Registry<T extends Content<T>> {
 
         void ifPresent(Consumer<T> tConsumer);
 
-        void ifPresent(Consumer<T> tConsumer, Runnable notPresent);
+        void ifPresentOrElse(Consumer<T> tConsumer, Runnable notPresent);
     }
 }

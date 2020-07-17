@@ -66,7 +66,7 @@ public class Mono<T> {
             consumer.accept(get());
     }
 
-    public void ifPresent(Consumer<T> consumer, Runnable runnable) {
+    public void ifPresentOrElse(Consumer<T> consumer, Runnable runnable) {
         if (isPresent())
             consumer.accept(get());
         else
