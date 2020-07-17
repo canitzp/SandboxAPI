@@ -21,7 +21,8 @@ public interface RenderPipeline {
     ShaderManager getShaderManager();
 
     class UnsupportedRenderPipelineException extends RuntimeException {
-
+        public UnsupportedRenderPipelineException(Identity identity) {
+            super(String.format("Render Pipeline '%s' is unsupported.", identity.toString()));
+        }
     }
-
 }
