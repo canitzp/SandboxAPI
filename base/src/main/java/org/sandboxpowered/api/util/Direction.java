@@ -227,15 +227,13 @@ public enum Direction {
     }
 
     public enum Type implements Predicate<Direction>, Iterable<Direction> {
-        HORIZONTAL(new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST}, new Axis[]{Axis.X, Axis.Z}),
-        VERTICAL(new Direction[]{Direction.UP, Direction.DOWN}, new Axis[]{Axis.Y});
+        HORIZONTAL(new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST}),
+        VERTICAL(new Direction[]{Direction.UP, Direction.DOWN});
 
         private final Direction[] facingArray;
-        private final Axis[] axisArray;
 
-        Type(Direction[] directions, Axis[] axes) {
+        Type(Direction[] directions) {
             this.facingArray = directions;
-            this.axisArray = axes;
         }
 
         @Override
@@ -291,7 +289,7 @@ public enum Direction {
         }
 
         public boolean isHorizontal() {
-            return this == X || this == Z;
+            return this != Y;
         }
 
         public String toString() {

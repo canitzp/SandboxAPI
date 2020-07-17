@@ -69,14 +69,14 @@ public interface BlockEntity {
             return InternalService.getInstance().blockEntityTypeFunction(entityCreator, validBlocks);
         }
 
-        @Override
-        default Class<Type<T>> getContentType() {
-            return getType();
-        }
-
         @SuppressWarnings("unchecked")
         static <C> Class<C> getType() {
             return (Class<C>) Type.class;
+        }
+
+        @Override
+        default Class<Type<T>> getContentType() {
+            return getType();
         }
     }
 }
