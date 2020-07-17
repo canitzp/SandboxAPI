@@ -1,7 +1,9 @@
 package org.sandboxpowered.api.client.rendering.texture;
 
 import org.sandboxpowered.api.util.Identity;
+import org.sandboxpowered.api.util.annotation.PreAlpha;
 
+@PreAlpha
 public interface Atlas {
     Identity getIdentity();
 

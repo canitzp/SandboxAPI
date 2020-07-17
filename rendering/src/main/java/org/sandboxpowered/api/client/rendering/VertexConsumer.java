@@ -1,8 +1,10 @@
 package org.sandboxpowered.api.client.rendering;
 
 import org.sandboxpowered.api.client.rendering.model.Model;
+import org.sandboxpowered.api.util.annotation.PreAlpha;
 import org.sandboxpowered.api.util.math.*;
 
+@PreAlpha
 public interface VertexConsumer {
 
     void quad(MatrixStack.Matrices matrices, Model.Quad quad, Color color, int light, int overlay);

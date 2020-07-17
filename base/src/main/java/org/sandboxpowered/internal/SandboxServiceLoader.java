@@ -2,13 +2,14 @@ package org.sandboxpowered.internal;
 
 import com.google.common.collect.Iterators;
 import org.jetbrains.annotations.NotNull;
+import org.sandboxpowered.api.util.annotation.Internal;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ServiceLoader;
 
-@org.sandboxpowered.api.util.annotation.Internal
+@Internal
 public class SandboxServiceLoader {
     private static final Map<Class<?>, Object> SERVICE_MAP = new HashMap<>();
 

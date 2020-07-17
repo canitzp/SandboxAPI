@@ -1,10 +1,12 @@
 package org.sandboxpowered.api.client.rendering.shader;
 
+import org.sandboxpowered.api.util.annotation.PreAlpha;
 import org.sandboxpowered.api.util.math.Color;
 import org.sandboxpowered.api.util.math.Matrix4f;
 import org.sandboxpowered.api.util.math.Vec2f;
 import org.sandboxpowered.api.util.math.Vec3f;
 
+@PreAlpha
 public interface Shader {
     void bind();
 
