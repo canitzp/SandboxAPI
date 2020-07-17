@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -60,8 +61,6 @@ public class AddonSpec implements AddonInfo {
             title = id;
         this.title = title;
         this.description = description;
-        if (authors.isEmpty())
-            throw new IllegalArgumentException(String.format("Addon %s does not define any authors!", id));
         this.authors = authors;
         this.url = url;
         this.dependencies = dependencies;
@@ -158,5 +157,18 @@ public class AddonSpec implements AddonInfo {
     @Override
     public URL getPath() {
         return path;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AddonSpec addonSpec = (AddonSpec) o;
+        return Objects.equals(id, addonSpec.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }
