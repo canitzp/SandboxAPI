@@ -70,9 +70,13 @@ public interface BlockEntity {
         }
 
         @Override
-        @SuppressWarnings({"unchecked", "rawtypes"})
-        default Class getContentType() {
-            return Type.class;
+        default Class<Type<T>> getContentType() {
+            return getType();
+        }
+
+        @SuppressWarnings("unchecked")
+        static <C> Class<C> getType() {
+            return (Class<C>) Type.class;
         }
     }
 }
