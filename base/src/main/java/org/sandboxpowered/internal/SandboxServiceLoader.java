@@ -16,8 +16,8 @@ public class SandboxServiceLoader {
         if (!SERVICE_MAP.containsKey(tClass)) {
             ServiceLoader<T> functionsServiceLoader = ServiceLoader.load(tClass);
             Iterator<T> tIterator = functionsServiceLoader.iterator();
-            if (tIterator.hasNext())
-                throw new IllegalStateException(String.format("No services loaded for '%s'", tClass));
+            if (!tIterator.hasNext())
+                throw new IllegalStateException(String.format("No services defined for '%s'", tClass));
             T service = tIterator.next();
             if (tIterator.hasNext()) {
                 T[] services = Iterators.toArray(functionsServiceLoader.iterator(), tClass);
