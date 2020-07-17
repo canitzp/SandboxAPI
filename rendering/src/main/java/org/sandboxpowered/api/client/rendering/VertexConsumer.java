@@ -7,7 +7,7 @@ import org.sandboxpowered.api.util.math.*;
 @PreAlpha
 public interface VertexConsumer {
 
-    void quad(MatrixStack.Matrices matrices, Model.Quad quad, Color color, int light, int overlay);
+    void quad(MatrixStack.Entry entry, Model.Quad quad, Color color, int light, int overlay);
 
     void vertex(Vec3f position, Color color, Vec2f texture, int overlay, int light, Vec3f normal);
 

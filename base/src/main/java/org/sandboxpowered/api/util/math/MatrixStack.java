@@ -19,13 +19,13 @@ public interface MatrixStack {
 
     void translate(Vec3f vec);
 
-    Matrices peek();
+    Entry peek();
 
     boolean isEmpty();
 
     void pop();
 
-    interface Matrices {
+    interface Entry {
         Matrix4f getModelMatrix();
 
         Matrix3f getNormalMatrix();
