@@ -28,12 +28,12 @@ public interface Atlas {
             return getWidth() == getHeight();
         }
 
-        float getUMin();
+        float getMinU();
 
-        float getVMin();
+        float getMinV();
 
-        float getUMax();
+        float getMaxU();
 
-        float getVMax();
+        float getMaxV();
     }
 }
