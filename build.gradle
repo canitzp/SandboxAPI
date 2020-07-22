@@ -1,15 +1,5 @@
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "org.javamodularity:moduleplugin:1.6.0"
-    }
-}
-
 plugins {
+    id "com.jfrog.bintray" version "1.8.4"
     id 'java-platform'
     id 'maven-publish'
 }
@@ -23,23 +13,10 @@ allprojects {
 
 archivesBaseName = 'platform'
 
-void addRepo(RepositoryHandler repositories) {
-    def ENV = System.getenv()
-    if (ENV.mvn_username) {
-        repositories.maven {
-            name = "Maven"
-            url = uri("sftp://maven.sandboxpowered.org:22/sbxmvn/")
-            credentials {
-                username = ENV.mvn_username
-                password = ENV.mvn_password
-            }
-        }
-    }
-}
-
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
+    apply plugin: "com.jfrog.bintray"
 
     sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
@@ -58,13 +35,44 @@ subprojects {
     publishing {
         publications {
             mavenJava(MavenPublication) {
-                afterEvaluate {
-                    artifact jar
-                }
+                groupId project.group
+                artifactId project.name
+                version project.version
+
+                artifact jar
             }
         }
-        addRepo(repositories)
     }
+    bintray {
+        user = System.getenv("BINTRAY_USER")
+        key = System.getenv("BINTRAY_KEY")
+        publications = ['mavenJava']
+        publish = true
+        
+        pkg {
+            repo = 'API'
+            name = project.name
+            userOrg = 'sandboxpowered'
+            licenses = ['MIT']
+            vcsUrl = 'https://github.com/sandboxpowered/sandboxapi.git'
+            publicDownloadNumbers = true
+            githubRepo = 'sandboxpowered/sandboxapi'
+            githubReleaseNotesFile = 'README.md'
+            version {
+                name = project.version
+                desc = ''
+                vcsTag = project.version
+                released  = new Date()
+            }
+        }
+
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -75,7 +83,29 @@ dependencies {
         api project(":resources")
     }
 }
+bintray {
+    user = System.getenv("BINTRAY_USER")
+    key = System.getenv("BINTRAY_KEY")
+    publications = ['platform']
+    publish = true
 
+    pkg {
+        repo = 'API'
+        name = 'api'
+        userOrg = 'sandboxpowered'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/sandboxpowered/sandboxapi.git'
+        publicDownloadNumbers = true
+        githubRepo = 'sandboxpowered/sandboxapi'
+        githubReleaseNotesFile = 'README.md'
+        version {
+            name = version
+            desc = ''
+            released  = new Date()
+        }
+    }
+
+}
 publishing {
     publications {
         platform(MavenPublication) {
@@ -85,5 +115,4 @@ publishing {
             from components.javaPlatform
         }
     }
-    addRepo(repositories)
 }
