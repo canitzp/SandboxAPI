@@ -149,12 +149,10 @@ public class AddonSpec implements AddonInfo {
         return platforms.containsKey(platform.toString()) ? platforms.get(platform.toString()) ? AddonSpec.PlatformSupport.YES : AddonSpec.PlatformSupport.NO : AddonSpec.PlatformSupport.MAYBE;
     }
 
-    @Override
     public String getMainClass() {
         return mainClass;
     }
 
-    @Override
     public URL getPath() {
         return path;
     }
