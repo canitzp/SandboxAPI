@@ -34,9 +34,6 @@ public interface Enchantment extends Content<Enchantment> {
         return Enchantment.class;
     }
 
-    enum Target {
-    }
-
     enum Rarity {
         COMMON(10),
         UNCOMMON(5),
