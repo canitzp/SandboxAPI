@@ -88,7 +88,7 @@ public enum Direction {
     }
 
     public static Direction get(AxisDirection direction, Axis axis) {
-        for (Direction dir : values()) {
+        for (Direction dir : ALL) {
             if (dir.getDirection() == direction && dir.getAxis() == axis) {
                 return dir;
             }
