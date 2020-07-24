@@ -41,4 +41,24 @@ public interface BlockState extends PropertyContainer<BlockState> {
     default <X> Mono<X> getComponent(WorldReader world, Position position, Component<X> component, @Nullable Direction side) {
         return getBlock().getComponent(world, position, this, component, side);
     }
+
+    default boolean emitsRedstone() {
+        return getBlock().emitsRedstone(this);
+    }
+
+    default boolean hasComparatorValue() {
+        return getBlock().hasComparatorValue(this);
+    }
+
+    default int getComparatorValue(WorldReader world, Position pos) {
+        return getBlock().getComparatorValue(world, pos, this);
+    }
+
+    default int getWeakPower(WorldReader blockView, Position pos, Direction direction) {
+        return getBlock().getWeakPower(blockView, pos, this, direction);
+    }
+
+    default int getStrongPower(WorldReader blockView, Position pos, Direction direction) {
+        return getBlock().getStrongPower(blockView, pos, this, direction);
+    }
 }

@@ -92,7 +92,7 @@ public interface Block extends ItemProvider, Content<Block> {
         return state;
     }
 
-    default void randomTick(BlockState blockState, World serverWorld, Position position, Random random) {
+    default void randomTick(World serverWorld, Position position, BlockState blockState, Random random) {
     }
 
     /**
@@ -129,7 +129,6 @@ public interface Block extends ItemProvider, Content<Block> {
     }
 
     default void onEntityWalk(World world, Position position, Entity entity) {
-
     }
 
     default boolean canEntitySpawnWithin(BlockState state) {
@@ -138,6 +137,26 @@ public interface Block extends ItemProvider, Content<Block> {
 
     default Material.PistonInteraction getPistonInteraction(BlockState state) {
         return getMaterial(state).getPistonInteraction();
+    }
+
+    default boolean emitsRedstone(BlockState state) {
+        return false;
+    }
+
+    default boolean hasComparatorValue(BlockState state) {
+        return false;
+    }
+
+    default int getComparatorValue(WorldReader world, Position pos, BlockState state) {
+        return 0;
+    }
+
+    default int getWeakPower(WorldReader blockView, Position pos, BlockState state, Direction direction) {
+        return 0;
+    }
+
+    default int getStrongPower(WorldReader blockView, Position pos, BlockState state, Direction direction) {
+        return 0;
     }
 
     default Material getMaterial(BlockState state) {
