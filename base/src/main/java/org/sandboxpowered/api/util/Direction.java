@@ -1,5 +1,6 @@
 package org.sandboxpowered.api.util;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterators;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,10 +17,10 @@ public enum Direction {
     SOUTH(3, 2, 0, "south", AxisDirection.POSITIVE, Axis.Z, Vec3i.create(0, 0, 1)),
     WEST(4, 5, 1, "west", AxisDirection.NEGATIVE, Axis.X, Vec3i.create(-1, 0, 0)),
     EAST(5, 4, 3, "east", AxisDirection.POSITIVE, Axis.X, Vec3i.create(1, 0, 0));
-    private static final Direction[] ALL = values();
-    private static final Map<String, Direction> NAME_MAP = Arrays.stream(ALL).collect(Collectors.toMap(Direction::getName, (dir) -> dir));
-    private static final Direction[] ID_TO_DIRECTION = Arrays.stream(ALL).sorted(Comparator.comparingInt((dir) -> dir.id)).toArray(Direction[]::new);
-    private static final Direction[] HORIZONTAL = Arrays.stream(ALL).filter((dir) -> dir.getAxis().isHorizontal()).sorted(Comparator.comparingInt((dir) -> dir.horizontalId)).toArray(Direction[]::new);
+    public static final Direction[] ALL = values();
+    public static final Map<String, Direction> NAME_MAP = ImmutableMap.copyOf(Arrays.stream(ALL).collect(Collectors.toMap(Direction::getName, (dir) -> dir)));
+    public static final Direction[] ID_TO_DIRECTION = Arrays.stream(ALL).sorted(Comparator.comparingInt((dir) -> dir.id)).toArray(Direction[]::new);
+    public static final Direction[] HORIZONTAL = Arrays.stream(ALL).filter((dir) -> dir.getAxis().isHorizontal()).sorted(Comparator.comparingInt((dir) -> dir.horizontalId)).toArray(Direction[]::new);
     private final int id;
     private final int invertedId;
     private final int horizontalId;
