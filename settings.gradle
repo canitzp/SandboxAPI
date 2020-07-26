@@ -1,7 +1,10 @@
 rootProject.name = 'api'
 
 include 'base'
+project(':base').projectDir = new File('./modules/base')
 
 include 'rendering'
+project(':rendering').projectDir = new File('./modules/rendering')
 
 include 'resources'
+project(':resources').projectDir = new File('./modules/resources')
