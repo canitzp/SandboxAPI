@@ -32,14 +32,15 @@ subprojects {
     }
 
     ext.genOutputDir = file("$buildDir/generated/resources")
+    def templateModJson = rootProject.file("template/module-fabric.mod.json")
     task generateFabricModJson {
-        ext.outputFile = file("$genOutputDir/fabric.mod.json")
+        def outputFile = file("${project.ext.genOutputDir}/fabric.mod.json")
         outputs.file(outputFile)
         doLast {
-            outputFile.text = /{"id": "sandbox-$project.name", "version": "$project.version"}/
+            outputFile.text = templateModJson.text.replaceAll("module_version", "${project.version}").replaceAll("module_id", "sandbox-${project.name}")
         }
     }
-    sourceSets.main.output.dir genOutputDir, builtBy: generateFabricModJson
+    sourceSets.main.output.dir ext.genOutputDir, builtBy: generateFabricModJson
 
     publishing {
         publications {
