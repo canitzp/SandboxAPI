@@ -8,3 +8,6 @@ project(':rendering').projectDir = new File('./modules/rendering')
 
 include 'resources'
 project(':resources').projectDir = new File('./modules/resources')
+
+include 'defaults'
+project(':defaults').projectDir = new File('./modules/defaults')
