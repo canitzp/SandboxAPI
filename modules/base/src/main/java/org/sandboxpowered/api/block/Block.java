@@ -2,6 +2,7 @@ package org.sandboxpowered.api.block;
 
 import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.block.entity.BlockEntity;
+import org.sandboxpowered.api.client.GraphicsMode;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.content.Content;
 import org.sandboxpowered.api.entity.Entity;
@@ -191,8 +192,19 @@ public interface Block extends ItemProvider, Content<Block> {
         return ItemStack.of(this);
     }
 
+    default BlockRenderLayer getRenderLayer(BlockState state, GraphicsMode mode) {
+        return BlockRenderLayer.SOLID;
+    }
+
     default RenderType getRenderType() {
         return RenderType.MODEL;
+    }
+
+    enum BlockRenderLayer {
+        SOLID,
+        CUTOUT,
+        CUTOUT_MIPPED,
+        TRANSPARENT
     }
 
     enum RenderType {

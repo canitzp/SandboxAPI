@@ -3,6 +3,7 @@ package org.sandboxpowered.api.state;
 import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.block.Block;
 import org.sandboxpowered.api.block.Material;
+import org.sandboxpowered.api.client.GraphicsMode;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.util.Direction;
 import org.sandboxpowered.api.util.Mirror;
@@ -24,6 +25,10 @@ public interface BlockState extends PropertyContainer<BlockState> {
 
     default boolean canReplace() {
         return getBlock().canReplace(this);
+    }
+
+    default Block.BlockRenderLayer getRenderLayer(GraphicsMode mode) {
+        return getBlock().getRenderLayer(this, mode);
     }
 
     default BlockState rotate(Rotation rotation) {
