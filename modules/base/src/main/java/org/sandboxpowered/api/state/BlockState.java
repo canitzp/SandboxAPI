@@ -28,9 +28,7 @@ public interface BlockState extends PropertyContainer<BlockState> {
     }
 
     /**
-     *
-     * @deprecated
-     * <p> Use {@link BlockState#canReplace(WorldReader, Position, PlayerEntity, Hand, ItemStack, Direction, Vec3d)} instead.
+     * @deprecated <p> Use {@link BlockState#canReplace(WorldReader, Position, PlayerEntity, Hand, ItemStack, Direction, Vec3d)} instead.
      */
     @Deprecated
     default boolean canReplace() {

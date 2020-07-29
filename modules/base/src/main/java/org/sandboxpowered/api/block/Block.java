@@ -74,7 +74,7 @@ public interface Block extends ItemProvider, Content<Block> {
     }
 
     default boolean isSame(Block block) {
-        return this==block;
+        return this == block;
     }
 
     BlockState getBaseState();
@@ -131,9 +131,7 @@ public interface Block extends ItemProvider, Content<Block> {
     }
 
     /**
-     *
-     * @deprecated
-     * <p> Use {@link Block#canReplace(WorldReader, Position, BlockState, PlayerEntity, Hand, ItemStack, Direction, Vec3d)} instead.
+     * @deprecated <p> Use {@link Block#canReplace(WorldReader, Position, BlockState, PlayerEntity, Hand, ItemStack, Direction, Vec3d)} instead.
      */
     @Deprecated
     default boolean canReplace(BlockState state) {
