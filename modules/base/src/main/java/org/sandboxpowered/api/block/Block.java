@@ -16,6 +16,7 @@ import org.sandboxpowered.api.state.BlockState;
 import org.sandboxpowered.api.state.StateFactory;
 import org.sandboxpowered.api.util.*;
 import org.sandboxpowered.api.util.math.Position;
+import org.sandboxpowered.api.util.math.Vec3d;
 import org.sandboxpowered.api.util.math.Vec3f;
 import org.sandboxpowered.api.world.World;
 import org.sandboxpowered.api.world.WorldReader;
@@ -66,6 +67,14 @@ public interface Block extends ItemProvider, Content<Block> {
      */
     default InteractionResult onBlockClicked(World world, Position pos, BlockState state, PlayerEntity player) {
         return InteractionResult.IGNORE;
+    }
+
+    default BlockState getStateForPlacement(WorldReader reader, Position pos, PlayerEntity player, Hand hand, ItemStack stack, Direction side, Vec3d hitPos) {
+        return getBaseState();
+    }
+
+    default boolean isSame(Block block) {
+        return this == block;
     }
 
     BlockState getBaseState();
@@ -121,8 +130,16 @@ public interface Block extends ItemProvider, Content<Block> {
         return state;
     }
 
+    /**
+     * @deprecated <p> Use {@link Block#canReplace(WorldReader, Position, BlockState, PlayerEntity, Hand, ItemStack, Direction, Vec3d)} instead.
+     */
+    @Deprecated
     default boolean canReplace(BlockState state) {
         return getMaterial(state).isReplaceable();
+    }
+
+    default boolean canReplace(WorldReader reader, Position pos, BlockState currentState, PlayerEntity player, Hand hand, ItemStack stack, Direction side, Vec3d hitPos) {
+        return canReplace(currentState);
     }
 
     default boolean isAir(BlockState state) {
