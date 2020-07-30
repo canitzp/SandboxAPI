@@ -7,6 +7,7 @@ import org.sandboxpowered.api.entity.player.Hand;
 import org.sandboxpowered.api.entity.player.PlayerEntity;
 import org.sandboxpowered.api.fluid.Fluids;
 import org.sandboxpowered.api.item.ItemStack;
+import org.sandboxpowered.api.shape.Shape;
 import org.sandboxpowered.api.state.BlockState;
 import org.sandboxpowered.api.state.FluidState;
 import org.sandboxpowered.api.state.Properties;
@@ -18,6 +19,9 @@ import org.sandboxpowered.api.util.math.Vec3d;
 import org.sandboxpowered.api.world.WorldReader;
 
 public class SlabBlock extends BaseBlock implements FluidLoggable {
+    protected static final Shape BOTTOM_SHAPE = Shape.cube(0, 0, 0, 16, 8,  16);
+    protected static final Shape TOP_SHAPE = Shape.cube(0, 8, 0, 16, 16,  16);
+
     public SlabBlock(Settings settings) {
         super(settings);
     }
@@ -31,6 +35,12 @@ public class SlabBlock extends BaseBlock implements FluidLoggable {
     public void appendProperties(StateFactory.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
         builder.add(Properties.SLAB_TYPE);
+    }
+
+    @Override
+    public Shape getShape(WorldReader reader, Position position, BlockState state) {
+        SlabType type = state.get(Properties.SLAB_TYPE);
+        return type == SlabType.BOTTOM ? BOTTOM_SHAPE : type == SlabType.TOP ? TOP_SHAPE : super.getShape(reader, position, state);
     }
 
     @Override
