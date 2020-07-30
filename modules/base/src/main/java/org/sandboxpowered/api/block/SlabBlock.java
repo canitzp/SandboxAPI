@@ -1,12 +1,8 @@
-package org.sandboxpowered.api.defaults.block;
+package org.sandboxpowered.api.block;
 
-import org.sandboxpowered.api.block.BaseBlock;
-import org.sandboxpowered.api.block.Block;
-import org.sandboxpowered.api.block.FluidLoggable;
 import org.sandboxpowered.api.entity.player.Hand;
 import org.sandboxpowered.api.entity.player.PlayerEntity;
 import org.sandboxpowered.api.fluid.Fluids;
-import org.sandboxpowered.api.item.Item;
 import org.sandboxpowered.api.item.ItemStack;
 import org.sandboxpowered.api.shape.Shape;
 import org.sandboxpowered.api.state.BlockState;
