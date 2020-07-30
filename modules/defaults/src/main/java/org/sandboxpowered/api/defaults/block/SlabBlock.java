@@ -6,6 +6,7 @@ import org.sandboxpowered.api.block.FluidLoggable;
 import org.sandboxpowered.api.entity.player.Hand;
 import org.sandboxpowered.api.entity.player.PlayerEntity;
 import org.sandboxpowered.api.fluid.Fluids;
+import org.sandboxpowered.api.item.Item;
 import org.sandboxpowered.api.item.ItemStack;
 import org.sandboxpowered.api.shape.Shape;
 import org.sandboxpowered.api.state.BlockState;
@@ -51,15 +52,15 @@ public class SlabBlock extends BaseBlock implements FluidLoggable {
         }
         FluidState fluidState = reader.getFluidState(pos);
         BlockState newState = getBaseState().with(Properties.WATERLOGGED, Fluids.WATER.matches(fluidState.getFluid()));
-        return newState.with(Properties.SLAB_TYPE, side == Direction.UP || (side != Direction.DOWN && pos.getY() - hitPos.getY() >= 0.5f) ? SlabType.TOP : SlabType.BOTTOM);
+        return newState.with(Properties.SLAB_TYPE, side == Direction.DOWN || (side != Direction.UP && hitPos.getY() - pos.getY() > 0.5f) ? SlabType.TOP : SlabType.BOTTOM);
     }
 
     @Override
     public boolean canReplace(WorldReader reader, Position pos, BlockState currentState, PlayerEntity player, Hand hand, ItemStack stack, Direction side, Vec3d hitPos) {
         SlabType slabType = currentState.get(Properties.SLAB_TYPE);
-        if (slabType != SlabType.DOUBLE && asItem().map(t -> t == stack.getItem()).orElse(false)) {
-            boolean isAbove = pos.getY() - hitPos.getY() >= 0.5D;
-            return slabType == SlabType.BOTTOM ? side == Direction.UP || !isAbove && side.getAxis().isHorizontal() : side == Direction.DOWN || isAbove && side.getAxis().isHorizontal();
+        if (slabType != SlabType.DOUBLE && asItem().filter(item -> item == stack.getItem()).isPresent()) {
+            boolean isAbove = hitPos.getY() - pos.getY() > 0.5D;
+            return slabType == SlabType.TOP ? side == Direction.UP || !isAbove && side.getAxis().isHorizontal() : side == Direction.DOWN || isAbove && side.getAxis().isHorizontal();
         } else {
             return false;
         }
