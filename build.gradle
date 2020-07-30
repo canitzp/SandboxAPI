@@ -91,6 +91,7 @@ dependencies {
         api project(":rendering")
 
         api project(":resources")
+        api project(":chest-ui")
     }
 }
 bintray {
