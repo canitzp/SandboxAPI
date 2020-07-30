@@ -19,8 +19,8 @@ import org.sandboxpowered.api.util.math.Vec3d;
 import org.sandboxpowered.api.world.WorldReader;
 
 public class SlabBlock extends BaseBlock implements FluidLoggable {
-    protected static final Shape BOTTOM_SHAPE = Shape.cube(0, 0, 0, 16, 8,  16);
-    protected static final Shape TOP_SHAPE = Shape.cube(0, 8, 0, 16, 16,  16);
+    protected static final Shape BOTTOM_SHAPE = Shape.cube(0, 0, 0, 1, 0.5, 1);
+    protected static final Shape TOP_SHAPE = Shape.cube(0, 0.5, 0, 1, 1, 1);
 
     public SlabBlock(Settings settings) {
         super(settings);
