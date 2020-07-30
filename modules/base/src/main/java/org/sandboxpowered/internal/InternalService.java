@@ -14,6 +14,7 @@ import org.sandboxpowered.api.item.Item;
 import org.sandboxpowered.api.item.ItemStack;
 import org.sandboxpowered.api.registry.Registry;
 import org.sandboxpowered.api.server.Server;
+import org.sandboxpowered.api.shape.Shape;
 import org.sandboxpowered.api.state.Property;
 import org.sandboxpowered.api.util.Identity;
 import org.sandboxpowered.api.util.annotation.Internal;
@@ -77,4 +78,10 @@ public interface InternalService {
     Client clientInstance();
 
     Vec2i createVec2i(int x, int y);
+
+    Shape shape_cube(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
+
+    Shape shape_fullCube();
+
+    Shape shape_empty();
 }

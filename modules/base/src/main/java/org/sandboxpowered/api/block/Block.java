@@ -12,6 +12,7 @@ import org.sandboxpowered.api.item.Item;
 import org.sandboxpowered.api.item.ItemProvider;
 import org.sandboxpowered.api.item.ItemStack;
 import org.sandboxpowered.api.registry.Registry;
+import org.sandboxpowered.api.shape.Shape;
 import org.sandboxpowered.api.state.BlockState;
 import org.sandboxpowered.api.state.StateFactory;
 import org.sandboxpowered.api.util.*;
@@ -80,6 +81,10 @@ public interface Block extends ItemProvider, Content<Block> {
     BlockState getBaseState();
 
     StateFactory<Block, BlockState> getStateFactory();
+
+    default Shape getShape(WorldReader reader, Position position, BlockState state) {
+        return Shape.fullCube();
+    }
 
     /**
      * Gets called when the block is placed
