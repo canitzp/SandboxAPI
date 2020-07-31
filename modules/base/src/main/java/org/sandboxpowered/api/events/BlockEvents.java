@@ -1,18 +1,23 @@
 package org.sandboxpowered.api.events;
 
 import org.sandboxpowered.api.entity.player.PlayerEntity;
-import org.sandboxpowered.api.events.args.BlockArgs;
-import org.sandboxpowered.api.events.args.BlockDropArgs;
-import org.sandboxpowered.api.events.args.BlockModifiableArgs;
+import org.sandboxpowered.api.item.ItemStack;
+import org.sandboxpowered.api.state.BlockState;
+import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.world.World;
-import org.sandboxpowered.eventhandler.PriorityEventHandler;
-import org.sandboxpowered.eventhandler.priority.PriorityHandler;
+import org.sandboxpowered.eventhandler.Cancellable;
+import org.sandboxpowered.eventhandler.EventHandler;
+import org.sandboxpowered.eventhandler.ResettableEventHandler;
 
 public class BlockEvents {
-    public static final PriorityHandler<PlayerEntity, BlockArgs> BREAK = new PriorityEventHandler<>();
-    public static final PriorityHandler<PlayerEntity, BlockModifiableArgs> PLACE = new PriorityEventHandler<>();
-    public static final PriorityHandler<PlayerEntity, BlockDropArgs> DROPS = new PriorityEventHandler<>();
+    public static final EventHandler<BreakEvent> BREAK = new ResettableEventHandler<>();
+    public static final EventHandler<PlaceEvent> PLACE = new ResettableEventHandler<>();
 
-    //Render highlight, might need more info in the args than the standard block info
-    public static final PriorityHandler<World, BlockArgs> HIGHLIGHT = new PriorityEventHandler<>();
+    public interface BreakEvent {
+        void onEvent(World world, Position position, BlockState state, PlayerEntity player, ItemStack tool, Cancellable cancellable);
+    }
+
+    public interface PlaceEvent {
+        BlockState onEvent(World world, Position position, BlockState state, PlayerEntity player, ItemStack stack, Cancellable cancellable);
+    }
 }

@@ -1,17 +1,19 @@
 package org.sandboxpowered.api.events;
 
-import org.sandboxpowered.api.entity.ItemEntity;
 import org.sandboxpowered.api.entity.player.PlayerEntity;
-import org.sandboxpowered.api.events.args.ArrowTypeArgs;
-import org.sandboxpowered.api.events.args.EntityArgs;
-import org.sandboxpowered.api.events.args.ItemArgs;
+import org.sandboxpowered.api.item.ItemStack;
 import org.sandboxpowered.eventhandler.EventHandler;
-import org.sandboxpowered.eventhandler.PriorityEventHandler;
-import org.sandboxpowered.eventhandler.priority.PriorityHandler;
+import org.sandboxpowered.eventhandler.ResettableEventHandler;
 
 public class ItemEvents {
-    public static final EventHandler<PlayerEntity, ArrowTypeArgs> GET_ARROW_TYPE = new EventHandler<>();
-    public static final PriorityHandler<PlayerEntity, ItemArgs> DAMAGE = new PriorityEventHandler<>();
-    public static final PriorityHandler<PlayerEntity, EntityArgs<ItemEntity>> THROW = new PriorityEventHandler<>();
+    public static final EventHandler<ArrowTypeEvent> GET_ARROW_TYPE = new ResettableEventHandler<>();
+    public static final EventHandler<DamageEvent> DAMAGE = new ResettableEventHandler<>();
 
+    public interface DamageEvent {
+        int onEvent(PlayerEntity player, ItemStack stack, int damage);
+    }
+
+    public interface ArrowTypeEvent {
+        ItemStack onEvent(PlayerEntity entity, ItemStack bow, ItemStack arrow);
+    }
 }
