@@ -10,10 +10,10 @@ import org.sandboxpowered.api.world.World;
 import org.sandboxpowered.internal.BlockEntityContext;
 
 public abstract class BaseBlockEntity implements BlockEntity {
-    private final Type<?> type;
+    private final Type type;
     private BlockEntityContext context;
 
-    public BaseBlockEntity(Type<?> type) {
+    public BaseBlockEntity(Type type) {
         this.type = type;
     }
 
@@ -33,7 +33,7 @@ public abstract class BaseBlockEntity implements BlockEntity {
     }
 
     @Override
-    public final Type<?> getType() {
+    public final Type getType() {
         return type;
     }
 

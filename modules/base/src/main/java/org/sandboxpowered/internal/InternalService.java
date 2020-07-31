@@ -8,6 +8,8 @@ import org.sandboxpowered.api.client.Client;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.content.Content;
 import org.sandboxpowered.api.entity.Entity;
+import org.sandboxpowered.api.entity.MobCategory;
+import org.sandboxpowered.api.entity.data.SyncedData;
 import org.sandboxpowered.api.fluid.Fluid;
 import org.sandboxpowered.api.fluid.FluidStack;
 import org.sandboxpowered.api.item.Item;
@@ -45,7 +47,7 @@ public interface InternalService {
 
     Material getMaterial(String material);
 
-    <T extends BlockEntity> BlockEntity.Type<T> blockEntityTypeFunction(Supplier<T> supplier, Block[] blocks);
+    BlockEntity.Type blockEntityTypeFunction(Supplier<? extends BlockEntity> supplier, Block[] blocks);
 
     ItemStack createItemStack(Item item, int amount);
 
@@ -78,6 +80,12 @@ public interface InternalService {
     Client clientInstance();
 
     Vec2i createVec2i(int x, int y);
+
+    MobCategory getEntityCategory(String name);
+
+    <T> SyncedData<T> registerSyncedData(SyncedData.SyncedDataSerializer<T> serializer, boolean saveToWorld);
+
+    <T> SyncedData<T> makeSyncedData(Identity id, SyncedData.SyncedDataSerializer<T> serializer, boolean saveToWorld);
 
     Shape shape_cube(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
 

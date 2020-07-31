@@ -1,9 +1,9 @@
 package org.sandboxpowered.api.block.entity;
 
 import org.jetbrains.annotations.Nullable;
-import org.sandboxpowered.api.block.Block;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.content.Content;
+import org.sandboxpowered.api.registry.Registry;
 import org.sandboxpowered.api.util.Direction;
 import org.sandboxpowered.api.util.Mono;
 import org.sandboxpowered.api.util.math.Position;
@@ -11,9 +11,6 @@ import org.sandboxpowered.api.util.nbt.CompoundTag;
 import org.sandboxpowered.api.util.nbt.ReadableCompoundTag;
 import org.sandboxpowered.api.util.nbt.WritableCompoundTag;
 import org.sandboxpowered.api.world.World;
-import org.sandboxpowered.internal.InternalService;
-
-import java.util.function.Supplier;
 
 public interface BlockEntity {
     /**
@@ -29,7 +26,7 @@ public interface BlockEntity {
     /**
      * The {@link Type} the BlockEntity belongs too
      */
-    Type<?> getType();
+    Type getType();
 
     /**
      * Read the {@link CompoundTag} for data belonging to the BlockEntity
@@ -64,19 +61,12 @@ public interface BlockEntity {
         void onTick();
     }
 
-    interface Type<T extends BlockEntity> extends Content<Type<T>> {
-        static <T extends BlockEntity> Type<T> of(Supplier<T> entityCreator, Block... validBlocks) {
-            return InternalService.getInstance().blockEntityTypeFunction(entityCreator, validBlocks);
-        }
-
-        @SuppressWarnings("unchecked")
-        static <C> Class<C> getType() {
-            return (Class<C>) Type.class;
-        }
+    interface Type extends Content<Type> {
+        Registry<Type> REGISTRY = Registry.getRegistryFromType(Type.class);
 
         @Override
-        default Class<Type<T>> getContentType() {
-            return getType();
+        default Class<Type> getContentType() {
+            return Type.class;
         }
     }
 }
