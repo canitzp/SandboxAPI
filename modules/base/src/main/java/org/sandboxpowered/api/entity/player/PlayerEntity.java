@@ -24,7 +24,9 @@ public interface PlayerEntity extends LivingEntity {
 
     Optional<Position> getSleepingPosition();
 
-    default boolean isSleeping() {
-        return getSleepingPosition().isPresent();
-    }
+    boolean isSleeping();
+
+    boolean isSleepingIgnored();
+
+    void setSleepingIgnored(boolean ignored);
 }
