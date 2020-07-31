@@ -11,12 +11,19 @@ public interface Shape {
     static Shape empty() {
         return InternalService.getInstance().shape_empty();
     }
+
     static Shape fullCube() {
         return InternalService.getInstance().shape_fullCube();
     }
+
+    static Shape cuboid(int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
+        return cube(minX / 16d, minY / 16d, minZ / 16d, maxX / 16d, maxY / 16d, maxZ / 16d);
+    }
+
     static Shape cube(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         return InternalService.getInstance().shape_cube(minX, minY, minZ, maxX, maxY, maxZ);
     }
+
     static Shape cube(Vec3d min, Vec3d max) {
         return cube(min.getX(), min.getY(), min.getZ(), max.getX(), max.getY(), max.getZ());
     }

@@ -3,6 +3,7 @@ package org.sandboxpowered.api.state;
 import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.block.Block;
 import org.sandboxpowered.api.block.Material;
+import org.sandboxpowered.api.block.multipart.Slot;
 import org.sandboxpowered.api.client.GraphicsMode;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.entity.player.Hand;
@@ -81,5 +82,9 @@ public interface BlockState extends PropertyContainer<BlockState> {
 
     default boolean is(Block block) {
         return getBlock().isSame(block) || block.isSame(getBlock());
+    }
+
+    default Slot getSlot() {
+        return getBlock().getSlot(this);
     }
 }
