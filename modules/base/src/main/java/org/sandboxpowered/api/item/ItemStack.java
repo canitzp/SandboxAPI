@@ -65,6 +65,16 @@ public interface ItemStack {
 
     ItemStack grow(int amount);
 
+    default boolean has(Registry.Entry<Enchantment> enchantment) {
+        return enchantment.isPresent() && has(enchantment.get());
+    }
+
+    boolean has(Enchantment enchantment);
+
+    default int getLevel(Registry.Entry<Enchantment> enchantment) {
+        return enchantment.isPresent() ? getLevel(enchantment.get()) : 0;
+    }
+
     int getLevel(Enchantment enchantment);
 
     boolean hasTag();
