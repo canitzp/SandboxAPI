@@ -83,9 +83,7 @@ public interface InternalService {
 
     MobCategory getEntityCategory(String name);
 
-    <T> SyncedData<T> registerSyncedData(SyncedData.SyncedDataSerializer<T> serializer, boolean saveToWorld);
-
-    <T> SyncedData<T> makeSyncedData(Identity id, SyncedData.SyncedDataSerializer<T> serializer, boolean saveToWorld);
+    <T> SyncedData<T> registerSyncedData(Identity id, SyncedData.SyncedDataSerializer<T> serializer, boolean saveToWorld);
 
     Shape shape_cube(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
 
