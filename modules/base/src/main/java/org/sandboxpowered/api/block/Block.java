@@ -310,7 +310,7 @@ public interface Block extends ItemProvider, Content<Block> {
 
         public static class Builder {
             private final Material material;
-            private float hardness, resistance, slipperiness, velocity, jumpVelocity;
+            private float hardness, resistance, slipperiness = 0.6F, velocity = 1.0F, jumpVelocity = 1.0F;
             private int luminance, opacity;
             private boolean randomTicks;
 
