@@ -9,6 +9,7 @@ import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.content.Content;
 import org.sandboxpowered.api.entity.Entity;
 import org.sandboxpowered.api.entity.MobCategory;
+import org.sandboxpowered.api.entity.data.DataSerializers;
 import org.sandboxpowered.api.entity.data.SyncedData;
 import org.sandboxpowered.api.fluid.Fluid;
 import org.sandboxpowered.api.fluid.FluidStack;
@@ -27,6 +28,7 @@ import org.sandboxpowered.api.util.nbt.CompoundTag;
 import org.sandboxpowered.api.util.nbt.ReadableCompoundTag;
 import org.sandboxpowered.api.util.text.Text;
 
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 @Internal
@@ -84,6 +86,8 @@ public interface InternalService {
     MobCategory getEntityCategory(String name);
 
     <T> SyncedData<T> registerSyncedData(Identity id, SyncedData.SyncedDataSerializer<T> serializer, boolean saveToWorld);
+
+    <T> SyncedData.SyncedDataSerializer<T> injectDataHandler(int id, DataSerializers.Serializer<T> serializer, BiFunction<String, CompoundTag, T> deserializer);
 
     Shape shape_cube(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
 

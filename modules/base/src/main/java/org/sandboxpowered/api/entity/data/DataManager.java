@@ -5,6 +5,10 @@ import org.sandboxpowered.api.util.nbt.CompoundTag;
 import org.sandboxpowered.internal.InternalService;
 
 public interface DataManager {
+    static <T> SyncedData<T> registerData(Identity id, SyncedData.SyncedDataSerializer<T> serializer) {
+        return registerData(id, serializer, true);
+    }
+
     static <T> SyncedData<T> registerData(Identity id, SyncedData.SyncedDataSerializer<T> serializer, boolean saveToWorld) {
         return InternalService.getInstance().registerSyncedData(id, serializer, saveToWorld);
     }
