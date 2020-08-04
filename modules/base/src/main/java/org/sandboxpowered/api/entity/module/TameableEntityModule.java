@@ -2,7 +2,6 @@ package org.sandboxpowered.api.entity.module;
 
 import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.entity.Entity;
-import org.sandboxpowered.api.entity.LivingEntity;
 import org.sandboxpowered.api.entity.data.DataManager;
 import org.sandboxpowered.api.entity.data.DataSerializers;
 import org.sandboxpowered.api.entity.data.SyncedData;
@@ -13,8 +12,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class TameableEntityModule implements EntityDataModule {
-    private static final SyncedData<Byte> TAMEABLE_DATA = DataManager.registerData(Identity.of("sandbox", "tameable_data"), DataSerializers.BYTE);
-    private static final SyncedData<Optional<UUID>> OWNER = DataManager.registerData(Identity.of("sandbox", "owner"), DataSerializers.OPTIONAL_UUID);
+    private static final SyncedData<Byte> TAMEABLE_DATA = DataManager.register(Identity.of("sandbox", "tameable_data"), DataSerializers.BYTE);
+    private static final SyncedData<Optional<UUID>> OWNER = DataManager.register(Identity.of("sandbox", "owner"), DataSerializers.OPTIONAL_UUID);
+
+    private static final int TAMED = 1;
+    private static final int SITTING = 2;
 
     @Override
     public SyncedData<?>[] getEntityData() {
@@ -22,21 +24,21 @@ public class TameableEntityModule implements EntityDataModule {
     }
 
     public boolean isTamed(Entity entity) {
-        return (entity.getDataManager().get(TAMEABLE_DATA) & 4) != 0;
+        return (entity.getDataManager().get(TAMEABLE_DATA) & TAMED) != 0;
     }
 
     public void setTamed(Entity entity, boolean tamed) {
         byte b = entity.getDataManager().get(TAMEABLE_DATA);
-        entity.getDataManager().set(TAMEABLE_DATA, tamed ? (byte) (b | 4) : (byte) (b & -5));
+        entity.getDataManager().set(TAMEABLE_DATA, tamed ? (byte) (b | TAMED) : (byte) (b & ~TAMED));
     }
 
     public boolean isSitting(Entity entity) {
-        return (entity.getDataManager().get(TAMEABLE_DATA) & 1) != 0;
+        return (entity.getDataManager().get(TAMEABLE_DATA) & SITTING) != 0;
     }
 
     public void setIsSitting(Entity entity, boolean inSittingPose) {
         byte b = entity.getDataManager().get(TAMEABLE_DATA);
-        entity.getDataManager().set(TAMEABLE_DATA, inSittingPose ? (byte) (b | 1) : (byte) (b & -2));
+        entity.getDataManager().set(TAMEABLE_DATA, inSittingPose ? (byte) (b | SITTING) : (byte) (b & ~SITTING));
     }
 
     public Optional<UUID> getOwnerID(Entity entity) {
@@ -53,9 +55,7 @@ public class TameableEntityModule implements EntityDataModule {
         //Advancement?
     }
 
-    @Nullable
-    public Entity getOwner(Entity entity) {
-        Optional<UUID> ownerID = getOwnerID(entity);
-        return ownerID.map(uuid -> entity.getWorld().getEntityByUUID(uuid)).orElse(null);
+    public Optional<Entity> getOwner(Entity entity) {
+        return getOwnerID(entity).map(uuid -> entity.getWorld().getEntityByUUID(uuid));
     }
 }

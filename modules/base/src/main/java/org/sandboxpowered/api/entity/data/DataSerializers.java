@@ -1,19 +1,14 @@
 package org.sandboxpowered.api.entity.data;
 
 import org.sandboxpowered.api.item.ItemStack;
-import org.sandboxpowered.api.state.BlockState;
 import org.sandboxpowered.api.util.Direction;
 import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.util.nbt.CompoundTag;
-import org.sandboxpowered.api.util.text.Text;
 import org.sandboxpowered.internal.InternalService;
 
 import java.util.Optional;
-import java.util.OptionalInt;
 import java.util.UUID;
-import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class DataSerializers {
     public static final SyncedData.SyncedDataSerializer<Byte> BYTE = get(0, (key, tag, value) -> tag.setByte(key, value), (key, tag) -> tag.getByte(key));
