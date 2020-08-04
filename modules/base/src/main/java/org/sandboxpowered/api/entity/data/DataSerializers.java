@@ -18,12 +18,12 @@ import java.util.function.Function;
 public class DataSerializers {
     public static final SyncedData.SyncedDataSerializer<Byte> BYTE = get(0, (key, tag, value) -> tag.setByte(key, value), (key, tag) -> tag.getByte(key));
     //public static final SyncedData.SyncedDataSerializer<Short> SHORT =
-    public static final SyncedData.SyncedDataSerializer<Integer> INTEGER = get(2, (key, tag, value) -> tag.setInt(key, value), (key, tag) -> tag.getInt(key));
+    public static final SyncedData.SyncedDataSerializer<Integer> INTEGER = get(1, (key, tag, value) -> tag.setInt(key, value), (key, tag) -> tag.getInt(key));
     //public static final SyncedData.SyncedDataSerializer<Long> LONG =
-    //public static final SyncedData.SyncedDataSerializer<Float> FLOAT = get(3, );
+    //public static final SyncedData.SyncedDataSerializer<Float> FLOAT = get(2, );
     //public static final SyncedData.SyncedDataSerializer<Double> DOUBLE =
-    public static final SyncedData.SyncedDataSerializer<String> STRING = get(4, (key, tag, value) -> tag.setString(key, value), (key, tag) -> tag.getString(key));
-    //public static final SyncedData.SyncedDataSerializer<Text> TEXT_COMPONENT = get(5, );
+    public static final SyncedData.SyncedDataSerializer<String> STRING = get(3, (key, tag, value) -> tag.setString(key, value), (key, tag) -> tag.getString(key));
+    //public static final SyncedData.SyncedDataSerializer<Text> TEXT_COMPONENT = get(4, );
     //public static final SyncedData.SyncedDataSerializer<Optional<Text>> OPTIONAL_TEXT_COMPONENT = get(5, );
     public static final SyncedData.SyncedDataSerializer<ItemStack> ITEM_STACK = get(6, (key, tag, value) -> tag.setTag(key, value.asTag()), (key, tag) -> ItemStack.read(tag));
     public static final SyncedData.SyncedDataSerializer<Boolean> BOOLEAN = get(7, (key, tag, value) -> tag.setBoolean(key, value), (key, tag) -> tag.getBoolean(key));
