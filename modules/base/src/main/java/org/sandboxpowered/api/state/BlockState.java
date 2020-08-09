@@ -85,6 +85,6 @@ public interface BlockState extends PropertyContainer<BlockState> {
     }
 
     default boolean is(Registry.Entry<Block> entry) {
-        return entry.isPresent()&&is(entry.get());
+        return entry.isPresent() && is(entry.get());
     }
 }
