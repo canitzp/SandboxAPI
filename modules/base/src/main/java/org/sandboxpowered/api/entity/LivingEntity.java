@@ -30,7 +30,7 @@ public interface LivingEntity extends Entity {
 
     ItemStack getEquipped(EquipmentSlot slot);
 
-    Void equip(EquipmentSlot slot, ItemStack stack);
+    void equip(EquipmentSlot slot, ItemStack stack);
 
     enum EquipmentSlot {
         MAINHAND(Type.HAND),
