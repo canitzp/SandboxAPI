@@ -9,7 +9,7 @@ import org.sandboxpowered.eventhandler.Cancellable;
 import org.sandboxpowered.eventhandler.EventHandler;
 import org.sandboxpowered.eventhandler.ResettableEventHandler;
 
-public class BlockEvents {
+public final class BlockEvents {
     public static final EventHandler<BreakEvent> BREAK = new ResettableEventHandler<>();
     public static final EventHandler<PlaceEvent> PLACE = new ResettableEventHandler<>();
 
