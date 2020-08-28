@@ -89,6 +89,8 @@ public interface InternalService {
 
     <T> SyncedData.SyncedDataSerializer<T> injectDataHandler(int id, DataSerializers.Serializer<T> serializer, BiFunction<String, CompoundTag, T> deserializer);
 
+    <T> SyncedData.SyncedDataSerializer<T> injectOptionalDataHandler(int present, int optional, DataSerializers.Serializer<T> serializer, BiFunction<String, CompoundTag, T> deserializer);
+
     Shape shape_cube(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
 
     Shape shape_fullCube();

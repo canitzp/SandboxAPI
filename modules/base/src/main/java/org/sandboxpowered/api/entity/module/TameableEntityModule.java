@@ -2,6 +2,7 @@ package org.sandboxpowered.api.entity.module;
 
 import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.entity.Entity;
+import org.sandboxpowered.api.entity.data.DataHolder;
 import org.sandboxpowered.api.entity.data.DataManager;
 import org.sandboxpowered.api.entity.data.DataSerializers;
 import org.sandboxpowered.api.entity.data.SyncedData;
@@ -11,16 +12,17 @@ import org.sandboxpowered.api.util.Identity;
 import java.util.Optional;
 import java.util.UUID;
 
-public class TameableEntityModule implements EntityDataModule {
+public class TameableEntityModule extends SingletonEntityModule {
     private static final SyncedData<Byte> TAMEABLE_DATA = DataManager.register(Identity.of("sandbox", "tameable_data"), DataSerializers.BYTE);
-    private static final SyncedData<Optional<UUID>> OWNER = DataManager.register(Identity.of("sandbox", "owner"), DataSerializers.OPTIONAL_UUID);
+    private static final SyncedData<UUID> OWNER = DataManager.register(Identity.of("sandbox", "owner"), DataSerializers.UUID);
+    private static final DataHolder<?>[] DATA_HOLDERS = new DataHolder<?>[]{new DataHolder<>(TAMEABLE_DATA, (byte) 0), new DataHolder<>(OWNER, null)};
 
     private static final int TAMED = 1;
     private static final int SITTING = 2;
 
     @Override
-    public SyncedData<?>[] getEntityData() {
-        return new SyncedData<?>[]{TAMEABLE_DATA, OWNER};
+    public DataHolder<?>[] getDataHolders() {
+        return DATA_HOLDERS;
     }
 
     public boolean isTamed(Entity entity) {
@@ -42,11 +44,11 @@ public class TameableEntityModule implements EntityDataModule {
     }
 
     public Optional<UUID> getOwnerID(Entity entity) {
-        return entity.getDataManager().get(OWNER);
+        return entity.getDataManager().getOptional(OWNER);
     }
 
     public void setOwnerID(Entity entity, @Nullable UUID uuid) {
-        entity.getDataManager().set(OWNER, Optional.ofNullable(uuid));
+        entity.getDataManager().set(OWNER, uuid);
     }
 
     public void setOwner(Entity entity, PlayerEntity player) {

@@ -2,10 +2,10 @@ package org.sandboxpowered.api.entity;
 
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.content.Content;
+import org.sandboxpowered.api.entity.data.DataHolder;
 import org.sandboxpowered.api.entity.data.DataManager;
-import org.sandboxpowered.api.entity.module.EntityDataModule;
-import org.sandboxpowered.api.entity.data.SyncedData;
 import org.sandboxpowered.api.entity.module.EntityModule;
+import org.sandboxpowered.api.entity.module.SingletonEntityModule;
 import org.sandboxpowered.api.registry.Registry;
 import org.sandboxpowered.api.util.Mono;
 import org.sandboxpowered.api.util.annotation.Alpha;
@@ -27,52 +27,53 @@ public interface Entity {
 
     boolean isSneaking();
 
-    Map<EntityModule<?>, ?> getModules();
+    Map<EntityModule.Type<?>, EntityModule> getModules();
 
     World getWorld();
 
     UUID getPersistentID();
 
-    default void addDataModule(EntityDataModule module) {
+    default <T> void addDataHolder(DataHolder<T> holder) {
+        getDataManager().add(holder.data, holder.initial);
+    }
+
+    default void addModule(EntityModule module) {
+        getModules().put(module.getType(), module);
+    }
+
+    default void addDataModule(SingletonEntityModule module) {
         addModule(module);
-        for (SyncedData<?> entityData : module.getEntityData()) {
-            getDataManager().add(entityData, null);
+        DataHolder<?>[] holders = module.getDataHolders();
+        if (holders != null) {
+            for (DataHolder<?> holder : holders) addDataHolder(holder);
         }
     }
 
-    default void addModule(EntityModule<?> module) {
-        getModules().put(module, cast(module.createInstance(this)));
-    }
-
-    default boolean hasModule(EntityModule<?> module) {
+    default boolean hasModule(EntityModule.Type<?> module) {
         return getModules().containsKey(module);
     }
 
-    default <T> T getModule(EntityModule<T> module) {
-        return cast(getModules().get(module));
+    @SuppressWarnings("unchecked")
+    default <T extends EntityModule> T getModule(EntityModule.Type<T> module) {
+        return (T) getModules().get(module);
     }
 
     default void readData(CompoundTag tag) {
-        for (Map.Entry<EntityModule<?>, ?> module : getModules().entrySet()) {
-            module.getKey().deserialize(cast(module.getValue()), tag);
+        for (EntityModule module : getModules().values()) {
+            module.deserialize(this, tag);
         }
     }
 
     default void writeData(CompoundTag tag) {
-        for (Map.Entry<EntityModule<?>, ?> module : getModules().entrySet()) {
-            module.getKey().serialize(cast(module.getValue()), tag);
+        for (EntityModule module : getModules().values()) {
+            module.serialize(this, tag);
         }
     }
 
     default void tick() {
-        for (Map.Entry<EntityModule<?>, ?> module : getModules().entrySet()) {
-            module.getKey().tick(cast(module.getValue()));
+        for (EntityModule module : getModules().values()) {
+            module.tick(this);
         }
-    }
-
-    @SuppressWarnings("unchecked")
-    static <F, T> T cast(F from) {
-        return (T) from;
     }
 
     interface Type extends Content<Type> {
