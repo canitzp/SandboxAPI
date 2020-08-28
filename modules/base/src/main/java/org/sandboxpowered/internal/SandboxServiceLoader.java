@@ -12,7 +12,7 @@ public class SandboxServiceLoader {
     private static final Map<Class<?>, Object> SERVICE_MAP = new HashMap<>();
 
     @NotNull
-    public static <T> T loadService(Class<T> tClass) {
+    public static <T> T getOrLoadService(Class<T> tClass) {
         if (!SERVICE_MAP.containsKey(tClass)) {
             ServiceLoader<T> functionsServiceLoader = ServiceLoader.load(tClass);
             Iterator<T> tIterator = functionsServiceLoader.iterator();
