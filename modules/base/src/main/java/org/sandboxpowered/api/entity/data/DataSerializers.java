@@ -29,11 +29,11 @@ public class DataSerializers {
     public static final SyncedData.SyncedDataSerializer<CompoundTag> TAG_COMPOUND = get(14, (key, tag, value) -> tag.setTag(key, value), (key, tag) -> tag.getCompound(key));
 
     private static <T> SyncedData.SyncedDataSerializer<T> getOptional(int present, int optional, Serializer<T> serializer, BiFunction<String, CompoundTag, T> deserializer) {
-        return InternalService.getInstance().injectOptionalDataHandler(present, optional, serializer, deserializer);
+        return InternalService.getInstance().injectDataHandler(present, optional, serializer, deserializer);
     }
 
     private static <T> SyncedData.SyncedDataSerializer<T> get(int id, Serializer<T> serializer, BiFunction<String, CompoundTag, T> deserializer) {
-        return InternalService.getInstance().injectDataHandler(id, serializer, deserializer);
+        return InternalService.getInstance().injectDataHandler(id, -1, serializer, deserializer);
     }
 
     @FunctionalInterface
