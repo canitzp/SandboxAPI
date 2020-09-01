@@ -6,8 +6,5 @@ project(':base').projectDir = new File('./modules/base')
 include 'rendering'
 project(':rendering').projectDir = new File('./modules/rendering')
 
-include 'editor'
-project(':editor').projectDir = new File('./modules/editor')
-
 include 'resources'
 project(':resources').projectDir = new File('./modules/resources')
