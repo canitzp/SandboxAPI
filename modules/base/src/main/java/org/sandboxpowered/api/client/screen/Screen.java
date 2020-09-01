@@ -1,4 +1,4 @@
-package org.sandboxpowered.api.screen;
+package org.sandboxpowered.api.client.screen;
 
 import org.sandboxpowered.api.client.Client;
 import org.sandboxpowered.api.util.math.MatrixStack;
@@ -8,11 +8,17 @@ public interface Screen {
 
     void render(Client client, MatrixStack matrixStack, int mouseX, int mouseY, float partial);
 
-    boolean shouldPauseGame();
+    default boolean shouldPauseGame() {
+        return true;
+    }
 
-    void onClose();
+    default void onClose() {
 
-    boolean shouldCloseOnEsc();
+    }
+
+    default boolean shouldCloseOnEsc() {
+        return true;
+    }
 
     String getNarratorText();
 }
