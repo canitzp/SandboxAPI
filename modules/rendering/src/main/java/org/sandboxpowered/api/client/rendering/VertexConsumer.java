@@ -11,9 +11,9 @@ public interface VertexConsumer {
 
     void vertex(Vec3f position, Color color, Vec2f texture, int overlay, int light, Vec3f normal);
 
-    void vertex(Matrix4f matrix, float x, float y, float z);
+    VertexConsumer vertex(Matrix4f matrix, float x, float y, float z);
 
-    void vertex(Matrix4f matrix, Vec3f vec);
+    VertexConsumer vertex(Matrix4f matrix, Vec3f vec);
 
     VertexConsumer vertex(float x, float y, float z);
 
