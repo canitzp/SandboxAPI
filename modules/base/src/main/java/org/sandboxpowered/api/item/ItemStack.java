@@ -39,7 +39,7 @@ public interface ItemStack {
     }
 
     static ItemStack empty() {
-        return of(Items.AIR.get(), 0);
+        return of((Item) null, 0);
     }
 
     static ItemStack read(ReadableCompoundTag tag) {

@@ -10,13 +10,13 @@ import java.util.function.Consumer;
 public interface Registrar {
     AddonInfo getSourceAddon();
 
-    <T extends Content<T>> Registry.Entry<T> getEntry(Identity identity, Class<T> tClass);
+    <T extends Content<T>> T get(Identity identity, Class<T> tClass);
 
-    <T extends Content<T>> Registry.Entry<T> getEntry(Identity identity, Registry<T> registry);
+    <T extends Content<T>> T get(Identity identity, Registry<T> registry);
 
-    <T extends Content<T>> Registry.Entry<T> register(Identity identity, T content);
+    <T extends Content<T>> T register(Identity identity, T content);
 
-    default <T extends Content<T>> Registry.Entry<T> register(String name, T content) {
+    default <T extends Content<T>> T register(String name, T content) {
         return register(Identity.of(getSourceAddon().getId(), name), content);
     }
 

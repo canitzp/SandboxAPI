@@ -18,9 +18,9 @@ public interface Registry<T extends Content<T>> {
 
     Identity getIdentity(T val);
 
-    Entry<T> get(Identity identity);
+    T get(Identity identity);
 
-    Entry<T> register(Identity identity, T val);
+    T register(Identity identity, T val);
 
     Collection<T> values();
 
@@ -39,28 +39,4 @@ public interface Registry<T extends Content<T>> {
     Class<T> getType();
 
     Identity getIdentity();
-
-    interface Entry<T extends Content<T>> extends Supplier<T>, Predicate<T> {
-        @Override
-        T get();
-
-        Optional<T> getAsOptional();
-
-        T orElse(T other);
-
-        T orElseGet(Supplier<T> other);
-
-        boolean isPresent();
-
-        @Override
-        default boolean test(T t) {
-            return matches(t);
-        }
-
-        boolean matches(T other);
-
-        void ifPresent(Consumer<T> tConsumer);
-
-        void ifPresentOrElse(Consumer<T> tConsumer, Runnable notPresent);
-    }
 }
