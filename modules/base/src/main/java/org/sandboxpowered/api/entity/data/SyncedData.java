@@ -9,16 +9,20 @@ public interface SyncedData<T> {
 
     SyncedDataSerializer<T> getSerializer();
 
-    boolean isSavedInWorld();
+    boolean isNotSerialized();
 
     interface SyncedDataSerializer<T> {
         T read(PacketBuffer buf);
 
         void write(PacketBuffer buf, T value);
 
-        T read(CompoundTag tag, String key);
+        default T read(CompoundTag tag, String key) {
+            throw new RuntimeException("Tried to read using serializer that has no implementation: " + getClass().getSimpleName());
+        }
 
-        void write(CompoundTag buf, String key, T value);
+        default void write(CompoundTag buf, String key, T value) {
+            throw new RuntimeException("Tried to write using serializer that has no implementation: " + getClass().getSimpleName());
+        }
 
         T copy(T value);
     }
