@@ -8,7 +8,7 @@ import org.sandboxpowered.api.client.Client;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.content.Content;
 import org.sandboxpowered.api.entity.Entity;
-import org.sandboxpowered.api.entity.MobCategory;
+import org.sandboxpowered.api.entity.EntityCategory;
 import org.sandboxpowered.api.entity.data.DataSerializers;
 import org.sandboxpowered.api.entity.data.SyncedData;
 import org.sandboxpowered.api.fluid.Fluid;
@@ -83,7 +83,7 @@ public interface InternalService {
 
     Vec2i createVec2i(int x, int y);
 
-    MobCategory getEntityCategory(String name);
+    EntityCategory getEntityCategory(String name);
 
     <T> SyncedData<T> registerSyncedData(Identity id, SyncedData.SyncedDataSerializer<T> serializer, boolean saveToWorld);
 
@@ -94,4 +94,7 @@ public interface InternalService {
     Shape shape_fullCube();
 
     Shape shape_empty();
+
+    //How would something from the rendering module be referenced here?
+    Object makeModelPart(int textureWidth, int textureHeight, int textureU, int textureV);
 }

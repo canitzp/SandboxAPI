@@ -9,6 +9,7 @@ import org.sandboxpowered.api.entity.module.EntityModule;
 import org.sandboxpowered.api.registry.Registry;
 import org.sandboxpowered.api.util.Mono;
 import org.sandboxpowered.api.util.annotation.Alpha;
+import org.sandboxpowered.api.util.math.Vec3d;
 import org.sandboxpowered.api.util.nbt.CompoundTag;
 import org.sandboxpowered.api.world.World;
 
@@ -28,6 +29,10 @@ public interface Entity {
     boolean isSneaking();
 
     Map<EntityModule<?>, ?> getModules();
+
+    Vec3d getMotion();
+
+    Vec3d setMotion();
 
     World getWorld();
 

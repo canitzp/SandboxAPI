@@ -6,6 +6,6 @@ import org.sandboxpowered.api.util.annotation.PreAlpha;
 import org.sandboxpowered.api.util.math.MatrixStack;
 
 @PreAlpha
-public interface BlockEntityRender<T extends BlockEntity> {
+public interface BlockEntityRenderer<T extends BlockEntity> {
     void render(T entity, MatrixStack stack, VertexConsumer.Provider provider, int light, int overlay, float delta);
 }
