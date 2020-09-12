@@ -6,6 +6,7 @@ import org.sandboxpowered.api.util.Identity;
 import org.sandboxpowered.api.util.annotation.Alpha;
 import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.util.nbt.CompoundTag;
+import org.sandboxpowered.api.util.nbt.ReadableCompoundTag;
 import org.sandboxpowered.api.util.text.Text;
 
 import java.util.Optional;
@@ -20,7 +21,7 @@ public interface PlayerEntity extends LivingEntity {
         openScreen(id, null);
     }
 
-    void openScreen(Identity id, @Nullable CompoundTag data);
+    void openScreen(Identity id, @Nullable ReadableCompoundTag data);
 
     Optional<Position> getSleepingPosition();
 
