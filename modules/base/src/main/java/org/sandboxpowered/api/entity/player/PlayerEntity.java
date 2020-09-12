@@ -30,6 +30,4 @@ public interface PlayerEntity extends LivingEntity {
     boolean isSleepingIgnored();
 
     void setSleepingIgnored(boolean ignored);
-
-    ItemStack getHeldItem(Hand hand);
 }

@@ -3,7 +3,9 @@ package org.sandboxpowered.api.item;
 import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.content.Content;
+import org.sandboxpowered.api.entity.LivingEntity;
 import org.sandboxpowered.api.registry.Registry;
+import org.sandboxpowered.api.state.BlockState;
 import org.sandboxpowered.api.util.InteractionResult;
 import org.sandboxpowered.api.util.Mono;
 import org.sandboxpowered.api.util.math.Position;
@@ -28,6 +30,22 @@ public interface Item extends Content<Item> {
 
     default void appendTooltipText(ItemStack cast, @Nullable World world, List<Text> tooltip, boolean advanced) {
 
+    }
+
+    default float getMiningSpeed(ItemStack stack, BlockState state) {
+        return 1;
+    }
+
+    default boolean isEffectiveOn(ItemStack stack, BlockState state) {
+        return false;
+    }
+
+    default boolean onHit(ItemStack stack, LivingEntity attacker, LivingEntity victim) {
+        return false;
+    }
+
+    default boolean onMine(ItemStack stack, World world, Position pos, BlockState state, LivingEntity user) {
+        return false;
     }
 
     default <X> Mono<X> getComponent(Component<X> component) {
