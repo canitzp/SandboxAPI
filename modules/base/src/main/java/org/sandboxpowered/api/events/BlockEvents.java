@@ -8,10 +8,11 @@ import org.sandboxpowered.api.world.World;
 import org.sandboxpowered.eventhandler.Cancellable;
 import org.sandboxpowered.eventhandler.EventHandler;
 import org.sandboxpowered.eventhandler.ResettableEventHandler;
+import org.sandboxpowered.internal.InternalService;
 
 public final class BlockEvents {
-    public static final EventHandler<BreakEvent> BREAK = new ResettableEventHandler<>();
-    public static final EventHandler<PlaceEvent> PLACE = new ResettableEventHandler<>();
+    public static final EventHandler<BreakEvent> BREAK = InternalService.getInstance().createEventHandler();
+    public static final EventHandler<PlaceEvent> PLACE = InternalService.getInstance().createEventHandler();
 
     public interface BreakEvent {
         void onEvent(World world, Position position, BlockState state, PlayerEntity player, ItemStack tool, Cancellable cancellable);
