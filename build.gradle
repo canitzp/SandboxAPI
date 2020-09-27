@@ -1,13 +1,16 @@
 plugins {
-    id "com.jfrog.bintray" version "1.8.4"
     id 'java-platform'
     id 'maven-publish'
 }
 def ENV = System.getenv()
 
+def releasesRepoUrl = "https://nexus.sandboxpowered.org/repository/maven-releases/"
+def snapshotsRepoUrl = "https://nexus.sandboxpowered.org/repository/maven-snapshots/"
+
 allprojects {
     def buildNumber = ENV.BUILD_NUMBER
-    version = "${project.api_version}.${buildNumber ?: "0"}"
+    def snapshot = ENV.MAVEN_SNAPSHOT? '-SNAPSHOT' : ''
+    version = "${project.api_version}${snapshot}"
     group = project.maven_group
 }
 
@@ -16,7 +19,6 @@ archivesBaseName = 'platform'
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
-    apply plugin: "com.jfrog.bintray"
 
     sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
@@ -52,30 +54,16 @@ subprojects {
                 artifact jar
             }
         }
-    }
-    bintray {
-        user = System.getenv("BINTRAY_USER")
-        key = System.getenv("BINTRAY_KEY")
-        publications = ['mavenJava']
-        publish = true
 
-        pkg {
-            repo = 'API'
-            name = project.name
-            userOrg = 'sandboxpowered'
-            licenses = ['MIT']
-            vcsUrl = 'https://github.com/sandboxpowered/sandboxapi.git'
-            publicDownloadNumbers = true
-            githubRepo = 'sandboxpowered/sandboxapi'
-            githubReleaseNotesFile = 'README.md'
-            version {
-                name = project.version
-                desc = ''
-                vcsTag = project.version
-                released = new Date()
+        repositories {
+            maven {
+                url = ENV.MAVEN_SNAPSHOT ? snapshotsRepoUrl : releasesRepoUrl
+                credentials {
+                    username ENV.MAVEN_SNAPSHOT ? ENV.MAVEN_SNAPSHOT : ENV.MAVEN_USER
+                    password ENV.MAVEN_PASS
+                }
             }
         }
-
     }
 }
 
@@ -93,30 +81,7 @@ dependencies {
         api project(":resources")
     }
 }
-bintray {
-    user = System.getenv("BINTRAY_USER")
-    key = System.getenv("BINTRAY_KEY")
-    publications = ['platform']
-    publish = true
 
-    pkg {
-        repo = 'API'
-        name = 'api'
-        userOrg = 'sandboxpowered'
-        licenses = ['MIT']
-        vcsUrl = 'https://github.com/sandboxpowered/sandboxapi.git'
-        publicDownloadNumbers = true
-        githubRepo = 'sandboxpowered/sandboxapi'
-        githubReleaseNotesFile = 'README.md'
-        version {
-            name = project.version
-            desc = ''
-            vcsTag = project.version
-            released = new Date()
-        }
-    }
-
-}
 publishing {
     publications {
         platform(MavenPublication) {
@@ -124,6 +89,16 @@ publishing {
             artifactId = 'api'
 
             from components.javaPlatform
+        }
+    }
+
+    repositories {
+        maven {
+            url = ENV.MAVEN_SNAPSHOT ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username ENV.MAVEN_SNAPSHOT ? ENV.MAVEN_SNAPSHOT : ENV.MAVEN_USER
+                password ENV.MAVEN_PASS
+            }
         }
     }
 }
