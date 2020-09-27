@@ -28,5 +28,6 @@ public interface ModelManager {
     interface DefaultFormats {
         Identity MOJANGSON = Identity.of("minecraft", "json");
         Identity OBJ = Identity.of("sandbox", "obj");
+        Identity GLTF = Identity.of("sandbox", "gltf");
     }
 }

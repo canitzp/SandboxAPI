@@ -27,6 +27,7 @@ import org.sandboxpowered.api.util.math.Vec3i;
 import org.sandboxpowered.api.util.nbt.CompoundTag;
 import org.sandboxpowered.api.util.nbt.ReadableCompoundTag;
 import org.sandboxpowered.api.util.text.Text;
+import org.sandboxpowered.eventhandler.EventHandler;
 
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
@@ -97,4 +98,6 @@ public interface InternalService {
 
     //How would something from the rendering module be referenced here?
     Object makeModelPart(int textureWidth, int textureHeight, int textureU, int textureV);
+
+    <X> EventHandler<X> createEventHandler();
 }

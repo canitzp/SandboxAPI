@@ -6,12 +6,13 @@ import org.sandboxpowered.api.util.math.Vec3d;
 import org.sandboxpowered.api.world.World;
 import org.sandboxpowered.eventhandler.EventHandler;
 import org.sandboxpowered.eventhandler.ResettableEventHandler;
+import org.sandboxpowered.internal.InternalService;
 
 import java.util.List;
 
 public final class WorldEvents {
-    public static final EventHandler<LightningStrikeEvent> LIGHTNING_STRIKE = new ResettableEventHandler<>();
-    public static final EventHandler<AddCollisionBoxes> ADD_COLLISION_BOXES = new ResettableEventHandler<>();
+    public static final EventHandler<LightningStrikeEvent> LIGHTNING_STRIKE = InternalService.getInstance().createEventHandler();
+    public static final EventHandler<AddCollisionBoxes> ADD_COLLISION_BOXES = InternalService.getInstance().createEventHandler();
 
     public interface LightningStrikeEvent {
         void onEvent(World world, Vec3d position, List<Entity> hitEntities);
