@@ -24,6 +24,7 @@ import org.sandboxpowered.api.util.math.Vec3i;
 import org.sandboxpowered.api.util.nbt.CompoundTag;
 import org.sandboxpowered.api.util.nbt.ReadableCompoundTag;
 import org.sandboxpowered.api.util.text.Text;
+import org.sandboxpowered.eventhandler.EventHandler;
 
 import java.util.function.Supplier;
 
@@ -84,4 +85,6 @@ public interface InternalService {
     Shape shape_fullCube();
 
     Shape shape_empty();
+
+    <X> EventHandler<X> createEventHandler();
 }
