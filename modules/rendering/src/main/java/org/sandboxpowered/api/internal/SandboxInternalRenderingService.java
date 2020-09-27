@@ -8,7 +8,7 @@ import org.sandboxpowered.internal.SandboxServiceLoader;
 public interface SandboxInternalRenderingService {
     @NotNull
     static SandboxInternalRenderingService getInstance() {
-        return SandboxServiceLoader.getOrLoadService(SandboxInternalRenderingService.class);
+        return SandboxServiceLoader.loadService(SandboxInternalRenderingService.class);
     }
 
     <T extends Entity> LegacyEntityModel.Bone createBone(LegacyEntityModel tLegacyEntityModel);
