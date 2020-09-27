@@ -1,6 +1,7 @@
 package org.sandboxpowered.api.shape;
 
 import org.sandboxpowered.api.util.Direction;
+import org.sandboxpowered.api.util.math.ShapeCombination;
 import org.sandboxpowered.api.util.math.Vec3d;
 import org.sandboxpowered.internal.InternalService;
 
@@ -41,4 +42,10 @@ public interface Shape {
     Shape getFace(Direction direction);
 
     boolean contains(double x, double y, double z);
+
+    default Shape combine(Shape shape) {
+        return combine(shape, ShapeCombination.OR);
+    }
+
+    Shape combine(Shape shape, ShapeCombination function);
 }

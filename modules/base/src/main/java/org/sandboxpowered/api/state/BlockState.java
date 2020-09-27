@@ -9,6 +9,7 @@ import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.entity.player.Hand;
 import org.sandboxpowered.api.entity.player.PlayerEntity;
 import org.sandboxpowered.api.item.ItemStack;
+import org.sandboxpowered.api.registry.Registry;
 import org.sandboxpowered.api.util.Direction;
 import org.sandboxpowered.api.util.Mirror;
 import org.sandboxpowered.api.util.Mono;
@@ -86,5 +87,9 @@ public interface BlockState extends PropertyContainer<BlockState> {
 
     default Slot getSlot() {
         return getBlock().getSlot(this);
+    }
+
+    default boolean is(Registry.Entry<Block> entry) {
+        return entry.isPresent() && is(entry.get());
     }
 }

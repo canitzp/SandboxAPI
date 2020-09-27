@@ -2,12 +2,19 @@ package org.sandboxpowered.api.events;
 
 import org.sandboxpowered.api.entity.player.PlayerEntity;
 import org.sandboxpowered.api.item.ItemStack;
+import org.sandboxpowered.api.state.BlockState;
 import org.sandboxpowered.eventhandler.EventHandler;
 import org.sandboxpowered.eventhandler.ResettableEventHandler;
+import org.sandboxpowered.internal.InternalService;
 
-public class ItemEvents {
-    public static final EventHandler<ArrowTypeEvent> GET_ARROW_TYPE = new ResettableEventHandler<>();
-    public static final EventHandler<DamageEvent> DAMAGE = new ResettableEventHandler<>();
+public final class ItemEvents {
+    public static final EventHandler<ArrowTypeEvent> GET_ARROW_TYPE = InternalService.getInstance().createEventHandler();
+    public static final EventHandler<DamageEvent> DAMAGE = InternalService.getInstance().createEventHandler();
+    public static final EventHandler<MiningSpeedEvent> MINING_SPEED = InternalService.getInstance().createEventHandler();
+
+    public interface MiningSpeedEvent {
+        float onEvent(PlayerEntity player, ItemStack stack, BlockState state, float speed);
+    }
 
     public interface DamageEvent {
         int onEvent(PlayerEntity player, ItemStack stack, int damage);
