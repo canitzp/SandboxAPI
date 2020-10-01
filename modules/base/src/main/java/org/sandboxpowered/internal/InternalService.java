@@ -1,5 +1,6 @@
 package org.sandboxpowered.internal;
 
+import com.google.gson.JsonElement;
 import org.jetbrains.annotations.NotNull;
 import org.sandboxpowered.api.block.Block;
 import org.sandboxpowered.api.block.Material;
@@ -12,6 +13,7 @@ import org.sandboxpowered.api.fluid.Fluid;
 import org.sandboxpowered.api.fluid.FluidStack;
 import org.sandboxpowered.api.item.Item;
 import org.sandboxpowered.api.item.ItemStack;
+import org.sandboxpowered.api.recipe.Ingredient;
 import org.sandboxpowered.api.registry.Registry;
 import org.sandboxpowered.api.server.Server;
 import org.sandboxpowered.api.shape.Box;
@@ -92,4 +94,10 @@ public interface InternalService {
     Box box_of(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
 
     Box box_of(Position pos1, Position pos2);
+
+    <T> Ingredient<T> ingredient_of(T t);
+
+    <T> Ingredient<T> ingredient_ofArray(T[] ts);
+
+    <T> Ingredient<T> ingredient_fromJson(Class<T> type, JsonElement element);
 }
