@@ -4,7 +4,6 @@ import org.sandboxpowered.api.entity.player.PlayerEntity;
 import org.sandboxpowered.api.item.ItemStack;
 import org.sandboxpowered.api.state.BlockState;
 import org.sandboxpowered.eventhandler.EventHandler;
-import org.sandboxpowered.eventhandler.ResettableEventHandler;
 import org.sandboxpowered.internal.InternalService;
 
 public final class ItemEvents {
