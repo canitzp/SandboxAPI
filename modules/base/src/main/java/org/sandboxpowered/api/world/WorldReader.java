@@ -10,6 +10,7 @@ import org.sandboxpowered.api.util.math.Position;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 public interface WorldReader {
     BlockState getBlockState(Position position);
@@ -31,11 +32,7 @@ public interface WorldReader {
         return height > 0 && height < 256;
     }
 
-    List<Entity> getEntitiesWithin(Box box);
+    Stream<Entity> getEntitiesWithin(Box box);
 
-    <T extends Entity> List<T> getEntitiesWithin(Box box, Class<T> filter);
-
-    default List<Entity> getEntities() {
-        return Collections.emptyList();
-    }
+    <T extends Entity> Stream<T> getEntitiesWithin(Box box, Class<T> filter);
 }
