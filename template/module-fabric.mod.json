@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "module_id",
+  "version": "module_version",
+  "environment": "*",
+  "custom": {
+    "modmenu:api": true,
+    "modmenu:parent": "sandbox"
+  }
+}

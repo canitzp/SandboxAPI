@@ -1,52 +1,48 @@
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "org.javamodularity:moduleplugin:1.6.0"
-    }
-}
-
 plugins {
     id 'java-platform'
     id 'maven-publish'
+    id 'me.qoomon.git-versioning' version '3.0.0'
 }
 def ENV = System.getenv()
 
+def releasesRepoUrl = "https://nexus.sandboxpowered.org/repository/maven-releases/"
+def snapshotsRepoUrl = "https://nexus.sandboxpowered.org/repository/maven-snapshots/"
+
+version = "${project.api_version}-SNAPSHOT"
+gitVersioning.apply {
+    branch {
+        pattern = 'develop'
+        versionFormat = '${version}'
+    }
+    branch {
+        pattern = 'feature/(?<feature>.+)'
+        versionFormat = '${feature}-SNAPSHOT'
+    }
+    tag {
+        pattern = 'release/(?<tagVersion>[0-9].*)'
+        versionFormat = '${tagVersion}'
+    }
+    commit {
+        versionFormat = '${commit.short}'
+    }
+}
+
 allprojects {
-    def buildNumber = ENV.BUILD_NUMBER
-    version = "${project.api_version}.${buildNumber ?: "0"}"
     group = project.maven_group
 }
 
-archivesBaseName='platform'
-
-void addRepo(RepositoryHandler repositories) {
-    def ENV = System.getenv()
-    if (ENV.mvn_username) {
-        repositories.maven {
-            name = "Maven"
-            url = uri("sftp://maven.sandboxpowered.org:22/sbxmvn/")
-            credentials {
-                username = ENV.mvn_username
-                password = ENV.mvn_password
-            }
-        }
-    }
-}
+archivesBaseName = 'platform'
 
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
 
+    version = rootProject.version
+
     sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
     repositories {
-        mavenCentral()
-        maven { url 'https://jitpack.io' }
-        maven { url 'https://maven.sandboxpowered.org' }
+        maven { url 'https://nexus.sandboxpowered.org/repository/maven-public/' }
     }
 
     if (project.name != "base") {
@@ -55,26 +51,58 @@ subprojects {
         }
     }
 
+    ext.genOutputDir = file("$buildDir/generated/resources")
+    def templateModJson = rootProject.file("template/module-fabric.mod.json")
+    task generateFabricModJson {
+        def outputFile = file("${project.ext.genOutputDir}/fabric.mod.json")
+        outputs.file(outputFile)
+        doLast {
+            outputFile.text = templateModJson.text.replaceAll("module_version", "${project.version}").replaceAll("module_id", "sandbox-${project.name}")
+        }
+    }
+    sourceSets.main.output.dir ext.genOutputDir, builtBy: generateFabricModJson
+
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
     publishing {
         publications {
             mavenJava(MavenPublication) {
-                afterEvaluate {
-                    artifact jar
+                groupId project.group
+                artifactId project.name
+                version project.version
+
+                artifact jar
+                artifact sourcesJar
+            }
+        }
+
+        repositories {
+            maven {
+                url = rootProject.version.endsWith("-SNAPSHOT") ? snapshotsRepoUrl : releasesRepoUrl
+                credentials {
+                    username ENV.MAVEN_USER
+                    password ENV.MAVEN_PASS
                 }
             }
         }
-        addRepo(repositories)
     }
+}
+
+repositories {
+    maven { url 'https://nexus.sandboxpowered.org/repository/maven-public/' }
 }
 
 dependencies {
     constraints {
         api project(":base")
         api project(":rendering")
-        api project(":rendering-opengl")
-        api project(":rendering-vulkan")
 
         api project(":resources")
+
+        api project(":recipes")
     }
 }
 
@@ -87,5 +115,14 @@ publishing {
             from components.javaPlatform
         }
     }
-    addRepo(repositories)
+
+    repositories {
+        maven {
+            url = rootProject.version.endsWith("-SNAPSHOT") ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username ENV.MAVEN_USER
+                password ENV.MAVEN_PASS
+            }
+        }
+    }
 }

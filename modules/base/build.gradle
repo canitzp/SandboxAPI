@@ -1,0 +1,15 @@
+configurations {
+    shade
+    api.extendsFrom shade
+}
+
+dependencies {
+    api group: 'org.jetbrains', name: 'annotations', version: '19.0.0'
+    api 'com.electronwill.night-config:core:3.6.0'
+    api 'com.electronwill.night-config:toml:3.6.0'
+    api 'com.github.zafarkhaja:java-semver:0.9.0'
+    api 'org.sandboxpowered:SimpleEventHandler:2.0.3'
+    api group: 'com.google.guava', name: 'guava', version: '21.0'
+    api group: 'com.google.code.gson', name: 'gson', version: '2.8.0'
+    api group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+}
