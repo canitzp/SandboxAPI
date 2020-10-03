@@ -66,8 +66,8 @@ public interface Block extends ItemProvider, Content<Block> {
      *
      * @return The {@link InteractionResult} of the interaction
      */
-    default InteractionResult onBlockClicked(World world, Position pos, BlockState state, PlayerEntity player) {
-        return InteractionResult.IGNORE;
+    default void onBlockClicked(World world, Position pos, BlockState state, PlayerEntity player) {
+
     }
 
     default BlockState getStateForPlacement(WorldReader reader, Position pos, PlayerEntity player, Hand hand, ItemStack stack, Direction side, Vec3d hitPos) {
