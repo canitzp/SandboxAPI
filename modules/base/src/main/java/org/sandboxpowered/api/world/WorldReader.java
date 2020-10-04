@@ -29,7 +29,7 @@ public interface WorldReader {
     }
 
     default boolean isHeightValid(int height) {
-        return height > 0 && height < 256;
+        return height >= 0 && height < 256;
     }
 
     Stream<Entity> getEntitiesWithin(Box box);
