@@ -2,7 +2,6 @@ package org.sandboxpowered.api.entity.player;
 
 import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.entity.LivingEntity;
-import org.sandboxpowered.api.item.ItemStack;
 import org.sandboxpowered.api.util.Identity;
 import org.sandboxpowered.api.util.annotation.Alpha;
 import org.sandboxpowered.api.util.math.Position;

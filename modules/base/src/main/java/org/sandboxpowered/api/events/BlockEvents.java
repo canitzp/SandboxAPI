@@ -7,7 +7,6 @@ import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.world.World;
 import org.sandboxpowered.eventhandler.Cancellable;
 import org.sandboxpowered.eventhandler.EventHandler;
-import org.sandboxpowered.eventhandler.ResettableEventHandler;
 import org.sandboxpowered.internal.InternalService;
 
 public final class BlockEvents {

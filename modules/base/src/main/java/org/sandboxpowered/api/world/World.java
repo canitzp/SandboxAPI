@@ -7,7 +7,6 @@ import org.sandboxpowered.api.util.Side;
 import org.sandboxpowered.api.util.SoundCategory;
 import org.sandboxpowered.api.util.SoundType;
 import org.sandboxpowered.api.util.math.Position;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -35,6 +34,6 @@ public interface World extends WorldReader, WorldWriter {
     default void playSound(@Nullable PlayerEntity player, Position pos, SoundType soundIn, SoundCategory category, float volume, float pitch) {
         playSound(player, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, soundIn, category, volume, pitch);
     }
-
+  
     void playSound(@Nullable PlayerEntity player, double x, double y, double z, SoundType soundIn, SoundCategory category, float volume, float pitch);
 }

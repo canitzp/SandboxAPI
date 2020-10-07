@@ -18,6 +18,7 @@ import org.sandboxpowered.api.item.Item;
 import org.sandboxpowered.api.item.ItemStack;
 import org.sandboxpowered.api.registry.Registry;
 import org.sandboxpowered.api.server.Server;
+import org.sandboxpowered.api.shape.Box;
 import org.sandboxpowered.api.shape.Shape;
 import org.sandboxpowered.api.state.Property;
 import org.sandboxpowered.api.util.DamageSource;
@@ -108,4 +109,8 @@ public interface InternalService {
     Shape makeEmptyShape();
 
     <X> EventHandler<X> createEventHandler();
+
+    Box box_of(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
+
+    Box box_of(Position pos1, Position pos2);
 }

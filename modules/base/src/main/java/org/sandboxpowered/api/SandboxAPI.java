@@ -18,7 +18,7 @@ public interface SandboxAPI {
      * <p>
      * E.G: fabric:reichenbach or forge:examplemod
      *
-     * @param loader The loader to check
+     * @param loader The loader to check, "universal" will ignore loader.
      * @param modId  The modId to check, if empty returns if the loader is enabled
      * @return if the mod is loaded
      */
