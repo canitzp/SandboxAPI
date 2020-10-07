@@ -110,7 +110,7 @@ public interface InternalService {
 
     <X> EventHandler<X> createEventHandler();
 
-    Box box_of(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
+    Box boxOf(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
 
-    Box box_of(Position pos1, Position pos2);
+    Box boxOf(Position pos1, Position pos2);
 }
