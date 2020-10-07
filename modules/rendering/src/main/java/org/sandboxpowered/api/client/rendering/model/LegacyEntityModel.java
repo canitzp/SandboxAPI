@@ -44,6 +44,6 @@ public abstract class LegacyEntityModel<T extends Entity> {
 
         Bone addCube(float x, float y, float z, float sizeX, float sizeY, float sizeZ, float inflation, boolean mirror);
 
-        void render(MatrixStack stack, VertexConsumer consumer, int light, int overlay);
+        void render(MatrixStack stack, VertexConsumer consumer, int light, int overlay, float red, float green, float blue, float alpha);
     }
 }
