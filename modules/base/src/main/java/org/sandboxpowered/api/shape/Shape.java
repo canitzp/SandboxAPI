@@ -10,11 +10,11 @@ import java.util.List;
 public interface Shape {
 
     static Shape empty() {
-        return InternalService.getInstance().shape_empty();
+        return InternalService.getInstance().makeEmptyShape();
     }
 
     static Shape fullCube() {
-        return InternalService.getInstance().shape_fullCube();
+        return InternalService.getInstance().makeFullCube();
     }
 
     static Shape cuboid(int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
@@ -22,7 +22,7 @@ public interface Shape {
     }
 
     static Shape cube(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
-        return InternalService.getInstance().shape_cube(minX, minY, minZ, maxX, maxY, maxZ);
+        return InternalService.getInstance().makeCubeShape(minX, minY, minZ, maxX, maxY, maxZ);
     }
 
     static Shape cube(Vec3d min, Vec3d max) {

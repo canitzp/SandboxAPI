@@ -1,14 +1,10 @@
 package org.sandboxpowered.api.client.rendering.entity;
 
-import org.sandboxpowered.api.client.rendering.model.entity.EntityModel;
-import org.sandboxpowered.api.util.Identity;
+import org.sandboxpowered.api.client.rendering.VertexConsumer;
 import org.sandboxpowered.api.util.annotation.PreAlpha;
+import org.sandboxpowered.api.util.math.MatrixStack;
 
-//TODO this is currently only the very very basic to render only the simplest of entities with no custom rendering, not even transformation.
-//Needless to say, that means it is a placeholder
 @PreAlpha
-public interface EntityRenderer {
-    EntityModel getModel();
-
-    Identity getTexture();
+public interface EntityRenderer<T> {
+    void render(T entity, float yaw, float delta, MatrixStack stack, VertexConsumer.Provider provider, int light);
 }

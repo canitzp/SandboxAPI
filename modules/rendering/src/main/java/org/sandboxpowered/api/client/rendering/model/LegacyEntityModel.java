@@ -13,8 +13,8 @@ import org.sandboxpowered.api.util.math.MatrixStack;
 public abstract class LegacyEntityModel<T extends Entity> {
     protected int textureWidth = 256, textureHeight = 256;
 
-    public final Bone createBone() {
-        return SandboxInternalRenderingService.getInstance().createBone(this);
+    public final Bone createBone(int textureX, int textureY) {
+        return SandboxInternalRenderingService.getInstance().createBone(this).setTextureOffset(textureX, textureY);
     }
 
     public abstract void setRotationAngles(T entity, float swing, float swingAmount, float age, float headYaw, float headPitch);
@@ -45,6 +45,5 @@ public abstract class LegacyEntityModel<T extends Entity> {
         Bone addCube(float x, float y, float z, float sizeX, float sizeY, float sizeZ, float inflation, boolean mirror);
 
         void render(MatrixStack stack, VertexConsumer consumer, int light, int overlay);
-
     }
 }

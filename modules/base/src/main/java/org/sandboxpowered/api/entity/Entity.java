@@ -1,5 +1,6 @@
 package org.sandboxpowered.api.entity;
 
+import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.block.Blocks;
 import org.sandboxpowered.api.component.Component;
 import org.sandboxpowered.api.content.Content;
@@ -97,6 +98,7 @@ public interface Entity {
     }
 
     @SuppressWarnings("unchecked")
+    @Nullable
     default <T extends EntityModule> T getModule(EntityModule.Type<T> module) {
         return (T) getModules().get(module);
     }

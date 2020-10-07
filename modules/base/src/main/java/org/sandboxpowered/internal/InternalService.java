@@ -97,20 +97,15 @@ public interface InternalService {
 
     <T> SyncedData.SyncedDataSerializer<T> injectDataHandler(int present, int optional, DataSerializers.Serializer<T> serializer, BiFunction<String, CompoundTag, T> deserializer);
 
-    default void serializeEntityModule(EntityModule module, Entity entity, CompoundTag tag) {
-    }
+    void serializeEntityModule(EntityModule module, Entity entity, CompoundTag tag);
 
-    default void deserializeEntityModule(EntityModule module, Entity entity, CompoundTag tag) {
-    }
+    void deserializeEntityModule(EntityModule module, Entity entity, CompoundTag tag);
 
-    Shape shape_cube(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
+    Shape makeCubeShape(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
 
-    Shape shape_fullCube();
+    Shape makeFullCube();
 
-    Shape shape_empty();
-
-    //How would something from the rendering module be referenced here?
-    Object makeModelPart(int textureWidth, int textureHeight, int textureU, int textureV);
+    Shape makeEmptyShape();
 
     <X> EventHandler<X> createEventHandler();
 }
