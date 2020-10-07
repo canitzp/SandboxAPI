@@ -1,14 +1,23 @@
 package org.sandboxpowered.api.entity;
 
+import org.sandboxpowered.api.entity.module.EntityModule;
+import org.sandboxpowered.api.util.DamageSource;
 import org.sandboxpowered.api.entity.player.Hand;
 import org.sandboxpowered.api.item.ItemStack;
 import org.sandboxpowered.api.util.annotation.Alpha;
+
+import java.util.Map;
 
 @Alpha
 public interface LivingEntity extends Entity {
     float getHealth();
 
     void setHealth(float health);
+    default void onDeath(DamageSource cause) {
+        for (EntityModule module : getModules().values()) {
+            module.onDeath(this, cause);
+        }
+    }
 
     default boolean isHoldingItem(Hand hand) {
         return !getHeld(hand).isEmpty();

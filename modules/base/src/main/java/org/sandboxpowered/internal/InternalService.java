@@ -11,6 +11,7 @@ import org.sandboxpowered.api.entity.Entity;
 import org.sandboxpowered.api.entity.EntityCategory;
 import org.sandboxpowered.api.entity.data.DataSerializers;
 import org.sandboxpowered.api.entity.data.SyncedData;
+import org.sandboxpowered.api.entity.module.EntityModule;
 import org.sandboxpowered.api.fluid.Fluid;
 import org.sandboxpowered.api.fluid.FluidStack;
 import org.sandboxpowered.api.item.Item;
@@ -19,7 +20,9 @@ import org.sandboxpowered.api.registry.Registry;
 import org.sandboxpowered.api.server.Server;
 import org.sandboxpowered.api.shape.Shape;
 import org.sandboxpowered.api.state.Property;
+import org.sandboxpowered.api.util.DamageSource;
 import org.sandboxpowered.api.util.Identity;
+import org.sandboxpowered.api.util.SoundCategory;
 import org.sandboxpowered.api.util.annotation.Internal;
 import org.sandboxpowered.api.util.math.Position;
 import org.sandboxpowered.api.util.math.Vec2i;
@@ -86,9 +89,19 @@ public interface InternalService {
 
     EntityCategory getEntityCategory(String name);
 
+    DamageSource getDamageSource(String name);
+
+    SoundCategory getSoundCategory(String name);
+
     <T> SyncedData<T> registerSyncedData(Identity id, SyncedData.SyncedDataSerializer<T> serializer, boolean saveToWorld);
 
     <T> SyncedData.SyncedDataSerializer<T> injectDataHandler(int present, int optional, DataSerializers.Serializer<T> serializer, BiFunction<String, CompoundTag, T> deserializer);
+
+    default void serializeEntityModule(EntityModule module, Entity entity, CompoundTag tag) {
+    }
+
+    default void deserializeEntityModule(EntityModule module, Entity entity, CompoundTag tag) {
+    }
 
     Shape shape_cube(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
 

@@ -2,7 +2,6 @@ package org.sandboxpowered.api.entity.module;
 
 import org.jetbrains.annotations.Nullable;
 import org.sandboxpowered.api.entity.Entity;
-import org.sandboxpowered.api.entity.data.DataHolder;
 import org.sandboxpowered.api.entity.data.DataManager;
 import org.sandboxpowered.api.entity.data.DataSerializers;
 import org.sandboxpowered.api.entity.data.SyncedData;
@@ -15,14 +14,20 @@ import java.util.UUID;
 public class TameableEntityModule extends SingletonEntityModule {
     private static final SyncedData<Byte> TAMEABLE_DATA = DataManager.register(Identity.of("sandbox", "tameable_data"), DataSerializers.BYTE);
     private static final SyncedData<UUID> OWNER = DataManager.register(Identity.of("sandbox", "owner"), DataSerializers.UUID);
-    private static final DataHolder<?>[] DATA_HOLDERS = new DataHolder<?>[]{new DataHolder<>(TAMEABLE_DATA, (byte) 0), new DataHolder<>(OWNER, null)};
+    private static final SyncedData<?>[] SYNCED_DATA = new SyncedData<?>[]{TAMEABLE_DATA, OWNER};
 
     private static final int TAMED = 1;
     private static final int SITTING = 2;
 
     @Override
-    public DataHolder<?>[] getDataHolders() {
-        return DATA_HOLDERS;
+    public SyncedData<?>[] getSyncedData() {
+        return SYNCED_DATA;
+    }
+
+    @Override
+    public Object getInitialValue(SyncedData<?> data) {
+        if (data == TAMEABLE_DATA) return (byte) 0;
+        return super.getInitialValue(data);
     }
 
     public boolean isTamed(Entity entity) {
