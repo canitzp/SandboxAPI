@@ -23,14 +23,6 @@ public interface World extends WorldReader, WorldWriter {
         return getSide().isClient();
     }
 
-    default List<Entity> getEntities() {
-        return Collections.emptyList();
-    }
-
-    default Entity getEntityByUUID(UUID uuid) {
-        return null;
-    }
-
     default void playSound(@Nullable PlayerEntity player, Position pos, SoundType soundIn, SoundCategory category, float volume, float pitch) {
         playSound(player, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, soundIn, category, volume, pitch);
     }

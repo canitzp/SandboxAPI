@@ -10,6 +10,7 @@ import org.sandboxpowered.api.util.math.Position;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 public interface WorldReader {
@@ -32,7 +33,16 @@ public interface WorldReader {
         return height >= 0 && height < 256;
     }
 
+    default List<Entity> getEntities() {
+        return Collections.emptyList();
+    }
+
+    default Entity getEntityByUUID(UUID uuid) {
+        return null;
+    }
+
     Stream<Entity> getEntitiesWithin(Box box);
 
+    //Shouldn't this use an Entity.Type?
     <T extends Entity> Stream<T> getEntitiesWithin(Box box, Class<T> filter);
 }
