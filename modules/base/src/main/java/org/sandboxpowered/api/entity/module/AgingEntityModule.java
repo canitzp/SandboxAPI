@@ -14,12 +14,12 @@ import org.sandboxpowered.internal.InternalService;
 /**
  * Entity Module that covers Aging Logic
  */
-public class AgeableEntityModule extends BaseEntityModule {
+public class AgingEntityModule extends BaseEntityModule {
     private static final SyncedData<Boolean> CHILD = DataManager.register(Identity.of("sandbox", "child"), DataSerializers.BOOLEAN, false);
     private static final SyncedData<?>[] SYNCED_DATA = new SyncedData<?>[] {CHILD};
     private int age;
 
-    protected AgeableEntityModule(Type<?> type) {
+    protected AgingEntityModule(Type<?> type) {
         super(type);
     }
 
@@ -59,7 +59,7 @@ public class AgeableEntityModule extends BaseEntityModule {
     @Override
     public boolean interact(Entity entity, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getHeldItem(hand);
-        if (isChild(entity) && entity.getOptionalModule(EntityModules.BREEDABLE).map(m -> m.isFoodItem(stack)).orElse(false)) {
+        if (isChild(entity) && entity.getOptionalModule(EntityModules.BREEDING).map(m -> m.isFoodItem(stack)).orElse(false)) {
             stack.shrink();
             ageUp(entity, (int) (getAge(entity) / -20f * 0.1f));
             return true;

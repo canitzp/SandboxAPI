@@ -17,14 +17,14 @@ import java.util.UUID;
 /**
  * Entity Module that covers Breeding Logic
  */
-public class BreedableEntityModule extends BaseEntityModule {
+public class BreedingEntityModule extends BaseEntityModule {
     private final Set<Item> foodItems = new HashSet<>();
 
     @Nullable
     private UUID breeder;
     private int inLove;
 
-    protected BreedableEntityModule(Type<?> type) {
+    protected BreedingEntityModule(Type<?> type) {
         super(type);
     }
 
@@ -73,7 +73,7 @@ public class BreedableEntityModule extends BaseEntityModule {
     }
 
     public boolean canBreed(Entity entity) {
-        return inLove <= 0 && !entity.getOptionalModule(EntityModules.AGEABLE)
+        return inLove <= 0 && !entity.getOptionalModule(EntityModules.AGING)
                 .map(module -> module.isChild(entity))
                 .orElse(false);
     }

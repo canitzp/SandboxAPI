@@ -11,13 +11,17 @@ import org.sandboxpowered.api.util.Identity;
 import java.util.Optional;
 import java.util.UUID;
 
-public class TameableEntityModule extends SingletonEntityModule {
+public class TamingEntityModule extends BaseEntityModule {
     private static final SyncedData<Byte> TAMEABLE_DATA = DataManager.register(Identity.of("sandbox", "tameable_data"), DataSerializers.BYTE);
     private static final SyncedData<UUID> OWNER = DataManager.register(Identity.of("sandbox", "owner"), DataSerializers.UUID);
     private static final SyncedData<?>[] SYNCED_DATA = new SyncedData<?>[]{TAMEABLE_DATA, OWNER};
 
     private static final int TAMED = 1;
     private static final int SITTING = 2;
+
+    protected TamingEntityModule(Type<?> type) {
+        super(type);
+    }
 
     @Override
     public SyncedData<?>[] getSyncedData() {

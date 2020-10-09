@@ -57,5 +57,19 @@ public interface EntityModule {
         public T create() {
             return factory.apply(this);
         }
+
+        public static class Singleton<T extends EntityModule> extends Type<T> {
+            private final T value;
+
+            public Singleton(Function<Type<T>, T> factory) {
+                super(factory);
+                value = factory.apply(this);
+            }
+
+            @Override
+            public T create() {
+                return value;
+            }
+        }
     }
 }

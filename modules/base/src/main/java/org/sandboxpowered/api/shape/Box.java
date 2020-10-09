@@ -9,10 +9,10 @@ public interface Box {
     }
 
     static Box of(Position pos1, Position pos2) {
-        return InternalService.getInstance().box_of(pos1, pos2);
+        return InternalService.getInstance().boxOf(pos1, pos2);
     }
 
     static Box of(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
-        return InternalService.getInstance().box_of(minX, minY, minZ, maxX, maxY, maxZ);
+        return InternalService.getInstance().boxOf(minX, minY, minZ, maxX, maxY, maxZ);
     }
 }

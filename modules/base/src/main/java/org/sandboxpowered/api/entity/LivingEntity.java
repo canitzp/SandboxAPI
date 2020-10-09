@@ -42,8 +42,8 @@ public interface LivingEntity extends Entity {
     void equip(EquipmentSlot slot, ItemStack stack);
 
     enum EquipmentSlot {
-        MAINHAND(Type.HAND),
-        OFFHAND(Type.HAND),
+        MAIN_HAND(Type.HAND),
+        OFF_HAND(Type.HAND),
         FEET(Type.ARMOR),
         LEGS(Type.ARMOR),
         CHEST(Type.ARMOR),
